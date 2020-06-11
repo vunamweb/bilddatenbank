@@ -1,4 +1,4 @@
-<?php global $filterButton; ?>
+<?php global $filterButton; $morpheus; ?>
 
 <section>
     <div class="container-xl">
@@ -58,9 +58,9 @@
 				</div>
 
 				<p><button class="btn btn-success allowedtosend" ref=""><i class="fa fa-envelope"></i> &nbsp; Send Mail to grantee with access data</button></p>
-
-
-		    </div>
+                
+                <input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />   
+           </div>
                
             </div>
 		</div>

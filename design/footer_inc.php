@@ -216,11 +216,13 @@
             
             $('.content .fa.fa-spinner').show();
             
+            var origin   = $('#url').val();
+            
             var search = $('#suche').val();
             
             //call ajax to changen content
                     $.ajax({
-                        url: 'http://php7.pixeldusche.com/bilddatenbank/home/galerie+search',
+                        url: ''+origin+'/home/galerie+search',
                         type: 'get',
                         data: {
                           search_value: search
@@ -251,16 +253,18 @@
          })
          
          $(".saveText").click(function () {
-    	    id = $(this).attr("ref");
+    	    var origin   = $('#url').val();
+            
+            id = $(this).attr("ref");
     	    myText = $("#t"+id).val();
             var hashtags = getHashtags();
     
     		// console.log(myText+\' # \'+id);
     
     	    request = $.ajax({
-    	        url: "http://php7.pixeldusche.com/bilddatenbank/morpheus/Update.php",
-    	        type: "post",
-    	        data: "hashtag="+hashtags+"&pos=tags&data="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
+    	        url: ""+origin+"home/galerie+update",
+    	        type: "get",
+    	        data: "myText="+myText+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
     	        success: function(data) {
     				$('#s'+id).removeClass('btn-danger');
     				// console.log(data);

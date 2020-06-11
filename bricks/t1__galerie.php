@@ -51,7 +51,6 @@ if($likes) {
 } else if($galerie && $galerie == 'search') {
     $seach_key = $_GET['search_value'];
     
-    //echo $seach_key; die();
     $output = '
     <div class="grid">
 	';
@@ -60,7 +59,7 @@ if($likes) {
 	$res 	= safe_query($que);
     
     while ($row = mysqli_fetch_object($res)){
-        $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$row->gnid." AND g.gnid=n.gnid ORDER BY g.sort";
+        $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE (g.gtextde like '%".$seach_key."%' OR g.keyword like '%".$seach_key."%' ) AND g.gnid=".$row->gnid." AND g.gnid=n.gnid ORDER BY g.sort";
 	    //echo $que; die();
         $res_1 	= safe_query($que);
 	
@@ -76,6 +75,20 @@ if($likes) {
 ';
  
  echo $output; die(); 
+ 
+} else if($galerie && $galerie == 'update') {
+    $text= $_GET["myText"];
+    $hashtags= $_GET["hashtags"];
+    $pos_1 = 'gtextde';
+    $pos_2 = 'tags';
+    $feld = $_GET["feld"];
+    $table = $_GET["table"];
+    $id = $_GET["id"];
+    
+    if($table && $feld && $id) {
+    	$sql = "UPDATE $table set $pos_1='$text', $pos_2='$hashtags' WHERE $feld=$id";
+        safe_query($sql);
+    }
 }
 
 

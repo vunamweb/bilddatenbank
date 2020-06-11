@@ -74,9 +74,9 @@ RewriteRule !\.[a-z]{2,4}$ %{REQUEST_URI}/ [R=301,L]
 #####**** NEW SHORTLINK ************************************************************************
 RewriteRule ^sl/(.*)/$ bilddatenbank/index.php?lang=sl&shortlink=1&hn=$1 [L]
 
-RewriteRule ^(.*)/(.*)/(.*)/(.*)\+(.*)/$ bilddatenbank/index.php?hn=$1&sn2=$2&sn3=$3&cont=$3&nid=$5&func=$4 [L]
-RewriteRule ^(.*)/(.*)/(.*)\+(.*)/$ bilddatenbank/index.php?hn=$1&sn2=$2&cont=$2&nid=$4&func=$3 [L]
-RewriteRule ^(.*)/(.*)\+(.*)/$ bilddatenbank/index.php?hn=$1&cont=$1&nid=$3&func=$2 [L]
+RewriteRule ^(.*)/(.*)/(.*)/(.*)\+(.*)/$ bilddatenbank/index.php?hn=$1&sn2=$2&sn3=$3&cont=$3&nid=$5&func=$4 [NC,L,QSA]
+RewriteRule ^(.*)/(.*)/(.*)\+(.*)/$ bilddatenbank/index.php?hn=$1&sn2=$2&cont=$2&nid=$4&func=$3 [NC,L,QSA]
+RewriteRule ^(.*)/(.*)\+(.*)/$ bilddatenbank/index.php?hn=$1&cont=$1&nid=$3&func=$2 [NC,L,QSA]
 
 RewriteRule ^(.*)/(.*)/(.*)/(.*)/(.*)/$ bilddatenbank/index.php?hn=$1&sn2=$2&sn3=$3&sn4=$4&sn5=$5&cont=$5 [L]
 RewriteRule ^(.*)/(.*)/(.*)/(.*)/$ bilddatenbank/index.php?hn=$1&sn2=$2&sn3=$3&sn4=$4&cont=$4 [L]
