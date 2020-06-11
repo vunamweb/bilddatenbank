@@ -5,7 +5,51 @@ global $justMine, $galerie, $filterButton;
 $galerie = isset($_GET["nid"]) ? $_GET["nid"] : 0;
 
 if($galerie) {
-	$que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$galerie." AND g.gnid=n.gnid ORDER BY g.sort";
+	$table = 'morp_tags_category';
+    $primary = 'id';
+    $show_col = "name";
+    $sorting_col = "name";
+    
+    $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
+    
+    $sql = "SELECT * FROM $table order by $sorting_col";
+    $res = safe_query($sql);
+    $row = mysqli_fetch_object($res);
+    
+    $num_rows = mysqli_num_rows($res);
+    
+    $count = 1;
+    
+    while ($row = mysqli_fetch_object($res))
+    {
+        $select .= '<option value="">' . $row->$show_col . '</option>';
+    
+        $tags_category_id = $row->$primary;
+    
+        $table = 'morp_tags';
+        $primary_1 = 'tagID';
+        $show_col_1 = "tag";
+        $sorting_col_1 = "tag";
+    
+        $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
+            "  order by $sorting_col_1";
+        $res_1 = safe_query($sql);
+        $row_1 = mysqli_fetch_object($res_1);
+    
+        while ($row_1 = mysqli_fetch_object($res_1))
+        {
+            $select .= '<option value="' . $row_1->$primary_1 . '">' . $row_1->$show_col_1 .
+                '</option>';
+        }
+    
+        $count++;
+    
+        $select .= ($count < $num_rows) ?
+            '</select><select name="select" class="ui selection dropdown" multiple="">':
+        '</select>';
+    }
+    
+    $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$galerie." AND g.gnid=n.gnid ORDER BY g.sort";
 	$res 	= safe_query($que);
 	$x		= mysqli_num_rows($res);
 	$n = 0;
@@ -55,50 +99,12 @@ if($galerie) {
     <div class="relative">
 	    <textarea class="galedit form-control" name="t'.$gid.'" id="t'.$gid.'" ref="s'.$gid.'" placeholder="Description Image">'.$textde.'</textarea>
     		<button class="btn btn-info saveText" ref="'.$gid.'" id="s'.$gid.'"><i class="fa fa-save"></i></button>
-    	</div>
-	<select multiple id="tags'.$gid.'" name="tags[]" class="tags form-control" ref="'.$gid.'" placeholder="Tags / Kategorien"></select>
+    	</div>';
+   $output .= $select;
+   $output .='     
 </div>
 ';
-
-		$jsList .= '
-	var $select_'.$gid.' = $(\'#tags'.$gid.'\').selectize({
-		plugins: [\'remove_button\'],
-	    labelField: \'title\',
-	    searchField: \'title\',
-	    sortField: \'title\',
-		options: options,
-	    create:  function(value, callback) {
-			// console.log(value);
-		    request = $.ajax({
-		        url: "'.$dir.'morpheus/UpdateTag.php",
-		        type: "post",
-		        data: "add=1&table=morp_cms_galerie&data="+value+"&id='.$gid.'&feld=gid",
-		        success: function(data) {
-					 // console.log(data);
-					 callback({ value: data, title: value });
-					 setOptions(data, value);
-
-				}
-		    });
-	    },
-	    onChange: function(value) {
-	        if (!value.length) return;
-		    request = $.ajax({
-		        url: "'.$dir.'morpheus/UpdateTag.php",
-		        type: "post",
-		        data: "table=morp_cms_galerie&data="+value+"&id='.$gid.'&feld=gid",
-		        success: function(data) {
-					// console.log(data);
-				}
-		    });
-	    }
-	});
-
-	'.( $tagCount > 0 ? ' $select_'.$gid.'[0].selectize.setValue(['.$tagList.']);' : '').'
-
-';
-
-	}
+}
 
 	$filterButton = '
 	<p class="mb6">&nbsp</p>
@@ -108,7 +114,9 @@ if($galerie) {
 
 	$js = '
 
-	function setOptions(data, value) {
+	$(\'.selection.dropdown\').dropdown({maxSelections: 3});
+    
+    function setOptions(data, value) {
 		'.$setOptions.'
 	}
 
@@ -136,30 +144,14 @@ if($galerie) {
   			}
 	    });
     });
-    $(".saveText").click(function () {
-	    id = $(this).attr("ref");
-	    myText = $("#t"+id).val();
-
-		// console.log(myText+\' # \'+id);
-
-	    request = $.ajax({
-	        url: "'.$dir.'morpheus/Update.php",
-	        type: "post",
-	        data: "pos=gtextde&data="+myText+"&id="+id+"&feld=gid&table=morp_cms_galerie",
-	        success: function(data) {
-				$(\'#s\'+id).removeClass(\'btn-danger\');
-				// console.log(data);
-  			}
-	    });
-    });
+    
     $(".galedit").on("input",function () {
 	    id = $(this).attr("ref");
 	    $(\'#\'+id).addClass(\'btn-danger\');
     });
 
 
-'.$jsList;
-
+';
 }
 
 //$galerie = 1;

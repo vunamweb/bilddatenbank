@@ -265,7 +265,7 @@ function set_thumb_gallery($res, $setFilter = 0)
 
     while ($row = mysqli_fetch_object($res))
     {
-        // print_r($row);
+        //print_r($row); die();
         $img = $row->gname;
         $tn = $row->tn;
         $ordner = $row->gnname;
@@ -274,17 +274,15 @@ function set_thumb_gallery($res, $setFilter = 0)
         $textde = $row->gtextde;
         $hl = $row->gtexten;
 
-        $tagList = getTags($gid, 'image');
+        $tagList = $row->tags;
+        $tagList = explode(',', $tagList);
         // print_r($tagList);
         $filter = '';
 
         foreach ($tagList as $arr)
-        {
-            $filter .= " " . $arr[1];
-            $tagListButtons[$arr[1]] = $arr[2];
-
-        }
-
+         if($arr != '') 
+          $filter .= 'tag_' . $arr . ' ';
+          
         $noOfComments = '';
         if ($mid)
             $hasLike = isLike($mid, "morp_cms_galerie_likes", "gid", $gid);
@@ -294,7 +292,7 @@ function set_thumb_gallery($res, $setFilter = 0)
 
         $gallery_list .= '
 	
-	<div class="grid-item grid-sizer ' . $filter . '">
+	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item">
 	        <a class="galIcons" data-toggle="lightbox" data-gallery="stift2" href="' .
             $dir . 'Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/' . $img .

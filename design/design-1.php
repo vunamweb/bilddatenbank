@@ -8,15 +8,13 @@
                     <?php include('page/left.php') ?>
 
 		    </div>
-
-		    <div class="col-md-7 main">
-
-<?php echo $output; ?>
-
-		    </div>
-
-
-		    <div class="col-lg-2 right-board">
+            <div class="">
+              <div class="col-md-7 main content">
+                 <i class="fa fa-spinner" aria-hidden="true"></i>
+                 <?php echo $output; ?>
+              </div>
+              
+              <div class="col-lg-2 right-board">
 
 <h4>Area Folder to work with</h4>
 
@@ -63,8 +61,9 @@
 
 
 		    </div>
-
-        </div>
+               
+            </div>
+		</div>
     </div>
 </section>
 

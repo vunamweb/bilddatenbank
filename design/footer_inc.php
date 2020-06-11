@@ -80,16 +80,56 @@
 
 <!-- Initialize Swiper + Ekko -->
 <script type="text/javascript">
-	 function getHashtags() {
+	 var timeOut = 50;
+     
+     function getHashtags() {
 	   
         var result = '';
         
         $('a.transition').each(function(){
-            result = result + '#' + $(this).attr('data-value') + ',';
+            result = result + $(this).attr('data-value') + ',';
         })
         
         return result;  
 	 }
+     
+     function getfilter() {
+	    var size = $('a.transition').length;
+        if(size == 0)
+          return '.tag';
+          
+        var count = 1;
+        
+        var result = '.';
+        
+        $('a.transition').each(function(){
+            if(count < size)
+              result = result + 'tag_' + $(this).attr('data-value') + ', .';
+            else
+              result = result + 'tag_' + $(this).attr('data-value');
+              
+            count++;  
+        })
+        
+        return result;  
+	 }
+     
+     function filter() {
+        setTimeout(function(){ 
+                var filter = getfilter();
+                //alert(filter);
+                
+                var grid = $('.grid').isotope({
+                  itemSelector: '.grid-item',
+                  masonry: {
+                 	columnWidth: '.grid-sizer',
+                 	percentPosition: true
+                  }
+                });
+                
+               grid.isotope({ filter: filter }); 
+            }, timeOut);
+     }
      
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
@@ -127,7 +167,7 @@
          var hashtags = getHashtags();
          
          if(hashtags == '') {
-            alert('you need to fill keyword and hashtag');
+            alert('you need to fill hashtag');
             return;
          }
          
@@ -144,14 +184,7 @@
             $('#file_upload').uploadifive('upload');
       })
 
-/*
-	$('.overlay').click(function () {
-		go = $(this).attr("ref");
-		document.location.href=go;
-	});
-*/
-
-	$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+   $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 	    event.preventDefault();
 	    $(this).ekkoLightbox({
 		    alwaysShowClose: true
@@ -160,10 +193,83 @@
 
 	$( document ).ready(function() {
 		$('.selection.search').dropdown({maxSelections: 3});
-        // console.log("ready");
-
-	});
-	$(window).on("load", function() {
+        
+        $('.search.dropdown .item').click(function() {
+		    var dataValue = $(this).attr('data-value');
+            
+            filter();
+            
+            setTimeout(function(){ 
+                $('.search.dropdown a.transition').each(function(){
+                    var nowDataValue = $(this).attr('data-value');
+                    
+                    if(dataValue == nowDataValue)
+                      $(this).click(function(){
+                         filter();
+                      })
+                })
+            }, timeOut);
+         });
+         
+         $('.navbar-form').submit(function(e){
+            e.preventDefault();
+            
+            $('.content .fa.fa-spinner').show();
+            
+            var search = $('#suche').val();
+            
+            //call ajax to changen content
+                    $.ajax({
+                        url: 'http://php7.pixeldusche.com/bilddatenbank/home/galerie+search',
+                        type: 'get',
+                        data: {
+                          search_value: search
+                        },
+                        dataType: 'json',
+                        beforeSend: function beforeSend() {},
+                        complete: function complete(obj) {
+                            $('.content .fa.fa-spinner').hide();
+                            
+                            $('.content').html(obj.responseText);
+                            
+                            $('.grid').isotope({
+                              itemSelector: '.grid-item',
+                              masonry: {
+                             	columnWidth: '.grid-sizer',
+                             	percentPosition: true
+                              }
+                            });
+                           
+                            $('.grid-item ').each(function(){
+                                $(this).css('opacity', 1);
+                            })
+                        },
+                        success: function success(result) {
+                          //$('.content').html(result);
+                        }
+                    }); 
+         })
+         
+         $(".saveText").click(function () {
+    	    id = $(this).attr("ref");
+    	    myText = $("#t"+id).val();
+            var hashtags = getHashtags();
+    
+    		// console.log(myText+\' # \'+id);
+    
+    	    request = $.ajax({
+    	        url: "http://php7.pixeldusche.com/bilddatenbank/morpheus/Update.php",
+    	        type: "post",
+    	        data: "hashtag="+hashtags+"&pos=tags&data="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
+    	        success: function(data) {
+    				$('#s'+id).removeClass('btn-danger');
+    				// console.log(data);
+      			}
+    	    });
+         });
+    });
+	
+    $(window).on("load", function() {
       <?php echo $js; ?>
   });
 

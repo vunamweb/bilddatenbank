@@ -1976,7 +1976,8 @@ function getPdfOld($pid)
 function get_cms_text($text, $lang = "de", $dir, $video_page = "")
 {
 
-    // echo "$text, $lang, $dir";
+    //echo $text; die();
+    ///echo "$text, $lang, $dir";
     global $navarray, $navarrayFULL, $hn;
     global $color, $h1_2, $h1_1, $rechts;
 
@@ -2023,6 +2024,7 @@ function get_cms_text($text, $lang = "de", $dir, $video_page = "")
 
             if ($txt[0] && !preg_match("/template/", $txt[0]))
             {
+                //echo $txt[0]; die();
                 if (file_exists("bricks/" . $txt[0] . ".php"))
                     include ("bricks/" . $txt[0] . ".php");
             } elseif ($txt[0] && preg_match("/template/", $txt[0]))

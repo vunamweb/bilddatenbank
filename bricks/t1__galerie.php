@@ -7,6 +7,7 @@ global $filterButton, $filter, $tagListButtons;
 
 $galerie = isset($_GET["nid"]) ? $_GET["nid"] : 0;
 $likes = isset($_GET["likes"]) ? $_GET["likes"] : 0;
+$search = isset($_GET["search"]) ? $_GET["search"] : '';
 
 $hashtag = isset($_GET["hashtag"]) ? $_GET["hashtag"] : '';
 $hashtagid = isset($_GET["hashtagid"]) ? $_GET["hashtagid"] : 0;
@@ -21,6 +22,7 @@ $hashtagid = isset($_GET["hashtagid"]) ? $_GET["hashtagid"] : 0;
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // SHOW IMAGES WITH LIKES / MY LIKES OR MOST LIKES
+//$output = 'dff'; return;
 if($likes) {
 	$profile = getProfile($besitzer);
 	$max = 40;
@@ -46,6 +48,34 @@ if($likes) {
 	</div>
 ';
 
+} else if($galerie && $galerie == 'search') {
+    $seach_key = $_GET['search_value'];
+    
+    //echo $seach_key; die();
+    $output = '
+    <div class="grid">
+	';
+    
+    $que  	= "SELECT * FROM `morp_cms_galerie_name` n ORDER BY n.gnname";
+	$res 	= safe_query($que);
+    
+    while ($row = mysqli_fetch_object($res)){
+        $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$row->gnid." AND g.gnid=n.gnid ORDER BY g.sort";
+	    //echo $que; die();
+        $res_1 	= safe_query($que);
+	
+        $x		= mysqli_num_rows($res_1);
+
+	$tagListButtons = array();
+
+	$output .= set_thumb_gallery($res_1, 1);
+	}
+    
+    $output .= '
+		</div>
+';
+ 
+ echo $output; die(); 
 }
 
 

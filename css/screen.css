@@ -429,7 +429,7 @@ select { border-radius: 0; }
 
 .sortGal {
     float: left;
-    background-color: #444444;
+    /*background-color: #444444;*/
     text-align: center;
     margin-right: 1em;
     margin-bottom: 1em;
@@ -994,6 +994,13 @@ color: #4b636e;
     min-width: 14em;
     min-height: 2.71428571em;
     width: 350px;
+}
+.content .fa.fa-spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 3em;
+    display: none;
 }
 /* @end */
 
