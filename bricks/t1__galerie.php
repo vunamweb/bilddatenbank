@@ -75,7 +75,6 @@ if($likes) {
 ';
  
  echo $output; die(); 
- 
 } else if($galerie && $galerie == 'update') {
     $text= $_GET["myText"];
     $hashtags= $_GET["hashtags"];
@@ -89,6 +88,37 @@ if($likes) {
     	$sql = "UPDATE $table set $pos_1='$text', $pos_2='$hashtags' WHERE $feld=$id";
         safe_query($sql);
     }
+} else if($galerie && $galerie == 'modal') {
+    $output = '<div class="row">';
+    $output .= '<div class="col-md-6">';
+    
+    $data = $_GET['data'];
+    $data = explode(',', $data);
+    
+    $que  	= "SELECT * FROM `morp_cms_galerie` g WHERE g.gid = ".$data[0]." ORDER BY g.sort";
+    $res 	= safe_query($que);
+    
+    while ($row = mysqli_fetch_object($res)) {
+        $src = $dir . 'Galerie/' . $morpheus['GaleryPath'] . '/' . $data[1] . '/' . $data[0] . '/' . $morpheus['Original'] . '/' . $row->gname;
+        
+        $output .= '<img class="img-responsive" src='.$src.' />';
+        
+        $output .= '</div>';
+        
+        $output .= '<div class="col-md-6">';
+        
+        $infor = json_decode($row->another_infor);
+        
+        $output .= '<p>Type: '.$infor->type.'</p>';
+        $output .= '<p>Width: '.$infor->width.'</p>';
+        $output .= '<p>Height: '.$infor->height.'</p>';
+        $output .= '<p>Size: '.$infor->mb.'</p>';
+        $output .= '<p>Date: '.$infor->date.'</p>';
+        
+        $output .= '</div></div>';
+    }
+	    
+  echo $output; die();   
 }
 
 
@@ -136,6 +166,25 @@ else if($galerie) {
 	';
 	
 	$output .= set_thumb_gallery($res, 1);
+    $output .= '<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+    </div>
+  </div>
+</div>';
+    
+    
 	$output .= '
 		</div>
 ';

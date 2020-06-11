@@ -234,14 +234,6 @@
                             
                             $('.content').html(obj.responseText);
                             
-                            $('.grid').isotope({
-                              itemSelector: '.grid-item',
-                              masonry: {
-                             	columnWidth: '.grid-sizer',
-                             	percentPosition: true
-                              }
-                            });
-                           
                             $('.grid-item ').each(function(){
                                 $(this).css('opacity', 1);
                             })
@@ -271,6 +263,22 @@
       			}
     	    });
          });
+         
+         $('.show_galery').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            data = id.replace('#', '');
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+modal",
+    	        type: "get",
+    	        data: "data="+data+"",
+    	        success: function(data) {
+    				$('#myModal .modal-body').html(data);
+                }
+    	    });
+         })
     });
 	
     $(window).on("load", function() {

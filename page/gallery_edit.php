@@ -5,51 +5,7 @@ global $justMine, $galerie, $filterButton;
 $galerie = isset($_GET["nid"]) ? $_GET["nid"] : 0;
 
 if($galerie) {
-	$table = 'morp_tags_category';
-    $primary = 'id';
-    $show_col = "name";
-    $sorting_col = "name";
-    
-    $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
-    
-    $sql = "SELECT * FROM $table order by $sorting_col";
-    $res = safe_query($sql);
-    $row = mysqli_fetch_object($res);
-    
-    $num_rows = mysqli_num_rows($res);
-    
-    $count = 1;
-    
-    while ($row = mysqli_fetch_object($res))
-    {
-        $select .= '<option value="">' . $row->$show_col . '</option>';
-    
-        $tags_category_id = $row->$primary;
-    
-        $table = 'morp_tags';
-        $primary_1 = 'tagID';
-        $show_col_1 = "tag";
-        $sorting_col_1 = "tag";
-    
-        $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
-            "  order by $sorting_col_1";
-        $res_1 = safe_query($sql);
-        $row_1 = mysqli_fetch_object($res_1);
-    
-        while ($row_1 = mysqli_fetch_object($res_1))
-        {
-            $select .= '<option value="' . $row_1->$primary_1 . '">' . $row_1->$show_col_1 .
-                '</option>';
-        }
-    
-        $count++;
-    
-        $select .= ($count < $num_rows) ?
-            '</select><select name="select" class="ui selection dropdown" multiple="">':
-        '</select>';
-    }
-    
-    $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$galerie." AND g.gnid=n.gnid ORDER BY g.sort";
+	$que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$galerie." AND g.gnid=n.gnid ORDER BY g.sort";
 	$res 	= safe_query($que);
 	$x		= mysqli_num_rows($res);
 	$n = 0;
@@ -65,6 +21,7 @@ if($galerie) {
 		$gid 	= $row->gid;
 		$textde = $row->gtextde;
 		$hl = $row->gtexten;
+        $hashtags = $row->tags;
 
 		$sql = "SELECT tagID FROM `morp_tags_list` WHERE art='image' AND targetID=$gid";
 		$rs = safe_query($sql);
@@ -100,7 +57,7 @@ if($galerie) {
 	    <textarea class="galedit form-control" name="t'.$gid.'" id="t'.$gid.'" ref="s'.$gid.'" placeholder="Description Image">'.$textde.'</textarea>
     		<button class="btn btn-info saveText" ref="'.$gid.'" id="s'.$gid.'"><i class="fa fa-save"></i></button>
     	</div>';
-   $output .= $select;
+   $output .= listHashtagsGalery($hashtags);
    $output .='     
 </div>
 ';

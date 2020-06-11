@@ -294,9 +294,7 @@ function set_thumb_gallery($res, $setFilter = 0)
 	
 	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item">
-	        <a class="galIcons" data-toggle="lightbox" data-gallery="stift2" href="' .
-            $dir . 'Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/' . $img .
-            '"><img class="img-responsive" src="' . $dir .
+	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal"><img class="img-responsive" src="' . $dir .
             'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner .
             '/' . $img . '"></a>
 	        
@@ -386,6 +384,54 @@ function liste()
 
     //return $_GET['neu'];
     return $echo;
+}
+
+function listHashtagsGalery($hashtags) {
+    $table = 'morp_tags_category';
+    $primary = 'id';
+    $show_col = "name";
+    $sorting_col = "name";
+    
+    $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
+    
+    $sql = "SELECT * FROM $table order by $sorting_col";
+    $res = safe_query($sql);
+    $row = mysqli_fetch_object($res);
+    
+    $num_rows = mysqli_num_rows($res);
+    
+    $count = 1;
+    
+    while ($row = mysqli_fetch_object($res))
+    {
+        $select .= '<option value="">' . $row->$show_col . '</option>';
+    
+        $tags_category_id = $row->$primary;
+    
+        $table = 'morp_tags';
+        $primary_1 = 'tagID';
+        $show_col_1 = "tag";
+        $sorting_col_1 = "tag";
+    
+        $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
+            "  order by $sorting_col_1";
+        $res_1 = safe_query($sql);
+        $row_1 = mysqli_fetch_object($res_1);
+    
+        while ($row_1 = mysqli_fetch_object($res_1))
+        {
+            $selected = ($hashtags != str_replace($row_1->$primary_1, '', $hashtags)) ? 'selected' : '';
+            $select .= '<option '.$selected.' value="' . $row_1->$primary_1 . '">' . $row_1->$show_col_1 . '</option>';
+        }
+    
+        $count++;
+    
+        $select .= ($count < $num_rows) ?
+            '</select><select name="select" class="ui selection dropdown" multiple="">':
+        '</select>';
+    }
+    
+    return $select;
 }
 
 function getRGBImage($file_dir, $file_type)
