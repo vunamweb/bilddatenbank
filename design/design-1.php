@@ -23,17 +23,22 @@
 	$que = "SELECT * FROM morp_cms_galerie_folders WHERE mid=$mid";
 	$res = safe_query($que);
 	while($row = mysqli_fetch_object($res)) {
-		echo '<li class="btn btn-info btn-folder"><a href="#'.$row->folderID .'" class="area_folder" data-toggle="modal" data-target="#myModal_area_folder">'.$row->folder_name.'</a></li>';
+		echo '<li class="btn btn-info btn-folder"><a href="'.$morpheus["url"].'home/galerie+areafolder/?id='.$row->folderID.'">'.$row->folder_name.'</a><br>
+              </li>
+              <a href="#'.$row->folderID .'" class="area_folder" data-toggle="modal" data-target="#myModal_area_folder">edit</a>
+              ';
 	}
 	
 ?>	
 </ul>
 <p>&nbsp;</p>
-<p>after click => <i>morp_cms_galerie_folders_images</i></p>
+<p style="display: none;">after click => <i>morp_cms_galerie_folders_images</i></p>
 
 	<hr>
 
-				<h4 class="mt2 mb3"><b>Settings for the external access</b></h4>
+				<?php if($_GET['nid'] == 'areafolder') { ?>
+                  <div>
+                  <h4 class="mt2 mb3"><b>Settings for the external access</b></h4>
 				<p>just display after selecting folder and click invite partner // table <em>morp_cms_galerie_guests</em></p>
 				<div class="form-group">
 					<input type="text" class="form-control setform" name="username" id="username" ref="" col="username" value="<?php echo $row->username; ?>" placeholder="Username" />
@@ -58,10 +63,27 @@
 				</div>
 
 				<p><button class="btn btn-success allowedtosend" ref=""><i class="fa fa-envelope"></i> &nbsp; Send Mail to grantee with access data</button></p>
-                
-                <input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />   
+                </div>
+                <?php } ?>
            </div>
-               
+           <div class="modal" id="myModal_area_folder">
+              <div class="modal-dialog">
+                <div class="modal-content">
+            
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+            
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                     
+                  </div>
+            
+                </div>
+              </div>
+         </div>
+         <input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />       
             </div>
 		</div>
     </div>

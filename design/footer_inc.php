@@ -149,6 +149,14 @@
                             }
                 	    });
                    })
+        
+        $('.delete_folder_confirm'). click(function(){
+          var r = confirm("Are you sure to delete?");
+            
+          if(r)
+             $(this).parent().find('.delete_folder').click();             
+          
+        })           
      }
      
      function setClickDeleteGalerieFoldersImages(){
@@ -168,6 +176,13 @@
     				$(dom).parent().hide();
                 }
     	    });
+         })
+         
+         $('.delete_galerie_folders_images_confirm').click(function(){
+            var r = confirm("Are you sure to delete?");
+            
+            if(r)
+             $(this).parent().find('.delete_galerie_folders_images').click();
          })
      }
      
@@ -364,7 +379,7 @@
             id = id.replace('#', '');
             
             request = $.ajax({
-    	        url: ""+origin+"home/galerie+areafolder",
+    	        url: ""+origin+"home/galerie+areafoldermodal",
     	        type: "get",
                 data: "id="+id+"",
     	        success: function(data) {

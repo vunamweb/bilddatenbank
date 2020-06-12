@@ -140,7 +140,7 @@ if($likes) {
     $res 	= safe_query($que);
     
     while ($row = mysqli_fetch_object($res)) {
-        $output .= '<div class="col-md-4"><input type="radio" name="folder" value="'.$row->folderID .'">'.$row->folder_name .'<a href="#'.$row->folderID .'" class="delete_folder"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></div>';
+        $output .= '<div class="col-md-4"><input type="radio" name="folder" value="'.$row->folderID .'">'.$row->folder_name .'<a href="#'.$row->folderID .'" class="delete_folder hide"><i class="fa fa-minus-circle" aria-hidden="true"></i></a><a href="#'.$row->folderID .'" class="delete_folder_confirm"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></div>';
     }
     
     echo $output; die();
@@ -185,7 +185,31 @@ if($likes) {
     
     $output .= '</div>';
     
-    echo ($x !=0) ? $output : 'No data'; die();
+    $output = ($x !=0) ? $output : 'No data';
+} else if($galerie && $galerie == 'areafoldermodal') {
+    $folder_id = $_GET['id'];
+    $table = 'morp_cms_galerie_folders_images';
+    $primary = 'foldersID'; 
+    
+    $output = '<div class="row">';
+    
+    $que  	= "SELECT * FROM $table where $primary = ".$folder_id."";
+    $res 	= safe_query($que);
+    
+    $x		= mysqli_num_rows($res);
+    
+    while ($row = mysqli_fetch_object($res)) {
+       $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gid=".$row->gid." AND g.gnid = n.gnid ORDER BY g.sort";
+	   $res_1 	= safe_query($que);
+       
+       $output .= show_gallery_folder_modal($res_1, $row->imagesID);
+    }
+    
+    $output .= '</div>';
+    
+    $output = ($x !=0) ? $output : 'No data';
+    
+    echo $output; die();
 } else if($galerie && $galerie == 'delareafolderimg') {
     $id = $_GET['id'];
     
@@ -289,26 +313,6 @@ else if($galerie) {
     </div>
   </div>
 </div>';
-
-$output .= '<div class="modal" id="myModal_area_folder">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-         
-      </div>
-
-    </div>
-  </div>
-</div>';
-    
-    
 	$output .= '
 		</div>
 ';
