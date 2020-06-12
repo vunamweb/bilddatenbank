@@ -151,6 +151,26 @@
                    })
      }
      
+     function setClickDeleteGalerieFoldersImages(){
+        $('.delete_galerie_folders_images').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            id = id.replace('#', '');
+            
+            var dom = this;
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+delareafolderimg",
+    	        type: "get",
+                data: "id="+id+"",
+    	        success: function(data) {
+    				$(dom).parent().hide();
+                }
+    	    });
+         })
+     }
+     
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -333,6 +353,23 @@
     				$('#myModal_add_folder .modal-body .content .row').html(data);
                     
                     setClickDeleteFolder();
+                }
+    	    });
+         })
+         
+         $('.area_folder').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            id = id.replace('#', '');
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+areafolder",
+    	        type: "get",
+                data: "id="+id+"",
+    	        success: function(data) {
+    				$('#myModal_area_folder .modal-body').html(data);
+                    setClickDeleteGalerieFoldersImages();
                 }
     	    });
          })

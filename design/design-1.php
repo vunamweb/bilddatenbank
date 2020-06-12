@@ -23,7 +23,7 @@
 	$que = "SELECT * FROM morp_cms_galerie_folders WHERE mid=$mid";
 	$res = safe_query($que);
 	while($row = mysqli_fetch_object($res)) {
-		echo '<li class="btn btn-info btn-folder"><a href="">'.$row->folder_name.'</a></li>';
+		echo '<li class="btn btn-info btn-folder"><a href="#'.$row->folderID .'" class="area_folder" data-toggle="modal" data-target="#myModal_area_folder">'.$row->folder_name.'</a></li>';
 	}
 	
 ?>	

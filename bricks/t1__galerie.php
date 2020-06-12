@@ -163,7 +163,39 @@ if($likes) {
     $sql = "delete from morp_cms_galerie_folders where folderID = ".$id."";
     safe_query($sql);
     
-    echo $sql; die();
+    die();
+} else if($galerie && $galerie == 'areafolder') {
+    $folder_id = $_GET['id'];
+    $table = 'morp_cms_galerie_folders_images';
+    $primary = 'foldersID'; 
+    
+    $output = '<div class="row">';
+    
+    $que  	= "SELECT * FROM $table where $primary = ".$folder_id."";
+    $res 	= safe_query($que);
+    
+    $x		= mysqli_num_rows($res);
+    
+    while ($row = mysqli_fetch_object($res)) {
+       $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gid=".$row->gid." AND g.gnid = n.gnid ORDER BY g.sort";
+	   $res_1 	= safe_query($que);
+       
+       $output .= show_gallery_folder($res_1, $row->imagesID);
+    }
+    
+    $output .= '</div>';
+    
+    echo ($x !=0) ? $output : 'No data'; die();
+} else if($galerie && $galerie == 'delareafolderimg') {
+    $id = $_GET['id'];
+    
+    $table = 'morp_cms_galerie_folders_images';
+    $primary = 'imagesID ';
+    
+    $sql = "delete from $table where $primary = ".$id."";
+    safe_query($sql);
+    
+    die();
 }
 
 
@@ -251,6 +283,24 @@ else if($galerie) {
            </div>
          <a href="#" class="btn btn-info save_button">Save</a>
          </div>
+         
+      </div>
+
+    </div>
+  </div>
+</div>';
+
+$output .= '<div class="modal" id="myModal_area_folder">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
          
       </div>
 

@@ -354,6 +354,39 @@ function set_thumb_gallery($res, $setFilter = 0)
     return $gallery_list;
 }
 
+function show_gallery_folder($res, $galerie_folders_images_id)
+{
+    global $dir, $morpheus, $js, $mid;
+    global $filter, $tagListButtons, $filterButton;
+
+    $gallery_list = '';
+
+    while ($row = mysqli_fetch_object($res))
+    {
+        //print_r($row); die();
+        $img = $row->gname;
+        $tn = $row->tn;
+        $ordner = $row->gnname;
+        $gnid = $row->gnid;
+        $gid = $row->gid;
+        $textde = $row->gtextde;
+        $hl = $row->gtexten;
+        
+        $gallery_list .= '
+	
+	    <div class="col-md-3">
+               <img class="img-responsive" src="' . $dir .
+            'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner .
+            '/' . $img . '">
+               <a class="delete_galerie_folders_images" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a> 
+            </div>
+    ';
+
+    }
+
+    return $gallery_list;
+}
+
 
 function liste()
 {
