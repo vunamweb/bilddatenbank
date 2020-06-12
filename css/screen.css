@@ -1009,5 +1009,21 @@ color: #4b636e;
 .modal-header .close {
     margin-top: -15px;
 }
+#myModal_add_folder .modal-body {
+    padding-left: 20%;
+}
+#myModal_add_folder .modal-body .area_add {
+    padding-top: 20px;
+    display: none;
+}
+#myModal_add_folder .modal-body .content {
+    padding-top: 20px;
+}
+#myModal_add_folder .modal-body .content input {
+  margin-right: 5px;
+}
+#myModal_add_folder .modal-body .content .save_button {
+  margin-top: 20px;
+}
 /* @end */
 

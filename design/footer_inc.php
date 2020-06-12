@@ -279,6 +279,73 @@
                 }
     	    });
          })
+         
+         $('.add_folder'). click(function(){
+            $('.area_add').show();
+         })
+         
+         $('.add_button'). click(function(){
+            var name = $('#name').val();
+            
+            var origin   = $('#url').val();
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+folder",
+    	        type: "get",
+    	        data: "name="+name+"",
+    	        success: function(data) {
+    				$("#myModal_add_folder .modal-body .content .row").append(data);
+                }
+    	    });
+            
+            
+         })
+         
+         $('.show_folder').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            data = id.replace('#', '');
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+showfolder",
+    	        type: "get",
+    	        success: function(data) {
+    				$('#myModal_add_folder .modal-body .content .row').html(data);
+                }
+    	    });
+         })
+         
+         $('.save_button').click(function(){
+            var folder_id, galeries_id = '';
+            
+            var origin   = $('#url').val();
+            
+            var selected = $("input[type='radio'][name='folder']:checked");
+            
+            if (selected.length > 0) {
+              folder_id = selected.val();
+            } else {
+                alert('you need choose at least one item');
+            }
+            
+            $('input.checkbox').each(function(){
+                var value = $(this).val();
+                
+                if($(this).is(":checked"))
+                  galeries_id = galeries_id + value + ','
+                  
+            })
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+savefolder",
+    	        type: "get",
+                data: "folder_id="+folder_id+"&galeries_id="+galeries_id+"",
+    	        success: function(data) {
+    				$('#myModal_add_folder .close').click();
+                }
+    	    });
+         })
     });
 	
     $(window).on("load", function() {

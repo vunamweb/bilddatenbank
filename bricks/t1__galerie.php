@@ -4,6 +4,8 @@ global $justMine, $galerie;
 
 global $filterButton, $filter, $tagListButtons;
 
+global $mylink;
+
 
 $galerie = isset($_GET["nid"]) ? $_GET["nid"] : 0;
 $likes = isset($_GET["likes"]) ? $_GET["likes"] : 0;
@@ -119,6 +121,42 @@ if($likes) {
     }
 	    
   echo $output; die();   
+} else if($galerie && $galerie == 'folder') {
+    $name = $_GET['name'];
+    $table = 'morp_cms_galerie_folders';
+    
+    $sql = "insert into $table(mid,folder_name)values(".$_SESSION['mid'].",'".$name."')";
+    safe_query($sql);
+    
+    $id = $mylink->insert_id;
+    
+    $output = '<div class="col-md-4"><input type="radio" name="folder" value="'.$id.'">'.$name.'</div>';
+    
+    echo $output; die();
+} else if($galerie && $galerie == 'showfolder') {
+    $output = '';
+    
+    $que  	= "SELECT * FROM `morp_cms_galerie_folders` f WHERE f.mid = ".$_SESSION['mid']." ORDER BY f.folder_name";
+    $res 	= safe_query($que);
+    
+    while ($row = mysqli_fetch_object($res)) {
+        $output .= '<div class="col-md-4"><input type="radio" name="folder" value="'.$row->folderID .'">'.$row->folder_name .'</div>';
+    }
+    
+    echo $output; die();
+} else if($galerie && $galerie == 'savefolder') {
+    $folder_id = $_GET['folder_id'];
+    
+    $galeries_id = $_GET['galeries_id'];
+    $galeries_id = explode(',', $galeries_id);
+    
+    foreach($galeries_id as $item) {
+        if($item != '') {
+            $sql = "insert into morp_cms_galerie_folders_images(foldersID,gid)values(".$folder_id.",'".$item."')";
+            safe_query($sql);
+        }
+    }
+    
 }
 
 
@@ -158,10 +196,10 @@ else if($galerie) {
 
 	$output .= '
 
-<!--
-		<h2><a href="'.$dir.$navID[$hn_id].'" class="btn btn-info"><i class="fa fa-chevron-left"></i></a> '.$galerieName.'</h2>
+
+		<a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Add selected to folder</a>
 			<hr>
--->
+
         <div class="grid">
 	';
 	
@@ -178,6 +216,35 @@ else if($galerie) {
       <!-- Modal body -->
       <div class="modal-body">
         Modal body..
+      </div>
+
+    </div>
+  </div>
+</div>';
+  $output .= '<div class="modal" id="myModal_add_folder">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+         <div class="header">
+           <a href="#" class="btn btn-info add_folder">+ Add new folder</a>
+           <div class="area_add">
+             <input type="text" name="name" id="name" />
+             <input type="button" value="Add" class="add_button" />
+           </div>
+         </div>
+         <div class="content">
+           <div class="row">
+           </div>
+         <a href="#" class="btn btn-info save_button">Save</a>
+         </div>
+         
       </div>
 
     </div>

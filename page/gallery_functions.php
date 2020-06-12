@@ -318,7 +318,7 @@ function set_thumb_gallery($res, $setFilter = 0)
             '</span></a></span>
 					
 					<div class="btn-group btn-group-gallery" data-toggle="buttons">
-						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox" id="add_to_folder" value="" name="add_to_folder">  
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox" value="'.$gid.'" name="add_to_folder">  
 							<div class="rahmen"><span class="fa fa-check"></span></div>				
 						</label>
 					</div>
