@@ -1025,5 +1025,8 @@ color: #4b636e;
 #myModal_add_folder .modal-body .content .save_button {
   margin-top: 20px;
 }
+a.delete_folder {
+  margin-left: 10px;
+}
 /* @end */
 

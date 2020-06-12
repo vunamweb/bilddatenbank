@@ -131,6 +131,26 @@
             }, timeOut);
      }
      
+     function setClickDeleteFolder() {
+        $('.delete_folder'). click(function(){
+                        var id = $(this).attr('href');
+                        id = id.replace('#', '');
+                        
+                        var dom = this;
+                        
+                        var origin   = $('#url').val();
+                        
+                        request = $.ajax({
+                	        url: ""+origin+"home/galerie+delfolder",
+                	        type: "get",
+                	        data: "id="+id+"",
+                	        success: function(data) {
+             			       $(dom).parent().hide();
+                            }
+                	    });
+                   })
+     }
+     
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -290,15 +310,14 @@
             var origin   = $('#url').val();
             
             request = $.ajax({
-    	        url: ""+origin+"home/galerie+folder",
+    	        url: ""+origin+"home/galerie+addfolder",
     	        type: "get",
     	        data: "name="+name+"",
     	        success: function(data) {
     				$("#myModal_add_folder .modal-body .content .row").append(data);
+                    setClickDeleteFolder();
                 }
     	    });
-            
-            
          })
          
          $('.show_folder').click(function(){
@@ -312,6 +331,8 @@
     	        type: "get",
     	        success: function(data) {
     				$('#myModal_add_folder .modal-body .content .row').html(data);
+                    
+                    setClickDeleteFolder();
                 }
     	    });
          })
@@ -338,7 +359,7 @@
             })
             
             request = $.ajax({
-    	        url: ""+origin+"home/galerie+savefolder",
+    	        url: ""+origin+"home/galerie+save_folder_galeries",
     	        type: "get",
                 data: "folder_id="+folder_id+"&galeries_id="+galeries_id+"",
     	        success: function(data) {

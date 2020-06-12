@@ -121,7 +121,7 @@ if($likes) {
     }
 	    
   echo $output; die();   
-} else if($galerie && $galerie == 'folder') {
+} else if($galerie && $galerie == 'addfolder') {
     $name = $_GET['name'];
     $table = 'morp_cms_galerie_folders';
     
@@ -130,7 +130,7 @@ if($likes) {
     
     $id = $mylink->insert_id;
     
-    $output = '<div class="col-md-4"><input type="radio" name="folder" value="'.$id.'">'.$name.'</div>';
+    $output = '<div class="col-md-4"><input type="radio" name="folder" value="'.$id.'">'.$name.'<a href="#'.$id.'" class="delete_folder"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></div>';
     
     echo $output; die();
 } else if($galerie && $galerie == 'showfolder') {
@@ -140,11 +140,11 @@ if($likes) {
     $res 	= safe_query($que);
     
     while ($row = mysqli_fetch_object($res)) {
-        $output .= '<div class="col-md-4"><input type="radio" name="folder" value="'.$row->folderID .'">'.$row->folder_name .'</div>';
+        $output .= '<div class="col-md-4"><input type="radio" name="folder" value="'.$row->folderID .'">'.$row->folder_name .'<a href="#'.$row->folderID .'" class="delete_folder"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></div>';
     }
     
     echo $output; die();
-} else if($galerie && $galerie == 'savefolder') {
+} else if($galerie && $galerie == 'save_folder_galeries') {
     $folder_id = $_GET['folder_id'];
     
     $galeries_id = $_GET['galeries_id'];
@@ -157,6 +157,13 @@ if($likes) {
         }
     }
     
+} else if($galerie && $galerie == 'delfolder') {
+    $id = $_GET['id'];
+    
+    $sql = "delete from morp_cms_galerie_folders where folderID = ".$id."";
+    safe_query($sql);
+    
+    echo $sql; die();
 }
 
 
