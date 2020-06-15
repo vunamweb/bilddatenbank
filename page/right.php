@@ -31,47 +31,25 @@ if ($_GET['nid'] == 'areafolder')
 ?>
 	<div class="content hide">
 		<div class="form-group">
-			<input type="text" class="form-control setform" name="username" id="username" ref="" col="username" value="<?php
-
-    echo $row->username;
-
-?>" placeholder="Username" />
+			<input type="text" class="form-control setform" name="username" id="username" placeholder="Username" />
 		</div>
 		<div class="form-group">
-			<input type="text" class="form-control setform" name="password" id="password" ref="" col="password" value="<?php
-
-    echo $row->password;
-
-?>" placeholder="password" />
+			<input type="text" class="form-control setform" name="password" id="password" placeholder="password" />
+		</div>
+        <div class="form-group">
+			<input type="text" class="form-control setform" name="email" id="email" placeholder="Email" />
 		</div>
 		<div class="form-group">
 			<label for="start">
 				Start date access
 			</label>
-			<input type="text" class="form-control setform" name="start_dat" id="start_dat" ref="" col="start_dat" value="<?php
-
-    echo $row->start_dat;
-
-?>" />
+			<input type="date" class="form-control setform" name="start_dat" id="start_dat" />
 		</div>
 		<div class="form-group">
 			<label for="start">
 				End date access
 			</label>
-			<input type="text" class="form-control setform" name="end_dat" id="end_dat" ref="" col="end_dat" value="<?php
-
-    echo $row->end_dat;
-
-?>" />
-		</div>
-		<div class="form-group">
-			<textarea class="form-control setform" name="email" id="email" ref="" col="email" placeholder="comma seperated e-Mail adresses">
-				<?php
-
-    echo $row->email;
-
-?>
-			</textarea>
+			<input type="date" class="form-control setform" name="end_dat" id="end_dat"  />
 		</div>
 		<p>
 			<button class="btn btn-success allowedtosend" ref="">
@@ -82,7 +60,5 @@ if ($_GET['nid'] == 'areafolder')
 		</p>
 	</div>
 	<?php
-
 }
-
 ?>
