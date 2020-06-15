@@ -47,29 +47,38 @@ if($func == 'editgalery') {
 
 		$output .= '
 
-        <div class="sortGal" id="z_'.$gid.'">
-            <div class="hovereffect">
-                <img class="img-responsive" src="'.$dir.'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.$img.'">
-                <div class="overlay">
-                		<p><i class="fa fa-eraser delete tool" ref="'.$gid.'" id="e'.$gid.'"></i></p>
-                		<p><i class="fa fa-check tool invisible delYes chk'.$gid.'" ref="'.$gid.'"></i></p>
-                		<p><i class="fa fa-close tool invisible delNo chk'.$gid.'" ref="'.$gid.'"></i></p>
-                </div>
-            </div>
-            <div class="relative">
-        	    <textarea class="galedit form-control" name="t'.$gid.'" id="t'.$gid.'" ref="s'.$gid.'" placeholder="Description Image">'.$textde.'</textarea>
-            		<button class="btn btn-info saveText" ref="'.$gid.'" id="s'.$gid.'"><i class="fa fa-save"></i></button>
-            	</div>';
-           $output .= listHashtagsGalery($hashtags);
-           $output .='     
-        </div>
+        <div class="row">
+        <div class="col-md-12">
+                     <div class="show_infor row">
+                          <div class="col-md-12">
+                            <a href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                            <br><br>
+                            <div class="alert alert-success hide" role="alert">gespeichert update</div>
+                           </div>
+                          <div class="col-md-6"><img class="img-responsive" src="'.$dir.'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.$img.'"></div>';
+         
+         $output .= '<div class="col-md-6"><label class="des_'.$gid.'">'.$textde.'</label><br>' . '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags). '</div>' .'</div>';
+         
+         $output .= '</div>';
+         
+         $output .=                                  
+                                
+            '
+            <div class="row relative show_edit hide">
+        	    <div class="col-md-12"><a href="javascript:void(0)" class="arrow-back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+                <br><br>
+                <div class="col-md-6"><textarea class="galedit form-control" name="t'.$gid.'" id="t'.$gid.'" ref="s'.$gid.'" placeholder="Description Image">'.$textde.'</textarea></div>
+            ';
+           
+        $output .= '<div class="col-md-6">' . listHashtagsGalery($hashtags) . '</div>'.'
+                    <br><div class="col-md-12"><button class="btn btn-info saveText" ref="'.$gid.'" id="s'.$gid.'"><i class="fa fa-save"></i></button></div>';
+        
+        $output .='     
+        </div></div></div>
         ';
   }
   
-  $js = '
-
-	$(\'.selection.dropdown\').dropdown({maxSelections: 3});
-';
+  echo $output; die();
 } 
 else if($galerie) {
 	$que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$galerie." AND g.gnid=n.gnid ORDER BY g.sort";
@@ -111,24 +120,18 @@ else if($galerie) {
 
 		$output .= '
 
-<div class="sortGal" id="z_'.$gid.'">
-    <div class="hovereffect">
-        <img class="img-responsive" src="'.$dir.'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.$img.'">
-        <div class="overlay">
-        		<p><i class="fa fa-eraser delete tool" ref="'.$gid.'" id="e'.$gid.'"></i></p>
-        		<p><i class="fa fa-check tool invisible delYes chk'.$gid.'" ref="'.$gid.'"></i></p>
-        		<p><i class="fa fa-close tool invisible delNo chk'.$gid.'" ref="'.$gid.'"></i></p>
-        </div>
+<div class="col-md-6">
+    <div class="">
+        <a href="#'.$gid.'" class="edit_image" data-toggle="modal" data-target="#myModal_edit_image"><img class="img-responsive" src="'.$dir.'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.$img.'"></a>
     </div>
-    <div class="relative">
-	    <label>'.$textde.'</label><br>
+    <div class="">
+	    <label class="des_'.$gid.'">'.$textde.'</label><br>
     		';
-  $output .= HashtagsGalery($hashtags);
+  $output .= '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags) . '</div>';
         
   $output .= '</div>';
    
-  $output .= '<a href="'.$morpheus['url'].'kategorien/kategorien-edit/editgalery+'.$gid.'"><i class="fa fa-edit"></i></a><button class="btn btn-info saveText hide" ref="'.$gid.'" id="s'.$gid.'"><i class="fa fa-edit"></i></button>
-    	     
+  $output .= '	     
 </div>
 ';
 }

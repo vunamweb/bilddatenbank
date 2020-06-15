@@ -83,6 +83,23 @@
                 </div>
               </div>
          </div>
+         <div class="modal" id="myModal_edit_image">
+              <div class="modal-dialog">
+                <div class="modal-content">
+            
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+            
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                     edut
+                  </div>
+            
+                </div>
+              </div>
+         </div>
          <input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />       
             </div>
 		</div>

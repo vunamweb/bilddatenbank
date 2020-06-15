@@ -118,7 +118,7 @@ body { font-family: "RobotoCn", sans-serif; font-size: 16px; font-weight: 300; c
 .down .navbar-brand { padding: 4px 0; }
 .padLeft0 { padding-left: 4px; }
 .relative { position: relative; }
-.saveText { position: absolute; z-index: 9; right: 0; bottom: 0; }
+.saveText { margin-top: 10px; }
 
 @media only screen and (max-width: 768px) { .padLeft0 { padding-left: 20px; } }
 @media (min-width: 979px) { ul.nav li.dropdown:hover > ul.dropdown-menu { display: block; } }
@@ -1030,6 +1030,9 @@ a.delete_folder {
 }
 .hide {
   display: none;
+}
+.show_edit .ui.selection {
+    width: 80%;
 }
 /* @end */
 

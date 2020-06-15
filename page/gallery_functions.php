@@ -497,6 +497,8 @@ function listHashtagsGalery($hashtags) {
         '</select>';
     }
     
+    $select .= '</div>';
+    
     return $select;
 }
 

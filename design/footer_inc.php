@@ -186,6 +186,16 @@
          })
      }
      
+     function setTextAfterSave(select, text) {
+        var data = '';
+        
+        $(select).each(function(){
+            data = data + '<strong>#' + $(this).text() + '&nbsp;&nbsp</strong>';
+        })
+        
+        $(text).html(data);
+     }
+     
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -299,26 +309,6 @@
                     }); 
          })
          
-         $(".saveText").click(function () {
-    	    var origin   = $('#url').val();
-            
-            id = $(this).attr("ref");
-    	    myText = $("#t"+id).val();
-            var hashtags = getHashtags();
-    
-    		// console.log(myText+\' # \'+id);
-    
-    	    request = $.ajax({
-    	        url: ""+origin+"home/galerie+update",
-    	        type: "get",
-    	        data: "myText="+myText+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
-    	        success: function(data) {
-    				$('#s'+id).removeClass('btn-danger');
-    				// console.log(data);
-      			}
-    	    });
-         });
-         
          $('.show_galery').click(function(){
             var origin   = $('#url').val();
             
@@ -419,6 +409,90 @@
                 }
     	    });
          })
+         
+         $('.edit_image').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            id = id.replace('#', '');
+            
+            request = $.ajax({
+    	        url: ""+origin+"kategorien/kategorien-edit/editgalery+"+id+"",
+    	        type: "get",
+    	        success: function(data) {
+    				$('#myModal_edit_image .modal-body').html(data);
+                    
+                    $('.selection.dropdown').dropdown({maxSelections: 3});
+                    
+                    $('.show_infor a').click(function(){
+                       $(this).parent().parent().hide();
+                       $(this).parent().parent().parent().find('.show_edit').removeClass('hide');
+                       $('.show_infor .alert-success').addClass('hide');
+                    })
+                
+                    $('.show_edit a.arrow-back').click(function(){
+                       $(this).parent().parent().addClass('hide');
+                       $(this).parent().parent().parent().find('.show_infor').show();
+                    })
+                
+                    $(".saveText").click(function () {
+                	    var origin   = $('#url').val();
+                        
+                        id = $(this).attr("ref");
+                	    myText = $("#t"+id).val();
+                        var hashtags = getHashtags();
+                
+                		request = $.ajax({
+                	        url: ""+origin+"home/galerie+update",
+                	        type: "get",
+                	        data: "myText="+myText+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
+                	        success: function(data) {
+                				$('#s'+id).removeClass('btn-danger');
+                                setTextAfterSave('.show_edit select option:selected', '.hashtag_'+id+'');
+                                $('.des_'+id+'').html(myText);
+                                $('.show_edit a.arrow-back').click();
+                                $('.show_infor .alert-success').removeClass('hide');
+                            }
+                	    });
+                   });
+                }
+    	    });
+         })
+         
+         /*$('.edit_image').click(function(){
+            setTimeout(function(){ 
+                $('.show_infor a').click(function(){
+                 $(this).parent().hide();
+                 $(this).parent().parent().find('.show_edit').removeClass('hide');
+                })
+                
+                $('.show_edit a').click(function(){
+                 $(this).parent().addClass('hide');
+                 $(this).parent().parent().find('.show_infor').show();
+                })
+                
+                $(".saveText").click(function () {
+            	    var origin   = $('#url').val();
+                    
+                    id = $(this).attr("ref");
+            	    myText = $("#t"+id).val();
+                    var hashtags = getHashtags();
+            
+            		// console.log(myText+\' # \'+id);
+            
+            	    request = $.ajax({
+            	        url: ""+origin+"home/galerie+update",
+            	        type: "get",
+            	        data: "myText="+myText+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
+            	        success: function(data) {
+            				$('#s'+id).removeClass('btn-danger');
+            				// console.log(data);
+              			}
+            	    });
+              });
+            
+             }, 100);
+         })*/
     });
 	
     $(window).on("load", function() {
