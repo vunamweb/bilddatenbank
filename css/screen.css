@@ -1034,5 +1034,12 @@ a.delete_folder {
 .show_edit .ui.selection {
     width: 80%;
 }
+.invite_partner {
+    text-align: center;
+    margin-top: 20px;
+}
+.invite_partner a {
+    font-size: 2em;
+}
 /* @end */
 

@@ -459,40 +459,9 @@
     	    });
          })
          
-         /*$('.edit_image').click(function(){
-            setTimeout(function(){ 
-                $('.show_infor a').click(function(){
-                 $(this).parent().hide();
-                 $(this).parent().parent().find('.show_edit').removeClass('hide');
-                })
-                
-                $('.show_edit a').click(function(){
-                 $(this).parent().addClass('hide');
-                 $(this).parent().parent().find('.show_infor').show();
-                })
-                
-                $(".saveText").click(function () {
-            	    var origin   = $('#url').val();
-                    
-                    id = $(this).attr("ref");
-            	    myText = $("#t"+id).val();
-                    var hashtags = getHashtags();
-            
-            		// console.log(myText+\' # \'+id);
-            
-            	    request = $.ajax({
-            	        url: ""+origin+"home/galerie+update",
-            	        type: "get",
-            	        data: "myText="+myText+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
-            	        success: function(data) {
-            				$('#s'+id).removeClass('btn-danger');
-            				// console.log(data);
-              			}
-            	    });
-              });
-            
-             }, 100);
-         })*/
+         $('.invite_partner'). click(function(){
+            $('.right-board .content').removeClass('hide');
+         })
     });
 	
     $(window).on("load", function() {
