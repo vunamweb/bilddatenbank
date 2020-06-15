@@ -918,7 +918,11 @@ if($nMeatDesc) $desc = $nMeatDesc;
 $zufall=rand(0,999);
 
 include("design/header_inc.php");
-include("design/top.php");
+if(get_guest_id_of_intranet_user() == 0)
+ include("design/top.php");
+else
+ include("design/top_guest.php");
+ 
 #include("design/sidebar-left.php");
 //echo $design;
 /*

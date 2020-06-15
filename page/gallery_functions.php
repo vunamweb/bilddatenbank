@@ -354,6 +354,81 @@ function set_thumb_gallery($res, $setFilter = 0)
     return $gallery_list;
 }
 
+function set_thumb_gallery_guest($res, $setFilter = 0)
+{
+    global $dir, $morpheus, $js, $mid;
+    global $filter, $tagListButtons, $filterButton;
+
+    $gallery_list = '';
+
+    while ($row = mysqli_fetch_object($res))
+    {
+        //print_r($row); die();
+        $img = $row->gname;
+        $tn = $row->tn;
+        $ordner = $row->gnname;
+        $gnid = $row->gnid;
+        $gid = $row->gid;
+        $textde = $row->gtextde;
+        $hl = $row->gtexten;
+
+        $tagList = $row->tags;
+        $tagList = explode(',', $tagList);
+        // print_r($tagList);
+        $filter = '';
+
+        foreach ($tagList as $arr)
+         if($arr != '') 
+          $filter .= 'tag_' . $arr . ' ';
+          
+        $noOfComments = '';
+        if ($mid)
+            $hasLike = isLike($mid, "morp_cms_galerie_likes", "gid", $gid);
+        $noOfLikes = countLikes("morp_cms_galerie_likes", "gid", $gid);
+        $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
+        $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
+
+        $gallery_list .= '
+	
+	<div class="grid-item grid-sizer tag ' . $filter . '">
+	    <div class="gal-item">
+	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal"><img class="img-responsive" src="' . $dir .
+            'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner .
+            '/' . $img . '"></a>
+	        
+	        <div class="inner">
+	            <div class="gal-Desc">
+		            <h2>' . $hl . '</h2>
+					<p>' . $textde . '</p>
+				</div>
+	        </div>
+	    </div>
+	</div>';
+}
+
+    if ($setFilter)
+    {
+        $filterButton = '		
+		<div id="" class="button-group filter-button-group">
+			<button class="btn btn-info is-checked" data-filter="*">All Photos</button>
+';
+
+        foreach ($tagListButtons as $key => $val)
+        {
+            $filterButton .= '			<button class="btn btn-info" data-filter=".' . $key .
+                '"># ' . $val . '</button>
+';
+        }
+
+        $filterButton .= '		
+		</div>
+';
+    }
+
+
+    return $gallery_list;
+}
+
 function show_gallery_folder($res, $galerie_folders_images_id)
 {
     global $dir, $morpheus, $js, $mid;
@@ -384,6 +459,20 @@ function show_gallery_folder($res, $galerie_folders_images_id)
     }
 
     return $gallery_list;
+}
+
+function get_guest_id_of_intranet_user()
+{
+    $table = 'morp_intranet_user';
+    $primary = 'mid'; 
+    $col = 'guestID';
+    
+    $que  	= "SELECT * FROM $table where $primary = ".$_SESSION['mid']."";
+    $res 	= safe_query($que);
+    
+    while ($row = mysqli_fetch_object($res)) {
+      return $row->$col;
+    }
 }
 
 function show_gallery_folder_modal($res, $galerie_folders_images_id)

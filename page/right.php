@@ -30,7 +30,8 @@ if ($_GET['nid'] == 'areafolder')
 {
 ?>
 	<div class="content hide">
-		<div class="form-group">
+		<div class="alert alert-error hide" role="alert">Please check mandatory fields</div>
+        <div class="form-group">
 			<input type="text" class="form-control setform" name="username" id="username" placeholder="Username" />
 		</div>
 		<div class="form-group">
@@ -58,7 +59,8 @@ if ($_GET['nid'] == 'areafolder')
 				&nbsp; Send Mail to grantee with access data
 			</button>
 		</p>
-	</div>
+	<input type="hidden" name="folder_id" id="folder_id" value="<?php echo $_GET['id'] ?>" />
+    </div>
 	<?php
 }
 ?>

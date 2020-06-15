@@ -59,6 +59,8 @@
 <script src="<?php echo $dir; ?>js/selectize.js"></script>
 <script src="<?php echo $dir; ?>js/imagesloaded.pkgd.min.js"></script>
 <script src="https://semantic-ui.com/dist/semantic.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
 
 <?php if ($hn_id == 3) { ?>
 <script src="<?php echo $dir; ?>assets/js/jquery.magnific-popup.js"></script>
@@ -461,6 +463,75 @@
          
          $('.invite_partner'). click(function(){
             $('.right-board .content').removeClass('hide');
+         })
+         
+         $('.allowedtosend').click(function(){
+            var origin   = $('#url').val();
+            
+            var validate = false;
+            
+            var username = $('#username');
+            var password = $('#password');
+            var email = $('#email');
+            var start_date = $('#start_dat');
+            var end_date = $('#end_dat');
+            var folder_id = $('#folder_id').val();
+            
+            if(username.val() == '') {
+                validate = true;
+                username.addClass('error');
+            } else {
+                validate = false;
+                username.removeClass('error'); 
+            }
+            
+            if(password.val() == '') {
+                validate = true;
+                password.addClass('error');
+            } else {
+                validate = false;
+                password.removeClass('error'); 
+            }
+            
+            if(email.val() == '') {
+                validate = true;
+                email.addClass('error');
+            } else {
+                validate = false;
+                email.removeClass('error'); 
+            }
+            
+            if(start_date.val() == '') {
+                validate = true;
+                start_date.addClass('error');
+            } else {
+                validate = false;
+                start_date.removeClass('error'); 
+            }
+            
+            if(end_date.val() == '') {
+                validate = true;
+                end_date.addClass('error');
+            } else {
+                validate = false;
+                end_date.removeClass('error'); 
+            }
+            
+            if(validate)
+              $('.alert-error').removeClass('hide');
+            else {
+              $('.alert-error').addClass('hide'); 
+              
+              request = $.ajax({
+                	        url: ""+origin+"home/galerie+guest",
+                	        type: "get",
+                	        data: "username="+username.val()+"&password="+password.val()+"&email="+email.val()+"&start_date="+start_date.val()+"&end_date="+end_date.val()+"&folder_id="+folder_id+"",
+                	        success: function(data) {
+                				
+                            }
+                	    });  
+            }
+              
          })
     });
 	

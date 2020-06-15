@@ -220,6 +220,28 @@ if($likes) {
     safe_query($sql);
     
     die();
+} else if($galerie && $galerie == 'guest') {
+    $folder_id = $_GET['folder_id'];
+    $username = $_GET['username'];
+    $password = $_GET['password'];
+    $email = $_GET['email'];
+    $start_date = $_GET['start_date'];
+    $end_date = $_GET['end_date'];
+    
+    $table = 'morp_cms_galerie_folders_images';
+    $primary = 'imagesID ';
+    
+    $sql = "insert into morp_cms_galerie_guests(username, password ,start_dat, end_dat, email, folder_ids)
+    values('".$username."', '".md5($password)."', '".$start_date."', '".$end_date."', '".$email."', '".$folder_id."')";
+    safe_query($sql);
+    
+    $insert_id = $mylink->insert_id;
+    
+    $sql = "insert into morp_intranet_user(uname, pw , email, guestID )
+    values('".$username."', '".md5($password)."', '".$email."', ".$insert_id.")";
+    safe_query($sql);
+    
+    die();
 }
 
 
@@ -267,24 +289,7 @@ else if($galerie) {
 	';
 	
 	$output .= set_thumb_gallery($res, 1);
-    $output .= '<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-    </div>
-  </div>
-</div>';
-  $output .= '<div class="modal" id="myModal_add_folder">
+    $output .= '<div class="modal" id="myModal_add_folder">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -354,8 +359,31 @@ else if($hashtag) {
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // SHOW CATEGORY ON START
+else if(get_guest_id_of_intranet_user() != 0) {
+    $table = 'morp_cms_galerie_guests';
+    $primary = 'guestID';
+    
+    
+    $que  	= "SELECT folder_ids FROM $table WHERE $primary=".get_guest_id_of_intranet_user()."";
+	$res 	= safe_query($que);
+	$row 	= mysqli_fetch_object($res);
+	$folder_ids = $row->folder_ids;
+    
+    $que  	= "SELECT * FROM `morp_cms_galerie_folders_images` f, `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE f.foldersID = ".$folder_ids." AND f.gid = g.gid AND g.gnid=n.gnid ORDER BY g.sort";
+	$res 	= safe_query($que);
+	$x		= mysqli_num_rows($res);
+
+	$tagListButtons = array();
+
+	$output .= '
+        <div class="grid">
+	';
+	
+	$output .= set_thumb_gallery_guest($res, 1);
+}
 else {
-	$que = "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE sichtbar=1 AND g.gnid=n.gnid GROUP BY g.gnid ORDER BY n.date DESC";
+	
+    $que = "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE sichtbar=1 AND g.gnid=n.gnid GROUP BY g.gnid ORDER BY n.date DESC";
 
 	$res 	= safe_query($que);
 	$x		= mysqli_num_rows($res);
@@ -423,7 +451,7 @@ else {
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 
-if($galerie || $likes)		$js = '
+if($galerie || $likes || get_guest_id_of_intranet_user() != 0 )		$js = '
 var $grid = $(\'.grid\').isotope({
   itemSelector: \'.grid-item\',
   masonry: {

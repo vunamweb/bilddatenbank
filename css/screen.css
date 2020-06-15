@@ -1041,5 +1041,11 @@ a.delete_folder {
 .invite_partner a {
     font-size: 2em;
 }
+.error {
+    border: 1px solid red;
+}
+.alert-error {
+    color: red;
+}
 /* @end */
 
