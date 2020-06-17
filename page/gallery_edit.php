@@ -122,7 +122,7 @@ else if($galerie) {
 
 <div class="col-md-6">
     <div class="item_image">
-         <img class="img-responsive" src="'.$dir.'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.$img.'">
+         <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
          <div class="edit_delete_image">
           <a href="#'.$gid.'" class="edit_image" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
           <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>

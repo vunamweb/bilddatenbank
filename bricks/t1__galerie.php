@@ -511,6 +511,7 @@ else {
 	while ($row = mysqli_fetch_object($res)) {
 		$n++;
 		$img 	= $row->gname;
+        $gid = $row->gid;
 		$ordner = $row->gnname;
 		$gnid 	= $row->gnid;
 
@@ -524,7 +525,7 @@ else {
 
 				<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
 				    <div class="hovereffect">
-				        <img class="img-responsive" src="'.$dir.'mthumb.php?w=800&amp;h=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.urlencode($img).'">
+				        <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
 			            <div class="overlay">
 			                <h2>'.$hl.'</h2>
 							<p>'.$textde.'</p>

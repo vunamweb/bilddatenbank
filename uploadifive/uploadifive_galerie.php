@@ -77,8 +77,8 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
         mkdirr($largeFile, 0777);
         
         $targetFile .= '/' . $_FILES['Filedata']['name'];
-        $thumbFile .= '/' . $_FILES['Filedata']['name'];
-        $largeFile .= '/' . $_FILES['Filedata']['name'];
+        $thumbFile .= '/'; //. $_FILES['Filedata']['name'];
+        $largeFile .= '/'; //. $_FILES['Filedata']['name'];
         
         
         if (!move_uploaded_file($tempFile, $targetFile))
@@ -86,8 +86,12 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
             
         $file_type = getFileTypeImage($targetFile);
         
-        reSizeImage($targetFile, $thumbFile, $file_type, $widthThumbResize, 'crop');
-        reSizeImage($targetFile, $largeFile, $file_type, $widthLargeResize, 'crop');
+        //echo $thumbFile; die();
+        makeImage($targetFile, $thumbFile, $widthThumbResize);
+        makeImage($targetFile, $largeFile, $widthLargeResize);
+        
+        //reSizeImage($targetFile, $thumbFile, $file_type, $widthThumbResize, 'crop');
+        //reSizeImage($targetFile, $largeFile, $file_type, $widthLargeResize, 'crop');
     } else
     {
         // The file type wasn't allowed
