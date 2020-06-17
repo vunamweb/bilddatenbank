@@ -55,7 +55,9 @@ if($func == 'editgalery') {
                             <br><br>
                             <div class="alert alert-success hide" role="alert">gespeichert update</div>
                            </div>
-                          <div class="col-md-6"><img class="img-responsive" src="'.$dir.'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.$img.'"></div>';
+                          <div class="col-md-6">
+                            <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+                          </div>';
          
          $output .= '<div class="col-md-6"><label class="des_'.$gid.'">'.$textde.'</label><br>' . '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags). '</div>' .'</div>';
          
