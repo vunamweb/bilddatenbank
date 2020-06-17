@@ -1058,11 +1058,11 @@ a.delete_folder {
     padding: 15px;
 }
 .delete_galerie_folders_images_confirm {
-    position: absolute;
+    /*position: absolute;
     left: 50%;
     top: 50%;
     font-size: 2em;
-    display: none;
+    display: none;*/
 }
 #images_area .col-md-6 {
     cursor: pointer;
@@ -1084,6 +1084,26 @@ a.delete_folder {
 }
 .areafolder {
     margin-top: 10px;
-}  
+}
+.item_image {
+    position: relative;
+}
+.item_image {
+    cursor: pointer;
+}
+.item_image:hover {
+    opacity: 0.5;
+    background: #ccc;
+}
+.item_image:hover .edit_delete_image {
+    display: block;
+}   
+.item_image .edit_delete_image {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: none;
+    font-size: 1.5em;
+}
 /* @end */
 

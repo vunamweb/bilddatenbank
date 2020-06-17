@@ -121,8 +121,13 @@ else if($galerie) {
 		$output .= '
 
 <div class="col-md-6">
-    <div class="">
-        <a href="#'.$gid.'" class="edit_image" data-toggle="modal" data-target="#myModal_edit_image"><img class="img-responsive" src="'.$dir.'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.$img.'"></a>
+    <div class="item_image">
+         <img class="img-responsive" src="'.$dir.'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/'.$img.'">
+         <div class="edit_delete_image">
+          <a href="#'.$gid.'" class="edit_image" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
+          <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+          <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a> 
+         </div>
     </div>
     <div class="">
 	    <label class="des_'.$gid.'">'.$textde.'</label><br>

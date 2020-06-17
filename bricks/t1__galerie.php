@@ -230,8 +230,8 @@ if($likes) {
 } else if($galerie && $galerie == 'delareafolderimg') {
     $id = $_GET['id'];
     
-    $table = 'morp_cms_galerie_folders_images';
-    $primary = 'imagesID ';
+    $table = 'morp_cms_galerie';
+    $primary = 'gid';
     
     $sql = "delete from $table where $primary = ".$id."";
     safe_query($sql);

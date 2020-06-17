@@ -453,8 +453,6 @@ function show_gallery_folder($res, $galerie_folders_images_id)
                <img class="img-responsive" src="' . $dir .
             'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner .
             '/' . $img . '">
-        <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-        <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a> 
         </div>
     ';
 

@@ -176,7 +176,7 @@
     	        type: "get",
                 data: "id="+id+"",
     	        success: function(data) {
-    				$(dom).parent().hide();
+    				$(dom).parent().parent().parent().hide();
                 }
     	    });
          })
