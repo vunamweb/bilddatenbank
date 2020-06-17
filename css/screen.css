@@ -1070,5 +1070,20 @@ a.delete_folder {
 #images_area .col-md-6:hover .delete_galerie_folders_images_confirm {
     display: block;
 }
+.icon_folder {
+    text-align: center;
+    font-size: 1.5em;
+    padding-top: 20px;
+    width: 90%;
+}
+.icon_folder a {
+    margin-left: 5px;
+}
+.areafolder .panel-default {
+    margin-bottom: 0;
+}
+.areafolder {
+    margin-top: 10px;
+}  
 /* @end */
 

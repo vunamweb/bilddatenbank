@@ -177,32 +177,7 @@ if($likes) {
     $que  	= "SELECT * FROM $table where $col like '%".$folder_id."%'";
     $res 	= safe_query($que);
     
-    $output .= '<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#guest_area">Guest</button>';
-    
-    $output .= '<div id="guest_area" class="collapse"><div id="area_edit_guest"></div><div class="alert alert-success hide" role="alert">gespeichert</div>
-        <br>
-        ';
-    
-    $output .= '<table class="table mt2">';
-    
-    while ($row = mysqli_fetch_object($res))
-    {
-        $edit = $row->$primary;
-        $output .= '<tr class=tr_'.$edit.'>
-			<td><a href="#' . $edit . '" class="edit_guest">' . $row->$show_col . '</a></td>
-            <td><a href="#' . $edit .
-            '" class="btn btn-info btn-small edit_guest"><i class="fa fa-pencil-square-o"></a></td>
-			<td><a href="#' . $edit . '" class="btn btn-danger btn-small delete_guest"><i class="fa fa-trash-o"></a></td>
-		</tr>';
-    }
-    
-    $output .= '</table>';
-    
-    $output .= '</div>';
-    
-    $output .= '<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#images_area">Images</button>';
-    
-    $output .= '<div id="images_area" class="collapse">';
+    $output .= '<div id="images_area">';
     
     
     
@@ -275,13 +250,13 @@ if($likes) {
         //if user not exist
         if($x <= 0) {
             $sql = "insert into morp_cms_galerie_guests(username, password ,start_dat, end_dat, email, folder_ids)
-            values('".$item->username."', '".md5($item->password)."', '".$item->start_date."', '".$item->end_date."', '".$item->email."', '".$folder_id."')";
+            values('".$item->email."', '".md5($item->password)."', '".$item->start_date."', '".$item->end_date."', '".$item->email."', '".$folder_id."')";
             safe_query($sql);
             
             $insert_id = $mylink->insert_id;
             
             $sql = "insert into morp_intranet_user(uname, pw , email, guestID )
-            values('".$item->username."', '".md5($item->password)."', '".$item->email."', ".$insert_id.")";
+            values('".$item->email."', '".md5($item->password)."', '".$item->email."', ".$insert_id.")";
             safe_query($sql);
         } else {
             $row = mysqli_fetch_object($res);
@@ -312,6 +287,12 @@ if($likes) {
 		<a href="javascript:void(0)" class="arrow-back-guest"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
         <br>
         <div class="form-group">
+    			<input type="text" class="form-control setform" name="email" id="email" value='.$row->email.' placeholder="Email" />
+		</div>
+        <div class="form-group">
+    			<input type="password" class="form-control setform" name="password" id="password" value='.$row->password.' placeholder="Password" />
+		</div>
+        <div class="form-group">
 			<label for="start">
 				Start date access
 			</label>
@@ -338,10 +319,15 @@ if($likes) {
     $id = $_GET['id'];
     $start_date = $_GET['start_date'];
     $end_date = $_GET['end_date'];
+    $email = $_GET['email'];
+    $pass = $_GET['pass'];
     
-    $sql = "UPDATE morp_cms_galerie_guests set start_dat = '$start_date', end_dat = '$end_date' WHERE guestID = ".$id."";
+    $sql = "UPDATE morp_cms_galerie_guests set username = '$email', email = '$email', password = '$pass', start_dat = '$start_date', end_dat = '$end_date' WHERE guestID = ".$id."";
     safe_query($sql);
-     
+    
+    $sql = "UPDATE morp_intranet_user set uname ='$email', email = '$email', pw = '$pass' WHERE guestID = ".$id."";
+    safe_query($sql);
+    
     die();
 } else if($galerie && $galerie == 'delguest') {
     $id = $_GET['id'];

@@ -199,6 +199,11 @@
         $(text).html(data);
      }
      
+     function validateEmail(email) {
+       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       return re.test(String(email).toLowerCase());
+     }
+     
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -513,17 +518,21 @@
                                     var id = $(this).attr('ref');
                                     var start_date = $('#start_dat').val();
                                     var end_date = $('#end_dat').val();
-                                    
+                                    var email = $('#email').val();
+                                    var pass = $('#password').val();
                                     
                                     request = $.ajax({
                                         	        url: ""+origin+"home/galerie+updateguest",
                                         	        type: "get",
-                                        	        data: "id="+id+"&start_date="+start_date+"&end_date="+end_date+"",
+                                        	        data: "id="+id+"&email="+email+"&pass="+pass+"&start_date="+start_date+"&end_date="+end_date+"",
                                         	        success: function(data) {
                                         			  $('.areafolder .mt2').show();
                                                       $('#area_edit_guest').hide();
                                                       
                                                       $('.alert-success').removeClass('hide');
+                                                      
+                                                      email = email.split('@');
+                                                      $('#user_'+id+'').html(email[0]);
                                                     }
                                	    }); 
                            })
@@ -564,10 +573,10 @@
             var end_date = $('#end_dat');
             var folder_id = $('#folder_id').val();
             
-            if(username.val() == '') {
-                username.addClass('error');
+            if(!validateEmail(email.val())) {
+                email.addClass('error');
             } else {
-                username.removeClass('error'); 
+                email.removeClass('error'); 
             }
             
             if(password.val() == '') {
@@ -588,10 +597,9 @@
                 end_date.removeClass('error'); 
             }
             
-            if(username.val() == '' || password.val() == '' || start_date.val() == '' || end_date.val() == '') {
+            if(!validateEmail(email.val()) || password.val() == '' || start_date.val() == '' || end_date.val() == '') {
                 $('.alert-error').removeClass('hide');
                 $('.alert-success').addClass('hide');
-                
             }
             else {
               $('.alert-error').addClass('hide');
