@@ -21,7 +21,7 @@
 				</ul>
 
 				<ul class="nav-child">
-					<li class="hn"><strong><a href="http://localhost/bilddatenbank/de/kategory-group/">Group</a></strong></li>
+					<li class="hn"><strong><a href="http://localhost/bilddatenbank/de/kategory/">kategory</a></strong></li>
 
 
 				</ul>
