@@ -82,7 +82,8 @@
 
 <!-- Initialize Swiper + Ekko -->
 <script type="text/javascript">
-	 var timeOut = 50;
+	 var timeOut = 50, invitation = [], countInvite = 0;
+     
      
      function getHashtags() {
 	   
@@ -260,6 +261,8 @@
 
 	$( document ).ready(function() {
 		$('.selection.search').dropdown({maxSelections: 3});
+        
+        setClickDeleteGalerieFoldersImages();
         
         $('.search.dropdown .item').click(function() {
 		    var dataValue = $(this).attr('data-value');
@@ -468,7 +471,91 @@
          $('.allowedtosend').click(function(){
             var origin   = $('#url').val();
             
-            var validate = false;
+            var folder_id = $('#folder_id').val();
+            
+            request = $.ajax({
+                	        url: ""+origin+"home/galerie+guest",
+                	        type: "get",
+                	        data: "folder_id="+folder_id+"&data="+JSON.stringify(invitation)+"",
+                	        success: function(data) {
+                			  $('.alert-success').html('Save and send login successfully');	
+                            }
+                	    });  
+         })
+         
+         $('.edit_guest').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            id = id.replace('#', '');
+            
+            request = $.ajax({
+                	        url: ""+origin+"home/galerie+editguest",
+                	        type: "get",
+                	        data: "id="+id+"",
+                	        success: function(data) {
+                			  $('#area_edit_guest').show();
+                              $('#area_edit_guest').html(data);
+                              
+                              $('.areafolder .mt2').hide();
+                              
+                              $('.arrow-back-guest').click(function(){
+                                 $('.areafolder .mt2').show();
+                                 $('#area_edit_guest').hide();
+                                 
+                                 $('.alert-success').addClass('hide');
+                                 
+                              })
+                              
+                              $('.save_guest').click(function(){
+                                    var origin   = $('#url').val();
+                                    
+                                    var id = $(this).attr('ref');
+                                    var start_date = $('#start_dat').val();
+                                    var end_date = $('#end_dat').val();
+                                    
+                                    
+                                    request = $.ajax({
+                                        	        url: ""+origin+"home/galerie+updateguest",
+                                        	        type: "get",
+                                        	        data: "id="+id+"&start_date="+start_date+"&end_date="+end_date+"",
+                                        	        success: function(data) {
+                                        			  $('.areafolder .mt2').show();
+                                                      $('#area_edit_guest').hide();
+                                                      
+                                                      $('.alert-success').removeClass('hide');
+                                                    }
+                               	    }); 
+                           })
+                            }
+                	    });  
+         })
+         
+         $('.delete_guest').click(function(){
+            var origin   = $('#url').val();
+                                    
+            var id = $(this).attr('href');
+            id = id.replace('#', '');
+            
+            request = $.ajax({
+   	         url: ""+origin+"home/galerie+delguest",
+   	         type: "get",
+             data: "id="+id+"",
+             success: function(data) {
+       			  $('.tr_'+id+'').hide();
+              }
+       	    }); 
+            
+         })
+         
+         
+         $('.right-board .content input').click(function(){
+            $('.alert-success').addClass('hide');
+            $('.alert-error').addClass('hide');
+         })
+         
+         $('.allowedtosave').click(function(){
+            var origin   = $('#url').val();
             
             var username = $('#username');
             var password = $('#password');
@@ -478,60 +565,47 @@
             var folder_id = $('#folder_id').val();
             
             if(username.val() == '') {
-                validate = true;
                 username.addClass('error');
             } else {
-                validate = false;
                 username.removeClass('error'); 
             }
             
             if(password.val() == '') {
-                validate = true;
                 password.addClass('error');
             } else {
-                validate = false;
                 password.removeClass('error'); 
             }
             
-            if(email.val() == '') {
-                validate = true;
-                email.addClass('error');
-            } else {
-                validate = false;
-                email.removeClass('error'); 
-            }
-            
             if(start_date.val() == '') {
-                validate = true;
                 start_date.addClass('error');
             } else {
-                validate = false;
                 start_date.removeClass('error'); 
             }
             
             if(end_date.val() == '') {
-                validate = true;
                 end_date.addClass('error');
             } else {
-                validate = false;
                 end_date.removeClass('error'); 
             }
             
-            if(validate)
-              $('.alert-error').removeClass('hide');
-            else {
-              $('.alert-error').addClass('hide'); 
-              
-              request = $.ajax({
-                	        url: ""+origin+"home/galerie+guest",
-                	        type: "get",
-                	        data: "username="+username.val()+"&password="+password.val()+"&email="+email.val()+"&start_date="+start_date.val()+"&end_date="+end_date.val()+"&folder_id="+folder_id+"",
-                	        success: function(data) {
-                				
-                            }
-                	    });  
+            if(username.val() == '' || password.val() == '' || start_date.val() == '' || end_date.val() == '') {
+                $('.alert-error').removeClass('hide');
+                $('.alert-success').addClass('hide');
+                
             }
+            else {
+              $('.alert-error').addClass('hide');
+              $('.alert-success').removeClass('hide');
               
+              invitation[countInvite] = {};
+              invitation[countInvite].username = username.val();
+              invitation[countInvite].password = password.val();
+              invitation[countInvite].email = email.val();
+              invitation[countInvite].start_date = start_date.val();
+              invitation[countInvite].end_date = end_date.val();
+              
+              countInvite++;
+            }
          })
     });
 	

@@ -31,6 +31,7 @@ if ($_GET['nid'] == 'areafolder')
 ?>
 	<div class="content hide">
 		<div class="alert alert-error hide" role="alert">Please check mandatory fields</div>
+        <div class="alert alert-success hide" role="alert">Save successfully</div>
         <div class="form-group">
 			<input type="text" class="form-control setform" name="username" id="username" placeholder="Username" />
 		</div>
@@ -53,10 +54,11 @@ if ($_GET['nid'] == 'areafolder')
 			<input type="date" class="form-control setform" name="end_dat" id="end_dat"  />
 		</div>
 		<p>
-			<button class="btn btn-success allowedtosend" ref="">
-				<i class="fa fa-envelope">
-				</i>
-				&nbsp; Send Mail to grantee with access data
+			<button class="btn btn-success allowedtosave" ref="">
+				Save
+			</button>
+            <button class="btn btn-success allowedtosend" ref="">
+				 Save & Send Login
 			</button>
 		</p>
 	<input type="hidden" name="folder_id" id="folder_id" value="<?php echo $_GET['id'] ?>" />

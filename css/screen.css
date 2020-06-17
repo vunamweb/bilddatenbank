@@ -1047,5 +1047,28 @@ a.delete_folder {
 .alert-error {
     color: red;
 }
+.right-board .content .btn {
+    padding: 6px 8px;
+}
+.areafolder .btn-primary  {
+    display: block;
+    margin: 20px;
+}
+#area_edit_guest .content {
+    padding: 15px;
+}
+.delete_galerie_folders_images_confirm {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 2em;
+    display: none;
+}
+#images_area .col-md-6 {
+    cursor: pointer;
+}
+#images_area .col-md-6:hover .delete_galerie_folders_images_confirm {
+    display: block;
+}
 /* @end */
 
