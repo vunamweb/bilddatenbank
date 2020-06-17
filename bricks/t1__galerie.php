@@ -152,8 +152,16 @@ if($likes) {
     
     foreach($galeries_id as $item) {
         if($item != '') {
-            $sql = "insert into morp_cms_galerie_folders_images(foldersID,gid)values(".$folder_id.",'".$item."')";
-            safe_query($sql);
+            $que  	= "SELECT * FROM `morp_cms_galerie_folders_images` f WHERE f.foldersID = ".$folder_id." AND f.gid = ".$item."";
+            $res 	= safe_query($que);
+            
+            $x		= mysqli_num_rows($res);
+            
+            //if not exist, then insert, so not double
+            if($x <= 0) {
+              $sql = "insert into morp_cms_galerie_folders_images(foldersID,gid)values(".$folder_id.",'".$item."')";
+              safe_query($sql);   
+            }
         }
     }
     
@@ -232,6 +240,16 @@ if($likes) {
     
     $table = 'morp_cms_galerie';
     $primary = 'gid';
+    
+    $sql = "delete from $table where $primary = ".$id."";
+    safe_query($sql);
+    
+    die();
+} else if($galerie && $galerie == 'del_folder_img') {
+    $id = $_GET['id'];
+    
+    $table = 'morp_cms_galerie_folders_images';
+    $primary = 'imagesID';
     
     $sql = "delete from $table where $primary = ".$id."";
     safe_query($sql);

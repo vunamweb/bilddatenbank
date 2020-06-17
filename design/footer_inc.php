@@ -181,11 +181,36 @@
     	    });
          })
          
+         $('.delete_galerie_folders_images_').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            id = id.replace('#', '');
+            
+            var dom = this;
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+del_folder_img",
+    	        type: "get",
+                data: "id="+id+"",
+    	        success: function(data) {
+    				$(dom).parent().hide();
+                }
+    	    });
+         })
+         
          $('.delete_galerie_folders_images_confirm').click(function(){
             var r = confirm("Are you sure to delete?");
             
             if(r)
              $(this).parent().find('.delete_galerie_folders_images').click();
+         })
+         
+         $('.delete_galerie_folders_images_confirm_').click(function(){
+            var r = confirm("Are you sure to delete?");
+            
+            if(r)
+             $(this).parent().find('.delete_galerie_folders_images_').click();
          })
      }
      

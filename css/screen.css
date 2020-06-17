@@ -1057,17 +1057,17 @@ a.delete_folder {
 #area_edit_guest .content {
     padding: 15px;
 }
-.delete_galerie_folders_images_confirm {
-    /*position: absolute;
+.delete_galerie_folders_images_confirm_ {
+    position: absolute;
     left: 50%;
     top: 50%;
     font-size: 2em;
-    display: none;*/
+    display: none;
 }
 #images_area .col-md-6 {
     cursor: pointer;
 }
-#images_area .col-md-6:hover .delete_galerie_folders_images_confirm {
+#images_area .col-md-6:hover .delete_galerie_folders_images_confirm_ {
     display: block;
 }
 .icon_folder {
