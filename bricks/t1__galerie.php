@@ -101,7 +101,7 @@ if($likes) {
     $res 	= safe_query($que);
     
     while ($row = mysqli_fetch_object($res)) {
-        $src = $dir . 'Galerie/' . $morpheus['GaleryPath'] . '/' . $data[1] . '/' . $data[0] . '/' . $morpheus['Original'] . '/' . $row->gname;
+        $src = $dir . 'Galerie/' . $morpheus['GaleryPath'] . '/' . $data[1] . '/' . $data[0] . '/' . $morpheus['large'] . '/' . set_name_image($row->gname);
         
         $output .= '<img class="img-responsive" src='.$src.' />';
         

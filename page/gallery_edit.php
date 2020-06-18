@@ -19,6 +19,8 @@ if($func == 'editgalery') {
 	while ($row = mysqli_fetch_object($res)) {
 		$n++;
 		$img 	= $row->gname;
+        $img = set_name_image($img);
+        
 		$tn 	= $row->tn;
 		$ordner = $row->gnname;
 		$gid 	= $row->gid;
@@ -94,6 +96,8 @@ else if($galerie) {
 	while ($row = mysqli_fetch_object($res)) {
 		$n++;
 		$img 	= $row->gname;
+        $img = set_name_image($img);
+        
 		$tn 	= $row->tn;
 		$ordner = $row->gnname;
 		$gid 	= $row->gid;

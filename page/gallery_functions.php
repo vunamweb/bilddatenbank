@@ -256,6 +256,11 @@ class resize
 }
 
 
+function set_name_image($img) {
+    $replace = array('JPG', 'PNG', 'png');
+    
+    return str_replace($replace, 'jpg', $img);
+}
 function set_thumb_gallery($res, $setFilter = 0)
 {
     global $dir, $morpheus, $js, $mid;
@@ -265,8 +270,9 @@ function set_thumb_gallery($res, $setFilter = 0)
 
     while ($row = mysqli_fetch_object($res))
     {
-        //print_r($row); die();
         $img = $row->gname;
+        //$img = set_name_image($img);
+        
         $tn = $row->tn;
         $ordner = $row->gnname;
         $gnid = $row->gnid;
@@ -295,7 +301,7 @@ function set_thumb_gallery($res, $setFilter = 0)
 	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item">
 	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
-              <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
+              <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
             </a>
 	        
 	        <div class="inner">
@@ -306,7 +312,7 @@ function set_thumb_gallery($res, $setFilter = 0)
 	        
 	            <div class="gal-Icons">
 					<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
-            '/' . $ordner . '/' . urlencode($img) .
+            '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) .
             '" class="galIcons i4"><i class="fa fa-download tool"></i></a>
 	            	<span class="galIcons"><i class="fa fa-heart' . ($hasLike ? '' :
             '-o lightBlue') . ' tool loveit" ref="' . $gid .
@@ -440,6 +446,8 @@ function show_gallery_folder($res, $galerie_folders_images_id)
     {
         //print_r($row); die();
         $img = $row->gname;
+        $img = set_name_image($img);
+        
         $tn = $row->tn;
         $ordner = $row->gnname;
         $gnid = $row->gnid;
@@ -450,9 +458,7 @@ function show_gallery_folder($res, $galerie_folders_images_id)
         $gallery_list .= '
 	
 	    <div class="col-md-6">
-               <img class="img-responsive" src="' . $dir .
-            'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner .
-            '/' . $img . '">
+         <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">      
         <a class="delete_galerie_folders_images_ hide" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
         <a class="delete_galerie_folders_images_confirm_"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>    
         </div>
