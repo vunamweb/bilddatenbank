@@ -261,6 +261,137 @@ function set_name_image($img) {
     
     return str_replace($replace, 'jpg', $img);
 }
+
+function sort_array_gallery() {
+    $result = array();
+    
+    $que  	= "SELECT * FROM `morp_cms_galerie_name`";
+	$res 	= safe_query($que);
+    
+    while ($row = mysqli_fetch_object($res)) {
+       $result[$row->gnid] = $row->gnname;
+    }
+    
+    return $result;
+}
+
+function get_total_search($seach_value, $hashtags) {
+    $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
+    
+    for($i = 0; $i < count($hashtags) -1; $i++){
+        if($i < count($hashtags) - 2) 
+            $que .= 'like "%'.$hashtags[$i].'%" or g.tags ';
+        else
+            $que .= 'like "%'.$hashtags[$i].'%"';
+          
+    }
+    
+    $que .= ')';
+    
+    $res 	= safe_query($que);
+    
+    return mysqli_num_rows($res);
+}
+
+function set_thumb_gallery_search($res, $sort_gallery)
+{
+    global $dir, $morpheus, $js, $mid;
+    global $filter, $tagListButtons, $filterButton;
+
+    $gallery_list = '';
+
+    while ($row = mysqli_fetch_object($res))
+    {
+        $img = $row->gname;
+        //$img = set_name_image($img);
+        
+        $tn = $row->tn;
+        $gnid = $row->gnid;
+        $ordner = $sort_gallery[$gnid];
+        $gid = $row->gid;
+        $textde = $row->gtextde;
+        $hl = $row->gtexten;
+
+        $tagList = $row->tags;
+        $tagList = explode(',', $tagList);
+        // print_r($tagList);
+        $filter = '';
+
+        foreach ($tagList as $arr)
+         if($arr != '') 
+          $filter .= 'tag_' . $arr . ' ';
+          
+        $noOfComments = '';
+        if ($mid)
+            $hasLike = isLike($mid, "morp_cms_galerie_likes", "gid", $gid);
+        $noOfLikes = countLikes("morp_cms_galerie_likes", "gid", $gid);
+        $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
+        $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
+
+        $gallery_list .= '
+	
+	<div class="grid-item grid-sizer tag ' . $filter . '">
+	    <div class="gal-item">
+	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
+              <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
+            </a>
+	        
+	        <div class="inner">
+	            <div class="gal-Desc">
+		            <h2>' . $hl . '</h2>
+					<p>' . $textde . '</p>
+				</div>
+	        
+	            <div class="gal-Icons">
+					<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
+            '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) .
+            '" class="galIcons i4"><i class="fa fa-download tool"></i></a>
+	            	<span class="galIcons"><i class="fa fa-heart' . ($hasLike ? '' :
+            '-o lightBlue') . ' tool loveit" ref="' . $gid .
+            '"></i> <span class="noOfLikes">' . $noOfLikes . '</span></span>
+					<span class="galIcons"><a href="' . $dir .
+            '?hn=galerien&cont=gallery-comment&sn2=gallery-comment&galerie=' . $gnid .
+            '&foto=' . $gid . '"><i class="fa fa-comments' . ($hasComment ? '' :
+            '-o lightBlue') . ' tool"></i>  <span class="noOfLikes">' . $noOfComments .
+            '</span></a></span>
+					
+					<div class="btn-group btn-group-gallery" data-toggle="buttons">
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox" value="'.$gid.'" name="add_to_folder">  
+							<div class="rahmen"><span class="fa fa-check"></span></div>				
+						</label>
+					</div>
+					
+				</div>
+	        </div>
+	        
+	    </div>
+	</div>';
+
+    }
+
+    if ($setFilter)
+    {
+        $filterButton = '		
+		<div id="" class="button-group filter-button-group">
+			<button class="btn btn-info is-checked" data-filter="*">All Photos</button>
+';
+
+        foreach ($tagListButtons as $key => $val)
+        {
+            $filterButton .= '			<button class="btn btn-info" data-filter=".' . $key .
+                '"># ' . $val . '</button>
+';
+        }
+
+        $filterButton .= '		
+		</div>
+';
+    }
+
+
+    return $gallery_list;
+}
+
 function set_thumb_gallery($res, $setFilter = 0)
 {
     global $dir, $morpheus, $js, $mid;

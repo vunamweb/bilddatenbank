@@ -66,7 +66,8 @@
                           </div>
                   </div>
 					<input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />
-				</div>
+                    <input type="hidden" id="page" value="1" />
+                </div>
 			</div>
 		</div>
 	</section>

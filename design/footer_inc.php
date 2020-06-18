@@ -294,7 +294,7 @@
         
         setClickDeleteGalerieFoldersImages();
         
-        $('.search.dropdown .item').click(function() {
+        /*$('.search.dropdown .item').click(function() {
 		    var dataValue = $(this).attr('data-value');
             
             filter();
@@ -309,10 +309,17 @@
                       })
                 })
             }, timeOut);
-         });
+         });*/
+         
+         $('.number_page').change(function(){
+            $('.navbar-form').submit();
+         })
          
          $('.navbar-form').submit(function(e){
             e.preventDefault();
+            
+            var page = $('#page').val();
+            var number = $('.number_page').val();
             
             $('.content .fa.fa-spinner').show();
             
@@ -325,7 +332,10 @@
                         url: ''+origin+'/home/galerie+search',
                         type: 'get',
                         data: {
-                          search_value: search
+                          search_value: search,
+                          page: page,
+                          number: number,
+                          hashtags: getHashtags()
                         },
                         dataType: 'json',
                         beforeSend: function beforeSend() {},
@@ -337,9 +347,38 @@
                             $('.grid-item ').each(function(){
                                 $(this).css('opacity', 1);
                             })
+                            
+                            $('.number_pagination').click(function(){
+                                var page = $(this).attr('href');
+                                page = page.replace('#', '');
+                                
+                                $('#page').val(page);
+                                
+                                $('.navbar-form').submit();
+                           })
+                           
+                           $('.previous_pagination').click(function(){
+                              var page = $('#page').val();
+                              
+                              if(page > 1) {
+                                 $('#page').val(page - 1);
+                                 
+                                 $('.navbar-form').submit();
+                              }
+                           })
+                           
+                           $('.next_pagination').click(function(){
+                              var page = $('#page').val();
+                              
+                              if(true) {
+                                 $('#page').val(page + 1);
+                                 
+                                 $('.navbar-form').submit();
+                              }
+                           })
                         },
                         success: function success(result) {
-                          //$('.content').html(result);
+                          
                         }
                     }); 
          })

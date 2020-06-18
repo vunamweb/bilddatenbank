@@ -51,27 +51,66 @@ if($likes) {
 ';
 
 } else if($galerie && $galerie == 'search') {
-    $seach_key = $_GET['search_value'];
+    $seach_value = $_GET['search_value'];
+    $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+    $number = (isset($_GET['number'])) ? $_GET['number'] : 20;
     
-    $output = '
+    $start = $number * ($page - 1);
+    
+    $hashtags = $_GET['hashtags'];
+    $hashtags = explode(',', $hashtags);
+    
+    $total_search = get_total_search($seach_value, $hashtags);
+    $number = ($number > $total_search) ? $total_search : $number;
+    
+    $count_page = round($total_search/$number);
+    //echo $total_search;
+    
+    $sort_gallery = sort_array_gallery();
+    
+    $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
+    
+    for($i = 0; $i < count($hashtags) -1; $i++){
+        if($i < count($hashtags) - 2) 
+            $que .= 'like "%'.$hashtags[$i].'%" or g.tags ';
+        else
+            $que .= 'like "%'.$hashtags[$i].'%"';
+          
+    }
+    
+    $que .= ') LIMIT '.$start.','.$number.'';
+    $res 	= safe_query($que);
+    
+    $output = '';
+    
+    $output .= '<div class="infor_number col-md-6">'.($start + 1).'-'.($start + $number).' of '.$total_search.'</div>';
+    
+    $output .= '<div class="infor_pagination">';
+    
+    $output .= '<a href="#" class="previous_pagination"><</a>';
+    
+    for($i = 1; $i <= $count_page; $i++){
+        $active = '';
+        
+        if($i == $page)
+          $active = 'active';
+          
+        $output .= '<a href="#'.$i.'" class="number_pagination '.$active.'">'.$i.'</a>';  
+    }
+     
+     
+    $output .= '<a href="#" class="next_pagination">></a>'; 
+    
+    $output .= '</div><br>';
+     
+    
+    
+    $output .= '
     <div class="grid">
 	';
     
-    $que  	= "SELECT * FROM `morp_cms_galerie_name` n ORDER BY n.gnname";
-	$res 	= safe_query($que);
-    
-    while ($row = mysqli_fetch_object($res)){
-        $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE (g.gtextde like '%".$seach_key."%' OR g.keyword like '%".$seach_key."%' ) AND g.gnid=".$row->gnid." AND g.gnid=n.gnid ORDER BY g.sort";
-	    //echo $que; die();
-        $res_1 	= safe_query($que);
+    $output .= set_thumb_gallery_search($res, $sort_gallery);
 	
-        $x		= mysqli_num_rows($res_1);
-
-	$tagListButtons = array();
-
-	$output .= set_thumb_gallery($res_1, 1);
-	}
-    
     $output .= '
 		</div>
 ';

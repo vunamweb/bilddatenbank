@@ -1105,5 +1105,15 @@ a.delete_folder {
     display: none;
     font-size: 1.5em;
 }
+#suche {
+    display: block !important;
+    margin-bottom: 10px;
+}
+.infor_pagination a {
+    margin-left: 5px;
+}
+.active {
+    color: red;
+}
 /* @end */
 
