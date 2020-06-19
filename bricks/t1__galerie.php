@@ -486,6 +486,10 @@ else if($galerie) {
 		</div>
 ';
 
+$filterButton = '
+	<p class="mb6">&nbsp</p>
+	<a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info"><i class="fa fa-plus"></i> Add Photos / Files</a>
+';
 }
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
