@@ -8,6 +8,7 @@ $item	= $_REQUEST["item"];
 $neu	= $_REQUEST["neu"];
 $name= $_REQUEST["name"];
 $stop	= $_REQUEST["stopit"];
+$textde = $_REQUEST['textde'];
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -31,7 +32,7 @@ if($del && !$stop)
 
 else if($update && !$stop)
 {
-   $sql="UPDATE $table SET $show_col ='".$name."' WHERE $primary=".$update."";
+   $sql="UPDATE $table SET $show_col ='".$name."',textde = '".$textde."' WHERE $primary=".$update."";
    $res = safe_query($sql); 
    //return;
    $output .= '<div class="alert alert-success" role="alert">gespeichert</div>';
