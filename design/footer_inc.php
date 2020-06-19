@@ -365,12 +365,16 @@
                             });
                             
                             $('.number_pagination').click(function(){
+                                var currentPage = $('#page').val();
+                                
                                 var page = $(this).attr('href');
                                 page = page.replace('#', '');
                                 
-                                $('#page').val(page);
+                                if(currentPage != page) {
+                                   $('#page').val(page);
                                 
-                                $('.navbar-form').submit();
+                                   $('.navbar-form').submit(); 
+                                }
                            })
                            
                            $('.previous_pagination').click(function(){

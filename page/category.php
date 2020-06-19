@@ -92,7 +92,8 @@ function edit($edit)
    return '
    <form method="post">
    		<input type="text" class="form-control" name="name" value="'.$row->$show_col.'" /> <br /><br />
-   		<input type="hidden" name="ubdate" value="'.$edit.'" />
+   		<input type="text" class="form-control" name="textde" value="'.$row->textde.'" /> <br /><br />
+        <input type="hidden" name="ubdate" value="'.$edit.'" />
    		<button type="submit" value="Update" class="btn btn-info">Speichern</button>
 		<button name="stopit" value="stopit" class="btn btn-danger">abbrechen</button>
    	</form>';

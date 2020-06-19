@@ -53,7 +53,11 @@ if($likes) {
 } else if($galerie && $galerie == 'search') {
     $seach_value = $_GET['search_value'];
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+    
     $number = (isset($_GET['number'])) ? $_GET['number'] : 20;
+    $_SESSION['number_per_page'] = $number;
+    
+    
     $category_id = ($_GET['category_id'] != '') ? $_GET['category_id'] : 0;
     
     $start = $number * ($page - 1);
@@ -116,7 +120,8 @@ if($likes) {
     $output .= set_thumb_gallery_search($res, $sort_gallery);
 	
     $output .= '
-		</div>
+		<input type="hidden" name="category_id" id="category_id" value='.$category_id.' />  
+        </div>
 ';
  
  echo $output; die(); 

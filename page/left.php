@@ -49,14 +49,14 @@ while ($row = mysqli_fetch_object($res))
 						<div class="form-group">
 							<input type="text" class="form-control" name="suche" id="suche" placeholder="Suche..."<?php echo isset($_GET["suche"]) ? ' value="'.$_GET["suche"].'"' : ''; ?>>
 						    <select class="number_page">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="10">10</option>
-                              <option value="20">20</option>
-                              <option value="30">30</option>
+                              <option <?php if($_SESSION['number_per_page'] == 2) echo 'selected' ?>  value="2">2</option>
+                              <option <?php if($_SESSION['number_per_page'] == 3) echo 'selected' ?> value="3">3</option>
+                              <option <?php if($_SESSION['number_per_page'] == 4) echo 'selected' ?> value="4">4</option>
+                              <option <?php if($_SESSION['number_per_page'] == 5) echo 'selected' ?> value="5">5</option>
+                              <option <?php if($_SESSION['number_per_page'] == 6) echo 'selected' ?> value="6">6</option>
+                              <option <?php if($_SESSION['number_per_page'] == 10) echo 'selected' ?> value="10">10</option>
+                              <option <?php if($_SESSION['number_per_page'] == 20) echo 'selected' ?> value="20">20</option>
+                              <option <?php if($_SESSION['number_per_page'] == 30) echo 'selected' ?> value="30">30</option>
                             </select> 
                             <label>How manny images/page</label>
                         </div>
