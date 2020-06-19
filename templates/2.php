@@ -30,7 +30,8 @@ if($lastUsedTemplateID && $lastUsedTemplateID != $fileID && !$templateIsClosed) 
 }
 
 
-if($template2count == 1 || $templateIsClosed) { $template .= '
+if($template2count == 1 || $templateIsClosed) { 
+	$template .= '
         <div class="row">';
 	$templateIsClosed=0;
 }

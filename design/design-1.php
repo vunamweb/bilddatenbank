@@ -3,16 +3,16 @@
 		<div class="container-xl">
 			<!-- <div class="row row-flex row-flex-wrap"> -->
 			<div class="row">
-				<div class="col-md-3 left-board">
+				<div class="col-md-2 left-board">
 					<?php include( 'page/left.php') ?>
 				</div>
 				<div class="">
-					<div class="col-md-7 main content">
+					<div class="col-md-10 main content">
 						<i class="fa fa-spinner" aria-hidden="true">
 						</i>
 						<?php echo $output; ?>
 					</div>
-					<div class="col-lg-2 right-board">
+					<div class="right-board">
 						<?php if(get_guest_id_of_intranet_user() == 0) { ?>
                          <?php include( 'page/right.php') ?>
                         <?php } ?>

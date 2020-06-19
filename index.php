@@ -775,7 +775,7 @@ $leftimage	= '';
 
 $rb_headl = '';
 
-global $anker, $tref, $tabstand;
+global $anker, $tref, $tabstand, $tende, $tschmal;
 
 if ($cid) {
 /*
@@ -831,7 +831,10 @@ if ($cid) {
 		$tfoto 		= $throw->timage;
 		$tcolor		= $throw->tcolor;
 		$tref		= $throw->tref;
+		$tende		= $throw->tende;
 		$tabstand	=$throw->tabstand;
+		$tschmal	= $throw->tschmal;
+
 		$style 		= '';
 
 		// $foto 		= $row->imgname;

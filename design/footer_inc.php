@@ -84,7 +84,6 @@
 <script type="text/javascript">
 	 var timeOut = 50, invitation = [], countInvite = 0;
      
-     
      function getHashtags() {
 	   
         var result = '';
@@ -318,6 +317,9 @@
          $('.navbar-form').submit(function(e){
             e.preventDefault();
             
+            //$('.content').html('');
+            $('.content .fa.fa-spinner').show();
+            
             var page = $('#page').val();
             var number = $('.number_page').val();
             
@@ -327,6 +329,8 @@
             
             var search = $('#suche').val();
             
+            var category_id = $('#category_id').val();
+            
             //call ajax to changen content
                     $.ajax({
                         url: ''+origin+'/home/galerie+search',
@@ -335,7 +339,8 @@
                           search_value: search,
                           page: page,
                           number: number,
-                          hashtags: getHashtags()
+                          hashtags: getHashtags(),
+                          category_id: category_id
                         },
                         dataType: 'json',
                         beforeSend: function beforeSend() {},
@@ -347,6 +352,17 @@
                             $('.grid-item ').each(function(){
                                 $(this).css('opacity', 1);
                             })
+                            
+                            $grid = $('.grid').isotope({
+                              itemSelector: '.grid-item',
+                              masonry: {
+                             	columnWidth: '.grid-sizer',
+                             	percentPosition: true
+                              }
+                            });
+                            $grid.imagesLoaded().progress( function() {
+                              $grid.isotope('layout');
+                            });
                             
                             $('.number_pagination').click(function(){
                                 var page = $(this).attr('href');
@@ -361,7 +377,7 @@
                               var page = $('#page').val();
                               
                               if(page > 1) {
-                                 $('#page').val(page - 1);
+                                 $('#page').val(parseInt(page) - 1);
                                  
                                  $('.navbar-form').submit();
                               }
@@ -370,8 +386,10 @@
                            $('.next_pagination').click(function(){
                               var page = $('#page').val();
                               
-                              if(true) {
-                                 $('#page').val(page + 1);
+                              var totalPage = $('.infor_pagination .number_pagination').length;
+                              
+                              if(page < totalPage) {
+                                 $('#page').val(parseInt(page) + 1);
                                  
                                  $('.navbar-form').submit();
                               }
@@ -741,22 +759,5 @@ while ($row = mysqli_fetch_object($res)) {
 
 
 </script>
-
-<!-- Matomo -->
-<script type="text/javascript">
-  var _paq = window._paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//php7.pixeldusche.com/intranet/matomo/";
-    _paq.push(['setTrackerUrl', u+'matomo.php']);
-    _paq.push(['setSiteId', '1']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<!-- End Matomo Code -->
-
 </body>
 </html>

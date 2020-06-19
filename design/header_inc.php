@@ -48,7 +48,7 @@ if($galerie || $news || $hashtag) { ?>
 .is-showing-items .grid-item {
 	opacity: 1;
 }
-.grid-sizer, .grid-item { width: 25%; }
+.grid-sizer, .grid-item { width: 50%; float: left; }
 @media screen and (max-width: 1200px) {
 	.grid-sizer, .grid-item { width: 33.33%; }
 }

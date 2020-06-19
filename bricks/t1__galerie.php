@@ -54,13 +54,14 @@ if($likes) {
     $seach_value = $_GET['search_value'];
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
     $number = (isset($_GET['number'])) ? $_GET['number'] : 20;
+    $category_id = ($_GET['category_id'] != '') ? $_GET['category_id'] : 0;
     
     $start = $number * ($page - 1);
     
     $hashtags = $_GET['hashtags'];
     $hashtags = explode(',', $hashtags);
     
-    $total_search = get_total_search($seach_value, $hashtags);
+    $total_search = get_total_search($seach_value, $hashtags, $category_id);
     $number = ($number > $total_search) ? $total_search : $number;
     
     $count_page = round($total_search/$number);
@@ -68,7 +69,10 @@ if($likes) {
     
     $sort_gallery = sort_array_gallery();
     
-    $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
+    if($category_id == 0)
+     $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
+    else
+     $que = "SELECT * FROM `morp_cms_galerie` g where g.gnid = ".$category_id." AND (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
     
     for($i = 0; $i < count($hashtags) -1; $i++){
         if($i < count($hashtags) - 2) 
@@ -438,6 +442,7 @@ else if($galerie) {
 
 		<a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Add selected to folder</a>
 			<hr>
+        <input type="hidden" name="category_id" id="category_id" value='.$galerie.' />    
 
         <div class="grid">
 	';

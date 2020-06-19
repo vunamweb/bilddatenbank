@@ -275,8 +275,11 @@ function sort_array_gallery() {
     return $result;
 }
 
-function get_total_search($seach_value, $hashtags) {
-    $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
+function get_total_search($seach_value, $hashtags, $category_id) {
+    if($category_id == 0)
+     $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
+    else
+     $que = "SELECT * FROM `morp_cms_galerie` g where g.gnid = ".$category_id." AND (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
     
     for($i = 0; $i < count($hashtags) -1; $i++){
         if($i < count($hashtags) - 2) 
