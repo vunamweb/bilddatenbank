@@ -49,6 +49,30 @@ $verifyToken = md5('pixeld' . $_POST['timestamp']);
 if (!empty($_FILES) && $_POST['token'] == $verifyToken)
 {
     $tempFile = $_FILES['Filedata']['tmp_name'];
+    
+    $im = new Imagick($tempFile);
+    
+    $width = $im->getImageWidth();
+    $height = $im->getImageHeight();
+    $size = $im->getImageSize()/1024;
+    $filetime = date("Y-m-d", filectime($tempFile));
+    $imagecolor = $im->getImageColorspace();
+    $imageprops = $im->getImageProperties();
+    $file_type = getFileTypeImage($tempFile);
+    
+    //echo 'w ' . $width . 'h ' . $height . 's ' . $size . 'time ' . $filetime . 'color ' . $imagecolor . 'type ' . $file_type;
+    //die();
+    
+    $file_infor = new stdClass;
+
+    $file_infor->type = $file_type;
+    $file_infor->width = $width;
+    $file_infor->height = $height;
+    $file_infor->mb = $size;
+    $file_infor->date = $filetime;
+    $file_infor->color = $imagecolor;
+    $file_infor->props = $imageprops;
+    
     $file = $_FILES['Filedata']['name'];
 
     $filesize = filesize($tempFile);
@@ -60,8 +84,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
     // print_r($fileParts);
     if (in_array(strtolower($fileParts['extension']), $fileTypes))
     {
-        setData($hashtags, $keyword, $file, $uploadDir, $gnid, strtolower($fileParts['extension']),
-            $filesize, $filetime);
+        setData($hashtags, $keyword, $file, $uploadDir, $gnid, json_encode($file_infor));
 
         $insert_id = $mylink->insert_id;
         
@@ -100,18 +123,18 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
 }
 
 
-function setdata($hashtags, $keyword, $file, $uploadDir, $gnid, $extension, $filesize, $date)
+function setdata($hashtags, $keyword, $file, $uploadDir, $gnid, $file_infor)
 {
-    $file_dir = $uploadDir . '' . $file;
+    /*$file_dir = $uploadDir . '' . $file;
 
     $file_type = getFileTypeImage($file_dir);
     //$file_rgb = getRGBImage($file_dir, $file_type); //echo($file_rgb) ; die();
     $file_width = getWidthImage($file_dir, $file_type);
     $file_height = getHeightImage($file_dir, $file_type);
     $file_mb = getSizeMbImage($file_dir);
-    $file_date = getDateImage($file_dir);
+    $file_date = getDateImage($file_dir);*/
 
-    $file_infor = new stdClass;
+    /*$file_infor = new stdClass;
 
     $file_infor->type = $file_type;
     //$file_infor->rgb = $file_rgb;
@@ -120,7 +143,7 @@ function setdata($hashtags, $keyword, $file, $uploadDir, $gnid, $extension, $fil
     $file_infor->mb = $file_mb;
     $file_infor->date = $file_date;
 
-    $file_infor = json_encode($file_infor);
+    $file_infor = json_encode($file_infor);*/
 
 
     if (!$date)

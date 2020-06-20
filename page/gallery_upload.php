@@ -11,6 +11,7 @@ $table = 'morp_tags_category';
 $primary = 'id';
 $show_col = "name";
 $sorting_col = "name";
+//print_r($_GET); die();
 
 $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
 
@@ -70,8 +71,8 @@ $row = mysqli_fetch_object($res);
 
 $img = $row->gname;
 $ordner = $row->gnname;
-//$path 	=  DIR.'/Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/';
-$path = 'D:/xampp-7-4/htdocs/bilddatenbank' . '/Galerie/' . $morpheus["GaleryPath"] .
+$path 	=  DIR.'/Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/';
+//$path = 'D:/xampp-7-4/htdocs/bilddatenbank' . '/Galerie/' . $morpheus["GaleryPath"] .
     '/' . $ordner . '/';
 
 

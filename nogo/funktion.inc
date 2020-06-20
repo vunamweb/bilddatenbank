@@ -392,6 +392,40 @@ function erstelleID($id)
 //**************************************************************************************
 
 
+function ImageInformations($f, $imgFolder)
+{
+    global $fileTypes;
+
+    echo "<h1>".$f."</h1>";
+
+    $fileParts = pathinfo($f);
+    echo "<br><hr><br>";
+    print_r($fileParts);
+    echo "<br><hr><br>";
+
+    $im = new Imagick($f);
+    $imageprops = $im->getImageProperties();
+	print_r($imageprops);
+
+    $imageprops = $im->getImageColorspace();
+	print_r($imageprops);
+
+
+
+    $width = $im->getImageWidth();
+    $height = $im->getImageHeight();
+
+    $noOfPagesInPDF = $im->getNumberImages();
+    $max = $allpage ? $noOfPagesInPDF : 1;
+
+    
+}
+    
+//**************************************************************************************
+//**************************************************************************************
+//**************************************************************************************
+
+
 function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400',
     $allpage = 0)
 {

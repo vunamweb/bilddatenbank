@@ -159,11 +159,15 @@ if($likes) {
         
         $infor = json_decode($row->another_infor);
         
+        $ID = ($infor->format == 13) ? 'RGB' : 'CMYK';
+        
         $output .= '<p>Type: '.$infor->type.'</p>';
         $output .= '<p>Width: '.$infor->width.'</p>';
         $output .= '<p>Height: '.$infor->height.'</p>';
         $output .= '<p>Size: '.$infor->mb.'</p>';
         $output .= '<p>Date: '.$infor->date.'</p>';
+        $output .= '<p>'.$ID.'</p>';
+        
         
         $output .= '</div></div>';
     }
