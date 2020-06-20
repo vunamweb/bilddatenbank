@@ -213,6 +213,25 @@
          })
      }
      
+     function setShowGallery() {
+        $('.show_galery').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            data = id.replace('#', '');
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+modal",
+    	        type: "get",
+    	        data: "data="+data+"",
+    	        success: function(data) {
+    				$('#myModal .modal-body').html(data);
+                    setJsEditButtonModal();
+                }
+    	    });
+         })
+     }
+     
      function setTextAfterSave(select, text) {
         var data = '';
         
@@ -222,6 +241,42 @@
         
         $(text).html(data);
      }
+     
+     function setJsEditButtonModal() {
+        $('.selection.dropdown').dropdown({maxSelections: 3});
+                    
+                    $('.show_infor a').click(function(){
+                       $(this).parent().parent().hide();
+                       $(this).parent().parent().parent().find('.show_edit').removeClass('hide');
+                       $('.show_infor .alert-success').addClass('hide');
+                    })
+                
+                    $('.show_edit a.arrow-back').click(function(){
+                       $(this).parent().parent().addClass('hide');
+                       $(this).parent().parent().parent().find('.show_infor').show();
+                    })
+                
+                    $(".saveText").click(function () {
+                	    var origin   = $('#url').val();
+                        
+                        id = $(this).attr("ref");
+                	    myText = $("#t"+id).val();
+                        var hashtags = getHashtags();
+                
+                		request = $.ajax({
+                	        url: ""+origin+"home/galerie+update",
+                	        type: "get",
+                	        data: "myText="+myText+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
+                	        success: function(data) {
+                				$('#s'+id).removeClass('btn-danger');
+                                setTextAfterSave('.show_edit select option:selected', '.hashtag_'+id+'');
+                                $('.des_'+id+'').html(myText);
+                                $('.show_edit a.arrow-back').click();
+                                $('.show_infor .alert-success').removeClass('hide');
+                            }
+                	    });
+                   });
+      }
      
      function validateEmail(email) {
        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -292,25 +347,9 @@
 		$('.selection.search').dropdown({maxSelections: 3});
         
         setClickDeleteGalerieFoldersImages();
+        setShowGallery();
         
-        /*$('.search.dropdown .item').click(function() {
-		    var dataValue = $(this).attr('data-value');
-            
-            filter();
-            
-            setTimeout(function(){ 
-                $('.search.dropdown a.transition').each(function(){
-                    var nowDataValue = $(this).attr('data-value');
-                    
-                    if(dataValue == nowDataValue)
-                      $(this).click(function(){
-                         filter();
-                      })
-                })
-            }, timeOut);
-         });*/
-         
-         $('.number_page').change(function(){
+        $('.number_page').change(function(){
             $('.navbar-form').submit();
          })
          
@@ -348,6 +387,8 @@
                             $('.content .fa.fa-spinner').hide();
                             
                             $('.content').html(obj.responseText);
+                            
+                            setShowGallery();
                             
                             $('.grid-item ').each(function(){
                                 $(this).css('opacity', 1);
@@ -403,22 +444,6 @@
                           
                         }
                     }); 
-         })
-         
-         $('.show_galery').click(function(){
-            var origin   = $('#url').val();
-            
-            var id = $(this).attr('href');
-            data = id.replace('#', '');
-            
-            request = $.ajax({
-    	        url: ""+origin+"home/galerie+modal",
-    	        type: "get",
-    	        data: "data="+data+"",
-    	        success: function(data) {
-    				$('#myModal .modal-body').html(data);
-                }
-    	    });
          })
          
          $('.add_folder'). click(function(){
@@ -517,40 +542,7 @@
     	        type: "get",
     	        success: function(data) {
     				$('#myModal_edit_image .modal-body').html(data);
-                    
-                    $('.selection.dropdown').dropdown({maxSelections: 3});
-                    
-                    $('.show_infor a').click(function(){
-                       $(this).parent().parent().hide();
-                       $(this).parent().parent().parent().find('.show_edit').removeClass('hide');
-                       $('.show_infor .alert-success').addClass('hide');
-                    })
-                
-                    $('.show_edit a.arrow-back').click(function(){
-                       $(this).parent().parent().addClass('hide');
-                       $(this).parent().parent().parent().find('.show_infor').show();
-                    })
-                
-                    $(".saveText").click(function () {
-                	    var origin   = $('#url').val();
-                        
-                        id = $(this).attr("ref");
-                	    myText = $("#t"+id).val();
-                        var hashtags = getHashtags();
-                
-                		request = $.ajax({
-                	        url: ""+origin+"home/galerie+update",
-                	        type: "get",
-                	        data: "myText="+myText+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
-                	        success: function(data) {
-                				$('#s'+id).removeClass('btn-danger');
-                                setTextAfterSave('.show_edit select option:selected', '.hashtag_'+id+'');
-                                $('.des_'+id+'').html(myText);
-                                $('.show_edit a.arrow-back').click();
-                                $('.show_infor .alert-success').removeClass('hide');
-                            }
-                	    });
-                   });
+                    setJsEditButtonModal();
                 }
     	    });
          })

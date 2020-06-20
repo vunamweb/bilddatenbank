@@ -139,16 +139,27 @@ if($likes) {
         safe_query($sql);
     }
 } else if($galerie && $galerie == 'modal') {
-    $output = '<div class="row">';
+    $output = '<div class="row show_infor">';
+    
+    $output .= '<div class="col-md-12">
+                  <a href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                  <br><br>
+                  <div class="alert alert-success hide" role="alert">gespeichert update</div>
+                </div>';
+    
     $output .= '<div class="col-md-6">';
     
     $data = $_GET['data'];
     $data = explode(',', $data);
     
-    $que  	= "SELECT * FROM `morp_cms_galerie` g WHERE g.gid = ".$data[0]." ORDER BY g.sort";
+    $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gid=".$data[0]." AND g.gnid=n.gnid ORDER BY g.sort";
+	//$que  	= "SELECT * FROM `morp_cms_galerie` g WHERE g.gid = ".$data[0]." ORDER BY g.sort";
     $res 	= safe_query($que);
     
     while ($row = mysqli_fetch_object($res)) {
+        $textde = $row->gtextde;
+        $hashtags = $row->tags;
+        
         $src = $dir . 'Galerie/' . $morpheus['GaleryPath'] . '/' . $data[1] . '/' . $data[0] . '/' . $morpheus['large'] . '/' . set_name_image($row->gname);
         
         $output .= '<img class="img-responsive" src='.$src.' />';
@@ -159,7 +170,7 @@ if($likes) {
         
         $infor = json_decode($row->another_infor);
         
-        $ID = ($infor->format == 13) ? 'RGB' : 'CMYK';
+        $ID = ($infor->color == 13) ? 'RGB' : 'CMYK';
         
         $output .= '<p>Type: '.$infor->type.'</p>';
         $output .= '<p>Width: '.$infor->width.'</p>';
@@ -168,8 +179,22 @@ if($likes) {
         $output .= '<p>Date: '.$infor->date.'</p>';
         $output .= '<p>'.$ID.'</p>';
         
-        
         $output .= '</div></div>';
+        
+        $output .=                                  
+            '
+            <div class="row relative show_edit hide">
+        	    <div class="col-md-12"><a href="javascript:void(0)" class="arrow-back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
+                <br><br>
+                <div class="col-md-6"><textarea class="galedit form-control" name="t'.$data[0].'" id="t'.$data[0].'" ref="s'.$data[0].'" placeholder="Description Image">'.$textde.'</textarea></div>
+            ';
+           
+        $output .= '<div class="col-md-6">' . listHashtagsGalery($hashtags) . '</div>'.'
+                    <br><div class="col-md-12"><button class="btn btn-info saveText" ref="'.$data[0].'" id="s'.$data[0].'"><i class="fa fa-save"></i></button></div>';
+        
+        $output .= '</div>';
+        
+        
     }
 	    
   echo $output; die();   
