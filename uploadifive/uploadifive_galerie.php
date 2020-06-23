@@ -37,7 +37,7 @@ $imgTypes = array(
     'jpg',
     'jpeg',
     'png'); // Allowed file extensions
-$docFiles = array("gif", "svg");
+$docFiles = array("gif", "svg", 'psd', 'pdf');
 $fileTypes = array_merge($imgTypes, $docFiles);
 
 // *****************************************
