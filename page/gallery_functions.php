@@ -283,7 +283,7 @@ function get_total_search($seach_value, $hashtags, $category_id) {
     
     for($i = 0; $i < count($hashtags) -1; $i++){
         if($i < count($hashtags) - 2) 
-            $que .= 'like "%'.$hashtags[$i].'%" or g.tags ';
+            $que .= 'like "%'.$hashtags[$i].'%" AND g.tags ';
         else
             $que .= 'like "%'.$hashtags[$i].'%"';
           
@@ -591,7 +591,7 @@ function show_gallery_folder($res, $galerie_folders_images_id)
         
         $gallery_list .= '
 	
-	    <div class="col-md-6">
+	    <div class="col-md-6 EEE">
          <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">      
         <a class="delete_galerie_folders_images_ hide" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
         <a class="delete_galerie_folders_images_confirm_"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>    
@@ -637,7 +637,7 @@ function show_gallery_folder_modal($res, $galerie_folders_images_id)
         
         $gallery_list .= '
 	
-	    <div class="col-md-6">
+	    <div class="col-md-6 CCC">
                <img class="img-responsive" src="' . $dir .
             'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner .
             '/' . $img . '">
@@ -652,16 +652,16 @@ function show_gallery_folder_modal($res, $galerie_folders_images_id)
 }
 
 
-function liste()
+function liste($ordering="")
 {
-    global $sorting_col, $show_col, $table, $primary;
+    global $sorting_col, $show_col, $table, $primary, $ASC;
 
     $echo .= '<p><a href="?neu=1" class="btn btn-info"><i class="fa fa-plus"></i> NEU</a></p>';
     $echo .= '<table class="table mt2">';
 
     $old = '';
 
-    $sql = "SELECT * FROM $table WHERE 1";
+    $sql = "SELECT * FROM $table WHERE 1".$ordering;
     $res = safe_query($sql);
 
     while ($row = mysqli_fetch_object($res))
@@ -670,14 +670,44 @@ function liste()
         $echo .= '<tr>
 			<td><a href="?edit=' . $edit . '">' . $row->$show_col . '</a></td>
             <td><a href="?edit=' . $edit .
-            '" class="btn btn-info btn-small"><i class="fa fa-pencil-square-o"></a></td>
+            '" class="btn btn-info btn-small"><i class="fa fa-pencil-square-o"></i></a></td>
 			<td><a href="?del=' . $edit .
-            '" class="btn btn-danger btn-small"><i class="fa fa-trash-o"></a></td>
+            '" class="btn btn-danger btn-small"><i class="fa fa-trash-o"></i></a></td>
 		</tr>';
     }
 
     $echo .= '</table>
 	<p><a href="?neu=1" class="btn btn-info"><i class="fa fa-plus"></i> NEU</a></p>';
+
+    //return $_GET['neu'];
+    return $echo;
+}
+
+
+function liste_DIV($ordering="")
+{
+    global $sorting_col, $show_col, $table, $primary, $ASC;
+
+    $echo .= '<p class="mb2"><a href="?neu=1" class="btn btn-info"><i class="fa fa-plus"></i> NEU</a></p>';
+    $echo .= '<div class="row mt2 liste">';
+
+    $old = '';
+
+    $sql = "SELECT * FROM $table WHERE 1".$ordering;
+    $res = safe_query($sql);
+
+    while ($row = mysqli_fetch_object($res))
+    {
+        $edit = $row->$primary;
+        $echo .= '<div class="col-md-4 border1">
+			<span class="tbl_name"><a href="?edit='.$edit.'">' . $row->$show_col . '</a></span>
+            <span class="tbl_edit"><a href="?edit='.$edit.'" class="btn btn-info btn-small"><i class="fa fa-pencil-square-o"></i></a></span>
+			<span class="tbl_delete"><a href="?del='.$edit.'" class="btn btn-danger btn-small"><i class="fa fa-trash-o"></i></a></span>
+		</div>';
+    }
+
+    $echo .= '</div>
+	<p class="mt4"><a href="?neu=1" class="btn btn-info"><i class="fa fa-plus"></i> NEU</a></p>';
 
     //return $_GET['neu'];
     return $echo;

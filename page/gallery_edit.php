@@ -57,11 +57,11 @@ if($func == 'editgalery') {
                             <br><br>
                             <div class="alert alert-success hide" role="alert">gespeichert update</div>
                            </div>
-                          <div class="col-md-6">
+                          <div class="col-md-6 FFF">
                             <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
                           </div>';
          
-         $output .= '<div class="col-md-6"><label class="des_'.$gid.'">'.$textde.'</label><br>' . '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags). '</div>' .'</div>';
+         $output .= '<div class="col-md-6 JJJ"><label class="des_'.$gid.'">'.$textde.'</label><br>' . '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags). '</div>' .'</div>';
          
          $output .= '</div>';
          
@@ -71,10 +71,10 @@ if($func == 'editgalery') {
             <div class="row relative show_edit hide">
         	    <div class="col-md-12"><a href="javascript:void(0)" class="arrow-back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
                 <br><br>
-                <div class="col-md-6"><textarea class="galedit form-control" name="t'.$gid.'" id="t'.$gid.'" ref="s'.$gid.'" placeholder="Description Image">'.$textde.'</textarea></div>
+                <div class="col-md-6 GGG"><textarea class="galedit form-control" name="t'.$gid.'" id="t'.$gid.'" ref="s'.$gid.'" placeholder="Description Image">'.$textde.'</textarea></div>
             ';
            
-        $output .= '<div class="col-md-6">' . listHashtagsGalery($hashtags) . '</div>'.'
+        $output .= '<div class="col-md-6 YYY">' . listHashtagsGalery($hashtags) . '</div>'.'
                     <br><div class="col-md-12"><button class="btn btn-info saveText" ref="'.$gid.'" id="s'.$gid.'"><i class="fa fa-save"></i></button></div>';
         
         $output .='     
@@ -126,16 +126,16 @@ else if($galerie) {
 
 		$output .= '
 
-<div class="col-md-6">
+<div class="col-md-4 col-lg-3 mb3">
     <div class="item_image">
          <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
          <div class="edit_delete_image">
           <a href="#'.$gid.'" class="edit_image" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
-          <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-          <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a> 
+          <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+          <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><i class="fa fa-trash-o" aria-hidden="true"></i></a> 
          </div>
     </div>
-    <div class="">
+    <div class="hashtag_display">
 	    <label class="des_'.$gid.'">'.$textde.'</label><br>
     		';
   $output .= '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags) . '</div>';

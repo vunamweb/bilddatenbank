@@ -80,13 +80,14 @@ if($likes) {
     
     for($i = 0; $i < count($hashtags) -1; $i++){
         if($i < count($hashtags) - 2) 
-            $que .= 'like "%'.$hashtags[$i].'%" or g.tags ';
+            $que .= 'like "%'.$hashtags[$i].'%" AND g.tags ';
         else
             $que .= 'like "%'.$hashtags[$i].'%"';
           
     }
     
     $que .= ') LIMIT '.$start.','.$number.'';
+    echo $que;
     $res 	= safe_query($que);
     
     $output = '';

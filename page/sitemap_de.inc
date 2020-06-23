@@ -3,39 +3,23 @@
 				</ul>
 
 				<ul class="nav-child">
-					<li class="hn"><strong><a href="http://localhost/bilddatenbank/de/kategorien/">Start Categories</a></strong></li>
+					<li class="hn"><strong><a href="http://php7.pixeldusche.com/bilddatenbank/de/infos/">Infos</a></strong></li>
 
 
 				</ul>
 
 				<ul class="nav-child">
-					<li class="hn"><strong><a href="http://localhost/bilddatenbank/de/infos/">Infos</a></strong></li>
+					<li class="hn"><strong><a href="http://php7.pixeldusche.com/bilddatenbank/de/ordner/">Dateiordner/Schlagworte</a></strong></li>
 
 
 				</ul>
 
 				<ul class="nav-child">
-					<li class="hn"><strong><a href="http://localhost/bilddatenbank/de/profil/">Profile</a></strong></li>
+					<li class="hn"><strong><a href="http://php7.pixeldusche.com/bilddatenbank/de/suchbegriffe/">Verwaltung Suchbegriffe</a></strong></li>
 
 
 				</ul>
 
 				<ul class="nav-child">
-					<li class="hn"><strong><a href="http://localhost/bilddatenbank/de/kategory/">kategory</a></strong></li>
-
-
-				</ul>
-
-				<ul class="nav-child">
-					<li class="hn"><strong><a href="http://localhost/bilddatenbank/de/tag/">tag</a></strong></li>
-
-
-				</ul>
-
-				<ul class="nav-child">
-					<li class="hn"><strong><a href="http://localhost/bilddatenbank/de/tag-group/">tagGroup</a></strong></li>
-					<li class="sn"><a href="http://localhost/bilddatenbank/de/neuigkeiten/dienstanweisungen/">Dienstanweisungen</a></li>
-					<li class="sn"><a href="http://localhost/bilddatenbank/de/neuigkeiten/neuigkeiten-vom-stift/">Neuigkeiten vom Stift</a></li>
-					<li class="sn"><a href="http://localhost/bilddatenbank/de/neuigkeiten/neuigkeiten-veranstaltungen/">Neuigkeiten Veranstaltungen</a></li>
-					<li class="sn"><a href="http://localhost/bilddatenbank/de/neuigkeiten/neuigkeiten-oberrad/">Neuigkeiten Oberrad</a></li>
+					<li class="hn"><strong><a href="http://php7.pixeldusche.com/bilddatenbank/de/suchbegriffe-gruppe/">Verwaltung Suchbegriffe Gruppen</a></strong></li>
 </ul>'; ?>
