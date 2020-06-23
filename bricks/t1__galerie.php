@@ -68,7 +68,7 @@ if($likes) {
     $total_search = get_total_search($seach_value, $hashtags, $category_id);
     $number = ($number > $total_search) ? $total_search : $number;
     
-    $count_page = round($total_search/$number);
+    $count_page = ($total_search > 0) ? round($total_search/$number) : 1;
     //echo $total_search;
     
     $sort_gallery = sort_array_gallery();
@@ -125,7 +125,7 @@ if($likes) {
         </div>
         
 ';
-    $output = ($total_search > 0) ? $output : 'No data';
+    $output = ($total_search > 0) ? $output : '<br> No data';
 
  echo $output; die(); 
 } else if($galerie && $galerie == 'update') {
