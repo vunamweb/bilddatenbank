@@ -118,18 +118,7 @@
      
      function filter() {
         setTimeout(function(){ 
-                var filter = getfilter();
-                //alert(filter);
-                
-                var grid = $('.grid').isotope({
-                  itemSelector: '.grid-item',
-                  masonry: {
-                 	columnWidth: '.grid-sizer',
-                 	percentPosition: true
-                  }
-                });
-                
-               grid.isotope({ filter: filter }); 
+                $('.navbar-form').submit();
             }, timeOut);
      }
      
@@ -348,6 +337,21 @@
         
         setClickDeleteGalerieFoldersImages();
         setShowGallery();
+        
+        $('.search.dropdown .item').click(function() {
+		    var dataValue = $(this).attr('data-value');
+            
+            setTimeout(function(){ 
+                $('.search.dropdown a.transition').each(function(){
+                    var nowDataValue = $(this).attr('data-value');
+                    
+                    if(dataValue == nowDataValue)
+                      $(this).click(function(){
+                         filter();
+                      })
+                })
+            }, timeOut);
+         });
         
         $('.number_page').change(function(){
             $('.navbar-form').submit();

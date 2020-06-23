@@ -125,7 +125,7 @@ if($likes) {
         </div>
         
 ';
-    $output = ($total_search > 0) ? $output : '<br> No data';
+    $output = ($total_search > 0) ? $output : '<br> <input type="hidden" name="category_id" id="category_id" value='.$category_id.' />  No data';
 
  echo $output; die(); 
 } else if($galerie && $galerie == 'update') {
