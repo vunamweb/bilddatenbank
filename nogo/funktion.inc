@@ -426,6 +426,33 @@ function ImageInformations($f, $imgFolder)
 //**************************************************************************************
 
 
+function makeImagePSD($f, $page, $size, $imgFolder, $fileName) {
+ $imagick = new \Imagick(realpath($f));
+
+$output = new \Imagick();
+            
+for($i = 0; $i < $page; $i++) {
+  $imagick->setIteratorIndex($i);
+  $output->addImage($imagick->getimage());  
+}
+            
+$merged = @$output->flattenimages();
+$merged->setImageFormat('jpg');
+$merged->thumbnailImage($size, $size, true);
+$merged->writeImage($imgFolder . $fileName . ".jpg");       
+}
+
+function makeImagePDF($f, $page, $size, $imgFolder, $fileName) {
+$im = new Imagick();
+
+$im->setResolution($size,$size);
+$im->readimage($f . '[0]'); 
+$im->setImageFormat('jpg');    
+$im->writeImage($imgFolder . $fileName . ".jpg"); 
+$im->clear(); 
+$im->destroy();      
+}
+
 function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400',
     $allpage = 0)
 {
@@ -454,7 +481,8 @@ function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400'
         $height = $im->getImageHeight();
 
         $noOfPagesInPDF = $im->getNumberImages();
-        $max = $allpage ? $noOfPagesInPDF : 1;
+        //$max = ($allpage) ? $noOfPagesInPDF : 1;
+        $max = 1;
 
         //		echo 'number of pages: '.$noOfPagesInPDF.'<br>';
 
@@ -472,15 +500,21 @@ function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400'
         } elseif ($thisFileTyp == "pdf")
         {
             //			exec("/usr/bin/convert convert -colorspace sRGB -density 300 $f -resize 240x240 eps/$f.jpg");
-            exec("/usr/bin/convert convert  -limit thread 1 -colorspace RGB $f -background white -alpha deactivate -resize $size\> -colorspace sRGB -scene 1 " .
-                $imgFolder . $fileName . ".jpg");
+            /*exec("/usr/bin/convert convert  -limit thread 1 -colorspace RGB $f -background white -alpha deactivate -resize $size\> -colorspace sRGB -scene 1 " .
+                $imgFolder . $fileName . ".jpg");*/
+            makeImagePDF($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
             //			for($i=0; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/'.$f.'-'.$i.'.jpg" ><br>';
             //			for($i=1; $i<=$max; $i++) echo '<img src="eps/pdf-0'.$x.'-'.$i.'.jpg" ><br>';
             //			echo '<img src="'.$imgFolder.$fileName.'.jpg" ><br>';
         } elseif ($thisFileTyp == "psd")
         {
-            exec("/usr/bin/convert convert -colorspace sRGB -density 300 $f -resize $size\> " .
-                $imgFolder . $fileName . ".jpg");
+            /*exec("/usr/bin/convert convert -flatten inhalt-$f[0] -resize $size\> " .
+                $imgFolder . $fileName . ".jpg");*/
+            /*exec("/usr/bin/convert convert inhalt-$f[0] -flatten -resize $size\> " .
+                $imgFolder . $fileName . ".jpg");*/
+            /*exec("/usr/bin/convert convert inhalt-$f -flatten -resize 1920*1920 " .
+                $imgFolder . $fileName . ".jpg");   */
+            makeImagePSD($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
             //			if($noOfPagesInPDF > 1) for($i=0; $i<$max; $i++) echo '<img src="eps/psd-'.$f.'-'.$i.'.jpg" ><br>';
             //			else echo '<img src="eps/psd-'.$f.'.jpg" ><br>';
         } else

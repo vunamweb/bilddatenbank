@@ -257,7 +257,7 @@ class resize
 
 
 function set_name_image($img) {
-    $replace = array('JPG', 'PNG', 'png', 'psd', 'PSD', 'pdf', 'PDF');
+    $replace = array('JPG', 'PNG', 'png', 'psd', 'PSD', 'pdf', 'PDF', 'ai', 'AI', 'eps', 'EPS');
     
     return str_replace($replace, 'jpg', $img);
 }

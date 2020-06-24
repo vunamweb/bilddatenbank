@@ -37,7 +37,7 @@ $imgTypes = array(
     'jpg',
     'jpeg',
     'png'); // Allowed file extensions
-$docFiles = array("gif", "svg", 'psd', 'pdf');
+$docFiles = array("gif", "svg", 'psd', 'pdf', 'eps', 'ai');
 $fileTypes = array_merge($imgTypes, $docFiles);
 
 // *****************************************
@@ -110,8 +110,8 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
         $file_type = getFileTypeImage($targetFile);
         
         //echo $thumbFile; die();
-        makeImage($targetFile, $thumbFile, $widthThumbResize);
-        makeImage($targetFile, $largeFile, $widthLargeResize);
+        makeImage($targetFile, $thumbFile, $widthThumbResize, false);
+        makeImage($targetFile, $largeFile, $widthLargeResize, false);
         
         //reSizeImage($targetFile, $thumbFile, $file_type, $widthThumbResize, 'crop');
         //reSizeImage($targetFile, $largeFile, $file_type, $widthLargeResize, 'crop');
