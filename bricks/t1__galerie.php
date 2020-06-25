@@ -129,16 +129,18 @@ if($likes) {
 
  echo $output; die(); 
 } else if($galerie && $galerie == 'update') {
-    $text= $_GET["myText"];
+    $text = $_GET["myText"];
+    $keyWord = $_GET["keyWord"];
     $hashtags= $_GET["hashtags"];
     $pos_1 = 'gtextde';
     $pos_2 = 'tags';
+    $pos_3 = 'keyword';
     $feld = $_GET["feld"];
     $table = $_GET["table"];
     $id = $_GET["id"];
     
     if($table && $feld && $id) {
-    	$sql = "UPDATE $table set $pos_1='$text', $pos_2='$hashtags' WHERE $feld=$id";
+    	$sql = "UPDATE $table set $pos_1='$text', $pos_2='$hashtags', $pos_3='$keyWord' WHERE $feld=$id";
         safe_query($sql);
     }
 } else if($galerie && $galerie == 'modal') {
@@ -162,6 +164,7 @@ if($likes) {
     while ($row = mysqli_fetch_object($res)) {
         $textde = $row->gtextde;
         $hashtags = $row->tags;
+        $keyWord = $row->keyword;
         
         $src = $dir . 'Galerie/' . $morpheus['GaleryPath'] . '/' . $data[1] . '/' . $data[0] . '/' . $morpheus['large'] . '/' . set_name_image($row->gname);
         
@@ -189,7 +192,10 @@ if($likes) {
             <div class="row relative show_edit hide">
         	    <div class="col-md-12"><a href="javascript:void(0)" class="arrow-back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
                 <br><br>
-                <div class="col-md-6"><textarea class="galedit form-control" name="t'.$data[0].'" id="t'.$data[0].'" ref="s'.$data[0].'" placeholder="Description Image">'.$textde.'</textarea></div>
+                <div class="col-md-6">
+                  <textarea class="galedit form-control" name="t'.$data[0].'" id="t'.$data[0].'" ref="s'.$data[0].'" placeholder="Description Image">'.$textde.'</textarea>
+                  <input id="keyword'.$data[0].'" placeholder="Key word" value="'.$keyWord.'" />  
+                </div>
             ';
            
         $output .= '<div class="col-md-6">' . listHashtagsGalery($hashtags) . '</div>'.'

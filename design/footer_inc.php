@@ -250,12 +250,13 @@
                         
                         id = $(this).attr("ref");
                 	    myText = $("#t"+id).val();
+                        keyWord = $("#keyword"+id).val();
                         var hashtags = getHashtags();
                 
                 		request = $.ajax({
                 	        url: ""+origin+"home/galerie+update",
                 	        type: "get",
-                	        data: "myText="+myText+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
+                	        data: "myText="+myText+"&keyWord="+keyWord+"&hashtags="+hashtags+"&id="+id+"&feld=gid&table=morp_cms_galerie",
                 	        success: function(data) {
                 				$('#s'+id).removeClass('btn-danger');
                                 setTextAfterSave('.show_edit select option:selected', '.hashtag_'+id+'');

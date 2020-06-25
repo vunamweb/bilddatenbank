@@ -27,6 +27,8 @@ if($func == 'editgalery') {
 		$textde = $row->gtextde;
 		$hl = $row->gtexten;
         $hashtags = $row->tags;
+        $keyWord = $row->keyword;
+        
 
 		$sql = "SELECT tagID FROM `morp_tags_list` WHERE art='image' AND targetID=$gid";
 		$rs = safe_query($sql);
@@ -71,7 +73,10 @@ if($func == 'editgalery') {
             <div class="row relative show_edit hide">
         	    <div class="col-md-12"><a href="javascript:void(0)" class="arrow-back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
                 <br><br>
-                <div class="col-md-6 GGG"><textarea class="galedit form-control" name="t'.$gid.'" id="t'.$gid.'" ref="s'.$gid.'" placeholder="Description Image">'.$textde.'</textarea></div>
+                <div class="col-md-6 GGG">
+                  <textarea class="galedit form-control" name="t'.$gid.'" id="t'.$gid.'" ref="s'.$gid.'" placeholder="Description Image">'.$textde.'</textarea>
+                  <input id="keyword'.$gid.'" placeholder="Key word" value="'.$keyWord.'" /> 
+                </div>
             ';
            
         $output .= '<div class="col-md-6 YYY">' . listHashtagsGalery($hashtags) . '</div>'.'
