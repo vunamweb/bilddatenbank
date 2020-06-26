@@ -617,6 +617,36 @@ function get_guest_id_of_intranet_user()
     }
 }
 
+function get_permission_guest()
+{
+    $table = 'morp_intranet_user';
+    $primary = 'mid'; 
+    $col = 'guestID';
+    
+    $que  	= "SELECT * FROM $table where $primary = ".$_SESSION['mid']."";
+    $res 	= safe_query($que);
+    
+    $row = mysqli_fetch_object($res);
+    $guestID = $row->$col;
+    
+    $que  	= "SELECT * FROM morp_cms_galerie_guests where guestID = ".$guestID."";
+    $res 	= safe_query($que);
+    
+    $row = mysqli_fetch_object($res);
+    
+    $start_date = $row->start_dat;
+    $end_date = $row->end_dat;
+    
+    $current_date = date("Y-m-d");
+    //echo (strtotime($current_date) - strtotime($end_date)) ;die();
+    
+    if((strtotime($current_date) < strtotime($start_date)) || (strtotime($current_date) > strtotime($end_date)))
+      return false;
+    
+    return true;  
+    
+}
+
 function show_gallery_folder_modal($res, $galerie_folders_images_id)
 {
     global $dir, $morpheus, $js, $mid;

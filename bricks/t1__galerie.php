@@ -581,6 +581,11 @@ else if($hashtag) {
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // SHOW CATEGORY ON START
 else if(get_guest_id_of_intranet_user() != 0) {
+    if(!get_permission_guest()) {
+        $output = 'you are expired to access resource';
+        return;
+    }
+    
     $table = 'morp_cms_galerie_guests';
     $primary = 'guestID';
     
@@ -601,6 +606,7 @@ else if(get_guest_id_of_intranet_user() != 0) {
 	';
 	
 	$output .= set_thumb_gallery_guest($res, 1);
+    
 }
 else {
 	
