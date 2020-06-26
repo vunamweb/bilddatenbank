@@ -66,7 +66,7 @@
 
 <!-- Bereich Naviagtion dynamisch -->
 
-<?php if($hn_id == 4) { ?>
+<?php if(false) { ?>
         <div class="container-full navbarButtons">
 	        <div class="container">
 	            <div class="navbar-collapse collapse">
