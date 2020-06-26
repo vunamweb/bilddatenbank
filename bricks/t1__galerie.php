@@ -367,6 +367,13 @@ if($likes) {
             $sql = "insert into morp_intranet_user(uname, pw , email, guestID )
             values('".$item->email."', '".md5($item->password)."', '".$item->email."', ".$insert_id.")";
             safe_query($sql);
+            
+            //send mail
+            $subject = 'Login information';
+            
+            $message = 'you can login ' . $morpheus["url"] . ' with information below \n';
+            $message .= 'User: ' . $item->email . '\n' . 'Pass: ' . $item->password;
+            mail($item->email, 'My Subject', $message);
         } else {
             $row = mysqli_fetch_object($res);
             
