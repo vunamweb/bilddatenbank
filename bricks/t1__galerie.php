@@ -178,6 +178,11 @@ if($likes) {
         
         $ID = ($infor->color == 13) ? 'RGB' : 'CMYK';
         
+        $output .= '<p>Description: '.$textde.'</p>';
+        $output .= '<p>Hashtags: '.HashtagsGalery($hashtags).'</p>';
+        
+        
+        
         $output .= '<p>Type: '.$infor->type.'</p>';
         $output .= '<p>Width: '.$infor->width.'</p>';
         $output .= '<p>Height: '.$infor->height.'</p>';
