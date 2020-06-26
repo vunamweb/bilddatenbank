@@ -371,9 +371,12 @@ if($likes) {
             //send mail
             $subject = 'Login information';
             
-            $message = 'you can login ' . $morpheus["url"] . ' with information below \n';
-            $message .= 'User: ' . $item->email . '\n' . 'Pass: ' . $item->password;
-            mail($item->email, 'My Subject', $message);
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            
+            $message = 'you can login ' . $morpheus["url"] . ' with information below <br>';
+            $message .= 'User: ' . $item->email . '<br>' . 'Pass: ' . $item->password;
+            mail($item->email, $subject, $message, $headers);
         } else {
             $row = mysqli_fetch_object($res);
             
