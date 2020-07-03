@@ -2,8 +2,8 @@
 	<section>
 		<div class="container-xl">
 			<!-- <div class="row row-flex row-flex-wrap"> -->
-			<div class="row">
-				<div class="col-md-3 left-board">
+			<div class="row" id="main">
+				<div class="col-md-3 left-board sidenav" id="mySidenav">
 					<?php include( 'page/left.php') ?>
 				</div>
 				<div class="col-md-9 main content">

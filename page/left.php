@@ -45,8 +45,10 @@ while ($row = mysqli_fetch_object($res))
 }
 ?>
 <form class="navbar-form navbar-right" role="search" method="get" action="<?php echo $dir; ?>index.php">
-						<?php echo $select; ?>
-					</form>
+  <?php echo $select; ?>
+</form>
+<a class="open_close_menu"><img src="images/1x/close_open_menu.png"/></a>
+<a class="open_close_menu navbar_menu"><img src="images/1x/navbar_menu.png"/></a>
 
 <?php echo $filterButton; ?>
 
