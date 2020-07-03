@@ -23,11 +23,11 @@
         				</div>
                         <div class="form-group next">
         				   <select id="type_photo" data-show-content="true" class="form-control">
-                                <option data-content="<i class='fa fa-eye'></i> Eye"></option>
-                                <option data-content="<i class='fa fa-heart-o'></i> Heart"></option>
-                                <option data-content="<i class='fa fa-leaf'></i> Leaf"></option>
-                                <option data-content="<i class='fa fa-music'></i> Music"></option>
-                                <option data-content="<i class='fa fa-star'></i> Star"></option>
+                                <option data-content=" Alle"></option>
+                                
+                                <option data-content="<i class='fa fa-camera'></i> Fotos"></option>
+                                <option data-content="<i class='fa fa-play'></i> Videos"></option>
+                                <option data-content="<i class='fa fa-paint-brush'></i> Vektoren"></option>
                            </select>
                         </div>
         				 <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i></button>
