@@ -264,19 +264,19 @@ div.wohnen:hover .DIVoverlay { -moz-transition-property: all; -o-transition-prop
 @media only screen and (max-width: 768px) { .wohnen h3, .wohnen p { font-size: 1em; } }
 .endFrame { margin-top: 40px; }
 
-footer { background: #666666; }
-footer li a, footer p a { font-size: .75rem; color: #fff !important; }
-footer p { text-transform: uppercase; font-weight: 600; margin-bottom: 0; line-height: 1.1em; }
+footer { background: #000; padding-left: 10%; }
+footer li a, footer p a { font-size: .75rem; color: #fff !important; text-transform: capitalize; }
+footer p { font-weight: 600; margin-bottom: 0; line-height: 1.1em; }
 footer a { font-weight: 300; }
 footer li { line-height: 1.1em; }
-footer .versal { text-transform: uppercase; margin-bottom: 1em; margin-top: 2px; }
+footer .versal {  margin-bottom: 1em; margin-top: 2px; }
 
 .media-left:nth-child(1) { width: 70%; }
 .media-left:nth-child(2) { width: 20%; }
 .media-left:nth-child(3) { width: 10%; }
 
-.copyright { padding: 20px 15px; }
-.copyright p { font-size: .75em; color: #424f84; font-weight: 400; line-height: 22px; }
+.copyright { margin: 0; }
+.copyright p { font-size: .75em; color: #fff; font-weight: 400; line-height: 22px; }
 
 .ra { text-align: right; }
 

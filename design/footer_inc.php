@@ -9,27 +9,29 @@
         <div class="row">
 <?php
 	foreach($footer_navid_arr as $key) {
-		echo '            <div class="col-md-2 col-xs-6">
-	            <p><a href="'.$dir.$navID[$key].'" alt="'.$navarrayFULL[$key].'">'.$navarrayFULL[$key].'</a></p>
+		if($navarrayFULL[$key] != '') {
+		  echo '            <div class="col-md-2 col-xs-6">
+	            <p><a class="nav-link" href="'.$dir.$navID[$key].'" alt="'.$navarrayFULL[$key].'">'.$navarrayFULL[$key].'</a></p>
 	            <ul>
 ';
-		echo set_nav('<li><a href="url">name</a></li>', $key, 2, 0);
+		echo set_nav('<li><a class="nav-link" href="url">name</a></li>', $key, 2, 0);
 
-		echo '
+		echo ' 
 	            </ul>
             </div>
 ';
-	}
+		}
+    }
 ?>
 			<div class="col-md-2 col-xs-6">
-	            <p><a href="<?php echo $dir.$navID[4]; ?>"><?php echo $navarrayFULL[4]; ?></a></p>
-	            <p><a href="<?php echo $dir.$navID[12]; ?>" alt="Galerien"><?php echo $navarrayFULL[12]; ?></a></p>
+	            <p><a class="nav-link" href="<?php echo $dir.$navID[4]; ?>"><?php echo $navarrayFULL[4]; ?></a></p>
+	            <p><a class="nav-link" href="<?php echo $dir.$navID[12]; ?>" alt="Galerien"><?php echo $navarrayFULL[12]; ?></a></p>
 
             </div>
 
             <div class="col-md-2 col-xs-6">
 	            <ul class="versal">
-		            	<li><a href="<?php echo $dir; ?>">STARTSEITE</a></li>
+		            	<li><a class="nav-link" href="<?php echo $dir; ?>">STARTSEITE</a></li>
 <?php echo $nav_meta; ?>
 	            </ul>
 	            <ul class="versal">
@@ -38,18 +40,10 @@
             </div>
         </div>
     </div>
-</footer>
-
-
-<div class="container copyright">
-    <div class="row">
-        <div class="col-md-12 center">
-			<p><?php echo date("Y"); ?> Frankfurter Kinderbüro</p>
-        </div>
+    <div class="container copyright">
+        	<p><?php echo date("Y"); ?> 2020 Frankfurter Kinderbüro, Konzept und Gestaltung: Konzept fünf, <a href="www.konzept-fuenf.de" target="_blank">www.konzept-fuenf.de</a></p>
     </div>
-</div>
-
-
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
