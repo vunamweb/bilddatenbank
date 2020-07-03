@@ -118,3 +118,4 @@ if ($_GET['nid'] == 'areafolder')
     <?php
 }
 ?>
+

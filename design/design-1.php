@@ -3,20 +3,22 @@
 		<div class="container-xl">
 			<!-- <div class="row row-flex row-flex-wrap"> -->
 			<div class="row">
-				<div class="col-md-2 left-board">
+				<div class="col-md-3 left-board">
 					<?php include( 'page/left.php') ?>
 				</div>
-				<div class="">
-					<div class="col-md-10 main content">
+				<div class="col-md-9 main content">
 						<i class="fa fa-spinner" aria-hidden="true">
 						</i>
 						<?php echo $output; ?>
-					</div>
-					<div class="right-board">
+				</div>
+					<?php if($_GET['func'] == 'galerie') { ?>
+                      <div class="right-board">
 						<?php if(get_guest_id_of_intranet_user() == 0) { ?>
                          <?php include( 'page/right.php') ?>
                         <?php } ?>
-					</div>
+					   </div> 
+                    <?php } ?>
+                    
 					<div class="modal" id="myModal_area_folder">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -67,7 +69,7 @@
                   </div>
 					<input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />
                     <input type="hidden" id="page" value="1" />
-                </div>
+                
 			</div>
 		</div>
 	</section>

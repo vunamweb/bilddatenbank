@@ -12,57 +12,55 @@
 ?>
 
     <!-- Statische Navbar -->
-
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-full navbarMeta">
-	            <div id="navbarMeta" class="navbar-collapse collapse">
-<!--
-                    <form class="navbar-form navbar-right" role="search" method="get" action="<?php echo $dir; ?>index.php">
-						<div class="form-group">
-							<input type="text" class="form-control" name="suche" placeholder="Suche..."<?php echo isset($_GET["suche"]) ? ' value="'.$_GET["suche"].'"' : ''; ?>>
-						</div>
-						<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-					</form>
--->
-
-					<ul class="nav navbar-nav navbar-right">
-		                <li<?php echo $cid == 1 ? ' class="aktiv"' : ''; ?>><a href="<?php echo $dir; ?>"><i class="fa fa-home"></i></a></li>
-						<?php echo $nav; ?>
+<nav class="navbar navbar-expand-lg navbar-default navbar-dark">
+        <a class="navbar-brand logo" href="<?php echo $dir; ?>">
+           <img src="<?php echo $dir; ?>images/kinderbuero_logo.png" alt="Logo" class="logo" />
+        </a>
+        <div id="navbarMeta" class="">
+            <form class="navbar-form" role="search" method="get" action="<?php echo $dir; ?>index.php">
+                        <div class="form-group">
+        							<input type="text" class="form-control" name="suche" id="suche" placeholder=""<?php echo isset($_GET["suche"]) ? ' value="'.$_GET["suche"].'"' : ''; ?>>
+        				</div>
+                        <div class="form-group next">
+        				   <select id="type_photo" data-show-content="true" class="form-control">
+                                <option data-content="<i class='fa fa-eye'></i> Eye"></option>
+                                <option data-content="<i class='fa fa-heart-o'></i> Heart"></option>
+                                <option data-content="<i class='fa fa-leaf'></i> Leaf"></option>
+                                <option data-content="<i class='fa fa-music'></i> Music"></option>
+                                <option data-content="<i class='fa fa-star'></i> Star"></option>
+                           </select>
+                        </div>
+        				 <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i></button>
+             </form>
+             
+             <div class="pull-left form-group parent_div">
+                  <select class="number_page form-control" data-show-content="true">
+                                  <option <?php if($_SESSION['number_per_page'] == 2) echo 'selected' ?>  value="2">2</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 3) echo 'selected' ?> value="3">3</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 4) echo 'selected' ?> value="4">4</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 5) echo 'selected' ?> value="5">5</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 6) echo 'selected' ?> value="6">6</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 10) echo 'selected' ?> value="10">10</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 20) echo 'selected' ?> value="20">20</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 30) echo 'selected' ?> value="30">30</option>
+                  </select> 
+             </div>
+             <div class="form-group next next_1">
+                  <label class="">Anzahl Bilder/Videos</label>
+             </div>
+         </div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container-full navbarMeta collapse navbar-collapse" id="navb">
+	            <ul class="nav navbar-nav navbar-right">
+		                <?php echo $nav; ?>
 						<?php echo $nav_meta; ?>
-						<li><a href="<?php echo $dir; ?>?logout=1"><?php echo substr($profile["vname"],0,1).''.substr($profile["nname"],0,1) ?> abmelden</a></li>
-	                </ul>
-	            </div>
+						<li><a class="nav-link meta-nav end" href="<?php echo $dir; ?>?logout=1"><?php echo substr($profile["vname"],0,1).''.substr($profile["nname"],0,1) ?> abmelden</a></li>
+                 </ul>
+	            
         </div>
-        <div class="container-full navbar-main">
-	            <div class="navbar-header">
-	                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-	                	<span class="sr-only">Navigation ein-/ausblenden</span>
-	                	<span class="icon-bar"></span>
-	                	<span class="icon-bar"></span>
-	                	<span class="icon-bar"></span>
-	                </button>
-	                <a class="navbar-brand logo" href="<?php echo $dir; ?>">
-		                <img src="<?php echo $dir; ?>images/kinderbuero_logo.png" alt="Logo" class="logo" />
-	                </a>
-	            </div>
-
-	            <div id="navbar" class="navbar-collapse collapse">
-	                <ul class="nav navbar-nav navbar-right">
-		                <li><a href="<?php echo $dir; ?>">All</a></li>
-<?php
-	$que  	= "SELECT gntextde, gnid FROM `morp_cms_galerie_name` WHERE 1";
-	$res 	= safe_query($que);
-	while($row = mysqli_fetch_object($res)) {
-		echo '						<li><a href="'.$dir.'home/galerie+'.$row->gnid.'/">'.$row->gntextde.'</a></li>
-';
-	}
-?>
-	                    <li class="mobileOn"><hr></li>
-	                    <?php echo $nav_meta_mobile; ?>
-	                </ul>
-
-	            </div>
-        </div>
+        
 
 <!-- Bereich Naviagtion dynamisch -->
 
@@ -112,5 +110,31 @@
 <?php } ?>
 
     </nav>
+    
+    <div class="container-full navbar-main">
+	            <div class="navbar-header hide">
+	                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	                	<span class="sr-only">Navigation ein-/ausblenden</span>
+	                	<span class="icon-bar"></span>
+	                	<span class="icon-bar"></span>
+	                	<span class="icon-bar"></span>
+	                </button>
+	            </div>
 
-	<div class="abstand-start<?php echo $cid==1 ? '-2' : ''; ?>"></div>
+	            <div id="navbar" class="navbar-collapse">
+	                <ul class="nav navbar-nav pull-right">
+		                <li><a href="<?php echo $dir; ?>">All</a></li>
+<?php
+	$que  	= "SELECT gntextde, gnid FROM `morp_cms_galerie_name` WHERE 1";
+	$res 	= safe_query($que);
+	while($row = mysqli_fetch_object($res)) {
+		echo '						<li><a href="'.$dir.'home/galerie+'.$row->gnid.'/">'.$row->gntextde.'</a></li>
+';
+	}
+?>
+	                    <li class="mobileOn"><hr></li>
+	                    <?php echo $nav_meta_mobile; ?>
+	                </ul>
+
+	            </div>
+        </div>

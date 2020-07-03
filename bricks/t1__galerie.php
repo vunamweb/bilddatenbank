@@ -14,6 +14,8 @@ $search = isset($_GET["search"]) ? $_GET["search"] : '';
 $hashtag = isset($_GET["hashtag"]) ? $_GET["hashtag"] : '';
 $hashtagid = isset($_GET["hashtagid"]) ? $_GET["hashtagid"] : 0;
 
+//print_r($_GET); die();
+
 
 #echo '##mid: '.$mid.'##';
 #print_r($_REQUEST);
@@ -617,7 +619,7 @@ else {
 	$n = 0;
 	$galerie = 1;
 
-	$output .= '
+	$output .= '<div class="row">
 ';
 
 	while ($row = mysqli_fetch_object($res)) {
@@ -635,7 +637,7 @@ else {
 
 		$output .= '
 
-				<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
+				<div class="col-md-4 col-sm-6 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
 				    <div class="hovereffect">
 				        <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
 			            <div class="overlay">
@@ -648,6 +650,8 @@ else {
 				</div>
 		';
 	}
+    
+    $output .= '</div>';
 
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -655,11 +659,9 @@ else {
 	// HASHTAGS // FAVOURITE PHOTOS
 	$tagList = getAllTags($id, $art='image');
 	ksort($tagList);
-	$filterButton = '<h2><b>#Hashtag & Likes</b></h2>
-	        		<hr>
-
-	        		<p><a href="'.$dir.'?likes=all" class="btn btn-default mb1"><i class="fa fa-heart-o"></i> most favourite photos</a></p>
-	        		<p><a href="'.$dir.'?likes=my" class="btn btn-default mb1"><i class="fa fa-heart-o"></i> my favourite photos</a></p>';
+	$filterButton = '
+                     <a class="left_bottom icon_start" href="'.$dir.'?likes=all" class="btn btn-default mb1"> MY favourite photos</a>
+	        		<a class="left_bottom icon_heart" href="'.$dir.'?likes=my" class="btn btn-default mb1">most favourite photos</a>';
 
 	foreach($tagList as $arr) {
 		$filterButton .= '<a href="'.$dir.'?hashtagid='.$arr[0].'&hashtag='.$arr[1].'" class="btn btn-info hashtagGal">#'.$arr[2].'</a>

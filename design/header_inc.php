@@ -13,8 +13,9 @@
 <meta property="og:url" content="<?php echo substr($dir,0,(strlen($dir)-1)).$uri; ?>" />
 <meta property="og:title" content="<?php echo $title; ?>" />
 <meta property="og:description" content="<?php echo $desc; ?>"/>
-<link href="<?php echo $dir; ?>css/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css">
-<link href="<?php echo $dir; ?>css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.0-beta/css/bootstrap-select.min.css">
 <link href="<?php echo $dir; ?>css/swiper.min.css" media="screen" rel="stylesheet" type="text/css">
 <link href="<?php echo $dir; ?>css/ekko-lightbox.css" media="screen" rel="stylesheet" type="text/css">
 <link href="<?php echo $dir; ?>css/screen.css?v=<?php echo $zufall; ?>" media="screen, projection" rel="stylesheet" type="text/css">
