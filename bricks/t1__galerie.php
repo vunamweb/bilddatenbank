@@ -501,7 +501,12 @@ else if($galerie) {
 
 
 		<a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Add selected to folder</a>
-			<hr>
+		<div class="filter_search">
+          <a href="#">Most favourite Photos</a>
+          <a href="#">MY favourite Photos</a>
+          <a href="#">Neu</a>
+          <a href="#">Alle Filter löschen</a>
+        </div>
         <input type="hidden" name="category_id" id="category_id" value='.$galerie.' />    
 
         <div class="grid">
@@ -541,10 +546,11 @@ else if($galerie) {
 		</div>
 ';
 
-$filterButton = '
+$filterButton = '';
+/*$filterButton = '
 	<p class="mb6">&nbsp</p>
 	<a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info"><i class="fa fa-plus"></i> Add Photos / Files</a>
-';
+';*/
 }
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
@@ -659,14 +665,14 @@ else {
 	// HASHTAGS // FAVOURITE PHOTOS
 	$tagList = getAllTags($id, $art='image');
 	ksort($tagList);
-	$filterButton = '
+	/*$filterButton = '
                      <a class="left_bottom icon_start" href="'.$dir.'?likes=all" class="btn btn-default mb1"> MY favourite photos</a>
-	        		<a class="left_bottom icon_heart" href="'.$dir.'?likes=my" class="btn btn-default mb1">most favourite photos</a>';
+	        		<a class="left_bottom icon_heart" href="'.$dir.'?likes=my" class="btn btn-default mb1">most favourite photos</a>';*/
 
-	foreach($tagList as $arr) {
+	/*foreach($tagList as $arr) {
 		$filterButton .= '<a href="'.$dir.'?hashtagid='.$arr[0].'&hashtag='.$arr[1].'" class="btn btn-info hashtagGal">#'.$arr[2].'</a>
 ';
-	}
+	}*/
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 

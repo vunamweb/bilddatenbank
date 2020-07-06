@@ -278,7 +278,9 @@
       $('.open_close_menu').show();
       $('.open_close_menu.navbar_menu').hide();
       $('.left_bottom').show();
+      $('.left_galleri').show();
       $('.left-board').css('background', '#ececec');
+      $('.btn-upload-left').css('display', 'block');
     }
 
     function closeNav() {
@@ -290,6 +292,8 @@
       $('.open_close_menu.navbar_menu').show();
       $('.left_bottom').hide();
       $('.left-board').css('background', 'none');
+      $('.btn-upload-left').hide();
+      $('.left_galleri').hide();
    }
      
      function setSelectIcon() {

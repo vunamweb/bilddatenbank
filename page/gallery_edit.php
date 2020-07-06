@@ -97,6 +97,11 @@ else if($galerie) {
 
 	$jsList = '';
 	$setOptions = '';
+    
+    $output .= '<div class="row">
+                  <div class="col-md-12 upload">
+                    <a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info">Bild/Video hinzufügen <i class="fa fa-plus"></i></a>
+                  </div>';
 
 	while ($row = mysqli_fetch_object($res)) {
 		$n++;
@@ -131,13 +136,17 @@ else if($galerie) {
 
 		$output .= '
 
-<div class="col-md-4 col-lg-3 mb3">
+<div class="col-md-4 mb3">
     <div class="item_image">
-         <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
+         <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
          <div class="edit_delete_image">
           <a href="#'.$gid.'" class="edit_image" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
-          <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-          <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><i class="fa fa-trash-o" aria-hidden="true"></i></a> 
+          <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><img src="images/1x/close.png" /></a>
+          <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><img src="'.$dir.'images/1x/close.png" /></a> 
+         </div>
+         <div class="favourite_image">
+          <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 
+          <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
          </div>
     </div>
     <div class="hashtag_display">
@@ -152,9 +161,10 @@ else if($galerie) {
 ';
 }
 
+$output .= '</div>';
+
 	$filterButton = '
-	<p class="mb6">&nbsp</p>
-	<a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info"><i class="fa fa-plus"></i> Add Photos / Files</a>
+	<a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info btn-upload-left">Bild/Video hinzufügen <i class="fa fa-plus"></i> </a>
 ';
 
 

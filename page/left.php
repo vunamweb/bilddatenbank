@@ -1,5 +1,5 @@
 <?php
-global $filterButton;
+global $filterButton, $morpheus;
 
 $table = 'morp_tags_category';
 $primary = 'id';
@@ -47,8 +47,10 @@ while ($row = mysqli_fetch_object($res))
 <form class="navbar-form navbar-right" role="search" method="get" action="<?php echo $dir; ?>index.php">
   <?php echo $select; ?>
 </form>
-<a class="open_close_menu"><img src="images/1x/close_open_menu.png"/></a>
-<a class="open_close_menu navbar_menu"><img src="images/1x/navbar_menu.png"/></a>
+<a class="open_close_menu"><img src="<?php echo $morpheus["url"] ?>images/1x/close_open_menu.png"/></a>
+<a class="open_close_menu navbar_menu"><img src="<?php echo $morpheus["url"] ?>images/1x/navbar_menu.png"/></a>
+<a class="left_bottom icon_start" href="'.$dir.'?likes=all" class="btn btn-default mb1"> MY favourite photos</a>
+<a class="left_bottom icon_heart" href="'.$dir.'?likes=my" class="btn btn-default mb1">most favourite photos</a>
 
 <?php echo $filterButton; ?>
 

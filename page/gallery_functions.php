@@ -433,8 +433,16 @@ function set_thumb_gallery($res, $setFilter = 0)
         $gallery_list .= '
 	
 	<div class="grid-item grid-sizer tag ' . $filter . '">
-	    <div class="gal-item">
-	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
+	    <div class="gal-item item_image">
+	        <div class="edit_delete_image">
+                   <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><img src="images/1x/close.png" /></a>
+                   <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><img src="'.$dir.'images/1x/close.png" /></a> 
+            </div>
+            <div class="favourite_image">
+              <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 
+              <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
+            </div>
+            <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
               <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
             </a>
 	        
@@ -444,7 +452,8 @@ function set_thumb_gallery($res, $setFilter = 0)
 					<p>' . $textde . '</p>
 				</div>
 	        
-	            <div class="gal-Icons">
+	            
+                <div class="gal-Icons">
 					<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) .
             '" class="galIcons i4"><i class="fa fa-download tool"></i></a>

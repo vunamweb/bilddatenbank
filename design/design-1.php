@@ -4,9 +4,13 @@
 			<!-- <div class="row row-flex row-flex-wrap"> -->
 			<div class="row" id="main">
 				<div class="col-md-3 left-board sidenav" id="mySidenav">
-					<?php include( 'page/left.php') ?>
-				</div>
-				<div class="col-md-9 main content">
+					<?php if($_GET['func'] == 'galerie') { ?>
+                       <?php include( 'page/left_galerie.php') ?>
+                    <?php } else { ?>
+                      <?php include( 'page/left.php') ?>
+                    <?php } ?>
+                </div>
+				<div class="col-md-12 main content">
 						<i class="fa fa-spinner" aria-hidden="true">
 						</i>
 						<?php echo $output; ?>
