@@ -142,7 +142,20 @@ else if($galerie) {
          <div class="edit_delete_image">
           <a href="#'.$gid.'" class="edit_image" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
           <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><img src="images/1x/close.png" /></a>
-          <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><img src="'.$dir.'images/1x/close.png" /></a> 
+          <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><i class="fa fa-trash-o"></i></a> 
+          <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="maximize_image"><img src="'.$dir.'images/1x/close.png" /></a> 
+          <div class="modal" id="demoLightbox'.$gid.'">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								
+								<!-- Modal body -->
+								<div class="modal-body">
+								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+         
+                                </div>
+							</div>
+						</div>
+					</div>
          </div>
          <div class="favourite_image">
           <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 

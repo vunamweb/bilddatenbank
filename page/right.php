@@ -1,3 +1,5 @@
+<a href="#" class="right_menu"><i class='fa fa-angle-double-left'></i></a>
+<div class="right_content">
 <h4>
 	Area Folder to work with
 </h4>
@@ -118,4 +120,5 @@ if ($_GET['nid'] == 'areafolder')
     <?php
 }
 ?>
+</div>
 

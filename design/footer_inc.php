@@ -45,13 +45,13 @@
     </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>!-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.0-beta/js/bootstrap-select.min.js"></script>
 <script src="<?php echo $dir; ?>js/jquery-ui.js"></script>
 <script src="<?php echo $dir; ?>js/swiper.min.js" type="text/javascript"></script>
-<script src="<?php echo $dir; ?>js/ekko-lightbox.min.js" type="text/javascript"></script>
 <script src="<?php echo $dir; ?>js/isotope.pkgd.js" type="text/javascript"></script>
 <script src="<?php echo $dir; ?>js/selectize.js"></script>
 <script src="<?php echo $dir; ?>js/imagesloaded.pkgd.min.js"></script>
@@ -79,7 +79,7 @@
 
 <!-- Initialize Swiper + Ekko -->
 <script type="text/javascript">
-	 var timeOut = 50, invitation = [], countInvite = 0, widthOpenMenu = 250;
+	 var timeOut = 50, invitation = [], countInvite = 0, widthOpenMenu = 250, widthCloseMenu = 50;
      
      function getHashtags() {
 	   
@@ -271,7 +271,25 @@
      }
      
      function openNav() {
-      document.getElementById("mySidenav").style.width = ""+widthOpenMenu+"px";
+      document.getElementById("mySidenav").style.width = ''+widthOpenMenu+'px';
+      document.getElementById("main").style.marginLeft= ''+widthOpenMenu+'px';
+      
+      $('.selection.search').show();
+      $('.minimize').css('display', 'none');
+      $('.right-board .right_content').hide();
+      $('.open_close_menu').show();
+      $('.open_close_menu.navbar_menu').hide();
+      $('.navbar-form').css('padding-left', '15px');
+      $('.open_close_menu.navbar_menu').css('left', '35px');
+      $('.left_bottom').show();
+      $('.filter_search').hide();
+      
+      $('.right_menu').html('<i class="fa fa-angle-double-left"></i>');
+      
+      
+      
+      
+      /*document.getElementById("mySidenav").style.width = ""+widthOpenMenu+"px";
       document.getElementById("main").style.marginLeft = ""+widthOpenMenu+"px";
       
       $('.left-board .navbar-form').show();
@@ -280,20 +298,31 @@
       $('.left_bottom').show();
       $('.left_galleri').show();
       $('.left-board').css('background', '#ececec');
-      $('.btn-upload-left').css('display', 'block');
+      $('.btn-upload-left').css('display', 'block');*/
     }
 
     function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft= "0";
+      document.getElementById("mySidenav").style.width = ''+widthCloseMenu+'px';
+      document.getElementById("main").style.marginLeft= ''+widthCloseMenu+'px';
       
-      $('.left-board .navbar-form').hide();
+      $('.selection.search').hide();
+      $('.minimize').css('display', 'block');
+      $('.right-board .right_content').show();
+      $('.open_close_menu').hide();
+      $('.open_close_menu.navbar_menu').show();
+      $('.navbar-form').css('padding-left', '0');
+      $('.open_close_menu.navbar_menu').css('left', '8px');
+      $('.left_bottom').hide();
+      $('.filter_search').show();
+      
+      $('.right_menu').html('<i class="fa fa-angle-double-right"></i>');
+      /*$('.left-board .navbar-form').hide();
       $('.open_close_menu').hide();
       $('.open_close_menu.navbar_menu').show();
       $('.left_bottom').hide();
       $('.left-board').css('background', 'none');
       $('.btn-upload-left').hide();
-      $('.left_galleri').hide();
+      $('.left_galleri').hide();*/
    }
      
      function setSelectIcon() {
@@ -354,12 +383,10 @@
             $('#file_upload').uploadifive('upload');
       })
 
-   $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-	    event.preventDefault();
-	    $(this).ekkoLightbox({
-		    alwaysShowClose: true
-	    });
-	});
+   /*$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+   });*/
 
 	$( document ).ready(function() {
 		$('.selection.search').dropdown({maxSelections: 3});
@@ -369,13 +396,37 @@
         //setSelect();
         setSelectIcon();
         
-        $('.open_close_menu').click(function(){
+        /*$('.selection.search').mouseout(function(){
+            $('.selection.search').hide();
+        })*/
+        
+        $('#suche').focus(function(){
+            $('.btn.btn-default.pull-right').hide();
+        })
+        $('.minimize').hover(function(){
+            var parent_class = $(this).attr('href');
+            parent_class = parent_class.replace('#', '');
+            
+            $('.selection.search').hide();
+            
+            //alert($('.search_'+parent_class+'.dropdown').offset().top);
+            $('.search_'+parent_class+'.dropdown').show();
+        })
+        
+        /*$('.minimize').mouseout(function(){
+            var parent_class = $(this).attr('href');
+            parent_class = parent_class.replace('#', '');
+            
+            $('.search_'+parent_class+'.dropdown').hide();
+        })*/
+        
+        $('.right_menu').click(function(){
            var width = $('#mySidenav').width();
            
-           if(width == 0)
-             openNav();
+           if(width >= widthCloseMenu)
+             closeNav();
            else 
-             closeNav();      
+             openNav();     
         })
         
         $('.search.dropdown .item').click(function() {

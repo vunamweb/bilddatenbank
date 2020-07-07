@@ -15,13 +15,12 @@
 						</i>
 						<?php echo $output; ?>
 				</div>
-					<?php if($_GET['func'] == 'galerie') { ?>
-                      <div class="right-board">
+				<div class="right-board">
 						<?php if(get_guest_id_of_intranet_user() == 0) { ?>
                          <?php include( 'page/right.php') ?>
                         <?php } ?>
-					   </div> 
-                    <?php } ?>
+			    </div> 
+                    
                     
 					<div class="modal" id="myModal_area_folder">
 						<div class="modal-dialog">

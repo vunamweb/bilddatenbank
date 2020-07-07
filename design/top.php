@@ -22,13 +22,14 @@
         							<input type="text" class="form-control" name="suche" id="suche" placeholder=""<?php echo isset($_GET["suche"]) ? ' value="'.$_GET["suche"].'"' : ''; ?>>
         				</div>
                         <div class="form-group next">
-        				   <select id="type_photo" data-show-content="true" class="form-control">
+        				   <input type="submit" value="Search" class="submit" />
+                           <!--<select id="type_photo" data-show-content="true" class="form-control">
                                 <option data-content=" Alle"></option>
                                 
                                 <option data-content="<i class='fa fa-camera'></i> Fotos"></option>
                                 <option data-content="<i class='fa fa-play'></i> Videos"></option>
                                 <option data-content="<i class='fa fa-paint-brush'></i> Vektoren"></option>
-                           </select>
+                           </select> !-->
                         </div>
         				 <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i></button>
              </form>

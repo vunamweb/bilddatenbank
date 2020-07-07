@@ -501,13 +501,7 @@ else if($galerie) {
 
 
 		<a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Add selected to folder</a>
-		<div class="filter_search">
-          <a href="#">Most favourite Photos</a>
-          <a href="#">MY favourite Photos</a>
-          <a href="#">Neu</a>
-          <a href="#">Alle Filter löschen</a>
-        </div>
-        <input type="hidden" name="category_id" id="category_id" value='.$galerie.' />    
+		<input type="hidden" name="category_id" id="category_id" value='.$galerie.' />    
 
         <div class="grid">
 	';
