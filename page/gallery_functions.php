@@ -465,21 +465,21 @@ function set_thumb_gallery($res, $setFilter = 0)
 				</div>
 	        
 	            
-                <div class="gal-Icons hide">
+                <div class="gal-Icons">
 					<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) .
-            '" class="galIcons i4"><i class="fa fa-download tool"></i></a>
-	            	<span class="galIcons"><i class="fa fa-heart' . ($hasLike ? '' :
+            '" class="galIcons i4 hide"><i class="fa fa-download tool"></i></a>
+	            	<span class="galIcons hide"><i class="fa fa-heart' . ($hasLike ? '' :
             '-o lightBlue') . ' tool loveit" ref="' . $gid .
-            '"></i> <span class="noOfLikes">' . $noOfLikes . '</span></span>
-					<span class="galIcons"><a href="' . $dir .
+            '"></i> <span class="noOfLikes hide">' . $noOfLikes . '</span></span>
+					<span class="galIcons hide"><a href="' . $dir .
             '?hn=galerien&cont=gallery-comment&sn2=gallery-comment&galerie=' . $gnid .
             '&foto=' . $gid . '"><i class="fa fa-comments' . ($hasComment ? '' :
             '-o lightBlue') . ' tool"></i>  <span class="noOfLikes">' . $noOfComments .
             '</span></a></span>
 					
 					<div class="btn-group btn-group-gallery" data-toggle="buttons">
-						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox" value="'.$gid.'" name="add_to_folder">  
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
 							<div class="rahmen"><span class="fa fa-check"></span></div>				
 						</label>
 					</div>
