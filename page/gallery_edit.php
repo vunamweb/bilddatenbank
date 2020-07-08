@@ -101,7 +101,10 @@ else if($galerie) {
     $output .= '<div class="row">
                   <div class="col-md-12 upload">
                     <a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info">Bild/Video hinzufügen <i class="fa fa-plus"></i></a>
-                  </div>';
+                  </div>
+                  <div class="col-md-12">
+                    <div class="grid">
+                  ';
 
 	while ($row = mysqli_fetch_object($res)) {
 		$n++;
@@ -136,15 +139,15 @@ else if($galerie) {
 
 		$output .= '
 
-<div class="col-md-4 mb3">
-    <div class="item_image">
+<div class="grid-item grid-sizer">
+    <div class="gal-item item_image">
          <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
          <div class="edit_delete_image">
-          <a href="#'.$gid.'" class="edit_image" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
+          <a href="#'.$gid.'" class="edit_image tool" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
           <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><img src="images/1x/close.png" /></a>
-          <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><i class="fa fa-trash-o"></i></a> 
-          <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="maximize_image"><img src="'.$dir.'images/1x/close.png" /></a> 
-          <div class="modal" id="demoLightbox'.$gid.'">
+          <a class="delete_galerie_folders_images_confirm tool" href="#'.$gid.'"><i class="fa fa-trash-o"></i></a> 
+          <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a> 
+          <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								
@@ -158,8 +161,8 @@ else if($galerie) {
 					</div>
          </div>
          <div class="favourite_image">
-          <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 
-          <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
+          <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 
+          <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
          </div>
     </div>
     <div class="hashtag_display">
@@ -174,7 +177,7 @@ else if($galerie) {
 ';
 }
 
-$output .= '</div>';
+$output .= '</div></div></div>';
 
 	$filterButton = '
 	<a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info btn-upload-left">Bild/Video hinzufügen <i class="fa fa-plus"></i> </a>
@@ -182,6 +185,21 @@ $output .= '</div>';
 
 
 	$js = '
+    var $grid = $(\'.grid\').isotope({
+      itemSelector: \'.grid-item\',
+      masonry: {
+    	columnWidth: \'.grid-sizer\',
+	    percentPosition: true
+      }
+    });
+
+    $grid.imagesLoaded().progress( function() {
+       $grid.isotope(\'layout\');
+    });
+    
+    var $items = $grid.find(\'.grid-item\');
+    $grid.addClass(\'is-showing-items\');
+    // .isotope( \'revealItemElements\', $items );
 
 	$(\'.selection.dropdown\').dropdown({maxSelections: 3});
     

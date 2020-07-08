@@ -434,26 +434,38 @@ function set_thumb_gallery($res, $setFilter = 0)
 	
 	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item item_image">
-	        <div class="edit_delete_image">
-                   <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><img src="images/1x/close.png" /></a>
-                   <a class="delete_galerie_folders_images_confirm" href="#'.$gid.'"><img src="'.$dir.'images/1x/close.png" /></a> 
+	        <div class="edit_delete_image max_view">
+              <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a> 
             </div>
+            <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								
+								<!-- Modal body -->
+								<div class="modal-body">
+								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+         
+                                </div>
+							</div>
+						</div>
+              </div>
             <div class="favourite_image">
-              <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 
-              <a class="delete_galerie_folders_images_confirmz" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
+              <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) . '" class="galIcons i4 tool"><i class="fa fa-download tool"></i></a>
+              <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 
+              <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
             </div>
             <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
               <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
             </a>
 	        
 	        <div class="inner">
-	            <div class="gal-Desc">
+	            <div class="gal-Desc hide">
 		            <h2>' . $hl . '</h2>
 					<p>' . $textde . '</p>
 				</div>
 	        
 	            
-                <div class="gal-Icons">
+                <div class="gal-Icons hide">
 					<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) .
             '" class="galIcons i4"><i class="fa fa-download tool"></i></a>
