@@ -300,7 +300,8 @@ img.kreis { -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 
     opacity: 0;
 }
 .btn.active span.fa {				
-	opacity: 1;				
+	opacity: 1;
+    color: #000;		
 }
 .btn-group-gallery {
 	background: transparent
