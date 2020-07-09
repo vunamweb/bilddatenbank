@@ -156,7 +156,7 @@ body { font-family: "RobotoCn", sans-serif; font-size: 16px; font-weight: 300; c
 .down .navbar-brand { padding: 4px 0; }
 .padLeft0 { padding-left: 4px; }
 .relative { position: relative; }
-.saveText { margin-top: 10px; }
+.saveText { margin: 10px 0; }
 
 @media only screen and (max-width: 768px) { .padLeft0 { padding-left: 20px; } }
 @media (min-width: 979px) { ul.nav li.dropdown:hover > ul.dropdown-menu { display: block; } }
@@ -964,12 +964,12 @@ body, .ui.sub.header  {
     }
 
 /* Position */
-#sel-cont, h1 {
+/*#sel-cont, h1 {
   position:relative;
   top: 15px; 
   left: 20px;
   width: 600px;	
-}
+}*/
 
 /*@group MultiSelect */
 /*Selectbox*/
