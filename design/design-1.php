@@ -33,7 +33,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="modal" id="myModal_edit_image">
+					<div class="modal_new modal" id="myModal_edit_image">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<!-- Modal Header -->
@@ -49,7 +49,7 @@
 							</div>
 						</div>
 					</div>
-                    <div class="modal" id="myModal">
+                    <div class="modal modal_new" id="myModal">
                           <div class="modal-dialog">
                             <div class="modal-content">
                         

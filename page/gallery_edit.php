@@ -59,11 +59,54 @@ if($func == 'editgalery') {
                             <br><br>
                             <div class="alert alert-success hide" role="alert">gespeichert update</div>
                            </div>
-                          <div class="col-md-6 FFF">
+                          <div class="col-md-7 FFF">
                             <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+                            <a href="#" class="bild_her">Bild herunterladen</a> 
                           </div>';
          
-         $output .= '<div class="col-md-6 JJJ"><label class="des_'.$gid.'">'.$textde.'</label><br>' . '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags). '</div>' .'</div>';
+        $infor = json_decode($row->another_infor);
+        
+        $ID = ($infor->color == 13) ? 'RGB' : 'CMYK';
+        
+        $width_cm = $infor->width * 2.54 / 300;
+        $width_cm = number_format($width_cm, 2, ',', ' ');
+        
+        $height_cm = $infor->height * 2.54 / 300;
+        $height_cm = number_format($height_cm, 2, ',', ' ');
+        
+        $output .= '<div class="col-md-5">';
+        
+        $output .= '<p class="lead">Bildname Mathilda Kinderfreizeit</p>';
+        $output .= '<p class="lead">Engel fliegen, <b>'.str_replace('.jpg', '', $row->gname).'</b></p>';
+        
+        
+        $output .= '<div class="image_information">';
+        
+        $output .= '<div class="infor_row"><p class="property">Autor:</p> <p class="value"> Christine Noth / Frankfurter Kinderbüro </p></div>';
+        $output .= '<div class="infor_row"><p class="property">Datum:</p> <p class="value"> '.$infor->date.'</p></div>';
+        $output .= '<div class="infor_row"><p class="property">Größe:</p> <p class="value"> '.$infor->width.' * '.$infor->height.' Pixel / '.$width_cm.' cm * '.$height_cm.' cm   </p></div>';
+        $output .= '<div class="infor_row"><p class="property">Auflösung:</p> <p class="value"> 300 dpi </p></div>';
+        $output .= '<div class="infor_row"><p class="property">Type:</p> <p class="value"> '.$infor->type.' </p></div>';
+        $output .= '<div class="infor_row"><p class="property">Farben:</p> <p class="value"> '.$ID.' </p></div>';
+        
+        $output .= '</div>';
+        
+        $output .= '<div class="image_des_hash">';
+        
+        $output .= '<p><b>Beschreibung</b> <p>'.$textde.'</p></p><br>';
+        $output .= '<p><b>Hashtags</b> <p> '.HashtagsGalery($hashtags).'</p></p>';
+        
+        $output .= '</div>';
+        
+        $output .= '</div>';
+        
+        
+        
+        
+         /*$output .= '<div class="col-md-5 JJJ">
+                       <label class="des_'.$gid.'">'.$textde.'</label><br>' . 
+                       '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags). '</div>' .
+                    '</div>';*/
          
          $output .= '</div>';
          
