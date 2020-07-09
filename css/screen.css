@@ -1067,21 +1067,57 @@ color: #4b636e;
     margin-top: -15px;
 }
 #myModal_add_folder .modal-body {
-    padding-left: 20%;
+    
 }
-#myModal_add_folder .modal-body .area_add {
+#myModal_add_folder .area_add {
     padding-top: 20px;
-    display: none;
+   display: inline-block;
+    padding-left: 30px;
+    position: relative;
+}
+#myModal_add_folder .area_add #name {
+    border: 1px solid #ececec;
+    border-radius: 20px;
+    padding: 3px;
+}
+#myModal_add_folder .area_add .add_button {
+    position: absolute;
+    right: 10px;
+    color: #ececec;
 }
 #myModal_add_folder .modal-body .content {
     padding-top: 20px;
 }
 #myModal_add_folder .modal-body .content input {
-  margin-right: 5px;
+  margin-right: 25px;
 }
 #myModal_add_folder .modal-body .content .save_button {
   margin-top: 20px;
+  padding: 5px 35px;
 }
+#myModal_add_folder .modal-body .content .folder {
+    background: #ececec;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+#myModal_add_folder .modal-body .delete_folder_confirm {
+    float: right;
+}
+#myModal_add_folder .modal-header {
+    background: #ececec;
+    border-bottom: none;
+    padding: 20px;
+}
+#myModal_add_folder .modal-header .close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+#myModal_add_folder .modal-header .header {
+    margin-top: -15px;
+}
+
+
 a.delete_folder {
   margin-left: 10px;
 }
@@ -1582,4 +1618,9 @@ a.delete_folder {
 
 .show_infor .fa {
     color: #ececec;
+}
+
+.add_folder{
+  display: inline-block;
+  padding: 3px 10px;
 }

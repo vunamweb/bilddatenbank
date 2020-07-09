@@ -538,7 +538,7 @@
          })
          
          $('.add_folder'). click(function(){
-            $('.area_add').show();
+            $('.area_add').css('display', 'inline-block');
          })
          
          $('.add_button'). click(function(){

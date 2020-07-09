@@ -253,7 +253,7 @@ if($likes) {
     $res 	= safe_query($que);
     
     while ($row = mysqli_fetch_object($res)) {
-        $output .= '<div class="col-md-4"><input type="radio" name="folder" value="'.$row->folderID .'">'.$row->folder_name .'<a href="#'.$row->folderID .'" class="delete_folder hide"><i class="fa fa-minus-circle" aria-hidden="true"></i></a><a href="#'.$row->folderID .'" class="delete_folder_confirm"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></div>';
+        $output .= '<div class="col-md-3"><div class="folder"><input type="radio" name="folder" value="'.$row->folderID .'">'.$row->folder_name .'<a href="#'.$row->folderID .'" class="delete_folder hide"><i class="fa fa-window-close" aria-hidden="true"></i></a><a href="#'.$row->folderID .'" class="delete_folder_confirm"><i class="fa fa-close" aria-hidden="true"></i></a></div></div>';
     }
     
     echo $output; die();
@@ -534,17 +534,18 @@ else if($galerie) {
       <!-- Modal Header -->
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="header">
+           <a href="#" class="btn btn-info add_folder">+ Neuen Ordner hinzufügen</a>
+           <div class="area_add">
+             <input type="text" name="name" id="name" placeholder="enter folder" />
+             <a href="#" class="add_button"><i class="fa fa-check" aria-hidden="true"></i></a>
+             <input type="button" value="Add" class="add_button hide" />
+           </div>
+        </div>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-         <div class="header">
-           <a href="#" class="btn btn-info add_folder">+ Add new folder</a>
-           <div class="area_add">
-             <input type="text" name="name" id="name" />
-             <input type="button" value="Add" class="add_button" />
-           </div>
-         </div>
          <div class="content">
            <div class="row">
            </div>
