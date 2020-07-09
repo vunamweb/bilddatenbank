@@ -79,7 +79,7 @@
 
 <!-- Initialize Swiper + Ekko -->
 <script type="text/javascript">
-	 var timeOut = 50, invitation = [], countInvite = 0, widthOpenMenu = 250, widthCloseMenu = 50;
+	 var timeOut = 50, timeOutMansory = 500, invitation = [], countInvite = 0, widthOpenMenu = 250, widthCloseMenu = 50;
      
      function getHashtags() {
 	   
@@ -330,6 +330,20 @@
         $('.number_page').selectpicker();
      }
      
+     function reloadMansory() {
+        $grid = $('.grid').isotope({
+            itemSelector: '.grid-item',
+            masonry: {
+           	columnWidth: '.grid-sizer',
+           	percentPosition: true
+            }
+        });
+        
+        $grid.imagesLoaded().progress( function() {
+           $grid.isotope('layout');
+        });
+     }
+     
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -426,7 +440,9 @@
            if(width >= widthCloseMenu)
              closeNav();
            else 
-             openNav();     
+             openNav();
+             
+           setTimeout(function(){ reloadMansory(); }, timeOutMansory);       
         })
         
         $('.search.dropdown .item').click(function() {
@@ -489,16 +505,7 @@
                                 $(this).css('opacity', 1);
                             })
                             
-                            $grid = $('.grid').isotope({
-                              itemSelector: '.grid-item',
-                              masonry: {
-                             	columnWidth: '.grid-sizer',
-                             	percentPosition: true
-                              }
-                            });
-                            $grid.imagesLoaded().progress( function() {
-                              $grid.isotope('layout');
-                            });
+                            reloadMansory();
                             
                             $('.number_pagination').click(function(){
                                 var currentPage = $('#page').val();
