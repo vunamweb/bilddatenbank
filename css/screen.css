@@ -1412,14 +1412,17 @@ a.delete_folder {
    right: -12px;
    top: 0;
    background: #ececec;
-   /*display: none;*/
 }
 .open_close_menu.navbar_menu {
     right: auto;
     border: transparent;
     left: 35px;
-    display: block;
+    display: none;
     background: none;
+    cursor: pointer;
+}
+.open_close_menu.arrow {
+    color: #fff !important;
 }
 
 .main.content {

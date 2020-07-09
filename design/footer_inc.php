@@ -277,7 +277,7 @@
       $('.selection.search').show();
       $('.minimize').css('display', 'none');
       $('.right-board .right_content').hide();
-      $('.open_close_menu').show();
+      //$('.open_close_menu').show();
       $('.open_close_menu.navbar_menu').hide();
       $('.navbar-form').css('padding-left', '15px');
       $('.open_close_menu.navbar_menu').css('left', '35px');
@@ -286,19 +286,8 @@
       
       $('.right_menu').html('<i class="fa fa-angle-double-left"></i>');
       
-      
-      
-      
-      /*document.getElementById("mySidenav").style.width = ""+widthOpenMenu+"px";
-      document.getElementById("main").style.marginLeft = ""+widthOpenMenu+"px";
-      
-      $('.left-board .navbar-form').show();
-      $('.open_close_menu').show();
-      $('.open_close_menu.navbar_menu').hide();
-      $('.left_bottom').show();
-      $('.left_galleri').show();
-      $('.left-board').css('background', '#ececec');
-      $('.btn-upload-left').css('display', 'block');*/
+      $('.open_close_menu.arrow').html('<i class="fa fa-angle-double-left"></i>');
+      $('.open_close_menu.arrow').css('right','-12px');
     }
 
     function closeNav() {
@@ -308,7 +297,7 @@
       $('.selection.search').hide();
       $('.minimize').css('display', 'block');
       $('.right-board .right_content').show();
-      $('.open_close_menu').hide();
+      //$('.open_close_menu').hide();
       $('.open_close_menu.navbar_menu').show();
       $('.navbar-form').css('padding-left', '0');
       $('.open_close_menu.navbar_menu').css('left', '8px');
@@ -316,13 +305,9 @@
       $('.filter_search').show();
       
       $('.right_menu').html('<i class="fa fa-angle-double-right"></i>');
-      /*$('.left-board .navbar-form').hide();
-      $('.open_close_menu').hide();
-      $('.open_close_menu.navbar_menu').show();
-      $('.left_bottom').hide();
-      $('.left-board').css('background', 'none');
-      $('.btn-upload-left').hide();
-      $('.left_galleri').hide();*/
+      
+      $('.open_close_menu.arrow').html('<i class="fa fa-angle-double-right"></i>');
+      $('.open_close_menu.arrow').css('right','-22px');
    }
      
      function setSelectIcon() {
@@ -443,6 +428,10 @@
              openNav();
              
            setTimeout(function(){ reloadMansory(); }, timeOutMansory);       
+        })
+        
+        $('.open_close_menu.navbar_menu ').click(function(){
+           $('.right_menu').click();       
         })
         
         $('.search.dropdown .item').click(function() {
