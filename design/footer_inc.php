@@ -79,8 +79,16 @@
 
 <!-- Initialize Swiper + Ekko -->
 <script type="text/javascript">
-	 var timeOut = 50, timeOutMansory = 500, invitation = [], countInvite = 0, widthOpenMenu = 250, widthCloseMenu = 50;
+	 var timeOut = 50, timeOutMansory = 500, invitation = [], countInvite = 0, widthOpenMenu = 250, widthCloseMenu = 50, statusSearch = false;
      
+     function setHeightFooter() {
+        var height_left = $('#mySidenav').height();
+        var height_main = $('.main.content').height();
+        
+        var height_footer = height_left - height_main + 100;
+        
+        $('footer').css('margin-top',''+height_footer+'px');
+     }
      function getHashtags() {
 	   
         var result = '';
@@ -114,9 +122,11 @@
 	 }
      
      function filter() {
-        setTimeout(function(){ 
+        if(statusSearch) {
+          setTimeout(function(){ 
                 $('.navbar-form').submit();
-            }, timeOut);
+          }, timeOut);  
+        }
      }
      
      function setClickDeleteFolder() {
@@ -394,10 +404,17 @@
         setShowGallery();
         //setSelect();
         setSelectIcon();
+        setHeightFooter();
         
         /*$('.selection.search').mouseout(function(){
             $('.selection.search').hide();
         })*/
+        
+        $('.clear_filter').click(function(){
+          $('.ui.selection .ui .delete.icon').each(function(){
+             $(this).click();
+          })
+        })
         
         $('#suche').focus(function(){
             $('.btn.btn-default.pull-right').hide();
@@ -422,7 +439,7 @@
         $('.right_menu').click(function(){
            var width = $('#mySidenav').width();
            
-           if(width >= widthCloseMenu)
+           if(width > widthCloseMenu)
              closeNav();
            else 
              openNav();
@@ -455,6 +472,8 @@
          
          $('.navbar-form').submit(function(e){
             e.preventDefault();
+            
+            statusSearch = true;
             
             //$('.content').html('');
             $('.content .fa.fa-spinner').show();

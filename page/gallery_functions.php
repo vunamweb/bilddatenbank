@@ -395,12 +395,14 @@ function set_thumb_gallery_search($res, $sort_gallery)
     return $gallery_list;
 }
 
-function set_thumb_gallery($res, $setFilter = 0)
+function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
 {
     global $dir, $morpheus, $js, $mid;
     global $filter, $tagListButtons, $filterButton;
 
     $gallery_list = '';
+    
+    $showCb = (!$showcheckbox) ? 'hide' : '';
 
     while ($row = mysqli_fetch_object($res))
     {
@@ -450,8 +452,9 @@ function set_thumb_gallery($res, $setFilter = 0)
 						</div>
               </div>
             <div class="favourite_image">
-              <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) . '" class="galIcons i4 tool"><i class="fa fa-download tool"></i></a>
-              <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 
+              <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) . '" class="galIcons i4 tool hide"><i class="fa fa-download tool"></i></a>
+              <a ref="' . $gid . '" class="tool loveit ' . ($hasLike ? 'lightBlue' :
+            '') . '" href="#'.$gid.'"><i class="fa fa-heart" aria-hidden="true"></i></a> 
               <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
             </div>
             <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
@@ -478,7 +481,7 @@ function set_thumb_gallery($res, $setFilter = 0)
             '-o lightBlue') . ' tool"></i>  <span class="noOfLikes">' . $noOfComments .
             '</span></a></span>
 					
-					<div class="btn-group btn-group-gallery" data-toggle="buttons">
+					<div class="btn-group btn-group-gallery '.$showCb.'" data-toggle="buttons">
 						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
 							<div class="rahmen"><span class="fa fa-check"></span></div>				
 						</label>

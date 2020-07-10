@@ -7,7 +7,7 @@ include("../nogo/config.php");
 include("../nogo/config_morpheus.inc");
 include("../nogo/db.php");
 dbconnect();
-include("login.php");
+//include("login.php");
 include("../nogo/funktion.inc");
 
 $ichbins = $_SESSION["mid"];
@@ -23,10 +23,11 @@ $onoff = $_POST["onoff"];
 if($ichbins != $mid) die();
 
 // print_r($_POST);
-
+//echo 'dd'; die();
 if($table && $feld && $id) {
 	if($onoff == "true") {
-		$ins = "INSERT `$table` SET mid=$mid, $feld=$id";
+		//echo "INSERT `$table` SET mid=$mid, $feld=$id"; die();
+        $ins = "INSERT `$table` SET mid=$mid, $feld=$id";
 		safe_query($ins);
 	}
 	else {

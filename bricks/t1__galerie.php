@@ -47,10 +47,12 @@ if($likes) {
     <div class="grid">
 ';
 
-	$output .= set_thumb_gallery($res, 1);	
+	$output .= set_thumb_gallery($res, 1, false);	
 	$output .= '
 	</div>
 ';
+
+$filterButton = '';
 
 } else if($galerie && $galerie == 'search') {
     $seach_value = $_GET['search_value'];
@@ -739,15 +741,15 @@ $(\'.button-group\').each( function( i, buttonGroup ) {
     $(".loveit").click(function () {
 	    var obj = $(this);
 	    id = obj.attr("ref");
-	    var onoff = obj.hasClass("fa-heart-o");
+	    var onoff = !obj.hasClass("lightBlue");
 
 	    request = $.ajax({
 	        url: "'.$dir.'morpheus/UpdateLikes.php",
 	        type: "post",
 	        data: "onoff="+onoff+"&mid='.$mid.'&id="+id+"&feld=gid&table=morp_cms_galerie_likes",
 	        success: function(data) {
-				if(onoff == true) { obj.removeClass("fa-heart-o lightBlue"); obj.addClass("fa-heart"); console.log(1); }
-				else { obj.removeClass("fa-heart");  obj.addClass("fa-heart-o lightBlue"); console.log(0); }
+				if(onoff == true) { obj.addClass("lightBlue"); console.log(1); }
+				else { obj.removeClass("lightBlue"); console.log(0); }
   			}
 	    });
     });

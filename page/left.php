@@ -48,16 +48,16 @@ while ($row = mysqli_fetch_object($res))
   <?php echo $select; ?>
 </form>
 <div class="filter_search">
-          <a href="#">Most favourite Photos</a>
-          <a href="#">MY favourite Photos</a>
-          <a href="#">Alle Filter lÃ¶schen</a>
+          <a href="<?php echo $morpheus["url"] ?>?likes=all">Most favourite Photos</a>
+          <a href="<?php echo $morpheus["url"] ?>?likes=my">MY favourite Photos</a>
+          <a href="javascript:void(0)" class="clear_filter">Alle Filter löschen</a>
 </div>
 <a class="open_close_menu arrow"><i class="fa fa-angle-double-left"></i></a>
 <a class="open_close_menu navbar_menu"><img src="<?php echo $morpheus["url"] ?>images/1x/navbar_menu.png"/></a>
-<a class="left_bottom icon_start" href="'.$dir.'?likes=all" class="btn btn-default mb1"> MY favourite photos</a>
-<a class="left_bottom icon_heart" href="'.$dir.'?likes=my" class="btn btn-default mb1">most favourite photos</a>
+<a class="left_bottom icon_start" href="<?php echo $morpheus["url"] ?>?likes=my" class="btn btn-default mb1"> MY favourite photos</a>
+<a class="left_bottom icon_heart" href="<?php echo $morpheus["url"] ?>?likes=all" class="btn btn-default mb1">most favourite photos</a>
 <br />
-<a class="left_bottom" href="'.$dir.'?likes=my" class="btn btn-default mb1">Alle Filter löschen</a>
+<a class="left_bottom clear_filter" href="javascript:void(0)" class="btn btn-default mb1">Alle Filter löschen</a>
 
 <?php echo $filterButton; ?>
 
