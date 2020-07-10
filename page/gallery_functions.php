@@ -334,13 +334,39 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $gallery_list .= '
 	
 	<div class="grid-item grid-sizer tag ' . $filter . '">
-	    <div class="gal-item">
+	    <div class="gal-item item_image">
+            <div class="edit_delete_image max_view">
+              <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a> 
+            </div>
+            <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								
+								<!-- Modal body -->
+								<div class="modal-body">
+								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+         
+                                </div>
+							</div>
+						</div>
+             </div>
+             <div class="favourite_image">
+                  <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) . '" class="galIcons i4 tool hide"><i class="fa fa-download tool"></i></a>
+                  <a ref="' . $gid . '" class="tool loveit ' . ($hasLike ? 'lightBlue' :
+                '') . '" href="#'.$gid.'"><i class="fa fa-heart" aria-hidden="true"></i></a> 
+                  <a class="tool hide" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a>
+                  <div class="btn-group btn-group-gallery '.$showCb.'" data-toggle="buttons">
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
+							<div class="rahmen"><span class="fa fa-check"></span></div>				
+						</label>
+	              </div> 
+                </div>
 	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
               <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
             </a>
 	        
 	        <div class="inner">
-	            <div class="gal-Desc">
+	            <div class="gal-Desc hide">
 		            <h2>' . $hl . '</h2>
 					<p>' . $textde . '</p>
 				</div>
@@ -348,18 +374,18 @@ function set_thumb_gallery_search($res, $sort_gallery)
 	            <div class="gal-Icons">
 					<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) .
-            '" class="galIcons i4"><i class="fa fa-download tool"></i></a>
-	            	<span class="galIcons"><i class="fa fa-heart' . ($hasLike ? '' :
+            '" class="galIcons i4 hide"><i class="fa fa-download tool"></i></a>
+	            	<span class="galIcons hide"><i class="fa fa-heart' . ($hasLike ? '' :
             '-o lightBlue') . ' tool loveit" ref="' . $gid .
-            '"></i> <span class="noOfLikes">' . $noOfLikes . '</span></span>
-					<span class="galIcons"><a href="' . $dir .
+            '"></i> <span class="noOfLikes hide">' . $noOfLikes . '</span></span>
+					<span class="galIcons hide"><a href="' . $dir .
             '?hn=galerien&cont=gallery-comment&sn2=gallery-comment&galerie=' . $gnid .
             '&foto=' . $gid . '"><i class="fa fa-comments' . ($hasComment ? '' :
             '-o lightBlue') . ' tool"></i>  <span class="noOfLikes">' . $noOfComments .
             '</span></a></span>
 					
-					<div class="btn-group btn-group-gallery" data-toggle="buttons">
-						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox" value="'.$gid.'" name="add_to_folder">  
+					<div class="btn-group btn-group-gallery hide '.$showCb.'" data-toggle="buttons">
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
 							<div class="rahmen"><span class="fa fa-check"></span></div>				
 						</label>
 					</div>
@@ -455,7 +481,12 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
               <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) . '" class="galIcons i4 tool hide"><i class="fa fa-download tool"></i></a>
               <a ref="' . $gid . '" class="tool loveit ' . ($hasLike ? 'lightBlue' :
             '') . '" href="#'.$gid.'"><i class="fa fa-heart" aria-hidden="true"></i></a> 
-              <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
+              <a class="tool hide" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
+              <div class="btn-group btn-group-gallery '.$showCb.'" data-toggle="buttons">
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
+							<div class="rahmen"><span class="fa fa-check"></span></div>				
+						</label>
+	          </div>
             </div>
             <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
               <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
@@ -481,7 +512,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
             '-o lightBlue') . ' tool"></i>  <span class="noOfLikes">' . $noOfComments .
             '</span></a></span>
 					
-					<div class="btn-group btn-group-gallery '.$showCb.'" data-toggle="buttons">
+					<div class="btn-group btn-group-gallery hide '.$showCb.'" data-toggle="buttons">
 						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
 							<div class="rahmen"><span class="fa fa-check"></span></div>				
 						</label>

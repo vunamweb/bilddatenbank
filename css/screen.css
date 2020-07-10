@@ -1338,11 +1338,13 @@ a.delete_folder {
 }
 
 .number_page {
-    
+    width: 60px;
+    color: #000;
+    height: auto;
 }
 
 .parent_div {
-    width: 40px;
+    width: 60px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     background: #ececec;

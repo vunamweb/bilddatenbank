@@ -205,7 +205,7 @@ else if($galerie) {
          </div>
          <div class="favourite_image">
           <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/start_favourite.png" /></a> 
-          <a class="tool" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
+          <a class="tool hide" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
          </div>
     </div>
     <div class="hashtag_display">

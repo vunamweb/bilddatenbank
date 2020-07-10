@@ -321,8 +321,12 @@
    }
      
      function setSelectIcon() {
-        $('#type_photo').selectpicker();
-        $('.number_page').selectpicker();
+        //$('#type_photo').selectpicker();
+        //$('.number_page').selectpicker();
+     }
+     
+     function getNumberPerDay() {
+        return $('.number_page.bootstrap-select ul.dropdown-menu li.active span.text').html();
      }
      
      function reloadMansory() {
@@ -526,7 +530,24 @@
                                 
                                    $('.navbar-form').submit(); 
                                 }
-                           })
+                            })
+                            
+                            $(".loveit").click(function () {
+                        	    var obj = $(this);
+                        	    id = obj.attr("ref");
+                        	    var onoff = !obj.hasClass("lightBlue");
+                                var origin   = $('#url').val();
+                        
+                        	    request = $.ajax({
+                        	        url: ""+origin+"morpheus/UpdateLikes.php",
+                        	        type: "post",
+                        	        data: "onoff="+onoff+"&mid='.$mid.'&id="+id+"&feld=gid&table=morp_cms_galerie_likes",
+                        	        success: function(data) {
+                        				if(onoff == true) { obj.addClass("lightBlue"); console.log(1); }
+                        				else { obj.removeClass("lightBlue"); console.log(0); }
+                          			}
+                        	    });
+                            });
                            
                            $('.previous_pagination').click(function(){
                               var page = $('#page').val();
