@@ -85,7 +85,7 @@
         var height_left = $('#mySidenav').height();
         var height_main = $('.main.content').height();
         
-        var height_footer = height_left - height_main + 100;
+        var height_footer = (height_left > height_main) ? height_left - height_main + 100 : 0;
         
         $('footer').css('margin-top',''+height_footer+'px');
      }

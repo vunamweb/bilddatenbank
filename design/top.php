@@ -46,7 +46,7 @@
                                   <option <?php if($_SESSION['number_per_page'] == 30) echo 'selected' ?> value="30">30</option>
                   </select> 
              </div>
-             <div class="form-group next next_1">
+             <div class="next_1">
                   <label class="">Anzahl Bilder/Videos</label>
              </div>
          </div>
