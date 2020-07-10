@@ -288,7 +288,7 @@
       $('.minimize').css('display', 'none');
       $('.right-board .right_content').hide();
       //$('.open_close_menu').show();
-      $('.open_close_menu.navbar_menu').hide();
+      //$('.open_close_menu.navbar_menu').hide();
       $('.navbar-form').css('padding-left', '15px');
       $('.open_close_menu.navbar_menu').css('left', '35px');
       $('.left_bottom').show();
@@ -308,7 +308,7 @@
       $('.minimize').css('display', 'block');
       $('.right-board .right_content').show();
       //$('.open_close_menu').hide();
-      $('.open_close_menu.navbar_menu').show();
+      //$('.open_close_menu.navbar_menu').show();
       $('.navbar-form').css('padding-left', '0');
       $('.open_close_menu.navbar_menu').css('left', '8px');
       $('.left_bottom').hide();
@@ -451,7 +451,7 @@
            setTimeout(function(){ reloadMansory(); }, timeOutMansory);       
         })
         
-        $('.open_close_menu.navbar_menu ').click(function(){
+        $('.open_close_menu.arrow ').click(function(){
            $('.right_menu').click();       
         })
         
