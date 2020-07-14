@@ -410,9 +410,18 @@
         setSelectIcon();
         setHeightFooter();
         
-        /*$('.selection.search').mouseout(function(){
-            $('.selection.search').hide();
-        })*/
+        $('.navbar-toggler').click(function(){
+            var width = $(window).width();
+            
+            if(width <= 768) {
+                setTimeout(function(){ 
+              if($('#navb').hasClass('show'))
+                $('#mySidenav').css('top','500px');
+              else
+                $('#mySidenav').css('top','164px'); 
+            }, 500);
+            }
+        })
         
         $('.clear_filter').click(function(){
           $('.ui.selection .ui .delete.icon').each(function(){

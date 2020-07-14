@@ -19,6 +19,7 @@
 <link href="<?php echo $dir; ?>css/swiper.min.css" media="screen" rel="stylesheet" type="text/css">
 <link href="<?php echo $dir; ?>css/ekko-lightbox.css" media="screen" rel="stylesheet" type="text/css">
 <link href="<?php echo $dir; ?>css/screen.css?v=<?php echo $zufall; ?>" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="<?php echo $dir; ?>css/mobile.css?v=<?php echo $zufall; ?>" media="screen, projection" rel="stylesheet" type="text/css">
 <!-- <link href="<?php echo $dir; ?>css/zusatz.css" media="screen, projection" rel="stylesheet" type="text/css"> -->
 <link rel="stylesheet" href="<?php echo $dir; ?>css/selectize.css">
 <link href="<?php echo $dir; ?>css/print.css" media="print" rel="stylesheet" type="text/css">
