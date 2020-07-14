@@ -876,6 +876,71 @@ function HashtagsGalery($hashtags) {
         $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
             "  order by $sorting_col_1";
         $res_1 = safe_query($sql);
+        //$row_1 = mysqli_fetch_object($res_1);
+    
+        while ($row_1 = mysqli_fetch_object($res_1))
+        {
+            if(($hashtags != str_replace($row_1->$primary_1, '', $hashtags)))
+               $select .= '<strong>#'.$row_1->$show_col_1.'&nbsp;&nbsp</strong>';
+        }
+    
+        $count++;
+    }
+    
+    return $select;
+}
+
+function HashtagsGalery_($hashtags) {
+    $hashtags = explode(',', $hashtags);
+    
+    foreach($hashtags as $item) {
+        if($item != '') {
+            $table = 'morp_tags';
+            $primary = 'tagID';
+            $show_col_1 = "tag";
+            $sorting_col_1 = "tag";
+        
+            $sql = "SELECT * FROM $table where $primary = " . $item . "";
+            $res = safe_query($sql);
+            //$row = mysqli_fetch_object($res);
+        
+            while ($row_1 = mysqli_fetch_object($res_1))
+            {
+                if(($hashtags != str_replace($row_1->$primary_1, '', $hashtags)))
+                   $select .= '<strong>#'.$row_1->$show_col_1.'&nbsp;&nbsp</strong>';
+            }
+        }
+    }
+    
+    
+    
+    $table = 'morp_tags_category';
+    $primary = 'id';
+    $show_col = "name";
+    $sorting_col = "name";
+    
+    $select = '';
+    
+    $sql = "SELECT * FROM $table order by $sorting_col";
+    $res = safe_query($sql);
+    $row = mysqli_fetch_object($res);
+    
+    $num_rows = mysqli_num_rows($res);
+    
+    $count = 1;
+    
+    while ($row = mysqli_fetch_object($res))
+    {
+        $tags_category_id = $row->$primary;
+    
+        $table = 'morp_tags';
+        $primary_1 = 'tagID';
+        $show_col_1 = "tag";
+        $sorting_col_1 = "tag";
+    
+        $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
+            "  order by $sorting_col_1";
+        $res_1 = safe_query($sql);
         $row_1 = mysqli_fetch_object($res_1);
     
         while ($row_1 = mysqli_fetch_object($res_1))

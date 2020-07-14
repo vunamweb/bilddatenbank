@@ -368,7 +368,7 @@
 	     }
 	  });
       
-      $('.upload').click(function(){
+      $('a.upload').click(function(){
          var timestamp = $('#timestamp').val();
          var token = $('#token').val();
          var gnid = $('#gnid').val();
