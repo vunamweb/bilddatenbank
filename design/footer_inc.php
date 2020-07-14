@@ -418,7 +418,7 @@
               if($('#navb').hasClass('show'))
                 $('#mySidenav').css('top','500px');
               else
-                $('#mySidenav').css('top','164px'); 
+                $('#mySidenav').css('top','200px'); 
             }, 500);
             }
         })

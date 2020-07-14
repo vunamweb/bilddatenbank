@@ -23,7 +23,7 @@
     
     #navbarMeta { width: auto }
     
-    .navbar-brand>img { width: 50px !important; margin-top: 0; }
+    .navbar-brand>img { width: 100px !important; margin-top: 0; }
     
     .navbar-dark .navbar-brand { margin: 0 }
     
@@ -46,7 +46,9 @@
     }
     
     .sidenav {
-        top: 185px;
+        top: 200px;
+        width: 200px;
+        padding-left: 10px;
     }
     
     #navbar .navbar-nav > li > a {
@@ -62,7 +64,40 @@
     }
     
     .main.content {
-        padding: 10px 10px;
+        padding: 20px 10px;
+    }
+    
+    .right-board a.right_menu {
+        display: none;
+    }
+    
+    .ui.search.dropdown{
+        width: 180px;
+        min-width: auto !important;
+        margin-left: 5px;
+    }
+    
+    .navbar-form {
+        padding: 0 2px;
+    }
+    
+    #main {
+      margin-left: 189px;
+    }
+    
+    .left_bottom {
+        margin-bottom: 10px;
+        margin-right: 10px;
+        display: block;
+    }
+    
+    .right-board {
+        right: 30%;
+    }
+    
+    .filter_search a {
+        padding-left: 5px;
+        font-size: 9px;
     }
 }
 
