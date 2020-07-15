@@ -36,14 +36,10 @@
              
              <div class="pull-left form-group parent_div">
                   <select class="number_page form-control" data-show-content="true">
-                                  <option <?php if($_SESSION['number_per_page'] == 2) echo 'selected' ?>  value="2">2</option>
-                                  <option <?php if($_SESSION['number_per_page'] == 3) echo 'selected' ?> value="3">3</option>
-                                  <option <?php if($_SESSION['number_per_page'] == 4) echo 'selected' ?> value="4">4</option>
-                                  <option <?php if($_SESSION['number_per_page'] == 5) echo 'selected' ?> value="5">5</option>
-                                  <option <?php if($_SESSION['number_per_page'] == 6) echo 'selected' ?> value="6">6</option>
-                                  <option <?php if($_SESSION['number_per_page'] == 10) echo 'selected' ?> value="10">10</option>
-                                  <option <?php if($_SESSION['number_per_page'] == 20) echo 'selected' ?> value="20">20</option>
-                                  <option <?php if($_SESSION['number_per_page'] == 30) echo 'selected' ?> value="30">30</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 20) echo 'selected' ?>  value="20">20</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 40) echo 'selected' ?> value="40">40</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 60) echo 'selected' ?> value="60">60</option>
+                                  <option <?php if($_SESSION['number_per_page'] == 80) echo 'selected' ?> value="80">80</option>
                   </select> 
              </div>
              <div class="next_1">
