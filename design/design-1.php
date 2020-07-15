@@ -66,11 +66,10 @@
                             </div>
                           </div>
                   </div>
-					<input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />
-                    <input type="hidden" id="page" value="1" />
-                
 			</div>
 		</div>
 	</section>
 	<div class="clearfix endFrame">
 	</div>
+    <input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />
+    <input type="hidden" id="page" value="1" />
