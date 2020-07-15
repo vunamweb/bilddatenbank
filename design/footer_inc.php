@@ -343,6 +343,25 @@
         });
      }
      
+     function showFolder() {
+        $('.show_folder').click(function(){
+            var origin   = $('#url').val();
+            
+            var id = $(this).attr('href');
+            data = id.replace('#', '');
+            
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+showfolder",
+    	        type: "get",
+    	        success: function(data) {
+    				$('#myModal_add_folder .modal-body .content .row').html(data);
+                    
+                    setClickDeleteFolder();
+                }
+    	    });
+         })
+     }
+     
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -406,7 +425,7 @@
         
         setClickDeleteGalerieFoldersImages();
         setShowGallery();
-        //setSelect();
+        showFolder();
         setSelectIcon();
         setHeightFooter();
         
@@ -518,9 +537,10 @@
                         complete: function complete(obj) {
                             $('.content .fa.fa-spinner').hide();
                             
-                            $('.content').html(obj.responseText);
+                            $('.main.content').html(obj.responseText);
                             
                             setShowGallery();
+                            showFolder();
                             
                             $('.grid-item ').each(function(){
                                 $(this).css('opacity', 1);
@@ -601,23 +621,6 @@
     	        data: "name="+name+"",
     	        success: function(data) {
     				$("#myModal_add_folder .modal-body .content .row").append(data);
-                    setClickDeleteFolder();
-                }
-    	    });
-         })
-         
-         $('.show_folder').click(function(){
-            var origin   = $('#url').val();
-            
-            var id = $(this).attr('href');
-            data = id.replace('#', '');
-            
-            request = $.ajax({
-    	        url: ""+origin+"home/galerie+showfolder",
-    	        type: "get",
-    	        success: function(data) {
-    				$('#myModal_add_folder .modal-body .content .row').html(data);
-                    
                     setClickDeleteFolder();
                 }
     	    });

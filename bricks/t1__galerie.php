@@ -94,7 +94,7 @@ $filterButton = '';
     echo $que;
     $res 	= safe_query($que);
     
-    $output = '';
+    $output = '<br><a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Add selected to folder</a>';
     
     $output .= '<div class="infor_number col-md-6">'.($start + 1).'-'.($start + $number).' of '.$total_search.'</div>';
     
@@ -529,36 +529,7 @@ else if($galerie) {
 	';
 	
 	$output .= set_thumb_gallery($res, 1);
-    $output .= '<div class="modal" id="myModal_add_folder">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="header">
-           <a href="#" class="btn btn-info add_folder">+ Neuen Ordner hinzufügen</a>
-           <div class="area_add">
-             <input type="text" name="name" id="name" placeholder="enter folder" />
-             <a href="#" class="add_button"><i class="fa fa-check" aria-hidden="true"></i></a>
-             <input type="button" value="Add" class="add_button hide" />
-           </div>
-        </div>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-         <div class="content">
-           <div class="row">
-           </div>
-         <a href="#" class="btn btn-info save_button">Save</a>
-         </div>
-         
-      </div>
-
-    </div>
-  </div>
-</div>';
+    
 	$output .= '
 		</div>
 ';

@@ -16,9 +16,7 @@
                          <?php include( 'page/right.php') ?>
                         <?php } ?>
 			    </div> 
-                    
-                    
-					<div class="modal" id="myModal_area_folder">
+                    <div class="modal" id="myModal_area_folder">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<!-- Modal Header -->
@@ -33,6 +31,7 @@
 							</div>
 						</div>
 					</div>
+                    
 					<div class="modal_new modal" id="myModal_edit_image">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -49,6 +48,7 @@
 							</div>
 						</div>
 					</div>
+                    
                     <div class="modal modal_new" id="myModal">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -66,7 +66,38 @@
                             </div>
                           </div>
                   </div>
-			</div>
+                  
+                  <div class="modal" id="myModal_add_folder">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                        
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <div class="header">
+                                   <a href="#" class="btn btn-info add_folder">+ Neuen Ordner hinzufügen</a>
+                                   <div class="area_add">
+                                     <input type="text" name="name" id="name" placeholder="enter folder" />
+                                     <a href="#" class="add_button"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                     <input type="button" value="Add" class="add_button hide" />
+                                   </div>
+                                </div>
+                              </div>
+                        
+                              <!-- Modal body -->
+                              <div class="modal-body">
+                                     <div class="content">
+                                       <div class="row">
+                                       </div>
+                                     <a href="#" class="btn btn-info save_button">Save</a>
+                                     </div>
+         
+                              </div>
+                        
+                            </div>
+                          </div>
+                  </div>
+            </div>
 		</div>
 	</section>
 	<div class="clearfix endFrame">
