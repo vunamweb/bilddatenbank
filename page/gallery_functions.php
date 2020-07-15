@@ -646,11 +646,13 @@ function show_gallery_folder($res, $galerie_folders_images_id)
         
         $gallery_list .= '
 	
-	    <div class="col-md-6 EEE">
-         <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">      
-        <a class="delete_galerie_folders_images_ hide" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-        <a class="delete_galerie_folders_images_confirm_"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>    
-        </div>
+	    <div class="grid-item grid-sizer">
+			 <div class="gal-item item_image">
+				 <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">      
+				 <a class="delete_galerie_folders_images_ hide" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+				 <a class="delete_galerie_folders_images_confirm_"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>    
+			 </div>
+		</div>
     ';
 
     }

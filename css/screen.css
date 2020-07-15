@@ -1134,9 +1134,11 @@ a.delete_folder {
 }
 .areafolder .panel-default {
     margin-bottom: 0;
+    padding-right: 20px;
 }
 .areafolder {
     margin-top: 10px;
+    padding-left: 10px;
 }
 .item_image {
     position: relative;
@@ -1603,4 +1605,8 @@ a.delete_folder {
 
 .modal_new .show_infor {
    padding: 0 10px 50px 0;
+}
+
+#images_area {
+    width: 100%;
 }
