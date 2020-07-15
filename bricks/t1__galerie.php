@@ -608,6 +608,8 @@ else if(get_guest_id_of_intranet_user() != 0) {
 	
 	$output .= set_thumb_gallery_guest($res, 1);
     
+    $filterButton = '';
+    
 }
 else {
 	
