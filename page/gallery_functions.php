@@ -587,9 +587,9 @@ function set_thumb_gallery_guest($res, $setFilter = 0)
 	
 	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item">
-	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal"><img class="img-responsive" src="' . $dir .
-            'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner .
-            '/' . $img . '"></a>
+	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
+                 <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
+           </a>
 	        
 	        <div class="inner">
 	            <div class="gal-Desc">
