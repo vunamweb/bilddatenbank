@@ -109,6 +109,11 @@
         top: -34px;
         left: 100px;
     }
+    
+    .modal_new .content {
+        display: block;
+        padding-top: 20px;
+    }
 }
 
 @media (max-width: 1400px) {
