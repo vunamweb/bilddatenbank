@@ -87,7 +87,7 @@ if($func == 'editgalery') {
         $output .= '<div class="image_information">';
         
         $output .= '<div class="infor_row"><p class="property">Autor:</p> <p class="value"> '.$copy.' </p></div>';
-        $output .= '<div class="infor_row"><p class="property">Datum:</p> <p class="value"> '.$infor->date.'</p></div>';
+        $output .= '<div class="infor_row"><p class="property">Datum:</p> <p class="value"> '.euro_dat($infor->date).'</p></div>';
         $output .= '<div class="infor_row"><p class="property">Größe:</p> <p class="value"> '.$infor->width.' * '.$infor->height.' Pixel / '.$width_cm.' cm * '.$height_cm.' cm   </p></div>';
         $output .= '<div class="infor_row"><p class="property">Auflösung:</p> <p class="value"> 300 dpi </p></div>';
         $output .= '<div class="infor_row"><p class="property">Type:</p> <p class="value"> '.$infor->type.' </p></div>';
