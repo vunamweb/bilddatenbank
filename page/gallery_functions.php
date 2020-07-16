@@ -275,6 +275,12 @@ function sort_array_gallery() {
     return $result;
 }
 
+function orginalDate($date) {
+    $date = str_replace(':', '-', $date);
+    
+    return euro_dat($date);
+}
+
 function get_total_search($seach_value, $hashtags, $category_id) {
     if($category_id == 0)
      $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";

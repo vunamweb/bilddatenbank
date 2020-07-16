@@ -187,6 +187,10 @@ $filterButton = '';
         $copy = 'icc:copyright';
         $copy = str_replace('Copyright (c)', '', $infor->props->$copy);
         
+        $orginalDate = 'exif:DateTimeOriginal';
+        $orginalDate = explode(' ', $infor->props->$orginalDate);
+        $orginalDate = orginalDate($orginalDate[0]);
+        
         $ID = ($infor->color == 13) ? 'RGB' : 'CMYK';
         
         $width_cm = $infor->width * 2.54 / 300;
@@ -201,7 +205,8 @@ $filterButton = '';
         $output .= '<div class="image_information">';
         
         $output .= '<div class="infor_row"><p class="property">Autor:</p> <p class="value"> '.$_SESSION["uname"].' </p></div>';
-        $output .= '<div class="infor_row"><p class="property">Datum:</p> <p class="value"> '.euro_dat($infor->date).'</p></div>';
+        $output .= '<div class="infor_row"><p class="property">Datum Update:</p> <p class="value"> '.euro_dat($infor->date).'</p></div>';
+        $output .= '<div class="infor_row"><p class="property">Datum Orginal:</p> <p class="value"> '.$orginalDate.'</p></div>';
         $output .= '<div class="infor_row"><p class="property">Größe:</p> <p class="value"> '.$infor->width.' * '.$infor->height.' Pixel / '.$width_cm.' cm * '.$height_cm.' cm   </p></div>';
         $output .= '<div class="infor_row"><p class="property">Auflösung:</p> <p class="value"> 300 dpi </p></div>';
         $output .= '<div class="infor_row"><p class="property">Type:</p> <p class="value"> '.$infor->type.' </p></div>';

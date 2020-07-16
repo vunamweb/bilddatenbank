@@ -51,6 +51,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
     $tempFile = $_FILES['Filedata']['tmp_name'];
     
     $im = new Imagick($tempFile);
+    //echo '<br>' . $im->getFilename(); die();
     
     $width = $im->getImageWidth();
     $height = $im->getImageHeight();
@@ -65,6 +66,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
     
     $file_infor = new stdClass;
 
+    $file_infor->path = realpath($_FILES["Filedata"]["tmp_name"]);
     $file_infor->type = $file_type;
     $file_infor->width = $width;
     $file_infor->height = $height;
