@@ -14,10 +14,13 @@
     <!-- Statische Navbar -->
 
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-full navbarMeta">
+        <div class="container-full navbarMeta navbarMeta_guest">
 	            <div id="navbarMeta" class="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-		                <li><a href="<?php echo $dir; ?>?logout=1"><?php echo substr($profile["vname"],0,1).''.substr($profile["nname"],0,1) ?> abmelden</a></li>
+		                <li>
+                          <a class="hide" href="<?php echo $dir; ?>?logout=1"><?php echo substr($profile["vname"],0,1).''.substr($profile["nname"],0,1) ?> abmelden</a>
+                          <a class="nav-link meta-nav end" href="<?php echo $dir; ?>?logout=1">WS abmelden</a>
+                          </li>
 	                </ul>
 	            </div>
         </div>

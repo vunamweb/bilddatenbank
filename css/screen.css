@@ -1613,4 +1613,11 @@ a.delete_folder {
 
 .bgwhite {
     background: #fff;
+    box-shadow: none;
+}
+
+.navbarMeta_guest {
+    position: absolute;
+    right: 0;
+    top: -40px;
 }
