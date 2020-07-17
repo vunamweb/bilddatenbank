@@ -19,7 +19,7 @@
                     <ul class="nav navbar-nav navbar-right">
 		                <li>
                           <a class="hide" href="<?php echo $dir; ?>?logout=1"><?php echo substr($profile["vname"],0,1).''.substr($profile["nname"],0,1) ?> abmelden</a>
-                          <a class="nav-link meta-nav end" href="<?php echo $dir; ?>?logout=1">WS abmelden</a>
+                          <a class="nav-link meta-nav end" href="<?php echo $dir; ?>?logout=1">abmelden</a>
                           </li>
 	                </ul>
 	            </div>
