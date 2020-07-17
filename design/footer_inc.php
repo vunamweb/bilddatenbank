@@ -1,31 +1,19 @@
 <?php
 	$uri	 = $_SERVER["REQUEST_URI"];
 
-	$footer_navid_arr = array(22,2,3,11);
+	// $footer_navid_arr = array(22,2,3,11);
 ?>
 
 <footer class="pt4 pb4 mt6">
     <div class="container-full">
         <div class="row">
-<?php
-	foreach($footer_navid_arr as $key) {
-		if($navarrayFULL[$key] != '') {
-		  echo '            <div class="col-md-2 col-xs-6">
-	            <p><a class="nav-link" href="'.$dir.$navID[$key].'" alt="'.$navarrayFULL[$key].'">'.$navarrayFULL[$key].'</a></p>
-	            <ul>
-';
-		echo set_nav('<li><a class="nav-link" href="url">name</a></li>', $key, 2, 0);
-
-		echo ' 
-	            </ul>
+			<div class="col-md-6 col-xs-6">
             </div>
-';
-		}
-    }
-?>
 			<div class="col-md-2 col-xs-6">
+<!--
 	            <p><a class="nav-link" href="<?php echo $dir.$navID[4]; ?>"><?php echo $navarrayFULL[4]; ?></a></p>
 	            <p><a class="nav-link" href="<?php echo $dir.$navID[12]; ?>" alt="Galerien"><?php echo $navarrayFULL[12]; ?></a></p>
+-->
 
             </div>
 
@@ -41,7 +29,7 @@
         </div>
     </div>
     <div class="container copyright">
-        	<p><?php echo date("Y"); ?> 2020 Frankfurter Kinderbüro, Konzept und Gestaltung: Konzept fünf, <a href="www.konzept-fuenf.de" target="_blank">www.konzept-fuenf.de</a></p>
+        	<p>&copy; <?php echo date("Y"); ?> Frankfurter Kinderbüro, Konzept und Gestaltung: Konzept fünf, <a href="www.konzept-fuenf.de" target="_blank">www.konzept-fuenf.de</a></p>
     </div>
 </footer>
 
@@ -80,64 +68,64 @@
 <!-- Initialize Swiper + Ekko -->
 <script type="text/javascript">
 	 var timeOut = 50, timeOutMansory = 500, invitation = [], countInvite = 0, widthOpenMenu = 250, widthCloseMenu = 50, statusSearch = false;
-     
+
      function setHeightFooter() {
         var height_left = $('#mySidenav').height();
         var height_main = $('.main.content').height();
-        
+
         var height_footer = (height_left > height_main) ? height_left - height_main + 100 : 0;
-        
+
         $('footer').css('margin-top',''+height_footer+'px');
      }
      function getHashtags() {
-	   
+
         var result = '';
-        
+
         $('a.transition').each(function(){
             result = result + $(this).attr('data-value') + ',';
         })
-        
-        return result;  
+
+        return result;
 	 }
-     
+
      function getfilter() {
 	    var size = $('a.transition').length;
         if(size == 0)
           return '.tag';
-          
+
         var count = 1;
-        
+
         var result = '.';
-        
+
         $('a.transition').each(function(){
             if(count < size)
               result = result + 'tag_' + $(this).attr('data-value') + ', .';
             else
               result = result + 'tag_' + $(this).attr('data-value');
-              
-            count++;  
+
+            count++;
         })
-        
-        return result;  
+
+        return result;
 	 }
-     
+
      function filter() {
         if(statusSearch) {
-          setTimeout(function(){ 
+          setTimeout(function(){
                 $('.navbar-form').submit();
-          }, timeOut);  
+          }, timeOut);
         }
      }
-     
+
      function setClickDeleteFolder() {
         $('.delete_folder'). click(function(){
                         var id = $(this).attr('href');
                         id = id.replace('#', '');
-                        
+
                         var dom = this;
-                        
+
                         var origin   = $('#url').val();
-                        
+
                         request = $.ajax({
                 	        url: ""+origin+"home/galerie+delfolder",
                 	        type: "get",
@@ -147,25 +135,25 @@
                             }
                 	    });
                    })
-        
+
         $('.delete_folder_confirm'). click(function(){
           var r = confirm("Are you sure to delete?");
-            
+
           if(r)
-             $(this).parent().find('.delete_folder').click();             
-          
-        })           
+             $(this).parent().find('.delete_folder').click();
+
+        })
      }
-     
+
      function setClickDeleteGalerieFoldersImages(){
         $('.delete_galerie_folders_images').click(function(){
             var origin   = $('#url').val();
-            
+
             var id = $(this).attr('href');
             id = id.replace('#', '');
-            
+
             var dom = this;
-            
+
             request = $.ajax({
     	        url: ""+origin+"home/galerie+delareafolderimg",
     	        type: "get",
@@ -175,15 +163,15 @@
                 }
     	    });
          })
-         
+
          $('.delete_galerie_folders_images_').click(function(){
             var origin   = $('#url').val();
-            
+
             var id = $(this).attr('href');
             id = id.replace('#', '');
-            
+
             var dom = this;
-            
+
             request = $.ajax({
     	        url: ""+origin+"home/galerie+del_folder_img",
     	        type: "get",
@@ -193,29 +181,29 @@
                 }
     	    });
          })
-         
+
          $('.delete_galerie_folders_images_confirm').click(function(){
             var r = confirm("Are you sure to delete?");
-            
+
             if(r)
              $(this).parent().find('.delete_galerie_folders_images').click();
          })
-         
+
          $('.delete_galerie_folders_images_confirm_').click(function(){
             var r = confirm("Are you sure to delete?");
-            
+
             if(r)
              $(this).parent().find('.delete_galerie_folders_images_').click();
          })
      }
-     
+
      function setShowGallery() {
         $('.show_galery').click(function(){
             var origin   = $('#url').val();
-            
+
             var id = $(this).attr('href');
             data = id.replace('#', '');
-            
+
             request = $.ajax({
     	        url: ""+origin+"home/galerie+modal",
     	        type: "get",
@@ -227,39 +215,39 @@
     	    });
          })
      }
-     
+
      function setTextAfterSave(select, text) {
         var data = '';
-        
+
         $(select).each(function(){
             data = data + '<strong>#' + $(this).text() + '&nbsp;&nbsp</strong>';
         })
-        
+
         $(text).html(data);
      }
-     
+
      function setJsEditButtonModal() {
         $('.selection.dropdown').dropdown({maxSelections: 3});
-                    
+
                     $('.show_infor a').click(function(){
                        $(this).parent().parent().hide();
                        $(this).parent().parent().parent().find('.show_edit').removeClass('hide');
                        $('.show_infor .alert-success').addClass('hide');
                     })
-                
+
                     $('.show_edit a.arrow-back').click(function(){
                        $(this).parent().parent().addClass('hide');
                        $(this).parent().parent().parent().find('.show_infor').show();
                     })
-                
+
                     $(".saveText").click(function () {
                 	    var origin   = $('#url').val();
-                        
+
                         id = $(this).attr("ref");
                 	    myText = $("#t"+id).val();
                         keyWord = $("#keyword"+id).val();
                         var hashtags = getHashtags();
-                
+
                 		request = $.ajax({
                 	        url: ""+origin+"home/galerie+update",
                 	        type: "get",
@@ -274,16 +262,16 @@
                 	    });
                    });
       }
-     
+
      function validateEmail(email) {
        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
        return re.test(String(email).toLowerCase());
      }
-     
+
      function openNav() {
       document.getElementById("mySidenav").style.width = ''+widthOpenMenu+'px';
       document.getElementById("main").style.marginLeft= ''+widthOpenMenu+'px';
-      
+
       $('.selection.search').show();
       $('.minimize').css('display', 'none');
       $('.right-board .right_content').hide();
@@ -293,9 +281,9 @@
       $('.open_close_menu.navbar_menu').css('left', '35px');
       $('.left_bottom').show();
       $('.filter_search').hide();
-      
+
       $('.right_menu').html('<i class="fa fa-angle-double-left"></i>');
-      
+
       $('.open_close_menu.arrow').html('<i class="fa fa-angle-double-left"></i>');
       $('.open_close_menu.arrow').css('right','-12px');
     }
@@ -303,7 +291,7 @@
     function closeNav() {
       document.getElementById("mySidenav").style.width = ''+widthCloseMenu+'px';
       document.getElementById("main").style.marginLeft= ''+widthCloseMenu+'px';
-      
+
       $('.selection.search').hide();
       $('.minimize').css('display', 'block');
       $('.right-board .right_content').show();
@@ -313,22 +301,22 @@
       $('.open_close_menu.navbar_menu').css('left', '8px');
       $('.left_bottom').hide();
       $('.filter_search').show();
-      
+
       $('.right_menu').html('<i class="fa fa-angle-double-right"></i>');
-      
+
       $('.open_close_menu.arrow').html('<i class="fa fa-angle-double-right"></i>');
       $('.open_close_menu.arrow').css('right','-22px');
    }
-     
+
      function setSelectIcon() {
         //$('#type_photo').selectpicker();
         //$('.number_page').selectpicker();
      }
-     
+
      function getNumberPerDay() {
         return $('.number_page.bootstrap-select ul.dropdown-menu li.active span.text').html();
      }
-     
+
      function reloadMansory() {
         $grid = $('.grid').isotope({
             itemSelector: '.grid-item',
@@ -337,31 +325,31 @@
            	percentPosition: true
             }
         });
-        
+
         $grid.imagesLoaded().progress( function() {
            $grid.isotope('layout');
         });
      }
-     
+
      function showFolder() {
         $('.show_folder').click(function(){
             var origin   = $('#url').val();
-            
+
             var id = $(this).attr('href');
             data = id.replace('#', '');
-            
+
             request = $.ajax({
     	        url: ""+origin+"home/galerie+showfolder",
     	        type: "get",
     	        success: function(data) {
     				$('#myModal_add_folder .modal-body .content .row').html(data);
-                    
+
                     setClickDeleteFolder();
                 }
     	    });
          })
      }
-     
+
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -386,23 +374,23 @@
 
 	     }
 	  });
-      
+
       $('a.upload').click(function(){
          var timestamp = $('#timestamp').val();
          var token = $('#token').val();
          var gnid = $('#gnid').val();
          var dir = $('#dir').val();
          var uploadScript = $('#uploadScript').val();
-         
+
          var keyword = $('#keyword').val();
          var hashtags = getHashtags();
-         
+
          if(hashtags == '') {
             alert('you need to fill hashtag');
             return;
          }
-         
-         
+
+
          $('#file_upload').data('uploadifive').settings.formData =
             {
                 'timestamp' : ''+timestamp+'',
@@ -422,74 +410,74 @@
 
 	$( document ).ready(function() {
 		$('.selection.search').dropdown({maxSelections: 3});
-        
+
         setClickDeleteGalerieFoldersImages();
         setShowGallery();
         showFolder();
         setSelectIcon();
         setHeightFooter();
-        
+
         $('.navbar-toggler').click(function(){
             var width = $(window).width();
-            
+
             if(width <= 768) {
-                setTimeout(function(){ 
+                setTimeout(function(){
               if($('#navb').hasClass('show'))
                 $('#mySidenav').css('top','500px');
               else
-                $('#mySidenav').css('top','200px'); 
+                $('#mySidenav').css('top','200px');
             }, 500);
             }
         })
-        
+
         $('.clear_filter').click(function(){
           $('.ui.selection .ui .delete.icon').each(function(){
              $(this).click();
           })
         })
-        
+
         $('#suche').focus(function(){
             $('.btn.btn-default.pull-right').hide();
         })
         $('.minimize').hover(function(){
             var parent_class = $(this).attr('href');
             parent_class = parent_class.replace('#', '');
-            
+
             $('.selection.search').hide();
-            
+
             //alert($('.search_'+parent_class+'.dropdown').offset().top);
             $('.search_'+parent_class+'.dropdown').show();
         })
-        
+
         /*$('.minimize').mouseout(function(){
             var parent_class = $(this).attr('href');
             parent_class = parent_class.replace('#', '');
-            
+
             $('.search_'+parent_class+'.dropdown').hide();
         })*/
-        
+
         $('.right_menu').click(function(){
            var width = $('#mySidenav').width();
-           
+
            if(width > widthCloseMenu)
              closeNav();
-           else 
+           else
              openNav();
-             
-           setTimeout(function(){ reloadMansory(); }, timeOutMansory);       
+
+           setTimeout(function(){ reloadMansory(); }, timeOutMansory);
         })
-        
+
         $('.open_close_menu.arrow ').click(function(){
-           $('.right_menu').click();       
+           $('.right_menu').click();
         })
-        
+
         $('.search.dropdown .item').click(function() {
 		    var dataValue = $(this).attr('data-value');
-            
-            setTimeout(function(){ 
+
+            setTimeout(function(){
                 $('.search.dropdown a.transition').each(function(){
                     var nowDataValue = $(this).attr('data-value');
-                    
+
                     if(dataValue == nowDataValue)
                       $(this).click(function(){
                          filter();
@@ -497,30 +485,30 @@
                 })
             }, timeOut);
          });
-        
+
         $('.number_page').change(function(){
             $('.navbar-form').submit();
          })
-         
+
          $('.navbar-form').submit(function(e){
             e.preventDefault();
-            
+
             statusSearch = true;
-            
+
             //$('.content').html('');
             $('.content .fa.fa-spinner').show();
-            
+
             var page = $('#page').val();
             var number = $('.number_page').val();
-            
+
             $('.content .fa.fa-spinner').show();
-            
+
             var origin   = $('#url').val();
-            
+
             var search = $('#suche').val();
-            
+
             var category_id = $('#category_id').val();
-            
+
             //call ajax to changen content
                     $.ajax({
                         url: ''+origin+'/home/galerie+search',
@@ -536,37 +524,37 @@
                         beforeSend: function beforeSend() {},
                         complete: function complete(obj) {
                             $('.content .fa.fa-spinner').hide();
-                            
+
                             $('.main.content').html(obj.responseText);
-                            
+
                             setShowGallery();
                             showFolder();
-                            
+
                             $('.grid-item ').each(function(){
                                 $(this).css('opacity', 1);
                             })
-                            
+
                             reloadMansory();
-                            
+
                             $('.number_pagination').click(function(){
                                 var currentPage = $('#page').val();
-                                
+
                                 var page = $(this).attr('href');
                                 page = page.replace('#', '');
-                                
+
                                 if(currentPage != page) {
                                    $('#page').val(page);
-                                
-                                   $('.navbar-form').submit(); 
+
+                                   $('.navbar-form').submit();
                                 }
                             })
-                            
+
                             $(".loveit").click(function () {
                         	    var obj = $(this);
                         	    id = obj.attr("ref");
                         	    var onoff = !obj.hasClass("lightBlue");
                                 var origin   = $('#url').val();
-                        
+
                         	    request = $.ajax({
                         	        url: ""+origin+"morpheus/UpdateLikes.php",
                         	        type: "post",
@@ -577,44 +565,44 @@
                           			}
                         	    });
                             });
-                           
+
                            $('.previous_pagination').click(function(){
                               var page = $('#page').val();
-                              
+
                               if(page > 1) {
                                  $('#page').val(parseInt(page) - 1);
-                                 
+
                                  $('.navbar-form').submit();
                               }
                            })
-                           
+
                            $('.next_pagination').click(function(){
                               var page = $('#page').val();
-                              
+
                               var totalPage = $('.infor_pagination .number_pagination').length;
-                              
+
                               if(page < totalPage) {
                                  $('#page').val(parseInt(page) + 1);
-                                 
+
                                  $('.navbar-form').submit();
                               }
                            })
                         },
                         success: function success(result) {
-                          
+
                         }
-                    }); 
+                    });
          })
-         
+
          $('.add_folder'). click(function(){
             $('.area_add').css('display', 'inline-block');
          })
-         
+
          $('.add_button'). click(function(){
             var name = $('#name').val();
-            
+
             var origin   = $('#url').val();
-            
+
             request = $.ajax({
     	        url: ""+origin+"home/galerie+addfolder",
     	        type: "get",
@@ -625,13 +613,13 @@
                 }
     	    });
          })
-         
+
          $('.area_folder').click(function(){
             var origin   = $('#url').val();
-            
+
             var id = $(this).attr('href');
             id = id.replace('#', '');
-            
+
             request = $.ajax({
     	        url: ""+origin+"home/galerie+areafoldermodal",
     	        type: "get",
@@ -642,28 +630,28 @@
                 }
     	    });
          })
-         
+
          $('.save_button').click(function(){
             var folder_id, galeries_id = '';
-            
+
             var origin   = $('#url').val();
-            
+
             var selected = $("input[type='radio'][name='folder']:checked");
-            
+
             if (selected.length > 0) {
               folder_id = selected.val();
             } else {
                 alert('you need choose at least one item');
             }
-            
+
             $('input.checkbox').each(function(){
                 var value = $(this).val();
-                
+
                 if($(this).is(":checked"))
                   galeries_id = galeries_id + value + ','
-                  
+
             })
-            
+
             request = $.ajax({
     	        url: ""+origin+"home/galerie+save_folder_galeries",
     	        type: "get",
@@ -673,13 +661,13 @@
                 }
     	    });
          })
-         
+
          $('.edit_image').click(function(){
             var origin   = $('#url').val();
-            
+
             var id = $(this).attr('href');
             id = id.replace('#', '');
-            
+
             request = $.ajax({
     	        url: ""+origin+"kategorien/kategorien-edit/editgalery+"+id+"",
     	        type: "get",
@@ -689,32 +677,32 @@
                 }
     	    });
          })
-         
+
          $('.invite_partner'). click(function(){
             $('.right-board .content').removeClass('hide');
          })
-         
+
          $('.allowedtosend').click(function(){
             var origin   = $('#url').val();
-            
+
             var folder_id = $('#folder_id').val();
-            
+
             request = $.ajax({
                 	        url: ""+origin+"home/galerie+guest",
                 	        type: "get",
                 	        data: "folder_id="+folder_id+"&data="+JSON.stringify(invitation)+"",
                 	        success: function(data) {
-                			  $('.alert-success').html('Save and send login successfully');	
+                			  $('.alert-success').html('Save and send login successfully');
                             }
-                	    });  
+                	    });
          })
-         
+
          $('.edit_guest').click(function(){
             var origin   = $('#url').val();
-            
+
             var id = $(this).attr('href');
             id = id.replace('#', '');
-            
+
             request = $.ajax({
                 	        url: ""+origin+"home/galerie+editguest",
                 	        type: "get",
@@ -722,26 +710,26 @@
                 	        success: function(data) {
                 			  $('#area_edit_guest').show();
                               $('#area_edit_guest').html(data);
-                              
+
                               $('.areafolder .mt2').hide();
-                              
+
                               $('.arrow-back-guest').click(function(){
                                  $('.areafolder .mt2').show();
                                  $('#area_edit_guest').hide();
-                                 
+
                                  $('.alert-success').addClass('hide');
-                                 
+
                               })
-                              
+
                               $('.save_guest').click(function(){
                                     var origin   = $('#url').val();
-                                    
+
                                     var id = $(this).attr('ref');
                                     var start_date = $('#start_dat').val();
                                     var end_date = $('#end_dat').val();
                                     var email = $('#email').val();
                                     var pass = $('#password').val();
-                                    
+
                                     request = $.ajax({
                                         	        url: ""+origin+"home/galerie+updateguest",
                                         	        type: "get",
@@ -749,24 +737,24 @@
                                         	        success: function(data) {
                                         			  $('.areafolder .mt2').show();
                                                       $('#area_edit_guest').hide();
-                                                      
+
                                                       $('.alert-success').removeClass('hide');
-                                                      
+
                                                       email = email.split('@');
                                                       $('#user_'+id+'').html(email[0]);
                                                     }
-                               	    }); 
+                               	    });
                            })
                             }
-                	    });  
+                	    });
          })
-         
+
          $('.delete_guest').click(function(){
             var origin   = $('#url').val();
-                                    
+
             var id = $(this).attr('href');
             id = id.replace('#', '');
-            
+
             request = $.ajax({
    	         url: ""+origin+"home/galerie+delguest",
    	         type: "get",
@@ -774,50 +762,50 @@
              success: function(data) {
        			  $('.tr_'+id+'').hide();
               }
-       	    }); 
-            
+       	    });
+
          })
-         
-         
+
+
          $('.right-board .content input').click(function(){
             $('.alert-success').addClass('hide');
             $('.alert-error').addClass('hide');
          })
-         
+
          $('.allowedtosave').click(function(){
             var origin   = $('#url').val();
-            
+
             var username = $('#username');
             var password = $('#password');
             var email = $('#email');
             var start_date = $('#start_dat');
             var end_date = $('#end_dat');
             var folder_id = $('#folder_id').val();
-            
+
             if(!validateEmail(email.val())) {
                 email.addClass('error');
             } else {
-                email.removeClass('error'); 
+                email.removeClass('error');
             }
-            
+
             if(password.val() == '') {
                 password.addClass('error');
             } else {
-                password.removeClass('error'); 
+                password.removeClass('error');
             }
-            
+
             if(start_date.val() == '') {
                 start_date.addClass('error');
             } else {
-                start_date.removeClass('error'); 
+                start_date.removeClass('error');
             }
-            
+
             if(end_date.val() == '') {
                 end_date.addClass('error');
             } else {
-                end_date.removeClass('error'); 
+                end_date.removeClass('error');
             }
-            
+
             if(!validateEmail(email.val()) || password.val() == '' || start_date.val() == '' || end_date.val() == '') {
                 $('.alert-error').removeClass('hide');
                 $('.alert-success').addClass('hide');
@@ -825,19 +813,19 @@
             else {
               $('.alert-error').addClass('hide');
               $('.alert-success').removeClass('hide');
-              
+
               invitation[countInvite] = {};
               invitation[countInvite].username = username.val();
               invitation[countInvite].password = password.val();
               invitation[countInvite].email = email.val();
               invitation[countInvite].start_date = start_date.val();
               invitation[countInvite].end_date = end_date.val();
-              
+
               countInvite++;
             }
          })
     });
-	
+
     $(window).on("load", function() {
       <?php echo $js; ?>
   });
