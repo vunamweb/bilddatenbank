@@ -122,10 +122,10 @@
 	                <ul class="nav navbar-nav pull-right">
 		                <li><a href="<?php echo $dir; ?>">All</a></li>
 <?php
-	$que  	= "SELECT gntextde, gnid FROM `morp_cms_galerie_name` WHERE 1 order by gnname";
+	$que  	= "SELECT gntextde, gnname, gnid FROM `morp_cms_galerie_name` WHERE 1 order by gnname";
 	$res 	= safe_query($que);
 	while($row = mysqli_fetch_object($res)) {
-		echo '						<li><a href="'.$dir.'home/galerie+'.$row->gnid.'/">'.$row->gntextde.'</a></li>
+		echo '						<li><a href="'.$dir.'home/galerie+'.$row->gnid.'/">'.$row->gnname.'</a></li>
 ';
 	}
 ?>

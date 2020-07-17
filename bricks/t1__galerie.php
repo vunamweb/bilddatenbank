@@ -633,46 +633,71 @@ else if(get_guest_id_of_intranet_user() != 0) {
     
 }
 else {
-	
-    $que = "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE sichtbar=1 AND g.gnid=n.gnid GROUP BY g.gnid ORDER BY n.gnname";
-
-	$res 	= safe_query($que);
-	$x		= mysqli_num_rows($res);
+	$output .= '<div class="row">
+    ';
+    
+    $que = "SELECT * FROM `morp_cms_galerie_name` n WHERE sichtbar=1 ORDER BY n.gnname";
+    //echo $que; die();
+    $res 	= safe_query($que);
+    
+    while ($row = mysqli_fetch_object($res)) {
+        $que = "SELECT * FROM `morp_cms_galerie` g WHERE  g.gnid=".$row->gnid." GROUP BY g.gnid";
+        //echo $que; die();
+    $res_ 	= safe_query($que);
+	$x		= mysqli_num_rows($res_);
 	$n = 0;
 	$galerie = 1;
-
-	$output .= '<div class="row">
-';
-
-	while ($row = mysqli_fetch_object($res)) {
-		$n++;
-		$img 	= $row->gname;
-        $gid = $row->gid;
-		$ordner = $row->gnname;
-		$gnid 	= $row->gnid;
-
-		$textde = $row->textde;
-		$hl = $row->gntextde;
-
-		$besitzer = $row->mid;
-		$profile = getProfile($besitzer);
-
-		$output .= '
-
-				<div class="col-md-4 col-sm-6 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
-				    <div class="hovereffect">
-				        <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
-			            <div class="overlay">
-			                <h2>'.$hl.'</h2>
-							<p>'.$textde.'</p>
-							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-pencil tool mb2"></i></a></p>
-							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-eraser tool"></i></a></p>
-			            </div>
-				    </div>
-				</div>
-		';
-	}
     
+    $ordner = $row->gnname;
+	$gnid 	= $row->gnid;
+    
+	$textde = $row->textde;
+	$hl = $row->gntextde;
+    
+    if($x > 0) {
+       while ($row_ = mysqli_fetch_object($res_)) {
+    		$n++;
+    		$img 	= $row_->gname;
+            $gid = $row_->gid;
+    		
+    
+    		$besitzer = $row_->mid;
+    		$profile = getProfile($besitzer);
+    
+    		$output .= '
+    
+    				<div class="col-md-4 col-sm-6 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
+    				    <div class="hovereffect">
+    				        <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
+    			            <div class="overlay">
+    			                <h2>'.$hl.'</h2>
+    							<p>'.$textde.'</p>
+    							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-pencil tool mb2"></i></a></p>
+    							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-eraser tool"></i></a></p>
+    			            </div>
+    				    </div>
+    				</div>
+    		';
+	   }  
+    } else {
+        $hl = $row->gnname;
+        $output .= '
+    
+    				<div class="col-md-4 col-sm-6 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
+    				    <div class="hovereffect">
+    				        <img class="img-responsive no-upload" src="'.$dir.'Galerie/no_upload.jpg">
+    			            <div class="overlay">
+    			                <h2>'.$hl.'</h2>
+    							<p>'.$textde.'</p>
+    							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-pencil tool mb2"></i></a></p>
+    							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-eraser tool"></i></a></p>
+    			            </div>
+    				    </div>
+    				</div>
+    		';
+    }
+
+  }
     $output .= '</div>';
 
 
