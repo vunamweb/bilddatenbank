@@ -634,7 +634,7 @@ else if(get_guest_id_of_intranet_user() != 0) {
 }
 else {
 	
-    $que = "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE sichtbar=1 AND g.gnid=n.gnid GROUP BY g.gnid ORDER BY n.date DESC";
+    $que = "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE sichtbar=1 AND g.gnid=n.gnid GROUP BY g.gnid ORDER BY n.gnname";
 
 	$res 	= safe_query($que);
 	$x		= mysqli_num_rows($res);
