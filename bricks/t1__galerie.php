@@ -386,9 +386,13 @@ $filterButton = '';
 } else if($galerie && $galerie == 'guest') {
     $folder_id = $_GET['folder_id'];
     $data = json_decode($_GET['data']);
+    $send_mail = $_GET['send_mail'];
+    
+    $response = '';
     
     foreach($data as $item) {
-        $que  	= "SELECT * FROM `morp_cms_galerie_guests` g WHERE g.username = '".$item->username."'";
+        $que  	= "SELECT * FROM `morp_cms_galerie_guests` g WHERE g.email = '".$item->email."'";
+        //echo $que; die();
         $res 	= safe_query($que);
         
         $x		= mysqli_num_rows($res);
@@ -406,14 +410,21 @@ $filterButton = '';
             safe_query($sql);
             
             //send mail
-            $subject = 'Login information';
+            if($send_mail == 'true') {
+                $subject = 'Login information';
             
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                
+                $message = 'you can login ' . $morpheus["url"] . ' with information below <br>';
+                $message .= 'User: ' . $item->email . '<br>' . 'Pass: ' . $item->password;
+                mail($item->email, $subject, $message, $headers);
+                
+                $response = 'Save and send login successfully';
+            } else {
+                $response = 'Save successfully';
+            }
             
-            $message = 'you can login ' . $morpheus["url"] . ' with information below <br>';
-            $message .= 'User: ' . $item->email . '<br>' . 'Pass: ' . $item->password;
-            mail($item->email, $subject, $message, $headers);
         } else {
             $row = mysqli_fetch_object($res);
             
@@ -424,10 +435,12 @@ $filterButton = '';
             
             $sql = "UPDATE morp_cms_galerie_guests set folder_ids='$folder_ids' WHERE username = '".$item->username."'";
             safe_query($sql);
+            
+            $response = 'Update successfully';
         }
     }
     
-    die();
+    echo $response; die();
 } else if($galerie && $galerie == 'editguest') {
     $id = $_GET['id'];
     

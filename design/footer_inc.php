@@ -349,7 +349,72 @@
     	    });
          })
      }
+     function addGuest(sendMail) {
+        var origin   = $('#url').val();
 
+            var username = $('#username');
+            var password = $('#password');
+            var email = $('#email');
+            var start_date = $('#start_dat');
+            var end_date = $('#end_dat');
+            var folder_id = $('#folder_id').val();
+
+            if(!validateEmail(email.val())) {
+                email.addClass('error');
+            } else {
+                email.removeClass('error');
+            }
+
+            if(password.val() == '') {
+                password.addClass('error');
+            } else {
+                password.removeClass('error');
+            }
+
+            if(start_date.val() == '') {
+                start_date.addClass('error');
+            } else {
+                start_date.removeClass('error');
+            }
+
+            if(end_date.val() == '') {
+                end_date.addClass('error');
+            } else {
+                end_date.removeClass('error');
+            }
+
+            if(!validateEmail(email.val()) || password.val() == '' || start_date.val() == '' || end_date.val() == '') {
+                $('.alert-error').removeClass('hide');
+                $('.alert-success-1.alert-success').addClass('hide');
+            }
+            else {
+              $('.alert-error').addClass('hide');
+              $('.alert-success-1.alert-success').removeClass('hide');
+
+              invitation[countInvite] = {};
+              invitation[countInvite].username = username.val();
+              invitation[countInvite].password = password.val();
+              invitation[countInvite].email = email.val();
+              invitation[countInvite].start_date = start_date.val();
+              invitation[countInvite].end_date = end_date.val();
+              
+              var origin   = $('#url').val();
+
+              var folder_id = $('#folder_id').val();
+
+              request = $.ajax({
+                	        url: ""+origin+"home/galerie+guest",
+                	        type: "get",
+                	        data: "folder_id="+folder_id+"&data="+JSON.stringify(invitation)+"&send_mail="+sendMail+"",
+                	        success: function(data) {
+                			  $('.alert-success-1.alert-success').html(data);
+                            }
+                	    });
+
+              //countInvite++;
+            }
+     }
+     
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -683,18 +748,7 @@
          })
 
          $('.allowedtosend').click(function(){
-            var origin   = $('#url').val();
-
-            var folder_id = $('#folder_id').val();
-
-            request = $.ajax({
-                	        url: ""+origin+"home/galerie+guest",
-                	        type: "get",
-                	        data: "folder_id="+folder_id+"&data="+JSON.stringify(invitation)+"",
-                	        success: function(data) {
-                			  $('.alert-success').html('Save and send login successfully');
-                            }
-                	    });
+            addGuest(true);
          })
 
          $('.edit_guest').click(function(){
@@ -773,56 +827,7 @@
          })
 
          $('.allowedtosave').click(function(){
-            var origin   = $('#url').val();
-
-            var username = $('#username');
-            var password = $('#password');
-            var email = $('#email');
-            var start_date = $('#start_dat');
-            var end_date = $('#end_dat');
-            var folder_id = $('#folder_id').val();
-
-            if(!validateEmail(email.val())) {
-                email.addClass('error');
-            } else {
-                email.removeClass('error');
-            }
-
-            if(password.val() == '') {
-                password.addClass('error');
-            } else {
-                password.removeClass('error');
-            }
-
-            if(start_date.val() == '') {
-                start_date.addClass('error');
-            } else {
-                start_date.removeClass('error');
-            }
-
-            if(end_date.val() == '') {
-                end_date.addClass('error');
-            } else {
-                end_date.removeClass('error');
-            }
-
-            if(!validateEmail(email.val()) || password.val() == '' || start_date.val() == '' || end_date.val() == '') {
-                $('.alert-error').removeClass('hide');
-                $('.alert-success-1.alert-success').addClass('hide');
-            }
-            else {
-              $('.alert-error').addClass('hide');
-              $('.alert-success-1.alert-success').removeClass('hide');
-
-              invitation[countInvite] = {};
-              invitation[countInvite].username = username.val();
-              invitation[countInvite].password = password.val();
-              invitation[countInvite].email = email.val();
-              invitation[countInvite].start_date = start_date.val();
-              invitation[countInvite].end_date = end_date.val();
-
-              countInvite++;
-            }
+            addGuest(false);
          })
     });
 
