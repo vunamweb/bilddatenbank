@@ -9,7 +9,9 @@ $que = "SELECT * FROM morp_cms_galerie_folders WHERE mid=$mid";
 $res = safe_query($que);
 while ($row = mysqli_fetch_object($res))
 {
-    echo '<li class="btn btn-info btn-folder"><a href="' . $morpheus["url"] .
+    $class = ($row->folderID == $_GET['id']) ? 'active user' : '';
+    
+    echo '<li class="btn btn-info btn-folder '.$class.'"><a href="' . $morpheus["url"] .
         'home/galerie+areafolder/?id=' . $row->folderID . '">' . $row->folder_name . '
 		</a>
 		<br>
