@@ -808,11 +808,11 @@
 
             if(!validateEmail(email.val()) || password.val() == '' || start_date.val() == '' || end_date.val() == '') {
                 $('.alert-error').removeClass('hide');
-                $('.alert-success').addClass('hide');
+                $('.alert-success-1.alert-success').addClass('hide');
             }
             else {
               $('.alert-error').addClass('hide');
-              $('.alert-success').removeClass('hide');
+              $('.alert-success-1.alert-success').removeClass('hide');
 
               invitation[countInvite] = {};
               invitation[countInvite].username = username.val();

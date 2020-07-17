@@ -85,7 +85,7 @@ if ($_GET['nid'] == 'areafolder')
         </div>
         <div class="content collapse" id="access_area">
     		<div class="alert alert-error hide" role="alert">Please check mandatory fields</div>
-            <div class="alert alert-success hide" role="alert">Save successfully</div>
+            <div class="alert alert-success alert-success-1 hide" role="alert">Save successfully</div>
             <div class="form-group">
     			<input type="text" class="form-control setform hide" name="username" id="username" placeholder="Username" />
     		</div>
