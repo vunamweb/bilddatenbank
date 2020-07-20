@@ -95,11 +95,12 @@ else {
 			else {
 				$haslogin = 0;
 				$_SESSION["uname"] = $row->uname;
+				$_SESSION["author"] = $row->vname . ' ' . $row->nname;
 				$_SESSION["pd"] = $row->pw;
 				$_SESSION["mid"] = $row->mid;
 				$_SESSION["cl"] = 0;
-
-				$sql = "INSERT morp_intranet_user_track SET mid=".$row->mid;
+                
+                $sql = "INSERT morp_intranet_user_track SET mid=".$row->mid;
 				safe_query($sql);
 
 				$lastlog = date("Y-m-d H:i");
