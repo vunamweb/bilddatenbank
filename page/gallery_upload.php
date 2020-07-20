@@ -65,14 +65,14 @@ if (!$galerie)
     die("Fehler");
 
 $que = "SELECT * FROM `morp_cms_galerie_name` WHERE gnid=" . $galerie .
-    " AND mid=" . $mid;
+    " ";
 $res = safe_query($que);
 $row = mysqli_fetch_object($res);
 
 $img = $row->gname;
 $ordner = $row->gnname;
-//$path 	=  DIR.'/Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/';
-$path = 'D:/xampp-7-4/htdocs/bilddatenbank' . '/Galerie/' . $morpheus["GaleryPath"] .
+$path 	=  DIR.'/Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/';
+//$path = 'D:/xampp-7-4/htdocs/bilddatenbank' . '/Galerie/' . $morpheus["GaleryPath"] .
     '/' . $ordner . '/';
 
 

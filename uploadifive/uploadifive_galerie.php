@@ -94,6 +94,8 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
         $thumbFile = $uploadDir . $insert_id . '/' . $morpheus['thumb'];
         $largeFile = $uploadDir . $insert_id . '/' . $morpheus['large'];
         
+        //echo $targetFile; die();
+        
         $widthThumbResize = $morpheus['thumb_width'];
         $widthLargeResize = $morpheus['large_width'];
         
