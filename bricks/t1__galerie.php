@@ -176,7 +176,9 @@ $filterButton = '';
         
         $output .= '<img class="img-responsive" src='.$src.' />';
         
-        $output .= '<a href="#" class="bild_her">Bild herunterladen</a>';
+        $output .= '<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
+            '/' . $data[1]  . '/'.$data[0] .'/'.$morpheus["Original"].'/' . urlencode($row->gname) .
+            '" class="bild_her">Bild herunterladen</a>';
         
         $output .= '</div>';
         
