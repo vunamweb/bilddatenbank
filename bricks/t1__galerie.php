@@ -91,7 +91,7 @@ $filterButton = '';
     }
     
     $que .= ') LIMIT '.$start.','.$number.'';
-    echo $que;
+    //echo $que;
     $res 	= safe_query($que);
     
     $output = '<br><a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Add selected to folder</a>';
@@ -678,7 +678,7 @@ else {
     				        <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
     			            <div class="overlay">
     			                <h2>'.$hl.'</h2>
-    							<p>'.$textde.'</p>
+    							<p>'.$ordner.'</p>
     							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-pencil tool mb2"></i></a></p>
     							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-eraser tool"></i></a></p>
     			            </div>
