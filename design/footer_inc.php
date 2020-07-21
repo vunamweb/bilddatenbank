@@ -182,6 +182,21 @@
     	    });
          })
 
+         $('a.delete_2').click(function(){
+             var url = getUrl();
+             
+             var r = confirm("Are you sure to delete?");
+             
+             var id = $(this).attr('href');
+             id= id.replace('#', '');
+             
+             url = url + '?del='+id+'';
+             
+             
+             if(r)
+              window.location.href = url;
+         })
+         
          $('.delete_galerie_folders_images_confirm').click(function(){
             var r = confirm("Are you sure to delete?");
 
@@ -196,7 +211,19 @@
              $(this).parent().find('.delete_galerie_folders_images_').click();
          })
      }
-
+     
+     function getUrl() {
+       
+       return window.location.origin + window.location.pathname;
+       var url = window.location.href;
+       var url_1 = url;
+       
+       url = url.split('?');
+       url = (url.length > 0) ? url[0] : url.split('#');
+       
+       return (url.length > 0) ? url[0] : url_1;
+     }
+     
      function setShowGallery() {
         $('.show_galery').click(function(){
             var origin   = $('#url').val();

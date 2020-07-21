@@ -110,7 +110,7 @@ function liste_DIV_folder($ordering="")
         $echo .= '<div class="col-md-4 border1">
 			<span class="tbl_name"><a href="?edit='.$edit.'&folder='.$row->$show_col.'">' . $row->$show_col . '</a></span>
             <span class="tbl_edit"><a href="?edit='.$edit.'&folder='.$row->$show_col.'" class="btn btn-info btn-small"><i class="fa fa-pencil-square-o"></i></a></span>
-			<span class="tbl_delete"><a href="?del='.$edit.'" class="btn btn-danger btn-small"><i class="fa fa-trash-o"></i></a></span>
+			<span class="tbl_delete"><a href="#'.$edit.'" class="btn btn-danger btn-small delete_2"><i class="fa fa-trash-o"></i></a></span>
 		</div>';
     }
 
