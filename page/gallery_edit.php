@@ -55,13 +55,15 @@ if($func == 'editgalery') {
         <div class="col-md-12">
                      <div class="show_infor row">
                           <div class="col-md-12">
-                            <a href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                            <a class="edit_" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
                             <br><br>
                             <div class="alert alert-success hide" role="alert">gespeichert update</div>
                            </div>
                           <div class="col-md-7 FFF">
                             <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
-                            <a href="#" class="bild_her">Bild herunterladen</a> 
+                            <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
+            '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($row->gname) .
+            '" class="bild_her">Bild herunterladen</a> 
                           </div>';
          
         $infor = json_decode($row->another_infor);

@@ -229,7 +229,7 @@
      function setJsEditButtonModal() {
         $('.selection.dropdown').dropdown({maxSelections: 3});
 
-                    $('.show_infor a').click(function(){
+                    $('.show_infor a.edit_').click(function(){
                        $(this).parent().parent().hide();
                        $(this).parent().parent().parent().find('.show_edit').removeClass('hide');
                        $('.show_infor .alert-success').addClass('hide');
