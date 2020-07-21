@@ -25,6 +25,11 @@ if($del && !$stop)
 {
    $sql="delete FROM $table WHERE $primary = ".$del."";
    $res = safe_query($sql);
+   
+   $sql="delete FROM morp_cms_galerie WHERE gnid = ".$del."";
+   $res = safe_query($sql);
+   
+   
    $output .= '<div class="alert alert-success" role="alert">gelöscht</div>';
    $output .= liste_DIV($ordering); 
 }
