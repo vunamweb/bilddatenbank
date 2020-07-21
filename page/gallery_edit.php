@@ -72,8 +72,14 @@ if($func == 'editgalery') {
         $copy = str_replace('Copyright (c)', '', $infor->props->$copy);
         
         $orginalDate = 'exif:DateTimeOriginal';
-        $orginalDate = explode(' ', $infor->props->$orginalDate);
-        $orginalDate = orginalDate($orginalDate[0]);
+        if($infor->props->$orginalDate != '') {
+          $orginalDate = explode(' ', $infor->props->$orginalDate);
+          $orginalDate = orginalDate($orginalDate[0]);  
+        } else {
+            $orginalDate = 'photoshop:DateCreated';
+            $orginalDate = orginalDate($infor->props->$orginalDate);
+        }
+        
         
         $ID = ($infor->color == 13) ? 'RGB' : 'CMYK';
         
