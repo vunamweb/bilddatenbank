@@ -257,7 +257,7 @@ class resize
 
 
 function set_name_image($img) {
-    $replace = array('JPG', 'PNG', 'png', 'psd', 'PSD', 'pdf', 'PDF', 'ai', 'AI', 'eps', 'EPS', 'tif', 'TIF');
+    $replace = array('JPG', 'PNG', 'png', 'psd', 'PSD', 'pdf', 'PDF', 'ai', 'AI', 'eps', 'EPS', 'tif', 'TIF', 'tiff', 'TIFF');
     
     return str_replace($replace, 'jpg', $img);
 }
@@ -477,7 +477,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
 								
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
          
                                 </div>
 							</div>

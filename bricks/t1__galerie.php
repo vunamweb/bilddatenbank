@@ -668,7 +668,7 @@ else {
     
     				<div class="col-md-4 col-sm-6 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
     				    <div class="hovereffect">
-    				        <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
+    				        <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
     			            <div class="overlay">
     			                <h2>'.$hl.'</h2>
     							<p>'.$textde.'</p>

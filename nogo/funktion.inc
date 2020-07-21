@@ -442,7 +442,7 @@ $merged->thumbnailImage($size, $size, true);
 $merged->writeImage($imgFolder . $fileName . ".jpg");       
 }
 
-function makeImagePDF($f, $page, $size, $imgFolder, $fileName) {
+function makeImageSpecial($f, $page, $size, $imgFolder, $fileName) {
 $im = new Imagick();
 
 $im->setResolution($size,$size);
@@ -497,12 +497,23 @@ function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400'
                 $fileName . ".jpg");
             //			echo '<img src="eps/ai-'.$f.'.png" ><br>';
             // for($i=1; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/ai-'.$f.'-'.$i.'.jpg" ><br>';
-        } elseif ($thisFileTyp == "pdf")
+        } elseif ($thisFileTyp == "tif")
+        {
+            makeImageSpecial($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
+            //			echo '<img src="eps/ai-'.$f.'.png" ><br>';
+            // for($i=1; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/ai-'.$f.'-'.$i.'.jpg" ><br>';
+        } elseif ($thisFileTyp == "tiff")
+        {
+            makeImageSpecial($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
+            //			echo '<img src="eps/ai-'.$f.'.png" ><br>';
+            // for($i=1; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/ai-'.$f.'-'.$i.'.jpg" ><br>';
+        } 
+        elseif ($thisFileTyp == "pdf")
         {
             //			exec("/usr/bin/convert convert -colorspace sRGB -density 300 $f -resize 240x240 eps/$f.jpg");
             /*exec("/usr/bin/convert convert  -limit thread 1 -colorspace RGB $f -background white -alpha deactivate -resize $size\> -colorspace sRGB -scene 1 " .
                 $imgFolder . $fileName . ".jpg");*/
-            makeImagePDF($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
+            makeImageSpecial($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
             //			for($i=0; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/'.$f.'-'.$i.'.jpg" ><br>';
             //			for($i=1; $i<=$max; $i++) echo '<img src="eps/pdf-0'.$x.'-'.$i.'.jpg" ><br>';
             //			echo '<img src="'.$imgFolder.$fileName.'.jpg" ><br>';

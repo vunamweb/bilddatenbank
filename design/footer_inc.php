@@ -440,6 +440,9 @@
 	     }
 	  });
 
+      $('input[type=file]').change(function () {
+          console.log($(this).val());
+      });
       $('a.upload').click(function(){
          var timestamp = $('#timestamp').val();
          var token = $('#token').val();
