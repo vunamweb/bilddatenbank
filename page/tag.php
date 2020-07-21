@@ -10,7 +10,6 @@ $name	= $_REQUEST["name"];
 $stop	= $_REQUEST["stopit"];
 $category_tag = $_REQUEST["category_tag"];
 
-print_r($_REQUEST);
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +29,9 @@ $ordering    	= " ORDER BY tag";
      '
     
 ';*/
-if($del && !$stop)
+if($stop) {
+ $output .= liste_DIV($ordering);   
+} else if($del && !$stop)
 {
    $db="morp_tags";
    $sql="delete FROM $db WHERE tagID = ".$del."";
@@ -67,7 +68,6 @@ else if ($save && !$stop) {
 		$output .= '<div class="alert alert-success" role="alert">gespeichert save</div>';
 		$db="morp_tags";
 	    $sql = "insert into $db(tag_long,tag,category_id)values('".$name."','".$name."',".$category_tag.")";
-		echo $sql;die();
 		$res = safe_query($sql);
 	}
     $output .= liste_DIV($ordering);
@@ -77,6 +77,7 @@ else if ($save && !$stop) {
 
 else if($neu)
 {
+    //echo 'ddzz'; die();
     $db = 'morp_tags_category';
     
     $select = '<select name="category_tag" class="form-control">';
@@ -109,8 +110,10 @@ else if($neu)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-else
- $output .= liste_DIV($ordering);
+else {
+ $output .= liste_DIV($ordering);   
+}
+ 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
