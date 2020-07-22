@@ -59,7 +59,7 @@ if($func == 'editgalery') {
                             <br><br>
                             <div class="alert alert-success hide" role="alert">gespeichert update</div>
                            </div>
-                          <div class="col-md-7 FFF">
+                          <div class="col-md-5 FFF">
                             <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
                             <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($row->gname) .
@@ -89,7 +89,7 @@ if($func == 'editgalery') {
         $height_cm = $infor->height * 2.54 / 300;
         $height_cm = number_format($height_cm, 2, ',', ' ');
 
-        $output .= '<div class="col-md-5">';
+        $output .= '<div class="col-md-7">';
 
         $output .= '<p class="lead">Bildname Mathilda Kinderfreizeit</p>';
         $output .= '<p class="lead">Engel fliegen, <b>'.str_replace('.jpg', '', $row->gname).'</b></p>';

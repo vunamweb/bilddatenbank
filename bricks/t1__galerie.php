@@ -158,7 +158,7 @@ $filterButton = '';
 
     $output .= '<div class="content">';
 
-    $output .= '<div class="col-md-7">';
+    $output .= '<div class="col-md-5">';
 
     $data = $_GET['data'];
     $data = explode(',', $data);
@@ -182,7 +182,7 @@ $filterButton = '';
 
         $output .= '</div>';
 
-        $output .= '<div class="col-md-5">';
+        $output .= '<div class="col-md-7">';
 
         $infor = json_decode($row->another_infor);
 

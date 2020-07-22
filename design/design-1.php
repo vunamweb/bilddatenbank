@@ -16,7 +16,16 @@
                          <?php include( 'page/right.php') ?>
                         <?php } ?>
 			    </div> 
-                    <div class="modal" id="myModal_area_folder">
+                    
+            </div>
+		</div>
+	</section>
+	<div class="clearfix endFrame">
+	</div>
+    <input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />
+    <input type="hidden" id="page" value="1" />
+    
+    <div class="modal" id="myModal_area_folder">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<!-- Modal Header -->
@@ -30,9 +39,9 @@
 								</div>
 							</div>
 						</div>
-					</div>
-                    
-					<div class="modal_new modal" id="myModal_edit_image">
+	</div>
+    
+    <div class="modal_new modal" id="myModal_edit_image">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<!-- Modal Header -->
@@ -97,10 +106,5 @@
                             </div>
                           </div>
                   </div>
-            </div>
-		</div>
-	</section>
-	<div class="clearfix endFrame">
-	</div>
-    <input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />
-    <input type="hidden" id="page" value="1" />
+    
+    
