@@ -556,7 +556,9 @@ else if($galerie) {
 
 
 		<a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Selektierte persönlichen Ordner hinzufügen</a>
-		<input type="hidden" name="category_id" id="category_id" value='.$galerie.' />
+        <a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info show_folder">Bilder hochladen <i class="fa fa-plus"></i></a>
+                  
+        <input type="hidden" name="category_id" id="category_id" value='.$galerie.' />
 
         <div class="grid">
 	';

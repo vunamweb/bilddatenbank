@@ -71,8 +71,8 @@ $row = mysqli_fetch_object($res);
 
 $img = $row->gname;
 $ordner = $row->gnname;
-//$path 	=  DIR.'/Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/';
-$path = 'D:/xampp-7-4/htdocs/bilddatenbank' . '/Galerie/' . $morpheus["GaleryPath"] .
+$path 	=  DIR.'/Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/';
+//$path = 'D:/xampp-7-4/htdocs/bilddatenbank' . '/Galerie/' . $morpheus["GaleryPath"] .
     '/' . $ordner . '/';
 
 
@@ -87,8 +87,7 @@ $uploadScript = $dir . 'uploadifive/uploadifive_galerie.php';
 
 $output .= '
 
-	<p><a href="' . $dir . $navID[8] . 'edit+' . $galerie .
-    '/" class="btn btn-info"><i class="fa fa-chevron-left"></i> Zurück zur Galerie</a><br/>&nbsp;<br/></p>';
+	<p><a href="javascript:history.back()" class="btn btn-info"><i class="fa fa-chevron-left"></i> Zurück zur Galerie</a><br/>&nbsp;<br/></p>';
 
 $output .= $select;
 
