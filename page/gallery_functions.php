@@ -350,7 +350,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
 								
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
          
                                 </div>
 							</div>

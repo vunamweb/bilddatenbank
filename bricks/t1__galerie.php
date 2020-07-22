@@ -72,7 +72,7 @@ $filterButton = '';
     $total_search = get_total_search($seach_value, $hashtags, $category_id);
     $number = ($number > $total_search) ? $total_search : $number;
     
-    $count_page = ($total_search > 0) ? round($total_search/$number) : 1;
+    $count_page = ($total_search > 0) ? round($total_search/$number, 0, PHP_ROUND_HALF_UP) : 1;
     //echo $total_search;
     
     $sort_gallery = sort_array_gallery();
