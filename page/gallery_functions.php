@@ -258,26 +258,26 @@ class resize
 
 function set_name_image($img) {
     $replace = array('JPG', 'PNG', 'png', 'psd', 'PSD', 'pdf', 'PDF', 'ai', 'AI', 'eps', 'EPS', 'tif', 'TIF', 'tiff', 'TIFF');
-    
+
     return str_replace($replace, 'jpg', $img);
 }
 
 function sort_array_gallery() {
     $result = array();
-    
+
     $que  	= "SELECT * FROM `morp_cms_galerie_name`";
 	$res 	= safe_query($que);
-    
+
     while ($row = mysqli_fetch_object($res)) {
        $result[$row->gnid] = $row->gnname;
     }
-    
+
     return $result;
 }
 
 function orginalDate($date) {
     $date = str_replace(':', '-', $date);
-    
+
     return euro_dat($date);
 }
 
@@ -286,19 +286,19 @@ function get_total_search($seach_value, $hashtags, $category_id) {
      $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
     else
      $que = "SELECT * FROM `morp_cms_galerie` g where g.gnid = ".$category_id." AND (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
-    
+
     for($i = 0; $i < count($hashtags) -1; $i++){
-        if($i < count($hashtags) - 2) 
+        if($i < count($hashtags) - 2)
             $que .= 'like "%'.$hashtags[$i].'%" AND g.tags ';
         else
             $que .= 'like "%'.$hashtags[$i].'%"';
-          
+
     }
-    
+
     $que .= ')';
-    
+
     $res 	= safe_query($que);
-    
+
     return mysqli_num_rows($res);
 }
 
@@ -313,7 +313,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
     {
         $img = $row->gname;
         //$img = set_name_image($img);
-        
+
         $tn = $row->tn;
         $gnid = $row->gnid;
         $ordner = $sort_gallery[$gnid];
@@ -327,9 +327,9 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $filter = '';
 
         foreach ($tagList as $arr)
-         if($arr != '') 
+         if($arr != '')
           $filter .= 'tag_' . $arr . ' ';
-          
+
         $noOfComments = '';
         if ($mid)
             $hasLike = isLike($mid, "morp_cms_galerie_likes", "gid", $gid);
@@ -338,20 +338,20 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
         $gallery_list .= '
-	
+
 	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item item_image">
             <div class="edit_delete_image max_view">
-              <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a> 
+              <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
             </div>
             <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								
+
 								<!-- Modal body -->
 								<div class="modal-body">
 								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
-         
+
                                 </div>
 							</div>
 						</div>
@@ -359,24 +359,24 @@ function set_thumb_gallery_search($res, $sort_gallery)
              <div class="favourite_image">
                   <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) . '" class="galIcons i4 tool hide"><i class="fa fa-download tool"></i></a>
                   <a ref="' . $gid . '" class="tool loveit ' . ($hasLike ? 'lightBlue' :
-                '') . '" href="#'.$gid.'"><i class="fa fa-heart" aria-hidden="true"></i></a> 
+                '') . '" href="#'.$gid.'"><i class="fa fa-heart" aria-hidden="true"></i></a>
                   <a class="tool hide" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a>
                   <div class="btn-group btn-group-gallery '.$showCb.'" data-toggle="buttons">
-						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
-							<div class="rahmen"><span class="fa fa-check"></span></div>				
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">
+							<div class="rahmen"><span class="fa fa-check"></span></div>
 						</label>
-	              </div> 
+	              </div>
                 </div>
 	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
               <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
             </a>
-	        
+
 	        <div class="inner">
 	            <div class="gal-Desc hide">
 		            <h2>' . $hl . '</h2>
 					<p>' . $textde . '</p>
 				</div>
-	        
+
 	            <div class="gal-Icons">
 					<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) .
@@ -389,16 +389,16 @@ function set_thumb_gallery_search($res, $sort_gallery)
             '&foto=' . $gid . '"><i class="fa fa-comments' . ($hasComment ? '' :
             '-o lightBlue') . ' tool"></i>  <span class="noOfLikes">' . $noOfComments .
             '</span></a></span>
-					
+
 					<div class="btn-group btn-group-gallery hide '.$showCb.'" data-toggle="buttons">
-						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
-							<div class="rahmen"><span class="fa fa-check"></span></div>				
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">
+							<div class="rahmen"><span class="fa fa-check"></span></div>
 						</label>
 					</div>
-					
+
 				</div>
 	        </div>
-	        
+
 	    </div>
 	</div>';
 
@@ -406,7 +406,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
 
     if ($setFilter)
     {
-        $filterButton = '		
+        $filterButton = '
 		<div id="" class="button-group filter-button-group">
 			<button class="btn btn-info is-checked" data-filter="*">All Photos</button>
 ';
@@ -418,7 +418,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
 ';
         }
 
-        $filterButton .= '		
+        $filterButton .= '
 		</div>
 ';
     }
@@ -433,14 +433,14 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
     global $filter, $tagListButtons, $filterButton;
 
     $gallery_list = '';
-    
+
     $showCb = (!$showcheckbox) ? 'hide' : '';
 
     while ($row = mysqli_fetch_object($res))
     {
         $img = $row->gname;
         //$img = set_name_image($img);
-        
+
         $tn = $row->tn;
         $ordner = $row->gnname;
         $gnid = $row->gnid;
@@ -454,9 +454,9 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         $filter = '';
 
         foreach ($tagList as $arr)
-         if($arr != '') 
+         if($arr != '')
           $filter .= 'tag_' . $arr . ' ';
-          
+
         $noOfComments = '';
         if ($mid)
             $hasLike = isLike($mid, "morp_cms_galerie_likes", "gid", $gid);
@@ -465,20 +465,20 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
         $gallery_list .= '
-	
+
 	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item item_image">
 	        <div class="edit_delete_image max_view">
-              <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a> 
+              <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
             </div>
             <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								
+
 								<!-- Modal body -->
 								<div class="modal-body">
 								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
-         
+
                                 </div>
 							</div>
 						</div>
@@ -486,25 +486,25 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
             <div class="favourite_image">
               <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) . '" class="galIcons i4 tool hide"><i class="fa fa-download tool"></i></a>
               <a ref="' . $gid . '" class="tool loveit ' . ($hasLike ? 'lightBlue' :
-            '') . '" href="#'.$gid.'"><i class="fa fa-heart" aria-hidden="true"></i></a> 
-              <a class="tool hide" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a> 
+            '') . '" href="#'.$gid.'"><i class="fa fa-heart" aria-hidden="true"></i></a>
+              <a class="tool hide" href="#'.$gid.'"><img src="'.$dir.'images/1x/heart_favourite.png" /></a>
               <div class="btn-group btn-group-gallery '.$showCb.'" data-toggle="buttons">
-						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
-							<div class="rahmen"><span class="fa fa-check"></span></div>				
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">
+							<div class="rahmen"><span class="fa fa-check"></span></div>
 						</label>
 	          </div>
             </div>
             <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
               <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
             </a>
-	        
+
 	        <div class="inner">
 	            <div class="gal-Desc hide">
 		            <h2>' . $hl . '</h2>
 					<p>' . $textde . '</p>
 				</div>
-	        
-	            
+
+
                 <div class="gal-Icons">
 					<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($img) .
@@ -517,16 +517,16 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
             '&foto=' . $gid . '"><i class="fa fa-comments' . ($hasComment ? '' :
             '-o lightBlue') . ' tool"></i>  <span class="noOfLikes">' . $noOfComments .
             '</span></a></span>
-					
+
 					<div class="btn-group btn-group-gallery hide '.$showCb.'" data-toggle="buttons">
-						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">  
-							<div class="rahmen"><span class="fa fa-check"></span></div>				
+						<label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="'.$gid.'" name="add_to_folder">
+							<div class="rahmen"><span class="fa fa-check"></span></div>
 						</label>
 					</div>
-					
+
 				</div>
 	        </div>
-	        
+
 	    </div>
 	</div>';
 
@@ -534,7 +534,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
 
     if ($setFilter)
     {
-        $filterButton = '		
+        $filterButton = '
 		<div id="" class="button-group filter-button-group">
 			<button class="btn btn-info is-checked" data-filter="*">All Photos</button>
 ';
@@ -546,7 +546,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
 ';
         }
 
-        $filterButton .= '		
+        $filterButton .= '
 		</div>
 ';
     }
@@ -579,9 +579,9 @@ function set_thumb_gallery_guest($res, $setFilter = 0)
         $filter = '';
 
         foreach ($tagList as $arr)
-         if($arr != '') 
+         if($arr != '')
           $filter .= 'tag_' . $arr . ' ';
-          
+
         $noOfComments = '';
         if ($mid)
             $hasLike = isLike($mid, "morp_cms_galerie_likes", "gid", $gid);
@@ -590,13 +590,13 @@ function set_thumb_gallery_guest($res, $setFilter = 0)
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
         $gallery_list .= '
-	
+
 	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item">
 	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
                  <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
            </a>
-	        
+
 	        <div class="inner">
 	            <div class="gal-Desc">
 		            <h2>' . $hl . '</h2>
@@ -609,7 +609,7 @@ function set_thumb_gallery_guest($res, $setFilter = 0)
 
     if ($setFilter)
     {
-        $filterButton = '		
+        $filterButton = '
 		<div id="" class="button-group filter-button-group">
 			<button class="btn btn-info is-checked" data-filter="*">All Photos</button>
 ';
@@ -621,7 +621,7 @@ function set_thumb_gallery_guest($res, $setFilter = 0)
 ';
         }
 
-        $filterButton .= '		
+        $filterButton .= '
 		</div>
 ';
     }
@@ -642,22 +642,39 @@ function show_gallery_folder($res, $galerie_folders_images_id)
         //print_r($row); die();
         $img = $row->gname;
         $img = set_name_image($img);
-        
+
         $tn = $row->tn;
         $ordner = $row->gnname;
         $gnid = $row->gnid;
         $gid = $row->gid;
         $textde = $row->gtextde;
         $hl = $row->gtexten;
-        
+
         $gallery_list .= '
-	
+
 	    <div class="grid-item grid-sizer">
 			 <div class="gal-item item_image">
-				 <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">      
-				 <a class="delete_galerie_folders_images_ hide" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-				 <a class="delete_galerie_folders_images_confirm_"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>    
-			 </div>
+				 <div class="edit_delete_image max_view">
+                   <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
+                   	<a class="delete_galerie_folders_images_ hide" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+				    <a class="delete_galerie_folders_images_confirm_ tool"><i class="fa fa-trash-o"></i></a>
+			     </div>
+				 <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+
+								<!-- Modal body -->
+								<div class="modal-body">
+								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
+
+                                </div>
+							</div>
+						</div>
+                 </div>
+				 <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
+				   <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
+				 </a>
+			</div>
 		</div>
     ';
 
@@ -669,12 +686,12 @@ function show_gallery_folder($res, $galerie_folders_images_id)
 function get_guest_id_of_intranet_user()
 {
     $table = 'morp_intranet_user';
-    $primary = 'mid'; 
+    $primary = 'mid';
     $col = 'guestID';
-    
+
     $que  	= "SELECT * FROM $table where $primary = ".$_SESSION['mid']."";
     $res 	= safe_query($que);
-    
+
     while ($row = mysqli_fetch_object($res)) {
       return $row->$col;
     }
@@ -683,31 +700,31 @@ function get_guest_id_of_intranet_user()
 function get_permission_guest()
 {
     $table = 'morp_intranet_user';
-    $primary = 'mid'; 
+    $primary = 'mid';
     $col = 'guestID';
-    
+
     $que  	= "SELECT * FROM $table where $primary = ".$_SESSION['mid']."";
     $res 	= safe_query($que);
-    
+
     $row = mysqli_fetch_object($res);
     $guestID = $row->$col;
-    
+
     $que  	= "SELECT * FROM morp_cms_galerie_guests where guestID = ".$guestID."";
     $res 	= safe_query($que);
-    
+
     $row = mysqli_fetch_object($res);
-    
+
     $start_date = $row->start_dat;
     $end_date = $row->end_dat;
-    
+
     $current_date = date("Y-m-d");
     //echo (strtotime($current_date) - strtotime($end_date)) ;die();
-    
+
     if((strtotime($current_date) < strtotime($start_date)) || (strtotime($current_date) > strtotime($end_date)))
       return false;
-    
-    return true;  
-    
+
+    return true;
+
 }
 
 function show_gallery_folder_modal($res, $galerie_folders_images_id)
@@ -727,15 +744,15 @@ function show_gallery_folder_modal($res, $galerie_folders_images_id)
         $gid = $row->gid;
         $textde = $row->gtextde;
         $hl = $row->gtexten;
-        
+
         $gallery_list .= '
-	
+
 	    <div class="col-md-6 CCC">
                <img class="img-responsive" src="' . $dir .
             'mthumb.php?w=400&amp;zc=1&amp;src=Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner .
             '/' . $img . '">
-               <a class="delete_galerie_folders_images hide" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a> 
-               <a class="delete_galerie_folders_images_confirm" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a> 
+               <a class="delete_galerie_folders_images hide" href="#'.$galerie_folders_images_id.'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+               <a class="delete_galerie_folders_images_confirm" href="#"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
             </div>
     ';
 
@@ -792,7 +809,7 @@ function liste_DIV($ordering="")
     while ($row = mysqli_fetch_object($res))
     {
         $edit = $row->$primary;
-        $echo .= '<div class="col-md-4 border1">
+        $echo .= '<div class="col-sm-4 col-md-3 border1">
 			<span class="tbl_name"><a href="?edit='.$edit.'">' . $row->$show_col . '</a></span>
             <span class="tbl_edit"><a href="?edit='.$edit.'" class="btn btn-info btn-small"><i class="fa fa-pencil-square-o"></i></a></span>
 			<span class="tbl_delete"><a href="#'.$edit.'" class="btn btn-danger btn-small delete_2"><i class="fa fa-trash-o"></i></a></span>
@@ -811,48 +828,48 @@ function listHashtagsGalery($hashtags) {
     $primary = 'id';
     $show_col = "name";
     $sorting_col = "name";
-    
+
     $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
-    
+
     $sql = "SELECT * FROM $table order by $sorting_col";
     $res = safe_query($sql);
     $row = mysqli_fetch_object($res);
-    
+
     $num_rows = mysqli_num_rows($res);
-    
+
     $count = 1;
-    
+
     while ($row = mysqli_fetch_object($res))
     {
         $select .= '<option value="">' . $row->$show_col . '</option>';
-    
+
         $tags_category_id = $row->$primary;
-    
+
         $table = 'morp_tags';
         $primary_1 = 'tagID';
         $show_col_1 = "tag";
         $sorting_col_1 = "tag";
-    
+
         $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
             "  order by $sorting_col_1";
         $res_1 = safe_query($sql);
         $row_1 = mysqli_fetch_object($res_1);
-    
+
         while ($row_1 = mysqli_fetch_object($res_1))
         {
             $selected = ($hashtags != str_replace($row_1->$primary_1, '', $hashtags)) ? 'selected' : '';
             $select .= '<option '.$selected.' value="' . $row_1->$primary_1 . '">' . $row_1->$show_col_1 . '</option>';
         }
-    
+
         $count++;
-    
+
         $select .= ($count < $num_rows) ?
             '</select><select name="select" class="ui selection dropdown" multiple="">':
         '</select>';
     }
-    
+
     $select .= '</div>';
-    
+
     return $select;
 }
 
@@ -861,57 +878,57 @@ function HashtagsGalery($hashtags) {
     $primary = 'id';
     $show_col = "name";
     $sorting_col = "name";
-    
+
     $select = '';
-    
+
     $sql = "SELECT * FROM $table order by $sorting_col";
     $res = safe_query($sql);
     $row = mysqli_fetch_object($res);
-    
+
     $num_rows = mysqli_num_rows($res);
-    
+
     $count = 1;
-    
+
     while ($row = mysqli_fetch_object($res))
     {
         $tags_category_id = $row->$primary;
-    
+
         $table = 'morp_tags';
         $primary_1 = 'tagID';
         $show_col_1 = "tag";
         $sorting_col_1 = "tag";
-    
+
         $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
             "  order by $sorting_col_1";
         $res_1 = safe_query($sql);
         //$row_1 = mysqli_fetch_object($res_1);
-    
+
         while ($row_1 = mysqli_fetch_object($res_1))
         {
             if(($hashtags != str_replace($row_1->$primary_1, '', $hashtags)))
                $select .= '<strong>#'.$row_1->$show_col_1.'&nbsp;&nbsp</strong>';
         }
-    
+
         $count++;
     }
-    
+
     return $select;
 }
 
 function HashtagsGalery_($hashtags) {
     $hashtags = explode(',', $hashtags);
-    
+
     foreach($hashtags as $item) {
         if($item != '') {
             $table = 'morp_tags';
             $primary = 'tagID';
             $show_col_1 = "tag";
             $sorting_col_1 = "tag";
-        
+
             $sql = "SELECT * FROM $table where $primary = " . $item . "";
             $res = safe_query($sql);
             //$row = mysqli_fetch_object($res);
-        
+
             while ($row_1 = mysqli_fetch_object($res_1))
             {
                 if(($hashtags != str_replace($row_1->$primary_1, '', $hashtags)))
@@ -919,47 +936,47 @@ function HashtagsGalery_($hashtags) {
             }
         }
     }
-    
-    
-    
+
+
+
     $table = 'morp_tags_category';
     $primary = 'id';
     $show_col = "name";
     $sorting_col = "name";
-    
+
     $select = '';
-    
+
     $sql = "SELECT * FROM $table order by $sorting_col";
     $res = safe_query($sql);
     $row = mysqli_fetch_object($res);
-    
+
     $num_rows = mysqli_num_rows($res);
-    
+
     $count = 1;
-    
+
     while ($row = mysqli_fetch_object($res))
     {
         $tags_category_id = $row->$primary;
-    
+
         $table = 'morp_tags';
         $primary_1 = 'tagID';
         $show_col_1 = "tag";
         $sorting_col_1 = "tag";
-    
+
         $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
             "  order by $sorting_col_1";
         $res_1 = safe_query($sql);
         $row_1 = mysqli_fetch_object($res_1);
-    
+
         while ($row_1 = mysqli_fetch_object($res_1))
         {
             if(($hashtags != str_replace($row_1->$primary_1, '', $hashtags)))
                $select .= '<strong>#'.$row_1->$show_col_1.'&nbsp;&nbsp</strong>';
         }
-    
+
         $count++;
     }
-    
+
     return $select;
 }
 
@@ -1039,11 +1056,11 @@ function reSizeImage($targetFile, $destinationFile, $fileType, $widthResize, $re
 {
     $width = getWidthImage($targetFile, $fileType);
     $height = getHeightImage($targetFile, $fileType);
-    
+
     //echo $width . '/' . $height; die();
 
     $heightResize = round(($widthResize * $height) / $width);
-    
+
     //echo $width . '/' . $height . '/' . $widthResize . '/' . $heightResize; die();
 
     $resizeObj = new resize($targetFile);

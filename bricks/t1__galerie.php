@@ -335,7 +335,7 @@ $filterButton = '';
        $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gid=".$row->gid." AND g.gnid = n.gnid ORDER BY g.sort";
 	   $res_1 	= safe_query($que);
 
-       //$output .= set_thumb_gallery($res_1, 1);
+       //$output .= set_thumb_gallery($res_1, 0);
        $output .= show_gallery_folder($res_1, $row->imagesID);
     }
 

@@ -1111,11 +1111,11 @@ a.delete_folder {
     padding: 15px;
 }
 .delete_galerie_folders_images_confirm_ {
-    position: absolute;
+    /*position: absolute;
     left: 50%;
     top: 50%;
     font-size: 2em;
-    display: none;
+    display: none;*/
 }
 #images_area .col-md-6 {
     cursor: pointer;
@@ -1635,5 +1635,11 @@ a.delete_folder {
 }
 
 .no-upload {
-    
+
+}
+
+.infor_pagination, .infor_number { width: 30%; display: inline-block; margin-left: 2em; text-align: center; }
+
+.modal .modal-body img.img-fluid {
+    width: 100%;
 }

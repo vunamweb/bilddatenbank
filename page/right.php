@@ -70,7 +70,9 @@ if ($_GET['nid'] == 'areafolder')
     
     $output .= '</table>';
     
-    $output .= '</div>';
+    $output .= '</div>'; 
+    
+    $output .= '</div>'; 
     
     $output .= '</div>';
     

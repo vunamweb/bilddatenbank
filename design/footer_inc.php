@@ -160,6 +160,7 @@
                 data: "id="+id+"",
     	        success: function(data) {
     				$(dom).parent().parent().parent().hide();
+                    reloadMansory();
                 }
     	    });
          })
@@ -177,7 +178,8 @@
     	        type: "get",
                 data: "id="+id+"",
     	        success: function(data) {
-    				$(dom).parent().hide();
+    				$(dom).parent().parent().find('.show_galery').hide();
+                    reloadMansory();
                 }
     	    });
          })
