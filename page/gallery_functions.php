@@ -347,10 +347,13 @@ function set_thumb_gallery_search($res, $sort_gallery)
             <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
-
+                                <!-- Modal Header -->
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
+								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
 
                                 </div>
 							</div>
@@ -474,10 +477,13 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
             <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
-
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div> 
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
+								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
 
                                 </div>
 							</div>

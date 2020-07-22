@@ -205,14 +205,18 @@ else if($galerie) {
           <a href="#'.$gid.'" class="edit_image tool" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
           <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><img src="images/1x/close.png" /></a>
           <a class="delete_galerie_folders_images_confirm tool" href="#'.$gid.'"><i class="fa fa-trash-o"></i></a>
-          <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
+          <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool large_image"><img src="'.$dir.'images/1x/close.png" /></a>
           <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
+                               <!-- Modal Header -->
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
 
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
 
                                 </div>
 							</div>

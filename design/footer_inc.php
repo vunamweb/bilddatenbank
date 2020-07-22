@@ -587,6 +587,11 @@
             $('.navbar-form').submit();
          })
 
+         $('.large_image').click(function(){
+           //setTimeout(function(){ $('.modal-backdrop.show').css('opacity', 0); }, 500);
+           
+         })
+         
          $('.navbar-form').submit(function(e){
             e.preventDefault();
 
