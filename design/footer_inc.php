@@ -377,6 +377,24 @@
                 }
     	    });
          })
+         
+         $('.add_hashtags_image').click(function(){
+            var origin   = $('#url').val();
+
+            var id = $(this).attr('href');
+            data = id.replace('#', '');
+
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+add_hashtags_image",
+    	        type: "get",
+    	        success: function(data) {
+    				$('#myModal_add_hashtags_image .modal-body .content .row').html(data);
+                    $('#myModal_add_hashtags_image .alert-success').addClass('hide');
+                    $('.selection.dropdown').dropdown({maxSelections: 3});
+
+                }
+    	    });
+         })
      }
      function addGuest(sendMail) {
         var origin   = $('#url').val();
@@ -760,6 +778,31 @@
                 data: "folder_id="+folder_id+"&galeries_id="+galeries_id+"",
     	        success: function(data) {
     				$('#myModal_add_folder .close').click();
+                }
+    	    });
+         })
+         
+         $('.save_hashtags_image').click(function(){
+            var hashtags, galeries_id = '';
+
+            var origin   = $('#url').val();
+
+            hashtags = getHashtags();
+
+            $('input.checkbox').each(function(){
+                var value = $(this).val();
+
+                if($(this).is(":checked"))
+                  galeries_id = galeries_id + value + ','
+
+            })
+
+            request = $.ajax({
+    	        url: ""+origin+"home/galerie+save_hashtags_image",
+    	        type: "get",
+                data: "hashtags="+hashtags+"&galeries_id="+galeries_id+"",
+    	        success: function(data) {
+    				$('#myModal_add_hashtags_image .alert-success').removeClass('hide');
                 }
     	    });
          })

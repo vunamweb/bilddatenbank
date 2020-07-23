@@ -106,5 +106,29 @@
                             </div>
                           </div>
                   </div>
+                  
+                  <div class="modal" id="myModal_add_hashtags_image">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                        
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                        
+                              <!-- Modal body -->
+                              <div class="modal-body">
+                                     <div class="alert alert-success hide" role="alert">gespeichert update</div>
+                                     <div class="content">
+                                       <div class="row">
+                                       </div>
+                                     <a href="#" class="btn btn-info save_hashtags_image">Save</a>
+                                     </div>
+         
+                              </div>
+                        
+                            </div>
+                          </div>
+                  </div>
     
     

@@ -859,7 +859,7 @@ function listHashtagsGalery($hashtags) {
         $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
             "  order by $sorting_col_1";
         $res_1 = safe_query($sql);
-        $row_1 = mysqli_fetch_object($res_1);
+        //$row_1 = mysqli_fetch_object($res_1);
 
         while ($row_1 = mysqli_fetch_object($res_1))
         {

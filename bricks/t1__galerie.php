@@ -295,6 +295,35 @@ $filterButton = '';
         }
     }
 
+} else if($galerie && $galerie == 'save_hashtags_image') {
+    $hashtags = $_GET['hashtags'];
+    $hashtags = explode(',', $hashtags);
+
+    $galeries_id = $_GET['galeries_id'];
+    $galeries_id = explode(',', $galeries_id);
+
+    foreach($galeries_id as $item) {
+        if($item != '') {
+            $que  	= "SELECT * FROM `morp_cms_galerie` g WHERE g.gid = ".$item."";
+            $res 	= safe_query($que);
+            $row = mysqli_fetch_object($res);
+            $tags = $row->tags;
+            
+            //echo $tags; die();
+            
+            foreach($hashtags as $hashtag) {
+                if($hashtag != '') {
+                 if($tags == str_replace($hashtag, '', $tags))
+                   $tags .= ',' . $hashtag . ','; 
+                }
+            }
+            
+            $sql = "UPDATE `morp_cms_galerie` set tags = '".$tags."' WHERE gid = ".$item."";
+            //echo $sql; die();
+            safe_query($sql);
+        }
+    }
+
 } else if($galerie && $galerie == 'delfolder') {
     $id = $_GET['id'];
 
@@ -390,6 +419,54 @@ $filterButton = '';
     safe_query($sql);
 
     die();
+} else if($galerie && $galerie == 'add_hashtags_image') {
+    $table = 'morp_tags_category';
+    $primary = 'id';
+    $show_col = "name";
+    $sorting_col = "name";
+    //print_r($_GET); die();
+    
+    $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
+    
+    $sql = "SELECT * FROM $table order by $sorting_col";
+    $res = safe_query($sql);
+    $row = mysqli_fetch_object($res);
+    
+    $num_rows = mysqli_num_rows($res);
+    
+    $count = 1;
+    
+    while ($row = mysqli_fetch_object($res))
+    {
+        $select .= '<option value="">' . $row->$show_col . '</option>';
+    
+        $tags_category_id = $row->$primary;
+    
+        $table = 'morp_tags';
+        $primary_1 = 'tagID';
+        $show_col_1 = "tag";
+        $sorting_col_1 = "tag";
+    
+        $sql = "SELECT * FROM $table where category_id =" . $tags_category_id .
+            "  order by $sorting_col_1";
+            
+        $res_1 = safe_query($sql);
+        
+        while ($row_1 = mysqli_fetch_object($res_1))
+        {
+            $select .= '<option value="' . $row_1->$primary_1 . '">' . $row_1->$show_col_1 .
+                '</option>';
+        }
+    
+        $count++;
+    
+        $select .= ($count < $num_rows) ?
+            '</select><select name="select" class="ui selection dropdown" multiple="">':
+        '</select>';
+    }
+    
+        echo $select; die(); 
+    
 } else if($galerie && $galerie == 'guest') {
     $folder_id = $_GET['folder_id'];
     $data = json_decode($_GET['data']);
@@ -555,8 +632,9 @@ else if($galerie) {
 	$output .= '
 
 
-		<a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Selektierte persönlichen Ordner hinzufügen</a>
-        <a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info show_folder">Bilder hochladen <i class="fa fa-plus"></i></a>
+		<a href="#" class="btn btn-info show_folder mb15" data-toggle="modal" data-target="#myModal_add_folder"> Selektierte persönlichen Ordner hinzufügen <i class="fa fa-plus"></i></a>
+        <a href="#" class="btn btn-info add_hashtags_image mb15" data-toggle="modal" data-target="#myModal_add_hashtags_image"> Suchbegriffe hinzufugen <i class="fa fa-plus"></i></a>
+        <a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info mb15">Bilder hochladen <i class="fa fa-plus"></i> </a>
                   
         <input type="hidden" name="category_id" id="category_id" value='.$galerie.' />
 
