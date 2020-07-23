@@ -82,9 +82,8 @@ else if($neu)
     
     $select = '<select name="category_tag" class="form-control">';
     
-    $sql = "SELECT * FROM $db";
+    $sql = "SELECT * FROM $db order by name";
     $res = safe_query($sql);
-    $row = mysqli_fetch_object($res);
     while ($row = mysqli_fetch_object($res)) {
 		$select .= '<option value='.$row->id.'>'.$row->name.'</option>';
 	}
@@ -135,9 +134,8 @@ function edit($edit)
     
     $select = '<select name="category_tag" class="form-control">';
     
-    $sql = "SELECT * FROM $db";
+    $sql = "SELECT * FROM $db order by name";
     $res = safe_query($sql);
-    $row = mysqli_fetch_object($res);
     while ($row = mysqli_fetch_object($res)) {
 		if($row->id == $category_id)
          $select .= '<option selected value='.$row->id.'>'.$row->name.'</option>';

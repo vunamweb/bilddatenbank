@@ -1,7 +1,7 @@
 <?php
 global $filterButton, $morpheus;
 
-$count = 1;
+$count = 0;
 
 $table = 'morp_tags_category';
 $primary = 'id';
@@ -12,7 +12,6 @@ $select = '<select name="select" class="ui selection search search_'.$count.'" m
 
 $sql = "SELECT * FROM $table order by $sorting_col";
 $res = safe_query($sql);
-$row = mysqli_fetch_object($res);
 
 $num_rows = mysqli_num_rows($res);
 
