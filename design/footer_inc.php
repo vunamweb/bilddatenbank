@@ -909,6 +909,41 @@
          $('.allowedtosave').click(function(){
             addGuest(false);
          })
+         
+         $('.set-folder').click(function(){
+             var parent = $(this).parent().parent();
+             
+             var r = confirm("Are you sure to not set this folder for user?");
+             
+             if(r) {
+               var origin   = $('#url').val();
+               
+               var data = $(this).attr('href');
+               data = data.replace('#', ''); 
+               
+               request = $.ajax({
+           	         url: ""+origin+"home/galerie+setfolder",
+           	         type: "get",
+                     data: "data="+data+"",
+                     success: function(data) {
+               			  parent.hide();
+                      }
+       	      });
+               
+             } else {
+                $(this).find('input').prop('checked', true);
+             }
+         })
+         
+         $('.delete_guest_confirm').click(function(){
+             var id = $(this).attr('href');
+             id = id.replace('#', ''); 
+             
+            var r = confirm("Are you sure to delete this user?");
+            
+            if(r)
+             $('.delete_guest_'+id+'').click();
+         })
     });
 
     $(window).on("load", function() {

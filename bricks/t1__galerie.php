@@ -517,7 +517,7 @@ $filterButton = '';
             if($folder_ids == str_replace($folder_id, '', $folder_ids))
               $folder_ids .= ',' . $folder_id;
 
-            $sql = "UPDATE morp_cms_galerie_guests set folder_ids='$folder_ids' WHERE username = '".$item->username."'";
+            $sql = "UPDATE morp_cms_galerie_guests set folder_ids='$folder_ids' WHERE username = '".$item->email."'";
             safe_query($sql);
 
             $response = 'Update successfully';
@@ -581,6 +581,25 @@ $filterButton = '';
     $sql = "UPDATE morp_intranet_user set uname ='$email', email = '$email', pw = '$pass' WHERE guestID = ".$id."";
     safe_query($sql);
 
+    die();
+} else if($galerie && $galerie == 'setfolder') {
+    $data = $_GET['data'];
+    $data = explode(',', $data);
+    
+    $table = 'morp_cms_galerie_guests';
+    $field = 'folder_ids';
+    $primary = 'guestID';
+    
+    $que  	= "SELECT $field FROM $table WHERE $primary = ".$data[0];
+    $res 	= safe_query($que);
+	$row 	= mysqli_fetch_object($res);
+    
+    $folder_ids = $row->$field;
+    $folder_ids = str_replace($data[1], '', $folder_ids);
+    
+    $que = "update $table set $field = '".$folder_ids."' where $primary = ".$data[0]."";
+    safe_query($que);
+    
     die();
 } else if($galerie && $galerie == 'delguest') {
     $id = $_GET['id'];

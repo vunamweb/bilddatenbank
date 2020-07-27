@@ -61,10 +61,12 @@ if ($_GET['nid'] == 'areafolder')
         $username = explode('@', $username);
         
         $output .= '<tr class=tr_'.$edit.'>
-			<td><a id="user_'.$edit.'" href="#' . $edit . '" class="edit_guest">' . $username[0] . '</a></td>
+			<td><a class="set-folder" href="#'.$edit.','.$_GET['id'].'"><input type="checkbox" checked/></a></td>
+            <td><a id="user_'.$edit.'" href="#' . $edit . '" class="edit_guest">' . $username[0] . '</a></td>
             <td><a href="#' . $edit .
-            '" class="btn btn-info btn-small edit_guest"><i class="fa fa-pencil-square-o"></a></td>
-			<td><a href="#' . $edit . '" class="btn btn-danger btn-small delete_guest"><i class="fa fa-trash-o"></a></td>
+            '" class="btn btn-info btn-small edit_guest"><i class="fa fa-edit"></i></a></td>
+			<td><a href="#' . $edit . '" class="btn btn-danger btn-small delete_guest delete_guest_' . $edit . ' hide"><i class="fa fa-trash-o"></i></a></td>
+		    <td><a href="#' . $edit . '" class="btn btn-danger btn-small delete_guest_confirm"><i class="fa fa-trash-o"></i></a></td>
 		</tr>';
     }
     
