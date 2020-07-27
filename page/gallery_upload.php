@@ -71,8 +71,8 @@ $row = mysqli_fetch_object($res);
 
 $img = $row->gname;
 $ordner = $row->gnname;
-//$path 	=  DIR.'/Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/';
-$path = 'D:/xampp-7-4/htdocs/bilddatenbank' . '/Galerie/' . $morpheus["GaleryPath"] .
+$path 	=  DIR.'/Galerie/'.$morpheus["GaleryPath"].'/'.$ordner.'/';
+//$path = 'D:/xampp-7-4/htdocs/bilddatenbank' . '/Galerie/' . $morpheus["GaleryPath"] .
     '/' . $ordner . '/';
 
 

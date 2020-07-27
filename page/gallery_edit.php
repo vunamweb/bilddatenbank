@@ -91,8 +91,8 @@ if($func == 'editgalery') {
 
         $output .= '<div class="col-md-7">';
 
-        $output .= '<p class="lead">Bildname Mathilda Kinderfreizeit</p>';
-        $output .= '<p class="lead">Engel fliegen, <b>'.str_replace('.jpg', '', $row->gname).'</b></p>';
+        $output .= '<p class="lead">Bildname: ';
+        $output .= '<b>'.str_replace('.jpg', '', $row->gname).'</b></p>';
 
 
         $output .= '<div class="image_information">';
