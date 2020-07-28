@@ -129,7 +129,7 @@ $filterButton = '';
         </div>
 
 ';
-    $output = ($total_search > 0) ? $output : '<br> <input type="hidden" name="category_id" id="category_id" value='.$category_id.' />  No data';
+    $output = ($total_search > 0) ? $output : '<br> <input type="hidden" name="category_id" id="category_id" value='.$category_id.' />  Keine Daten';
 
  echo $output; die();
 } else if($galerie && $galerie == 'update') {
@@ -374,7 +374,7 @@ $filterButton = '';
 
     $output .= '</div>';
 
-    $output = ($x !=0) ? $output : 'No data';
+    $output = ($x !=0) ? $output : 'Keine Daten';
 } else if($galerie && $galerie == 'areafoldermodal') {
     $folder_id = $_GET['id'];
     $table = 'morp_cms_galerie_folders_images';
@@ -396,7 +396,7 @@ $filterButton = '';
 
     $output .= '</div>';
 
-    $output = ($x !=0) ? $output : 'No data';
+    $output = ($x !=0) ? $output : 'Keine Daten';
 
     echo $output; die();
 } else if($galerie && $galerie == 'delareafolderimg') {
@@ -559,7 +559,7 @@ $filterButton = '';
 		</div>
 		<p>
 			<button ref='.$id.' class="btn btn-success save_guest">
-				Save
+				Sichern
 			</button>
         </p>
 

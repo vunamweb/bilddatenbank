@@ -120,7 +120,7 @@
 
 	            <div id="navbar" class="navbar-collapse">
 	                <ul class="nav navbar-nav pull-right">
-		                <li><a href="<?php echo $dir; ?>">All</a></li>
+		                <li><a href="<?php echo $dir; ?>">Alle</a></li>
 <?php
 	$que  	= "SELECT gntextde, gnname, gnid FROM `morp_cms_galerie_name` WHERE 1 order by gnname";
 	$res 	= safe_query($que);

@@ -1,7 +1,7 @@
 <a href="#" class="right_menu"><i class='fa fa-angle-double-left'></i></a>
 <div class="right_content">
 <h4>
-	Area Folder to work with
+	Freigabeordner
 </h4>
 <ul>
 <?php
@@ -42,7 +42,7 @@ if ($_GET['nid'] == 'areafolder')
     $output .= '<div class="panel panel-default">
                  <div class="panel-heading">
                    <h4 class="panel-title">
-                      <a data-toggle="collapse" data-target="#guest_area">Guest management</a>
+                      <a data-toggle="collapse" data-target="#guest_area">Gästeverwaltung</a>
                    </h4> 
                  </div>
                   
@@ -88,7 +88,7 @@ if ($_GET['nid'] == 'areafolder')
            </h4>
         </div>
         <div class="content collapse" id="access_area">
-    		<div class="alert alert-error hide" role="alert">Please check mandatory fields</div>
+    		<div class="alert alert-error hide" role="alert">Bitte Pflichtfeld ausfüllen</div>
             <div class="alert alert-success alert-success-1 hide" role="alert">Save successfully</div>
             <div class="form-group">
     			<input type="text" class="form-control setform hide" name="username" id="username" placeholder="Username" />
@@ -101,22 +101,22 @@ if ($_GET['nid'] == 'areafolder')
     		</div>
             <div class="form-group">
     			<label for="start">
-    				Start date access
+    				 Zugriff ab:
     			</label>
     			<input type="date" class="form-control setform" name="start_dat" id="start_dat" />
     		</div>
     		<div class="form-group">
     			<label for="start">
-    				End date access
+    				Zugriff beenden:
     			</label>
     			<input type="date" class="form-control setform" name="end_dat" id="end_dat"  />
     		</div>
     		<p>
     			<button class="btn btn-success allowedtosave" ref="">
-    				Save
+    				Sichern
     			</button>
                 <button class="btn btn-success allowedtosend" ref="">
-    				 Save & Send Login
+    				 Sichern und Zugang senden
     			</button>
     		</p>
     	<input type="hidden" name="folder_id" id="folder_id" value="<?php echo $_GET['id'] ?>" />
