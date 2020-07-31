@@ -171,7 +171,7 @@ $filterButton = '';
         $textde = $row->gtextde;
         $hashtags = $row->tags;
         $keyWord = $row->keyword;
-        $author = $row->author;
+        $author = $row->;
         
 
         $src = $dir . 'Galerie/' . $morpheus['GaleryPath'] . '/' . $data[1] . '/' . $data[0] . '/' . $morpheus['large'] . '/' . set_name_image($row->gname);
@@ -213,7 +213,7 @@ $filterButton = '';
 
         $output .= '<div class="image_information">';
 
-        $output .= '<div class="infor_row"><p class="property">Autor:</p> <p class="value"> '.$author.' </p></div>';
+        $output .= '<div class="infor_row"><p class="property">Autor:</p> <p class="value"> '.$_SESSION["author"].' </p></div>';
         $output .= '<div class="infor_row"><p class="property">Datum Update:</p> <p class="value"> '.euro_dat($infor->date).'</p></div>';
         $output .= '<div class="infor_row"><p class="property">Datum Orginal:</p> <p class="value"> '.$orginalDate.'</p></div>';
         $output .= '<div class="infor_row"><p class="property">Größe:</p> <p class="value"> '.$infor->width.' * '.$infor->height.' Pixel / '.$width_cm.' cm * '.$height_cm.' cm   </p></div>';

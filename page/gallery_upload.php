@@ -11,7 +11,6 @@ $table = 'morp_tags_category';
 $primary = 'id';
 $show_col = "name";
 $sorting_col = "name";
-//print_r($_GET); die();
 
 $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
 
@@ -104,6 +103,8 @@ $output .= '<form>
         <input type="hidden" id="gnid" value=' . $galerie . ' />
         <input type="hidden" id="dir" value=' . $path . ' />
         <input type="hidden" id="uploadScript" value=' . $uploadScript . ' />
+        <input type="hidden" id="vname" value=' . $_SESSION['vname'] . ' />
+        <input type="hidden" id="nname" value=' . $_SESSION['nname'] . ' />
      </form>';
 
 $js = '
@@ -115,8 +116,8 @@ $js = '
 				\'formData\'         : {
 									   \'timestamp\' : \'' . $timestamp . '\',
 									   \'token\'     : \'' . md5('pixeld' . $timestamp) . '\',
-									   \'gnid\'	   	: \'' . $galerie . '\',
-									   \'dir\'	   	: \'' . $path . '\'
+                                       \'gnid\'	   	: \'' . $galerie . '\',
+                                       \'dir\'	   	: \'' . $path . '\'
 				                     },
 				\'queueID\'          : \'queue\',
 				\'uploadScript\'     : \'' . $dir . 'uploadifive/uploadifive_galerie.php\',

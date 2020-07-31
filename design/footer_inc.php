@@ -499,6 +499,8 @@
 
          var keyword = $('#keyword').val();
          var hashtags = getHashtags();
+         var author = $('#vname').val() + ' ' + $('#nname').val() ;
+         
 
          if(hashtags == '') {
             alert('you need to fill hashtag');
@@ -513,7 +515,8 @@
                 'gnid'	   	: ''+gnid+'',
                 'dir'	   	: ''+dir+'',
                 'hashtags'	   	: ''+hashtags+'',
-                'keyword'	   	: ''+keyword+''
+                'keyword'	   	: ''+keyword+'',
+                'author'	   	: ''+author+'',
             },
             $('#file_upload').uploadifive('upload');
       })

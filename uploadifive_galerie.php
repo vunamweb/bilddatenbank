@@ -20,7 +20,6 @@ dbconnect();
 $gnid = $_POST["gnid"];
 $keyword = $_POST['keyword'];
 $hashtags = $_POST['hashtags'];
-$author = $_POST['author'];
 
 if (!$gnid)
     exit();
@@ -87,7 +86,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
     // print_r($fileParts);
     if (in_array(strtolower($fileParts['extension']), $fileTypes))
     {
-        setData($author,$hashtags, $keyword, $file, $uploadDir, $gnid, json_encode($file_infor));
+        setData($hashtags, $keyword, $file, $uploadDir, $gnid, json_encode($file_infor));
 
         $insert_id = $mylink->insert_id;
         
@@ -128,7 +127,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
 }
 
 
-function setdata($author, $hashtags, $keyword, $file, $uploadDir, $gnid, $file_infor)
+function setdata($hashtags, $keyword, $file, $uploadDir, $gnid, $file_infor)
 {
     /*$file_dir = $uploadDir . '' . $file;
 
@@ -150,6 +149,7 @@ function setdata($author, $hashtags, $keyword, $file, $uploadDir, $gnid, $file_i
 
     $file_infor = json_encode($file_infor);*/
 
+
     if (!$date)
         $date = date(Y . "-" . m . "-" . d);
 
@@ -167,7 +167,9 @@ function setdata($author, $hashtags, $keyword, $file, $uploadDir, $gnid, $file_i
     else
         $sql = "INSERT into ";
     
-    $sql .= " morp_cms_galerie SET author ='$author', tags='$hashtags', keyword='$keyword', gnid=$gnid, gname='$file', another_infor='$file_infor', `sort`=$anz, gdatum='$date'";
+    $author = $_SESSION["author"];
+
+    $sql .= " morp_cms_galerie SET author='$author', tags='$hashtags', keyword='$keyword', gnid=$gnid, gname='$file', another_infor='$file_infor', `sort`=$anz, gdatum='$date'";
 
     echo $sql;
     if ($edit)
