@@ -433,7 +433,7 @@ $filterButton = '';
     
     $sql = "SELECT * FROM $table order by $sorting_col";
     $res = safe_query($sql);
-    $row = mysqli_fetch_object($res);
+    //$row = mysqli_fetch_object($res);
     
     $num_rows = mysqli_num_rows($res);
     
