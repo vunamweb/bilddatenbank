@@ -835,6 +835,8 @@ function listHashtagsGalery($hashtags) {
     $show_col = "name";
     $sorting_col = "name";
 
+    $hashtags = explode(',', $hashtags);
+
     $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
 
     $sql = "SELECT * FROM $table order by $sorting_col";
@@ -863,7 +865,7 @@ function listHashtagsGalery($hashtags) {
 
         while ($row_1 = mysqli_fetch_object($res_1))
         {
-            $selected = ($hashtags != str_replace($row_1->$primary_1, '', $hashtags)) ? 'selected' : '';
+            $selected = (in_array($row_1->$primary_1, $hashtags)) ? 'selected' : '';
             $select .= '<option '.$selected.' value="' . $row_1->$primary_1 . '">' . $row_1->$show_col_1 . '</option>';
         }
 
@@ -884,6 +886,8 @@ function HashtagsGalery($hashtags) {
     $primary = 'id';
     $show_col = "name";
     $sorting_col = "name";
+
+    $hashtags = explode(',', $hashtags);
 
     $select = '';
 
@@ -911,7 +915,8 @@ function HashtagsGalery($hashtags) {
 
         while ($row_1 = mysqli_fetch_object($res_1))
         {
-            if(($hashtags != str_replace($row_1->$primary_1, '', $hashtags)))
+            if(in_array($row_1->$primary_1, $hashtags))
+            //if(($hashtags != str_replace($row_1->$primary_1, '', $hashtags)))
                $select .= '<strong>#'.$row_1->$show_col_1.'&nbsp;&nbsp</strong>';
         }
 

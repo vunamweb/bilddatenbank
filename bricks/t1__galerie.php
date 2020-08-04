@@ -145,6 +145,7 @@ $filterButton = '';
 
     if($table && $feld && $id) {
     	$sql = "UPDATE $table set $pos_1='$text', $pos_2='$hashtags', $pos_3='$keyWord' WHERE $feld=$id";
+        //echo $sql; die();
         safe_query($sql);
     }
 } else if($galerie && $galerie == 'modal') {

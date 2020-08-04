@@ -22,7 +22,7 @@
         							<input type="text" class="form-control" name="suche" id="suche" placeholder=""<?php echo isset($_GET["suche"]) ? ' value="'.$_GET["suche"].'"' : ''; ?>>
         				</div>
                         <div class="form-group next">
-        				   <input type="submit" value="Search" class="submit" />
+        				   <input type="submit" value="Suchen" class="submit" />
                            <!--<select id="type_photo" data-show-content="true" class="form-control">
                                 <option data-content=" Alle"></option>
                                 

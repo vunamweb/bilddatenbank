@@ -1661,3 +1661,11 @@ a.delete_folder {
 #myModal_add_hashtags_image #sel-cont {
     margin-bottom: 20px;
 }
+
+.edit_ .fa {
+    color: #000
+}
+
+.show_edit input {
+    width: 100%
+}
