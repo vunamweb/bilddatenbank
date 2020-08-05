@@ -81,7 +81,7 @@
 
         var result = '';
 
-        $('a.transition').each(function(){
+        $('a.ui.label').each(function(){
             result = result + $(this).attr('data-value') + ',';
         })
 
