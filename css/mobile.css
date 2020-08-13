@@ -1,5 +1,18 @@
+@media (max-width: 1400px) {
+	.grid-sizer, .grid-item {
+	    width: 33% !important;
+	}
+}
+
+
 @media (max-width: 1200px) { body, * { font-size: 16px; } }
-@media (max-width: 992px) { body, * { font-size: 14px; } }
+@media (max-width: 992px) {
+	body, * { font-size: 14px; }
+	.grid-sizer, .grid-item {
+	    width: 50% !important;
+	}
+	.infor_pagination, .infor_number { width: 100%; display: block; margin-left: 0; text-align: center; }
+}
 @media (max-width: 500px) { body, * { font-size: 13px; } }
 @media (min-width: 768px) {
 	#navbarMeta .navbar-nav > li > a { padding-top: 6px; padding-bottom: 4px; }
@@ -20,96 +33,96 @@
     .nav-link.meta-nav.end {
         width: 200px;
     }
-    
+
     #navbarMeta { width: auto }
-    
+
     .navbar-brand>img { width: 100px !important; margin-top: 0; }
-    
+
     .navbar-dark .navbar-brand { margin: 0 }
-    
+
     #navbarMeta { margin-top: 0; }
-    
-    #navbarMeta .form-group.next { 
+
+    #navbarMeta .form-group.next {
         display: none;
     }
-    
+
     .navbar-default .navbar-form {
         padding-left: 0;
     }
-    
+
     .parent_div {
         width: 30px;
     }
-    
+
     #navbarMeta .btn {
         left: 109px;
     }
-    
+
     .sidenav {
         top: 200px;
         width: 200px;
         padding-left: 10px;
     }
-    
+
     #navbar .navbar-nav > li > a {
         font-size: .8em;
     }
-    
+
     #navbar .nav > li {
         padding: 0px 5px 0px;
     }
-    
+
     #navbar ul.nav {
         text-align: left;
     }
-    
+
     .main.content {
         padding: 20px 10px;
     }
-    
+
     .right-board a.right_menu {
         display: none;
     }
-    
+
     .ui.search.dropdown{
         width: 180px;
         min-width: auto !important;
         margin-left: 5px;
     }
-    
+
     .navbar-form {
         padding: 0 2px;
     }
-    
+
     #main {
       margin-left: 189px;
     }
-    
+
     .left_bottom {
         margin-bottom: 10px;
         margin-right: 10px;
         display: block;
     }
-    
+
     .right-board {
         right: 30%;
     }
-    
+
     .filter_search a {
         padding-left: 5px;
         font-size: 9px;
     }
-    
+
     .grid-sizer, .grid-item {
         width: 100% !important;
     }
-    
+
     .bild_her {
         bottom: auto;
         top: -34px;
         left: 100px;
     }
-    
+
     .modal_new .content {
         display: block;
         padding-top: 20px;

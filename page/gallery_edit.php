@@ -94,7 +94,6 @@ if($func == 'editgalery') {
         $output .= '<p class="lead">Bildname: ';
         $output .= '<b>'.str_replace('.jpg', '', $row->gname).'</b></p>';
 
-
         $output .= '<div class="image_information">';
 
         $output .= '<div class="infor_row"><p class="property">Autor:</p> <p class="value"> '.$_SESSION["author"].' </p></div>';
@@ -116,17 +115,9 @@ if($func == 'editgalery') {
 
         $output .= '</div>';
 
+        $output .= '</div>';
 
-
-
-         /*$output .= '<div class="col-md-5 JJJ">
-                       <label class="des_'.$gid.'">'.$textde.'</label><br>' .
-                       '<div class="hashtag_'.$gid.'">' . HashtagsGalery($hashtags). '</div>' .
-                    '</div>';*/
-
-         $output .= '</div>';
-
-         $output .=
+        $output .=
 
             '
             <div class="row relative show_edit hide">
