@@ -1193,6 +1193,19 @@ a.delete_folder {
 }
 .infor_pagination a {
     margin-left: 5px;
+    color: #000;
+    width: 20px !important;
+    display: inline-block;
+}
+.infor_pagination a.number_pagination {
+    display: none;
+}
+.infor_pagination a.number_pagination.active {
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+.infor_pagination a.previous_pagination, .infor_pagination a.next_pagination {
+    background: #ccc;
 }
 .active {
     color: red;
