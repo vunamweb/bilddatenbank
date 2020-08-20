@@ -33,6 +33,7 @@
     </div>
 </footer>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>!-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -186,19 +187,19 @@
 
          $('a.delete_2').click(function(){
              var url = getUrl();
-             
+
              var r = confirm("Are you sure to delete?");
-             
+
              var id = $(this).attr('href');
              id= id.replace('#', '');
-             
+
              url = url + '?del='+id+'';
-             
-             
+
+
              if(r)
               window.location.href = url;
          })
-         
+
          $('.delete_galerie_folders_images_confirm').click(function(){
             var r = confirm("Are you sure to delete?");
 
@@ -213,19 +214,19 @@
              $(this).parent().find('.delete_galerie_folders_images_').click();
          })
      }
-     
+
      function getUrl() {
-       
+
        return window.location.origin + window.location.pathname;
        var url = window.location.href;
        var url_1 = url;
-       
+
        url = url.split('?');
        url = (url.length > 0) ? url[0] : url.split('#');
-       
+
        return (url.length > 0) ? url[0] : url_1;
      }
-     
+
      function setShowGallery() {
         $('.show_galery').click(function(){
             var origin   = $('#url').val();
@@ -377,7 +378,7 @@
                 }
     	    });
          })
-         
+
          $('.add_hashtags_image').click(function(){
             var origin   = $('#url').val();
 
@@ -444,7 +445,7 @@
               invitation[countInvite].email = email.val();
               invitation[countInvite].start_date = start_date.val();
               invitation[countInvite].end_date = end_date.val();
-              
+
               var origin   = $('#url').val();
 
               var folder_id = $('#folder_id').val();
@@ -461,7 +462,7 @@
               //countInvite++;
             }
      }
-     
+
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -500,7 +501,7 @@
          var keyword = $('#keyword').val();
          var hashtags = getHashtags();
          var author = $('#vname').val() + ' ' + $('#nname').val() ;
-         
+
 
          if(hashtags == '') {
             alert('you need to fill hashtag');
@@ -534,6 +535,23 @@
         showFolder();
         setSelectIcon();
         setHeightFooter();
+
+        $('.grid').imagesLoaded()
+		  .always( function( instance ) {
+		    console.log('all images loaded');
+		    $("#wait").addClass("off");
+		  })
+		  .done( function( instance ) {
+		    console.log('all images successfully loaded');
+		  })
+		  .fail( function() {
+		    console.log('all images loaded, at least one is broken');
+		  })
+		  .progress( function( instance, image ) {
+		    var result = image.isLoaded ? 'loaded' : 'broken';
+		    console.log( 'image is ' + result + ' for ' + image.img.src );
+		});
+
 
         $('.navbar-toggler').click(function(){
             var width = $(window).width();
@@ -610,9 +628,9 @@
 
          $('.large_image').click(function(){
            //setTimeout(function(){ $('.modal-backdrop.show').css('opacity', 0); }, 500);
-           
+
          })
-         
+
          $('.navbar-form').submit(function(e){
             e.preventDefault();
 
@@ -632,7 +650,7 @@
 
             var category_id = $('#category_id').val();
 
-            //call ajax to changen content
+            //call ajax to change content
                     $.ajax({
                         url: ''+origin+'/home/galerie+search',
                         type: 'get',
@@ -658,6 +676,18 @@
                             })
 
                             reloadMansory();
+
+                            $('a.number_pagination input').keypress(function(){
+                               var page = $(this).val();
+                               var currentPage = $('#page').val();
+                               
+                               if(currentPage != page) {
+                                   $('#page').val(page);
+
+                                   $('.navbar-form').submit();
+                                }
+
+                            })
 
                             $('.number_pagination').click(function(){
                                 var currentPage = $('#page').val();
@@ -703,6 +733,8 @@
                               var page = $('#page').val();
 
                               var totalPage = $('.infor_pagination .number_pagination').length;
+
+							  console.log("page: "+page+" - pagetotal: "+totalPage);
 
                               if(page < totalPage) {
                                  $('#page').val(parseInt(page) + 1);
@@ -784,7 +816,7 @@
                 }
     	    });
          })
-         
+
          $('.save_hashtags_image').click(function(){
             var hashtags, galeries_id = '';
 
@@ -912,18 +944,18 @@
          $('.allowedtosave').click(function(){
             addGuest(false);
          })
-         
+
          $('.set-folder').click(function(){
              var parent = $(this).parent().parent();
-             
+
              var r = confirm("Are you sure to not set this folder for user?");
-             
+
              if(r) {
                var origin   = $('#url').val();
-               
+
                var data = $(this).attr('href');
-               data = data.replace('#', ''); 
-               
+               data = data.replace('#', '');
+
                request = $.ajax({
            	         url: ""+origin+"home/galerie+setfolder",
            	         type: "get",
@@ -932,18 +964,18 @@
                			  parent.hide();
                       }
        	      });
-               
+
              } else {
                 $(this).find('input').prop('checked', true);
              }
          })
-         
+
          $('.delete_guest_confirm').click(function(){
              var id = $(this).attr('href');
-             id = id.replace('#', ''); 
-             
+             id = id.replace('#', '');
+
             var r = confirm("Are you sure to delete this user?");
-            
+
             if(r)
              $('.delete_guest_'+id+'').click();
          })

@@ -64,7 +64,7 @@ $filterButton = '';
 
     $category_id = ($_GET['category_id'] != '') ? $_GET['category_id'] : 0;
 
-    $start = $number * ($page - 1);
+    
 
     $hashtags = $_GET['hashtags'];
     $hashtags = explode(',', $hashtags);
@@ -72,8 +72,11 @@ $filterButton = '';
     $total_search = get_total_search($seach_value, $hashtags, $category_id);
     $number = ($number > $total_search) ? $total_search : $number;
 
-    $count_page = ($total_search > 0) ? round($total_search/$number, 0, PHP_ROUND_HALF_UP) : 1;
-    //echo $total_search;
+    $count_page = ($total_search > 0) ? ceil($total_search/$number) : 1;
+    $page = ($page < $count_page) ? $page : $count_page;
+
+    $start = $number * ($page - 1);
+    //echo $count_page;
 
     $sort_gallery = sort_array_gallery();
 
@@ -94,25 +97,35 @@ $filterButton = '';
     //echo $que;
     $res 	= safe_query($que);
 
+    $start_number = ($start + $number > $total_search) ? $total_search : ($start + $number);
+
     $output = '<br><a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Selektierte persönlichen Ordner hinzufügen</a>';
 
-    $output .= '<div class="infor_number col-md-6">'.($start + 1).'-'.($start + $number).' of '.$total_search.'</div>';
+    $output .= '<div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';
 
     $output .= '<div class="infor_pagination">';
 
     $output .= '<a href="#" class="previous_pagination"><</a>';
 
     for($i = 1; $i <= $count_page; $i++){
-        $active = '';
+        //$active = '';
 
-        if($i == $page)
-          $active = 'active';
+        //if($i == $page)
+          //$active = 'active';
+        
+        $output .= ($i == $page) ? '<a class="number_pagination active"><input type="text" value="'.$i.'"/></a>' :
+        '<a href="#'.$i.'" class="number_pagination">'.$i.'</a>'; 
 
-        $output .= '<a href="#'.$i.'" class="number_pagination '.$active.'">'.$i.'</a>';
+        //$output .= '<a href="#'.$i.'" class="number_pagination '.$active.'">'.$i.'</a>';
+        //$output .= '<a href="#'.$i.'" class="number_pagination '.$active.'"><input type="text" value="'.$i.'"/></a>';
+        
     }
 
 
     $output .= '<a href="#" class="next_pagination">></a>';
+
+    $output .= '<a class="number_page">insgesamt '.$count_page.' Seiten</a>';
+    
 
     $output .= '</div><br>';
 
