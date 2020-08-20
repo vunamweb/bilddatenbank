@@ -23,7 +23,7 @@
 <!-- <link href="<?php echo $dir; ?>css/zusatz.css" media="screen, projection" rel="stylesheet" type="text/css"> -->
 <link rel="stylesheet" href="<?php echo $dir; ?>css/selectize.css">
 <link href="<?php echo $dir; ?>css/print.css" media="print" rel="stylesheet" type="text/css">
-<!-- semantic for dropdownmenu !--> 
+<!-- semantic for dropdownmenu !-->
 <link href="https://semantic-ui.com/dist/semantic.css" media="screen, projection" rel="stylesheet" type="text/css">
 <!--[if IE]>
 <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -35,7 +35,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
+<link rel="apple-touch-icon" sizes="180x180" href="<?php echo $dir; ?>fav/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="<?php echo $dir; ?>fav/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="<?php echo $dir; ?>fav/favicon-16x16.png">
+<link rel="shortcut icon" href="<?php echo $dir; ?>fav/favicon.ico">
 <?php if ($hn_id == 3) { ?>
 <link rel="stylesheet" href="<?php echo $dir; ?>assets/css/magnific-popup.css">
 <link rel="stylesheet" href="<?php echo $dir; ?>assets/css/style.css">
@@ -63,5 +66,15 @@ if($galerie || $news || $hashtag) { ?>
 </style>
 <?php } ?>
 
+<style>
+	.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+    	color: #B3B3B3;
+	}
+	.navbar-dark .navbar-nav .nav-link.active { color: #666; }
+	.lightBlue {
+    	background: #FFDD00 !important;
+		border-color: #FFDD00 !important;
+	}
+</style>
 </head>
 <body>

@@ -1,3 +1,4 @@
+<div id="wait"><img src="images/YlWC.gif" class="waiting" /></div>
 <?php global $filterButton; $morpheus; ?>
 	<section>
 		<div class="container-xl">
@@ -15,8 +16,8 @@
 						<?php if(get_guest_id_of_intranet_user() == 0) { ?>
                          <?php include( 'page/right.php') ?>
                         <?php } ?>
-			    </div> 
-                    
+			    </div>
+
             </div>
 		</div>
 	</section>
@@ -24,7 +25,7 @@
 	</div>
     <input type="hidden" id="url" value="<?php echo $morpheus['url'] ?>" />
     <input type="hidden" id="page" value="1" />
-    
+
     <div class="modal" id="myModal_area_folder">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -40,7 +41,7 @@
 							</div>
 						</div>
 	</div>
-    
+
     <div class="modal_new modal" id="myModal_edit_image">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -57,29 +58,29 @@
 							</div>
 						</div>
 					</div>
-                    
+
                     <div class="modal modal_new" id="myModal">
                           <div class="modal-dialog">
                             <div class="modal-content">
-                        
+
                               <!-- Modal Header -->
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                               </div>
-                        
+
                               <!-- Modal body -->
                               <div class="modal-body">
                                 Modal body..
                               </div>
-                        
+
                             </div>
                           </div>
                   </div>
-                  
+
                   <div class="modal" id="myModal_add_folder">
                           <div class="modal-dialog">
                             <div class="modal-content">
-                        
+
                               <!-- Modal Header -->
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -92,7 +93,7 @@
                                    </div>
                                 </div>
                               </div>
-                        
+
                               <!-- Modal body -->
                               <div class="modal-body">
                                      <div class="content">
@@ -100,22 +101,22 @@
                                        </div>
                                      <a href="#" class="btn btn-info save_button">Save</a>
                                      </div>
-         
+
                               </div>
-                        
+
                             </div>
                           </div>
                   </div>
-                  
+
                   <div class="modal" id="myModal_add_hashtags_image">
                           <div class="modal-dialog">
                             <div class="modal-content">
-                        
+
                               <!-- Modal Header -->
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                               </div>
-                        
+
                               <!-- Modal body -->
                               <div class="modal-body">
                                      <div class="alert alert-success hide" role="alert">gespeichert update</div>
@@ -124,11 +125,10 @@
                                        </div>
                                      <a href="#" class="btn btn-info save_hashtags_image">Save</a>
                                      </div>
-         
+
                               </div>
-                        
+
                             </div>
                           </div>
                   </div>
-    
-    
+

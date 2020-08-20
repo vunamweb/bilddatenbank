@@ -25,7 +25,7 @@
         				   <input type="submit" value="Suchen" class="submit" />
                            <!--<select id="type_photo" data-show-content="true" class="form-control">
                                 <option data-content=" Alle"></option>
-                                
+
                                 <option data-content="<i class='fa fa-camera'></i> Fotos"></option>
                                 <option data-content="<i class='fa fa-play'></i> Videos"></option>
                                 <option data-content="<i class='fa fa-paint-brush'></i> Vektoren"></option>
@@ -33,14 +33,14 @@
                         </div>
         				 <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i></button>
              </form>
-             
+
              <div class="pull-left form-group parent_div">
                   <select class="number_page form-control" data-show-content="true">
                                   <option <?php if($_SESSION['number_per_page'] == 20) echo 'selected' ?>  value="20">20</option>
                                   <option <?php if($_SESSION['number_per_page'] == 40) echo 'selected' ?> value="40">40</option>
                                   <option <?php if($_SESSION['number_per_page'] == 60) echo 'selected' ?> value="60">60</option>
                                   <option <?php if($_SESSION['number_per_page'] == 80) echo 'selected' ?> value="80">80</option>
-                  </select> 
+                  </select>
              </div>
              <div class="next_1">
                   <label class="">Anzahl Bilder/Videos</label>
@@ -55,9 +55,9 @@
 						<?php echo $nav_meta; ?>
 						<li><a class="nav-link meta-nav end" href="<?php echo $dir; ?>?logout=1"><?php echo substr($profile["vname"],0,1).''.substr($profile["nname"],0,1) ?> abmelden</a></li>
                  </ul>
-	            
+
         </div>
-        
+
 
 <!-- Bereich Naviagtion dynamisch -->
 
@@ -74,7 +74,7 @@
                             <li><a href="<?php echo $dir ?>kategorien/kategorien/">Manager Category</a></li>
                           </ul>
                    </div>
-                   
+
                    <div class="dropdown pull-left">
                           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">HasTag
                           <span class="caret"></span></button>
@@ -83,7 +83,7 @@
                             <li><a href="#">Manager Hastag</a></li>
                           </ul>
                    </div>
-                    
+
                     <!--<ul class="nav navbar-nav navbar-right">
 						<li class="btn btn-default">
                           <a href="<?php echo $dir.$navID[9]; ?>"><i class="fa fa-plus"></i> Categories</a>
@@ -107,7 +107,7 @@
 <?php } ?>
 
     </nav>
-    
+
     <div class="container-full navbar-main">
 	            <div class="navbar-header hide">
 	                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -122,10 +122,12 @@
 	                <ul class="nav navbar-nav pull-right">
 		                <li><a href="<?php echo $dir; ?>">Alle</a></li>
 <?php
+	$galerie = isset($_GET["nid"]) ? $_GET["nid"] : 0;
+
 	$que  	= "SELECT gntextde, gnname, gnid FROM `morp_cms_galerie_name` WHERE 1 order by gnname";
 	$res 	= safe_query($que);
 	while($row = mysqli_fetch_object($res)) {
-		echo '						<li><a href="'.$dir.'home/galerie+'.$row->gnid.'/">'.$row->gnname.'</a></li>
+		echo '						<li'.($galerie == $row->gnid ? ' class="active"' : '').'><a href="'.$dir.'home/galerie+'.$row->gnid.'/">'.$row->gnname.'</a></li>
 ';
 	}
 ?>
