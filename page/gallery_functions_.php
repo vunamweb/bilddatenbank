@@ -337,8 +337,6 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        check_image($ordner, $gid, $img);
-
         $gallery_list .= '
 
 	<div class="grid-item grid-sizer tag ' . $filter . '">
@@ -432,27 +430,6 @@ function set_thumb_gallery_search($res, $sort_gallery)
     return $gallery_list;
 }
 
-function check_image($ordner, $gid, $img) {
-    global $morpheus;
-
-    $targetFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['Original'] . '/' . $img;
-    $ImgThumb = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img));
-    $ImgLarge = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img));
-    
-    $widthThumbResize = $morpheus['thumb_width'];
-    $widthLargeResize = $morpheus['large_width'];
-
-    if(!file_exists($ImgThumb)) {
-        $thumbFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['thumb'] . '/';
-        makeImage($targetFile, $thumbFile, $widthThumbResize, false);
-	}
-
-    if(!file_exists($ImgLarge)) {
-        $largeFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['large'] . '/';
-        makeImage($targetFile, $largeFile, $widthLargeResize, false);
-    }
-}
-
 function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
 {
     global $dir, $morpheus, $js, $mid;
@@ -490,8 +467,6 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        check_image($ordner, $gid, $img);        
-
         $gallery_list .= '
 
 	<div class="grid-item grid-sizer tag ' . $filter . '">
@@ -505,7 +480,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
+                                </div> 
 								<!-- Modal body -->
 								<div class="modal-body">
 								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
@@ -526,7 +501,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
 	          </div>
             </div>
             <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
-            	<img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
+              <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
             </a>
 
 	        <div class="inner">
@@ -866,7 +841,7 @@ function listHashtagsGalery($hashtags) {
 
     $sql = "SELECT * FROM $table order by $sorting_col";
     $res = safe_query($sql);
-
+    
     $num_rows = mysqli_num_rows($res);
 
     $count = 0;
@@ -917,7 +892,7 @@ function HashtagsGalery($hashtags) {
 
     $sql = "SELECT * FROM $table order by $sorting_col";
     $res = safe_query($sql);
-
+    
     $num_rows = mysqli_num_rows($res);
 
     $count = 1;

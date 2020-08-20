@@ -437,7 +437,7 @@ $filterButton = '';
     
     $num_rows = mysqli_num_rows($res);
     
-    $count = 1;
+    $count = 0;
     
     while ($row = mysqli_fetch_object($res))
     {
@@ -647,9 +647,9 @@ else if($galerie) {
 
 	$que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$galerie." AND g.gnid=n.gnid ORDER BY g.sort";
 	$res 	= safe_query($que);
-	$x		= mysqli_num_rows($res);
-
-	$tagListButtons = array();
+    $x		= mysqli_num_rows($res);
+    
+    $tagListButtons = array();
 
 	$output .= '
 
