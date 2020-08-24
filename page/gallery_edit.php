@@ -60,7 +60,7 @@ if($func == 'editgalery') {
                             <div class="alert alert-success hide" role="alert">gespeichert update</div>
                            </div>
                           <div class="col-md-5 FFF">
-                            <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+                            <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . $img.'">
                             <a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $ordner . '/'.$gid.'/'.$morpheus["Original"].'/' . urlencode($row->gname) .
             '" class="bild_her">Bild herunterladen</a>
@@ -191,7 +191,7 @@ else if($galerie) {
 
 <div class="grid-item grid-sizer">
     <div class="gal-item item_image">
-         <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode($img).'">
+         <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . $img.'">
          <div class="edit_delete_image">
           <a href="#'.$gid.'" class="edit_image tool" data-toggle="modal" data-target="#myModal_edit_image"><i class="fa fa-edit"></i></a>
           <a class="delete_galerie_folders_images hide" href="#'.$gid.'"><img src="images/1x/close.png" /></a>
@@ -207,7 +207,7 @@ else if($galerie) {
 
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode($img).'">
+								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . $img.'">
 
                                 </div>
 							</div>

@@ -453,6 +453,17 @@ $im->clear();
 $im->destroy();      
 }
 
+function makeImagejpg($f, $page, $size, $imgFolder, $fileName) {
+$im = new Imagick();
+//$im->setResolution($size,$size);
+$im->readimage($f); 
+$im->setImageFormat('jpg');
+$im->resizeImage($size, $size, imagick::FILTER_LANCZOS, 1);    
+$im->writeImage($imgFolder . $fileName . ".jpg"); 
+$im->clear(); 
+$im->destroy();      
+}
+
 function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400',
     $allpage = 0)
 {
@@ -530,9 +541,10 @@ function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400'
             //			else echo '<img src="eps/psd-'.$f.'.jpg" ><br>';
         } else
         {
+            makeImagejpg($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
             // echo '########## file: '.$fileName;
-            exec("/usr/bin/convert convert -colorspace sRGB -density 300 $f -resize $size\> " .
-                $imgFolder . $fileName . ".jpg");
+            //exec("/usr/bin/convert convert -colorspace sRGB -density 300 $f -resize $size\> " .
+              //  $imgFolder . $fileName . ".jpg");
             // echo 'xx<img src="'.$imgFolder.$fileName.'.jpg" ><br>';
         }
         // else echo '<img src="'.$f.'" ><br>'.$f .' - '. $width. ' - ' . $height;

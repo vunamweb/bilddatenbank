@@ -355,7 +355,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
                               </div>
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
+								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img).'">
 
                                 </div>
 							</div>
@@ -373,7 +373,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
 	              </div>
                 </div>
 	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
-              <img alt="'.$img.'" title="'.$img.'" class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
+              <img alt="'.$img.'" title="'.$img.'" class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img).'">
             </a>
 
 	        <div class="inner">
@@ -436,19 +436,28 @@ function check_image($ordner, $gid, $img) {
     global $morpheus;
 
     $targetFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['Original'] . '/' . $img;
-    $ImgThumb = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img));
-    $ImgLarge = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img));
+    $ImgThumb = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img);
+    $ImgLarge = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img);
     
+    //$ImgThumb = '/home/www/Bilddatenbank/Galerie/kinderbuero/SdK/816/thumb/nambu_02.jpg' ;
+
     $widthThumbResize = $morpheus['thumb_width'];
     $widthLargeResize = $morpheus['large_width'];
 
+    /*if($gid == 816) {
+        echo $ImgThumb . '<br/>' . $ImgLarge . '<br/>';
+        echo file_exists($ImgThumb) . '<br/>' . file_exists($ImgLarge);
+    }*/
+
     if(!file_exists($ImgThumb)) {
         $thumbFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['thumb'] . '/';
+        //echo $ImgThumb . '<br/>';
         makeImage($targetFile, $thumbFile, $widthThumbResize, false);
 	}
 
     if(!file_exists($ImgLarge)) {
         $largeFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['large'] . '/';
+        //echo $ImgLarge . '<br/>';
         makeImage($targetFile, $largeFile, $widthLargeResize, false);
     }
 }
@@ -490,7 +499,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        check_image($ordner, $gid, $img);        
+        //check_image($ordner, $gid, $img);        
 
         $gallery_list .= '
 
@@ -508,7 +517,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
                                 </div>
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
+								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img).'">
 
                                 </div>
 							</div>
@@ -526,7 +535,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
 	          </div>
             </div>
             <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
-            	<img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
+            	<img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img).'">
             </a>
 
 	        <div class="inner">

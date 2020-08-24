@@ -1690,3 +1690,18 @@ a.delete_folder {
 .show_edit input {
     width: 100%
 }
+
+.waiting {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 3;
+    opacity: 0.8;
+    left: 0;
+    text-align: center;
+    top: 0px;
+}
+.off {
+    display: none;
+}

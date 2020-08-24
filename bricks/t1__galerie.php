@@ -190,7 +190,7 @@ $filterButton = '';
 
         $src = $dir . 'Galerie/' . $morpheus['GaleryPath'] . '/' . $data[1] . '/' . $data[0] . '/' . $morpheus['large'] . '/' . set_name_image($row->gname);
 
-        $output .= '<img class="img-responsive" src='.$src.' />';
+        $output .= '<img class="img-responsive" src="'.$src.'" />';
 
         $output .= '<a href="' . $dir . 'download-img.php?dfile=Galerie/' . $morpheus["GaleryPath"] .
             '/' . $data[1]  . '/'.$data[0] .'/'.$morpheus["Original"].'/' . urlencode($row->gname) .

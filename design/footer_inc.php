@@ -359,6 +359,29 @@
         $grid.imagesLoaded().progress( function() {
            $grid.isotope('layout');
         });
+
+        processMansory();
+     }
+
+     function processMansory() {
+          $('.grid').imagesLoaded()
+          .always( function( instance ) {
+            //alert('start');
+            console.log('all images loaded');
+            $("#wait").addClass("off");
+          })
+          .done( function( instance ) {
+            //alert('ok');
+            console.log('all images successfully loaded');
+          })
+          .fail( function() {
+            console.log('all images loaded, at least one is broken');
+          })
+          .progress( function( instance, image ) {
+            var result = image.isLoaded ? 'loaded' : 'broken';
+            console.log( 'image is ' + result + ' for ' + image.img.src );
+            $("#wait").removeClass("off");
+        });
      }
 
      function showFolder() {
@@ -535,23 +558,7 @@
         showFolder();
         setSelectIcon();
         setHeightFooter();
-
-        $('.grid').imagesLoaded()
-		  .always( function( instance ) {
-		    console.log('all images loaded');
-		    $("#wait").addClass("off");
-		  })
-		  .done( function( instance ) {
-		    console.log('all images successfully loaded');
-		  })
-		  .fail( function() {
-		    console.log('all images loaded, at least one is broken');
-		  })
-		  .progress( function( instance, image ) {
-		    var result = image.isLoaded ? 'loaded' : 'broken';
-		    console.log( 'image is ' + result + ' for ' + image.img.src );
-		});
-
+        processMansory();
 
         $('.navbar-toggler').click(function(){
             var width = $(window).width();

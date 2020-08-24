@@ -1,4 +1,4 @@
-<div id="wait"><img src="images/YlWC.gif" class="waiting" /></div>
+<div id="wait" class="waiting"><img src="/images/YlWC.gif"  /></div>
 <?php global $filterButton; $morpheus; ?>
 	<section>
 		<div class="container-xl">
