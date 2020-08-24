@@ -638,7 +638,24 @@ $filterButton = '';
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 // SHOW IMAGES OF CATEGORY
 else if($galerie) {
-	$que  	= "SELECT mid, besucher, gntextde, textde FROM `morp_cms_galerie_name` WHERE gnid=".$galerie;
+    //start add 
+    $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+
+    $number = (isset($_GET['number'])) ? $_GET['number'] : 20;
+    $_SESSION['number_per_page'] = $number;
+
+    $total_search = get_total_search('', '', $galerie);
+    $number = ($number > $total_search) ? $total_search : $number;
+
+    $count_page = ($total_search > 0) ? ceil($total_search/$number) : 1;
+    $page = ($page < $count_page) ? $page : $count_page;
+
+    $start = $number * ($page - 1);
+
+    $start_number = ($start + $number > $total_search) ? $total_search : ($start + $number);
+    //end
+    
+    $que  	= "SELECT mid, besucher, gntextde, textde FROM `morp_cms_galerie_name` WHERE gnid=".$galerie;
 	$res 	= safe_query($que);
 	$row 	= mysqli_fetch_object($res);
 	$x		= $row->besucher;
@@ -658,7 +675,10 @@ else if($galerie) {
 	$profile = getProfile($besitzer);
 */
 
-	$que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$galerie." AND g.gnid=n.gnid ORDER BY g.sort";
+    $que  	= "SELECT * FROM `morp_cms_galerie_name` n, `morp_cms_galerie` g WHERE g.gnid=".$galerie." AND g.gnid=n.gnid ORDER BY g.sort";
+    //add
+    $que .= " LIMIT ".$start.",".$number."";
+    //end
 	$res 	= safe_query($que);
     $x		= mysqli_num_rows($res);
     
@@ -672,15 +692,37 @@ else if($galerie) {
         <a href="'.$dir.$navID[10].'edit+'.$galerie.'/" class="btn btn-info mb15">Bilder hochladen <i class="fa fa-plus"></i> </a>
                   
         <input type="hidden" name="category_id" id="category_id" value='.$galerie.' />
+    ';
+    
+    //start add 
+    $output .= '<br><div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';
 
-        <div class="grid">
-	';
+    /*$output .= '<select class="number_page form-control" data-show-content="true">';
+    $output .= ($_SESSION["number_per_page"] == 5) ? '<option selected value="20">20</option>' : '<option value="20">20</option>';
+    $output .= ($_SESSION["number_per_page"] == 40) ? '<option selected value="40">40</option>' : '<option value="40">40</option>';
+    $output .= ($_SESSION["number_per_page"] == 60) ? '<option selected value="60">60</option>' : '<option value="60">60</option>';
+    $output .= ($_SESSION["number_per_page"] == 80) ? '<option selected value="80">80</option>' : '<option value="80">80</option>';
+    $output .= '</select>';*/
 
-	$output .= set_thumb_gallery($res, 1);
+    $output .= '<div class="infor_pagination">';
 
-	$output .= '
-		</div>
-';
+    $output .= '<a href="#" class="previous_pagination"><</a>';
+
+    for($i = 1; $i <= $count_page; $i++){
+        $output .= ($i == $page) ? '<a class="number_pagination active"><input type="text" value="'.$i.'"/></a>' :
+        '<a href="#'.$i.'" class="number_pagination">'.$i.'</a>'; 
+    }
+
+    $output .= '<a href="#" class="next_pagination">></a>';
+
+    $output .= '<a class="number_page">insgesamt '.$count_page.' Seiten</a>';
+    
+    $output .= '</div><br><br>';
+    //end
+    
+    $output .='<div class="grid">';
+    $output .= set_thumb_gallery($res, 1);
+    $output .= '</div>';
 
 $filterButton = '';
 /*$filterButton = '

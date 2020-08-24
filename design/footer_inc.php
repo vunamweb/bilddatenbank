@@ -486,6 +486,58 @@
             }
      }
 
+     function pagination() {
+                           $('a.number_pagination input').keypress(function(){
+                               var page = $(this).val();
+                               var currentPage = $('#page').val();
+                               
+                               if(currentPage != page) {
+                                   $('#page').val(page);
+
+                                   $('.navbar-form').submit();
+                                }
+
+                            })
+
+                            $('.number_pagination').click(function(){
+                                var currentPage = $('#page').val();
+
+                                var page = $(this).attr('href');
+                                page = page.replace('#', '');
+
+                                if(currentPage != page) {
+                                   $('#page').val(page);
+
+                                   $('.navbar-form').submit();
+                                }
+                            })
+
+                            $('.previous_pagination').click(function(){
+                              var page = $('#page').val();
+
+                              if(page > 1) {
+                                 $('#page').val(parseInt(page) - 1);
+
+                                 $('.navbar-form').submit();
+                              }
+                           })
+
+                           $('.next_pagination').click(function(){
+                              var page = $('#page').val();
+
+                              var totalPage = $('.infor_pagination .number_pagination').length;
+
+							                console.log("page: "+page+" - pagetotal: "+totalPage);
+
+                              if(page < totalPage) {
+                                 $('#page').val(parseInt(page) + 1);
+
+                                 $('.navbar-form').submit();
+                              }
+                           })
+
+         }
+
      $('.linkbox, .cta-container').on("click", function() {
 		ref = $(this).attr("ref");
 		location.href=ref;
@@ -559,6 +611,7 @@
         setSelectIcon();
         setHeightFooter();
         processMansory();
+        pagination();
 
         $('.navbar-toggler').click(function(){
             var width = $(window).width();
@@ -683,31 +736,7 @@
                             })
 
                             reloadMansory();
-
-                            $('a.number_pagination input').keypress(function(){
-                               var page = $(this).val();
-                               var currentPage = $('#page').val();
-                               
-                               if(currentPage != page) {
-                                   $('#page').val(page);
-
-                                   $('.navbar-form').submit();
-                                }
-
-                            })
-
-                            $('.number_pagination').click(function(){
-                                var currentPage = $('#page').val();
-
-                                var page = $(this).attr('href');
-                                page = page.replace('#', '');
-
-                                if(currentPage != page) {
-                                   $('#page').val(page);
-
-                                   $('.navbar-form').submit();
-                                }
-                            })
+                            pagination();
 
                             $(".loveit").click(function () {
                         	    var obj = $(this);
@@ -725,31 +754,7 @@
                           			}
                         	    });
                             });
-
-                           $('.previous_pagination').click(function(){
-                              var page = $('#page').val();
-
-                              if(page > 1) {
-                                 $('#page').val(parseInt(page) - 1);
-
-                                 $('.navbar-form').submit();
-                              }
-                           })
-
-                           $('.next_pagination').click(function(){
-                              var page = $('#page').val();
-
-                              var totalPage = $('.infor_pagination .number_pagination').length;
-
-							  console.log("page: "+page+" - pagetotal: "+totalPage);
-
-                              if(page < totalPage) {
-                                 $('#page').val(parseInt(page) + 1);
-
-                                 $('.navbar-form').submit();
-                              }
-                           })
-                        },
+                          },
                         success: function success(result) {
 
                         }
