@@ -487,27 +487,33 @@
      }
 
      function pagination() {
-                           $('a.number_pagination input').keypress(function(){
-                              var page = $(this).val();
-                                
-                              if($(this).parent().hasClass('gallery')) {
-                                var href = $(this).parent().attr('href');
-                                href= href.replace('#', '');
+                           $('a.number_pagination input').keypress(function(e){
+                                if(e.which == 13) {
+                                  var page = $(this).val();
 
-                                var origin = $('#url').val();
-                                var category_id = $('#category_id').val();
-                                var url = ""+origin+""+href+"+"+category_id+"/?page="+page+"";
+                                  if($.isNumeric(page) && parseInt(page) > 0) {
+                                    if($(this).parent().hasClass('gallery')) {
+                                      var href = $(this).parent().attr('href');
+                                      href= href.replace('#', '');
 
-                                window.location.href = url;
-                              } else {
-                                  var currentPage = $('#page').val();
-                               
-                              if(currentPage != page) {
-                                   $('#page').val(page);
+                                      var origin = $('#url').val();
+                                      var category_id = $('#category_id').val();
+                                      var url = ""+origin+""+href+"+"+category_id+"/?page="+page+"";
 
-                                   $('.navbar-form').submit();
+                                      window.location.href = url;
+                                    } else {
+                                        var currentPage = $('#page').val();
+                                    
+                                        if(currentPage != page) {
+                                            $('#page').val(page);
+
+                                            $('.navbar-form').submit();
+                                          }
+                                    }
+                                  } else {
+                                    alert('Sie müssen numerisch eingeben');
+                                  }
                                 }
-                               }
                             })
 
                             /*$('.number_pagination').click(function(){
