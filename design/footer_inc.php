@@ -488,18 +488,26 @@
 
      function pagination() {
                            $('a.number_pagination input').keypress(function(){
-                               var page = $(this).val();
-                               var currentPage = $('#page').val();
+                              var page = $(this).val();
+                                
+                              if($(this).parent().hasClass('gallery')) {
+                                var origin = $('#url').val();
+                                var category_id = $('#category_id').val();
+                                var url = ""+origin+"home/galerie+"+category_id+"/?page="+page+"";
+
+                                window.location.href = url;
+                              } else {
+                                  var currentPage = $('#page').val();
                                
-                               if(currentPage != page) {
+                              if(currentPage != page) {
                                    $('#page').val(page);
 
                                    $('.navbar-form').submit();
                                 }
-
+                               }
                             })
 
-                            $('.number_pagination').click(function(){
+                            /*$('.number_pagination').click(function(){
                                 var currentPage = $('#page').val();
 
                                 var page = $(this).attr('href');
@@ -510,9 +518,13 @@
 
                                    $('.navbar-form').submit();
                                 }
-                            })
+                            })*/
 
                             $('.previous_pagination').click(function(){
+                              if($(this).hasClass('gallery')) {
+                                return;
+                              }
+
                               var page = $('#page').val();
 
                               if(page > 1) {
@@ -523,6 +535,10 @@
                            })
 
                            $('.next_pagination').click(function(){
+                              if($(this).hasClass('gallery')) {
+                                return;
+                              }
+
                               var page = $('#page').val();
 
                               var totalPage = $('.infor_pagination .number_pagination').length;

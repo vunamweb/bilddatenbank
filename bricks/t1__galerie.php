@@ -640,7 +640,7 @@ $filterButton = '';
 else if($galerie) {
     //start add 
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-
+    
     $number = (isset($_GET['number'])) ? $_GET['number'] : 20;
     $_SESSION['number_per_page'] = $number;
 
@@ -706,14 +706,14 @@ else if($galerie) {
 
     $output .= '<div class="infor_pagination">';
 
-    $output .= '<a href="#" class="previous_pagination"><</a>';
+    $output .= ($page == 1) ? '<a href="#" class="previous_pagination gallery"><</a>' : '<a href="'.$dir.'home/galerie+'.$galerie.'/?page='.($page - 1).'" class="previous_pagination gallery"><</a>';
 
     for($i = 1; $i <= $count_page; $i++){
-        $output .= ($i == $page) ? '<a class="number_pagination active"><input type="text" value="'.$i.'"/></a>' :
-        '<a href="#'.$i.'" class="number_pagination">'.$i.'</a>'; 
+        $output .= ($i == $page) ? '<a class="number_pagination gallery active"><input type="text" value="'.$i.'"/></a>' :
+        '<a href="#'.$i.'" class="number_pagination gallery">'.$i.'</a>'; 
     }
 
-    $output .= '<a href="#" class="next_pagination">></a>';
+    $output .= ($page == $count_page) ? '<a href="#" class="next_pagination gallery">></a>' : '<a href="'.$dir.'home/galerie+'.$galerie.'/?page='.($page + 1).'" class="next_pagination show_gallery">></a>' ;
 
     $output .= '<a class="number_page">insgesamt '.$count_page.' Seiten</a>';
     
