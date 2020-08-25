@@ -709,7 +709,7 @@ else if($galerie) {
     $output .= ($page == 1) ? '<a href="#" class="previous_pagination gallery"><</a>' : '<a href="'.$dir.'home/galerie+'.$galerie.'/?page='.($page - 1).'" class="previous_pagination gallery"><</a>';
 
     for($i = 1; $i <= $count_page; $i++){
-        $output .= ($i == $page) ? '<a class="number_pagination gallery active"><input type="text" value="'.$i.'"/></a>' :
+        $output .= ($i == $page) ? '<a href="#home/galerie" class="number_pagination gallery active"><input type="text" value="'.$i.'"/></a>' :
         '<a href="#'.$i.'" class="number_pagination gallery">'.$i.'</a>'; 
     }
 

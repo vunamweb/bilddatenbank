@@ -491,9 +491,12 @@
                               var page = $(this).val();
                                 
                               if($(this).parent().hasClass('gallery')) {
+                                var href = $(this).parent().attr('href');
+                                href= href.replace('#', '');
+
                                 var origin = $('#url').val();
                                 var category_id = $('#category_id').val();
-                                var url = ""+origin+"home/galerie+"+category_id+"/?page="+page+"";
+                                var url = ""+origin+""+href+"+"+category_id+"/?page="+page+"";
 
                                 window.location.href = url;
                               } else {
