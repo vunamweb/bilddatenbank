@@ -426,7 +426,7 @@ function ImageInformations($f, $imgFolder)
 //**************************************************************************************
 
 
-function makeImagePSD($f, $page, $size, $imgFolder, $fileName) {
+function makeImagePSD($f, $page, $sizeWidth, $sizeHeight, $imgFolder, $fileName) {
  $imagick = new \Imagick(realpath($f));
 
 $output = new \Imagick();
@@ -438,14 +438,14 @@ for($i = 0; $i < $page; $i++) {
             
 $merged = @$output->flattenimages();
 $merged->setImageFormat('jpg');
-$merged->thumbnailImage($size, $size, true);
+$merged->thumbnailImage($sizeWidth,$sizeHeight,true);
 $merged->writeImage($imgFolder . $fileName . ".jpg");       
 }
 
-function makeImageSpecial($f, $page, $size, $imgFolder, $fileName) {
+function makeImageSpecial($f, $page, $sizeWidth, $sizeHeight, $imgFolder, $fileName) {
 $im = new Imagick();
 
-$im->setResolution($size,$size);
+$im->setResolution($sizeWidth,$sizeHeight);
 $im->readimage($f . '[0]'); 
 $im->setImageFormat('jpg');    
 $im->writeImage($imgFolder . $fileName . ".jpg"); 
@@ -453,7 +453,7 @@ $im->clear();
 $im->destroy();      
 }
 
-function makeImagejpg($f, $page, $size, $imgFolder, $fileName) {
+function makeImagejpg_($f, $page, $size, $imgFolder, $fileName) {
 $im = new Imagick();
 //$im->setResolution($size,$size);
 $im->readimage($f); 
@@ -464,7 +464,18 @@ $im->clear();
 $im->destroy();      
 }
 
-function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400',
+function makeImagejpg($f, $page, $sizeWidth, $sizeHeight, $imgFolder, $fileName) {
+$im = new Imagick();
+//$im->setResolution($size,$size);
+$im->readimage($f); 
+$im->setImageFormat('jpg');
+$im->resizeImage($sizeWidth, $sizeHeight, imagick::FILTER_LANCZOS, 1);    
+$im->writeImage($imgFolder . $fileName . ".jpg"); 
+$im->clear(); 
+$im->destroy();      
+}
+
+function makeImage($f, $imgFolder = '/intranet/images/icons/', $sizeWidth = '400', $sizeHeight = '400',
     $allpage = 0)
 {
     global $fileTypes;
@@ -510,12 +521,12 @@ function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400'
             // for($i=1; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/ai-'.$f.'-'.$i.'.jpg" ><br>';
         } elseif ($thisFileTyp == "tif")
         {
-            makeImageSpecial($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
+            makeImageSpecial($f, $noOfPagesInPDF, $sizeWidth, $sizeHeight, $imgFolder, $fileName);
             //			echo '<img src="eps/ai-'.$f.'.png" ><br>';
             // for($i=1; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/ai-'.$f.'-'.$i.'.jpg" ><br>';
         } elseif ($thisFileTyp == "tiff")
         {
-            makeImageSpecial($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
+            makeImageSpecial($f, $noOfPagesInPDF, $sizeWidth, $sizeHeight, $imgFolder, $fileName);
             //			echo '<img src="eps/ai-'.$f.'.png" ><br>';
             // for($i=1; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/ai-'.$f.'-'.$i.'.jpg" ><br>';
         } 
@@ -524,7 +535,7 @@ function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400'
             //			exec("/usr/bin/convert convert -colorspace sRGB -density 300 $f -resize 240x240 eps/$f.jpg");
             /*exec("/usr/bin/convert convert  -limit thread 1 -colorspace RGB $f -background white -alpha deactivate -resize $size\> -colorspace sRGB -scene 1 " .
                 $imgFolder . $fileName . ".jpg");*/
-            makeImageSpecial($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
+            makeImageSpecial($f, $noOfPagesInPDF, $sizeWidth, $sizeHeight, $imgFolder, $fileName);
             //			for($i=0; $i<$noOfPagesInPDF; $i++) echo '<img src="eps/'.$f.'-'.$i.'.jpg" ><br>';
             //			for($i=1; $i<=$max; $i++) echo '<img src="eps/pdf-0'.$x.'-'.$i.'.jpg" ><br>';
             //			echo '<img src="'.$imgFolder.$fileName.'.jpg" ><br>';
@@ -536,12 +547,12 @@ function makeImage($f, $imgFolder = '/intranet/images/icons/', $size = '400x400'
                 $imgFolder . $fileName . ".jpg");*/
             /*exec("/usr/bin/convert convert inhalt-$f -flatten -resize 1920*1920 " .
                 $imgFolder . $fileName . ".jpg");   */
-            makeImagePSD($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
+            makeImagePSD($f, $noOfPagesInPDF, $sizeWidth, $sizeHeight, $imgFolder, $fileName);
             //			if($noOfPagesInPDF > 1) for($i=0; $i<$max; $i++) echo '<img src="eps/psd-'.$f.'-'.$i.'.jpg" ><br>';
             //			else echo '<img src="eps/psd-'.$f.'.jpg" ><br>';
         } else
         {
-            makeImagejpg($f, $noOfPagesInPDF, $size, $imgFolder, $fileName);
+            makeImagejpg($f, $noOfPagesInPDF, $sizeWidth, $sizeHeight, $imgFolder, $fileName);
             // echo '########## file: '.$fileName;
             //exec("/usr/bin/convert convert -colorspace sRGB -density 300 $f -resize $size\> " .
               //  $imgFolder . $fileName . ".jpg");

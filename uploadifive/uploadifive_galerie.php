@@ -98,7 +98,10 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
         //echo $targetFile; die();
         
         $widthThumbResize = $morpheus['thumb_width'];
+        $heighThumbResize = round(($height * $widthThumbResize)/$width);
+
         $widthLargeResize = $morpheus['large_width'];
+        $heighLargeResize = round(($height * $widthLargeResize)/$width);
         
         mkdirr($targetFile, 0777);
         mkdirr($thumbFile, 0777);
@@ -115,8 +118,8 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken)
         $file_type = getFileTypeImage($targetFile);
         
         //echo $thumbFile; die();
-        makeImage($targetFile, $thumbFile, $widthThumbResize, false);
-        makeImage($targetFile, $largeFile, $widthLargeResize, false);
+        makeImage($targetFile, $thumbFile, $widthThumbResize, $heighThumbResize, false);
+        makeImage($targetFile, $largeFile, $widthLargeResize, $heighLargeResize, false);
         
         //reSizeImage($targetFile, $thumbFile, $file_type, $widthThumbResize, 'crop');
         //reSizeImage($targetFile, $largeFile, $file_type, $widthLargeResize, 'crop');

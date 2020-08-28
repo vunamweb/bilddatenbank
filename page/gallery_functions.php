@@ -337,7 +337,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        //check_image($ordner, $gid, $img);
+        check_image($ordner, $gid, $img);
 
         $gallery_list .= '
 
@@ -439,10 +439,15 @@ function check_image($ordner, $gid, $img) {
     $ImgThumb = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img);
     $ImgLarge = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img);
     
-    //$ImgThumb = '/home/www/Bilddatenbank/Galerie/kinderbuero/SdK/816/thumb/nambu_02.jpg' ;
+    $im = new Imagick($targetFile);
+    $width = $im->getImageWidth();
+    $height = $im->getImageHeight();
 
     $widthThumbResize = $morpheus['thumb_width'];
+    $heighThumbResize = round(($height * $widthThumbResize)/$width);
+
     $widthLargeResize = $morpheus['large_width'];
+    $heighLargeResize = round(($height * $widthLargeResize)/$width);
 
     /*if($gid == 816) {
         echo $ImgThumb . '<br/>' . $ImgLarge . '<br/>';
@@ -452,13 +457,13 @@ function check_image($ordner, $gid, $img) {
     if(!file_exists($ImgThumb)) {
         $thumbFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['thumb'] . '/';
         //echo $ImgThumb . '<br/>';
-        makeImage($targetFile, $thumbFile, $widthThumbResize, false);
+        makeImage($targetFile, $thumbFile, $widthThumbResize, $heighThumbResize, false);
 	}
 
     if(!file_exists($ImgLarge)) {
         $largeFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['large'] . '/';
         //echo $ImgLarge . '<br/>';
-        makeImage($targetFile, $largeFile, $widthLargeResize, false);
+        makeImage($targetFile, $largeFile, $widthLargeResize, $heighLargeResize, false);
     }
 }
 
@@ -499,7 +504,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        //check_image($ordner, $gid, $img);        
+        check_image($ordner, $gid, $img);        
 
         $gallery_list .= '
 
