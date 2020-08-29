@@ -68,7 +68,8 @@
 
 <!-- Initialize Swiper + Ekko -->
 <script type="text/javascript">
-	 var timeOut = 50, timeOutMansory = 500, invitation = [], countInvite = 0, widthOpenMenu = 250, widthCloseMenu = 50, statusSearch = false;
+	 var timeOut = 50, timeOutMansory = 500, invitation = [], countInvite = 0, widthOpenMenu = 250, widthCloseMenu = 50,
+   statusSearch = false, finishLoad = true;
 
      function setHeightFooter() {
         var height_left = $('#mySidenav').height();
@@ -380,7 +381,7 @@
           .progress( function( instance, image ) {
             var result = image.isLoaded ? 'loaded' : 'broken';
             console.log( 'image is ' + result + ' for ' + image.img.src );
-            $("#wait").removeClass("off");
+            //$("#wait").removeClass("off");
         });
      }
 
@@ -530,34 +531,42 @@
                             })*/
 
                             $('.previous_pagination').click(function(){
-                              if($(this).hasClass('gallery')) {
-                                return;
-                              }
+                              if(finishLoad) {
+                                    finishLoad = false;
 
-                              var page = $('#page').val();
+                                    if($(this).hasClass('gallery')) {
+                                      return;
+                                    }  
 
-                              if(page > 1) {
-                                 $('#page').val(parseInt(page) - 1);
+                                  var page = $('#page').val();
 
-                                 $('.navbar-form').submit();
+                                  if(page > 1) {
+                                    $('#page').val(parseInt(page) - 1);
+
+                                    $('.navbar-form').submit();
+                                  }
                               }
                            })
 
                            $('.next_pagination').click(function(){
-                              if($(this).hasClass('gallery')) {
-                                return;
-                              }
+                              if(finishLoad) {
+                                    finishLoad = false;
 
-                              var page = $('#page').val();
+                                    if($(this).hasClass('gallery')) {
+                                      return;
+                                    }
 
-                              var totalPage = $('.infor_pagination .number_pagination').length;
+                                  var page = $('#page').val();
 
-							                console.log("page: "+page+" - pagetotal: "+totalPage);
+                                  var totalPage = $('.infor_pagination .number_pagination').length;
 
-                              if(page < totalPage) {
-                                 $('#page').val(parseInt(page) + 1);
+                                  console.log("page: "+page+" - pagetotal: "+totalPage);
 
-                                 $('.navbar-form').submit();
+                                  if(page < totalPage) {
+                                    $('#page').val(parseInt(page) + 1);
+
+                                    $('.navbar-form').submit();
+                                  }
                               }
                            })
 
@@ -717,73 +726,76 @@
          })
 
          $('.navbar-form').submit(function(e){
-            e.preventDefault();
+              e.preventDefault();
+              
+              statusSearch = true;
 
-            statusSearch = true;
+              //$('.content').html('');
+              //$('.content .fa.fa-spinner').show();
+              $("#wait").removeClass("off");
 
-            //$('.content').html('');
-            $('.content .fa.fa-spinner').show();
+              var page = $('#page').val();
+              var number = $('.number_page').val();
 
-            var page = $('#page').val();
-            var number = $('.number_page').val();
+              $('.content .fa.fa-spinner').show();
 
-            $('.content .fa.fa-spinner').show();
+              var origin   = $('#url').val();
 
-            var origin   = $('#url').val();
+              var search = $('#suche').val();
 
-            var search = $('#suche').val();
+              var category_id = $('#category_id').val();
 
-            var category_id = $('#category_id').val();
-
-            //call ajax to change content
-                    $.ajax({
-                        url: ''+origin+'/home/galerie+search',
-                        type: 'get',
-                        data: {
-                          search_value: search,
-                          page: page,
-                          number: number,
-                          hashtags: getHashtags(),
-                          category_id: category_id
-                        },
-                        dataType: 'json',
-                        beforeSend: function beforeSend() {},
-                        complete: function complete(obj) {
-                            $('.content .fa.fa-spinner').hide();
-
-                            $('.main.content').html(obj.responseText);
-
-                            setShowGallery();
-                            showFolder();
-
-                            $('.grid-item ').each(function(){
-                                $(this).css('opacity', 1);
-                            })
-
-                            reloadMansory();
-                            pagination();
-
-                            $(".loveit").click(function () {
-                        	    var obj = $(this);
-                        	    id = obj.attr("ref");
-                        	    var onoff = !obj.hasClass("lightBlue");
-                                var origin   = $('#url').val();
-
-                        	    request = $.ajax({
-                        	        url: ""+origin+"morpheus/UpdateLikes.php",
-                        	        type: "post",
-                        	        data: "onoff="+onoff+"&mid='.$mid.'&id="+id+"&feld=gid&table=morp_cms_galerie_likes",
-                        	        success: function(data) {
-                        				if(onoff == true) { obj.addClass("lightBlue"); console.log(1); }
-                        				else { obj.removeClass("lightBlue"); console.log(0); }
-                          			}
-                        	    });
-                            });
+              //call ajax to change content
+                      $.ajax({
+                          url: ''+origin+'/home/galerie+search',
+                          type: 'get',
+                          data: {
+                            search_value: search,
+                            page: page,
+                            number: number,
+                            hashtags: getHashtags(),
+                            category_id: category_id
                           },
-                        success: function success(result) {
+                          dataType: 'json',
+                          beforeSend: function beforeSend() {},
+                          complete: function complete(obj) {
+                              finishLoad = true;
 
-                        }
-                    });
+                              //$('.content .fa.fa-spinner').hide();
+
+                              $('.main.content').html(obj.responseText);
+
+                              setShowGallery();
+                              showFolder();
+
+                              $('.grid-item ').each(function(){
+                                  $(this).css('opacity', 1);
+                              })
+
+                              reloadMansory();
+                              pagination();
+
+                              $(".loveit").click(function () {
+                                var obj = $(this);
+                                id = obj.attr("ref");
+                                var onoff = !obj.hasClass("lightBlue");
+                                  var origin   = $('#url').val();
+
+                                request = $.ajax({
+                                    url: ""+origin+"morpheus/UpdateLikes.php",
+                                    type: "post",
+                                    data: "onoff="+onoff+"&mid='.$mid.'&id="+id+"&feld=gid&table=morp_cms_galerie_likes",
+                                    success: function(data) {
+                                  if(onoff == true) { obj.addClass("lightBlue"); console.log(1); }
+                                  else { obj.removeClass("lightBlue"); console.log(0); }
+                                  }
+                                });
+                              });
+                            },
+                          success: function success(result) {
+
+                          }
+                      });
          })
 
          $('.add_folder'). click(function(){

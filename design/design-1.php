@@ -8,8 +8,6 @@
 					<?php include( 'page/left.php') ?>
                 </div>
 				<div class="col-md-12 main content">
-						<i class="fa fa-spinner" aria-hidden="true">
-						</i>
 						<?php echo $output; ?>
 				</div>
 				<div class="right-board">
