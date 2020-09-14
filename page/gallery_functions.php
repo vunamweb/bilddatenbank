@@ -337,7 +337,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        check_image($ordner, $gid, $img);
+        //check_image($ordner, $gid, $img);
 
         $gallery_list .= '
 
@@ -504,7 +504,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        check_image($ordner, $gid, $img);        
+        //check_image($ordner, $gid, $img);        
 
         $gallery_list .= '
 
