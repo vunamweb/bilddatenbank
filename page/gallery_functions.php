@@ -337,7 +337,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        //check_image($ordner, $gid, $img);
+        check_image($ordner, $gid, $img);
 
         $gallery_list .= '
 
@@ -345,7 +345,9 @@ function set_thumb_gallery_search($res, $sort_gallery)
 	    <div class="gal-item item_image">
             <div class="edit_delete_image max_view">
               <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
-            </div>
+              <a class="delete_galerie_folders_images hide" href="'.$gid.'"><img src="images/1x/close.png"></a>
+              <a class="delete_galerie_folders_images_confirm tool" href="'.$gid.'"><i class="fa fa-trash-o"></i></a>
+              </div>
             <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -438,7 +440,7 @@ function check_image($ordner, $gid, $img) {
     $targetFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['Original'] . '/' . $img;
     $ImgThumb = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img);
     $ImgLarge = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img);
-    
+
     $im = new Imagick($targetFile);
     $width = $im->getImageWidth();
     $height = $im->getImageHeight();
@@ -454,12 +456,14 @@ function check_image($ordner, $gid, $img) {
         echo file_exists($ImgThumb) . '<br/>' . file_exists($ImgLarge);
     }*/
 
+    // if(!file_exists($ImgThumb)) {
     if(!file_exists($ImgThumb)) {
         $thumbFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['thumb'] . '/';
         //echo $ImgThumb . '<br/>';
         makeImage($targetFile, $thumbFile, $widthThumbResize, $heighThumbResize, false);
 	}
 
+    //if(!file_exists($ImgLarge)) {
     if(!file_exists($ImgLarge)) {
         $largeFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['large'] . '/';
         //echo $ImgLarge . '<br/>';
@@ -504,7 +508,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        //check_image($ordner, $gid, $img);        
+        // check_image($ordner, $gid, $img);
 
         $gallery_list .= '
 
