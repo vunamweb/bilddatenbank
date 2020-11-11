@@ -346,7 +346,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
             <div class="edit_delete_image max_view">
               <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
               <a class="delete_galerie_folders_images hide" href="'.$gid.'"><img src="images/1x/close.png"></a>
-              <a class="delete_galerie_folders_images_confirm tool" href="'.$gid.'"><i class="fa fa-trash-o"></i></a>
+              <a class="delete_galerie_folders_images_confirm tool" href="#'.$gid.'"><i class="fa fa-trash-o"></i></a>
               </div>
             <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
