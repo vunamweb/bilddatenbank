@@ -98,6 +98,17 @@ echo $maps; ?>
     return result;
   }
 
+  function getHashtagsSearch() {
+
+    var result = '';
+
+    $('.navbar-form a.ui.label').each(function() {
+      result = result + $(this).attr('data-value') + ',';
+    })
+
+    return result;
+}
+
   function getfilter() {
     var size = $('a.transition').length;
     if (size == 0)
@@ -768,7 +779,7 @@ echo $maps; ?>
           search_value: search,
           page: page,
           number: number,
-          hashtags: getHashtags(),
+          hashtags: getHashtagsSearch(),
           category_id: category_id
         },
         dataType: 'json',
@@ -777,8 +788,9 @@ echo $maps; ?>
           finishLoad = true;
 
           //$('.content .fa.fa-spinner').hide();
-
+          //$("#wait").addClass("off");
           $('.main.content').html(obj.responseText);
+          //return;
 
           setShowGallery();
           showFolder();

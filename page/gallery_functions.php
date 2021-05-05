@@ -337,7 +337,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
-        check_image($ordner, $gid, $img);
+        check_image_exists($ordner, $gid, $img);
 
         $gallery_list .= '
 
@@ -442,6 +442,8 @@ function check_image($ordner, $gid, $img) {
     $ImgLarge = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img);
 
     $im = new Imagick($targetFile);
+    //echo $targetFile . "<br>" . $im->getImageWidth() . "<br>" . $im->getImageHeight() . "<br>";
+    //die();
     $width = $im->getImageWidth();
     $height = $im->getImageHeight();
 
@@ -451,6 +453,7 @@ function check_image($ordner, $gid, $img) {
     $widthLargeResize = $morpheus['large_width'];
     $heighLargeResize = round(($height * $widthLargeResize)/$width);
 
+    
     /*if($gid == 816) {
         echo $ImgThumb . '<br/>' . $ImgLarge . '<br/>';
         echo file_exists($ImgThumb) . '<br/>' . file_exists($ImgLarge);
@@ -459,14 +462,14 @@ function check_image($ordner, $gid, $img) {
     // if(!file_exists($ImgThumb)) {
     if(!file_exists($ImgThumb)) {
         $thumbFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['thumb'] . '/';
-        //echo $ImgThumb . '<br/>';
+        echo $ImgThumb . "ddd" . '<br/>';
         makeImage($targetFile, $thumbFile, $widthThumbResize, $heighThumbResize, false);
 	}
 
     //if(!file_exists($ImgLarge)) {
     if(!file_exists($ImgLarge)) {
         $largeFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['large'] . '/';
-        //echo $ImgLarge . '<br/>';
+        echo $ImgLarge . "dd" . '<br/>';
         makeImage($targetFile, $largeFile, $widthLargeResize, $heighLargeResize, false);
     }
 }
