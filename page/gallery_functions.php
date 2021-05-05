@@ -257,7 +257,7 @@ class resize
 
 
 function set_name_image($img) {
-    $replace = array('JPG', 'PNG', 'png', 'psd', 'PSD', 'pdf', 'PDF', 'ai', 'AI', 'eps', 'EPS', 'tif', 'TIF', 'tiff', 'TIFF');
+    $replace = array('JPG', 'PNG', 'png', 'psd', 'PSD', 'pdf', 'PDF', 'ai', 'AI', 'eps', 'EPS', 'tif', 'TIF', 'tiff', 'TIFF', 'GIF', 'gif');
 
     return str_replace($replace, 'jpg', $img);
 }
@@ -479,37 +479,39 @@ function check_image_exists($ordner, $gid, $img) {
     $ImgLarge = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img);
     $ImgOriginal = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["Original"] . '/' . set_name_image($img);
 
-    if(file_exists($ImgOriginal))
-      if(!file_exists($ImgThumb)  || !file_exists($ImgLarge)) {
-	    $im = new Imagick($targetFile);
-	    $width = $im->getImageWidth();
-	    $height = $im->getImageHeight();
-	
-	    $widthThumbResize = $morpheus['thumb_width'];
-	    $heighThumbResize = round(($height * $widthThumbResize)/$width);
-	
-	    $widthLargeResize = $morpheus['large_width'];
-	    $heighLargeResize = round(($height * $widthLargeResize)/$width);
-	
-	    /*if($gid == 816) {
-	        echo $ImgThumb . '<br/>' . $ImgLarge . '<br/>';
-	        echo file_exists($ImgThumb) . '<br/>' . file_exists($ImgLarge);
-	    }*/
-	
-	    // if(!file_exists($ImgThumb)) {
-	    if(!file_exists($ImgThumb)) {
-	        $thumbFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['thumb'] . '/';
-	        //echo $ImgThumb . '<br/>';
-	        makeImage($targetFile, $thumbFile, $widthThumbResize, $heighThumbResize, false);
-		}
-	
-	    //if(!file_exists($ImgLarge)) {
-	    if(!file_exists($ImgLarge)) {
-	        $largeFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['large'] . '/';
-	        //echo $ImgLarge . '<br/>';
-	        makeImage($targetFile, $largeFile, $widthLargeResize, $heighLargeResize, false);
+    if(file_exists($ImgOriginal)) 
+      
+	    if(!file_exists($ImgThumb)  || !file_exists($ImgLarge)) {
+		    // echo "no file / ";
+		    $im = new Imagick($targetFile);
+		    $width = $im->getImageWidth();
+		    $height = $im->getImageHeight();
+		
+		    $widthThumbResize = $morpheus['thumb_width'];
+		    $heighThumbResize = round(($height * $widthThumbResize)/$width);
+		
+		    $widthLargeResize = $morpheus['large_width'];
+		    $heighLargeResize = round(($height * $widthLargeResize)/$width);
+		
+		    /*if($gid == 816) {
+		        echo $ImgThumb . '<br/>' . $ImgLarge . '<br/>';
+		        echo file_exists($ImgThumb) . '<br/>' . file_exists($ImgLarge);
+		    }*/
+		
+		    // if(!file_exists($ImgThumb)) {
+		    if(!file_exists($ImgThumb)) {
+		        $thumbFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['thumb'] . '/';
+		        // echo $ImgThumb . '<br/>';
+		        makeImage($targetFile, $thumbFile, $widthThumbResize, $heighThumbResize, false);
+			}
+		
+		    //if(!file_exists($ImgLarge)) {
+		    if(!file_exists($ImgLarge)) {
+		        $largeFile = $_SERVER['DOCUMENT_ROOT'].'/Galerie/'.$morpheus["GaleryPath"].'/' . $ordner. '/' . $gid . '/' . $morpheus['large'] . '/';
+		        // echo $ImgLarge . '<br/>';
+		        makeImage($targetFile, $largeFile, $widthLargeResize, $heighLargeResize, false);
+		    }
 	    }
-    }
 }
 
 
@@ -553,11 +555,11 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         // check_image($ordner, $gid, $img); /// Bjoern
         check_image_exists($ordner, $gid, $img);
 
-        $ImgOriginal = $_SERVER['DOCUMENT_ROOT'] . '/Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/' . $gid . '/' . $morpheus["Original"] . '/' . set_name_image($img);
-        if (file_exists($ImgOriginal)) {
+        $ImgOriginal = $_SERVER['DOCUMENT_ROOT'] . '/Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/' . $gid . '/' . $morpheus["Original"] . '/' . $img;
+       if (file_exists($ImgOriginal)) {
             $src_large = $dir . 'Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img);
             $src_thumb = $dir . 'Galerie/' . $morpheus["GaleryPath"] . '/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img);
-        } else {
+      } else {
             $src_large = $dir . 'Galerie/' . 'no_upload.jpg';
             $src_thumb = $dir . 'Galerie/' . 'no_upload.jpg';
         }
