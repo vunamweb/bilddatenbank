@@ -386,7 +386,8 @@ echo $maps; ?>
   }
 
   function processMansory() {
-    $('.grid').imagesLoaded()
+    $("#wait").addClass("off");
+    /*$('.grid').imagesLoaded()
       .always(function(instance) {
         //alert('start');
         console.log('all images loaded');
@@ -403,7 +404,7 @@ echo $maps; ?>
         var result = image.isLoaded ? 'loaded' : 'broken';
         console.log('image is ' + result + ' for ' + image.img.src);
         //$("#wait").removeClass("off");
-      });
+      });*/
   }
 
   function showFolder() {
