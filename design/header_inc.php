@@ -48,7 +48,7 @@ global $galerie, $news, $hashtag;
 if($galerie || $news || $hashtag) { ?>
 <style>
 .grid-item {
-	opacity: 0;
+	/*opacity: 0;*/
 }
 .is-showing-items .grid-item {
 	opacity: 1;

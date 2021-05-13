@@ -386,15 +386,17 @@ echo $maps; ?>
   }
 
   function processMansory() {
-    $("#wait").addClass("off");
-    /*$('.grid').imagesLoaded()
+    //$("#wait").addClass("off");
+    $('.grid').imagesLoaded()
       .always(function(instance) {
         //alert('start');
+        //image.img.src = "https://bilddatenbank.kinderbuero-frankfurt.de/images/kinderbuero_logo.png";
         console.log('all images loaded');
-        $("#wait").addClass("off");
+        //$("#wait").addClass("off");
       })
       .done(function(instance) {
         //alert('ok');
+        $("#wait").addClass("off");
         console.log('all images successfully loaded');
       })
       .fail(function() {
@@ -403,8 +405,9 @@ echo $maps; ?>
       .progress(function(instance, image) {
         var result = image.isLoaded ? 'loaded' : 'broken';
         console.log('image is ' + result + ' for ' + image.img.src);
-        //$("#wait").removeClass("off");
-      });*/
+        //image.img.src = "https://bilddatenbank.kinderbuero-frankfurt.de/images/kinderbuero_logo.png";
+        //$("#wait").addClass("off");
+      });
   }
 
   function showFolder() {
@@ -789,8 +792,13 @@ echo $maps; ?>
           finishLoad = true;
 
           //$('.content .fa.fa-spinner').hide();
-          //$("#wait").addClass("off");
+          //$('.main.content').html("complete");
           $('.main.content').html(obj.responseText);
+          //$('.main.content').html('<a class="show_galery" href="#1526,SdK" data-toggle="modal" data-target="#myModal"><img alt="Einverständniserklärungen_SdK2019.pdf" title="Einverständniserklärungen_SdK2019.pdf" class="img-responsive" src="https://bilddatenbank.kinderbuero-frankfurt.de/Galerie/kinderbuero/SdK/1526/thumb/Einverständniserklärungen_SdK2019.jpg"></a>');
+          //$("#wait").addClass("off");
+          //$('.grid-item').css('opacity', '1');
+          //alert('complete');
+
           //return;
 
           setShowGallery();
@@ -1092,7 +1100,7 @@ echo $maps; ?>
   });
 
   $(window).on("load", function() {
-    <?php echo $js; ?>
+    <?php //echo $js; ?>
   });
 
   <?php echo $jsFunc; ?>
