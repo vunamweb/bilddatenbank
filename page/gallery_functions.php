@@ -341,7 +341,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
 
         $gallery_list .= '
 
-	<div class="grid-item grid-sizer tag ' . $filter . '">
+	<div class="grid-item grid-sizerz tag z' . $filter . '">
 	    <div class="gal-item item_image">
             <div class="edit_delete_image max_view">
               <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
@@ -376,6 +376,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
                 </div>
 	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
               <img alt="'.$img.'" title="'.$img.'" class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img).'">
+             <!-- <img alt="_DSC8418.JPG" title="_DSC8418.JPG" class="img-responsive" src="https://static.depositphotos.com/storage/image/0d61440245ce0d8212cefe4bcfaf9bce495da1aa.jpg"> !-->
             </a>
 
 	        <div class="inner">
@@ -431,6 +432,55 @@ function set_thumb_gallery_search($res, $sort_gallery)
     }
 
 
+    /*return '<div class="grid-item grid-sizerz tag ztag_138 tag_56 tag_95 tag_70 tag_100 tag_82 tag_59 tag_127 tag_147 ">
+    <div class="gal-item item_image">
+        <div class="edit_delete_image max_view">
+          <a href="#" data-target="#demoLightbox1527" data-toggle="modal" class="tool"><img src="https://bilddatenbank.kinderbuero-frankfurt.de/images/1x/close.png"></a>
+          <a class="delete_galerie_folders_images hide" href="1527"><img src="images/1x/close.png"></a>
+          <a class="delete_galerie_folders_images_confirm tool" href="#1527"><i class="fa fa-trash-o"></i></a>
+          </div>
+        <div class="modal" id="demoLightbox1527" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                          </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                              <img class="img-fluid not-opacity" src="https://bilddatenbank.kinderbuero-frankfurt.de/Galerie/kinderbuero/SdK/1527/large/_DSC8418.jpg">
+
+                            </div>
+                        </div>
+                    </div>
+         </div>
+         <div class="favourite_image">
+              <a href="https://bilddatenbank.kinderbuero-frankfurt.de/download-img.php?dfile=Galerie/kinderbuero/SdK/1527/original/_DSC8418.JPG" class="galIcons i4 tool hide"><i class="fa fa-download tool"></i></a>
+              <a ref="1527" class="tool loveit " href="#1527"><i class="fa fa-heart" aria-hidden="true"></i></a>
+              <a class="tool hide" href="#1527"><img src="https://bilddatenbank.kinderbuero-frankfurt.de/images/1x/heart_favourite.png"></a>
+              <div class="btn-group btn-group-gallery " data-toggle="buttons">
+                    <label class="btn btn-default btn-transp"><input type="checkbox" class="checkbox hide" value="1527" name="add_to_folder">
+                        <div class="rahmen"><span class="fa fa-check"></span></div>
+                    </label>
+              </div>
+            </div>
+        <a class="show_galery" href="#1527,SdK" data-toggle="modal" data-target="#myModal">
+          <img alt="_DSC8418.JPG" title="_DSC8418.JPG" class="img-responsive" src="../Galerie/kinderbuero/SdK/1527/thumb/_DSC8418.jpg">
+          <img alt="_DSC8418.JPG" title="_DSC8418.JPG" class="img-responsive" src="https://static.depositphotos.com/storage/image/0d61440245ce0d8212cefe4bcfaf9bce495da1aa.jpg">
+       
+          </a>
+
+        <div class="inner">
+            <div class="gal-Desc hide">
+                <h2></h2>
+                <p></p>
+            </div>
+
+            
+        </div>
+
+    </div>
+</div>';*/
     return $gallery_list;
 }
 

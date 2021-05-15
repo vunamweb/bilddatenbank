@@ -793,9 +793,12 @@ echo $maps; ?>
 
           //$('.content .fa.fa-spinner').hide();
           //$('.main.content').html("complete");
-          $('.main.content').html(obj.responseText);
+          var response = "<h1 style='text-align: center'>Loading complete</h1><br>";
+          response = response + obj.responseText;
+          $('.main.content').html(response);
+          //$('.main.content').html(obj.responseText);
           //$('.main.content').html('<a class="show_galery" href="#1526,SdK" data-toggle="modal" data-target="#myModal"><img alt="Einverständniserklärungen_SdK2019.pdf" title="Einverständniserklärungen_SdK2019.pdf" class="img-responsive" src="https://bilddatenbank.kinderbuero-frankfurt.de/Galerie/kinderbuero/SdK/1526/thumb/Einverständniserklärungen_SdK2019.jpg"></a>');
-          //$("#wait").addClass("off");
+          $("#wait").addClass("off");
           //$('.grid-item').css('opacity', '1');
           //alert('complete');
 
@@ -836,7 +839,7 @@ echo $maps; ?>
             });
           })
 
-          reloadMansory();
+          //reloadMansory();
           pagination();
 
           $(".loveit").click(function() {

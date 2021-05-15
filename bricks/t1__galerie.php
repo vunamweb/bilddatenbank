@@ -132,7 +132,7 @@ $filterButton = '';
 
 
     $output .= '
-    <div class="grid">
+    <div class="gridzz">
 	';
 
     $output .= set_thumb_gallery_search($res, $sort_gallery);
