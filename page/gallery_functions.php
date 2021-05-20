@@ -336,6 +336,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
         $noOfLikes = countLikes("morp_cms_galerie_likes", "gid", $gid);
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
+        $dirLargeImage = $dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img);
 
         check_image_exists($ordner, $gid, $img);
 
@@ -344,7 +345,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
 	<div class="grid-item grid-sizerz tag z' . $filter . '">
 	    <div class="gal-item item_image">
             <div class="edit_delete_image max_view">
-              <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
+              <a href="#'.$dirLargeImage.'" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool tool_show_large_image"><img src="'.$dir.'images/1x/close.png" /></a>
               <a class="delete_galerie_folders_images hide" href="'.$gid.'"><img src="images/1x/close.png"></a>
               <a class="delete_galerie_folders_images_confirm tool" href="#'.$gid.'"><i class="fa fa-trash-o"></i></a>
               </div>
@@ -357,7 +358,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
                               </div>
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid not-opacity" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img).'">
+								  <img class="img-fluid not-opacity" src="">
 
                                 </div>
 							</div>
@@ -605,6 +606,9 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
         $hasComment = hasComment("morp_cms_galerie_comments", "gid", $gid);
         $noOfComments = countComments("morp_cms_galerie_comments", "gid", $gid);
 
+        $dirLargeImage = $dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . set_name_image($img);
+
+
         // check_image($ordner, $gid, $img); /// Bjoern
         check_image_exists($ordner, $gid, $img);
 
@@ -623,7 +627,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
 	<div class="grid-item grid-sizer tag ' . $filter . '">
 	    <div class="gal-item item_image">
 	        <div class="edit_delete_image max_view">
-              <a href="#" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool"><img src="'.$dir.'images/1x/close.png" /></a>
+              <a href="#'.$src_large.'" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool tool_show_large_image"><img src="'.$dir.'images/1x/close.png" /></a>
             </div>
             <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
@@ -634,7 +638,7 @@ function set_thumb_gallery($res, $setFilter = 0, $showcheckbox = true)
                                 </div>
 								<!-- Modal body -->
 								<div class="modal-body">
-								  <img class="img-fluid not-opacity" src="'.$src_large.'">
+								  <img class="img-fluid not-opacity" src="">
 
                                 </div>
 							</div>

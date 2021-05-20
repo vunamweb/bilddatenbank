@@ -264,6 +264,17 @@ echo $maps; ?>
         }
       });
     })
+
+    $('.tool_show_large_image').click(function(){
+      var dir = $(this).attr('href');
+      dir = dir.replace('#', '');
+
+      var target = $(this).attr('data-target');
+      target = target.replace('#demoLightbox', '');
+
+      $('#demoLightbox'+target+' .modal-body img').attr('src', dir); 
+
+    })
   }
 
   function setTextAfterSave(select, text) {
