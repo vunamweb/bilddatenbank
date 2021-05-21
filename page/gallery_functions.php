@@ -342,7 +342,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
 
         $gallery_list .= '
 
-	<div class="grid-item grid-sizerz tag z' . $filter . '">
+	<div class="grid-item grid-sizer tag' . $filter . '">
 	    <div class="gal-item item_image">
             <div class="edit_delete_image max_view">
               <a href="#'.$dirLargeImage.'" data-target="#demoLightbox'.$gid.'" data-toggle="modal"  class="tool tool_show_large_image"><img src="'.$dir.'images/1x/close.png" /></a>
