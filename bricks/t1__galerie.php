@@ -641,8 +641,9 @@ else if($galerie) {
     //start add 
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
     
-    $number = (isset($_GET['number'])) ? $_GET['number'] : 20;
-    $_SESSION['number_per_page'] = $number;
+    //$number = (isset($_GET['number'])) ? $_GET['number'] : 20;
+    $number = (isset($_SESSION['number_per_page'])) ? $_SESSION['number_per_page'] : 20;
+    //$_SESSION['number_per_page'] = $number;
 
     $total_search = get_total_search('', '', $galerie);
     $number = ($number > $total_search) ? $total_search : $number;
