@@ -1,5 +1,5 @@
 <?php
-$uri   = $_SERVER["REQUEST_URI"];
+$uri = $_SERVER["REQUEST_URI"];
 
 // $footer_navid_arr = array(22,2,3,11);
 ?>
@@ -48,23 +48,23 @@ $uri   = $_SERVER["REQUEST_URI"];
 <script src="<?php echo $dir; ?>js/core.min.js"></script>
 <script src="<?php echo $dir; ?>js/md5.js"></script>
 
-<?php if ($hn_id == 3) { ?>
+<?php if ($hn_id == 3) {?>
   <script src="<?php echo $dir; ?>assets/js/jquery.magnific-popup.js"></script>
   <script src="<?php echo $dir; ?>assets/js/timetable.js"></script>
-<?php } ?>
+<?php }?>
 
 <?php global $upload;
 if ($upload) {
-?>
+    ?>
 
   <link rel="stylesheet" type="text/css" href="<?php echo $dir; ?>uploadifive/uploadifive.css">
   <!-- <script src="<?php echo $dir; ?>uploadifive/jquery.min.js" type="text/javascript"></script> -->
   <script src="<?php echo $dir; ?>uploadifive/jquery.uploadifive.min.js" type="text/javascript"></script>
 
-<?php } ?>
+<?php }?>
 
 <?php global $maps, $js, $jsFunc;
-echo $maps; ?>
+echo $maps;?>
 
 
 <!-- Initialize Swiper + Ekko -->
@@ -88,7 +88,7 @@ echo $maps; ?>
   }
 
   function getHashtags() {
-
+  	// console.log("getHashtags");
     var result = '';
 
     $('a.ui.label').each(function() {
@@ -107,6 +107,17 @@ echo $maps; ?>
     })
 
     return result;
+  }
+
+  function getHashtagsEdit() {
+
+      var result = '';
+
+      $('#sel-cont a.ui.label').each(function() {
+        result = result + $(this).attr('data-value') + ',';
+      })
+
+      return result;
 }
 
   function getfilter() {
@@ -272,7 +283,7 @@ echo $maps; ?>
       var target = $(this).attr('data-target');
       target = target.replace('#demoLightbox', '');
 
-      $('#demoLightbox'+target+' .modal-body img').attr('src', dir); 
+      $('#demoLightbox'+target+' .modal-body img').attr('src', dir);
 
     })
   }
@@ -309,13 +320,14 @@ echo $maps; ?>
       id = $(this).attr("ref");
       myText = $("#t" + id).val();
       keyWord = $("#keyword" + id).val();
-      var hashtags = getHashtags();
+      var hashtags = getHashtagsEdit();
 
       request = $.ajax({
         url: "" + origin + "home/galerie+update",
         type: "get",
         data: "myText=" + myText + "&keyWord=" + keyWord + "&hashtags=" + hashtags + "&id=" + id + "&feld=gid&table=morp_cms_galerie",
         success: function(data) {
+			// console.log(data);
           $('#s' + id).removeClass('btn-danger');
           setTextAfterSave('.show_edit select option:selected', '.hashtag_' + id + '');
           $('.des_' + id + '').html(myText);
@@ -402,20 +414,20 @@ echo $maps; ?>
       .always(function(instance) {
         //alert('start');
         //image.img.src = "https://bilddatenbank.kinderbuero-frankfurt.de/images/kinderbuero_logo.png";
-        console.log('all images loaded');
+        // console.log('all images loaded');
         $("#wait").addClass("off");
       })
       .done(function(instance) {
         //alert('ok');
         $("#wait").addClass("off");
-        console.log('all images successfully loaded');
+        // console.log('all images successfully loaded');
       })
       .fail(function() {
-        console.log('all images loaded, at least one is broken');
+        // console.log('all images loaded, at least one is broken');
       })
       .progress(function(instance, image) {
         var result = image.isLoaded ? 'loaded' : 'broken';
-        console.log('image is ' + result + ' for ' + image.img.src);
+        // console.log('image is ' + result + ' for ' + image.img.src);
         //image.img.src = "https://bilddatenbank.kinderbuero-frankfurt.de/images/kinderbuero_logo.png";
         //$("#wait").addClass("off");
       });
@@ -598,7 +610,7 @@ echo $maps; ?>
 
         var totalPage = $('.infor_pagination .number_pagination').length;
 
-        console.log("page: " + page + " - pagetotal: " + totalPage);
+        // console.log("page: " + page + " - pagetotal: " + totalPage);
 
         if (page < totalPage) {
           $('#page').val(parseInt(page) + 1);
@@ -636,7 +648,7 @@ echo $maps; ?>
   });
 
   $('input[type=file]').change(function() {
-    console.log($(this).val());
+    // console.log($(this).val());
   });
   $('a.upload').click(function() {
     var timestamp = $('#timestamp').val();
@@ -866,10 +878,10 @@ echo $maps; ?>
               success: function(data) {
                 if (onoff == true) {
                   obj.addClass("lightBlue");
-                  console.log(1);
+                  // console.log(1);
                 } else {
                   obj.removeClass("lightBlue");
-                  console.log(0);
+                  // console.log(0);
                 }
               }
             });
@@ -1158,16 +1170,15 @@ echo $maps; ?>
 
 
   <?php
-  $sql = "SELECT * FROM morp_tags WHERE 1 ORDER BY tag";
-  $res = safe_query($sql);
-  $tag_list = '';
-  while ($row = mysqli_fetch_object($res)) {
+$sql = "SELECT * FROM morp_tags WHERE 1 ORDER BY tag";
+$res = safe_query($sql);
+$tag_list = '';
+while ($row = mysqli_fetch_object($res)) {
     $tag_list .= '{value:' . $row->tagID . ' , title: "' . $row->tag_long . '" },
 ';
-  }
+}
 
-
-  ?>
+?>
   var options = [{
       id: '',
       title: 'All'
