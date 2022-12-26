@@ -2,9 +2,9 @@
 session_start();
 //error_reporting( error_reporting() & ~E_NOTICE );
 ini_set('memory_limit', '9024M');
-//ini_set('display_errors', '1');
-//ini_set('display_startup_errors', '1');
-//error_reporting(E_ALL);
+/*ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);*/
 set_time_limit(0);
 error_reporting(0);
 # session_destroy();

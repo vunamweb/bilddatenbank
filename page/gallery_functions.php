@@ -257,9 +257,9 @@ class resize
 
 
 function set_name_image($img) {
-    $replace = array('JPG', 'PNG', 'png', 'psd', 'PSD', 'pdf', 'PDF', 'ai', 'AI', 'eps', 'EPS', 'tif', 'TIF', 'tiff', 'TIFF', 'GIF', 'gif');
+    $replace = array('.JPG', '.PNG', '.png', '.psd', '.PSD', '.pdf', '.PDF', '.ai', '.AI', '.eps', '.EPS', '.tif', '.TIF', '.tiff', '.TIFF', '.GIF', '.gif');
 
-    return str_replace($replace, 'jpg', $img);
+    return str_replace($replace, '.jpg', $img);
 }
 
 function sort_array_gallery() {
@@ -282,6 +282,8 @@ function orginalDate($date) {
 }
 
 function get_total_search($seach_value, $hashtags, $category_id) {
+    $hashtags = ($hashtags == null || $hashtags == '') ? array() : $hashtags;
+
     if($category_id == 0)
      $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
     else
@@ -376,8 +378,7 @@ function set_thumb_gallery_search($res, $sort_gallery)
 	              </div>
                 </div>
 	        <a class="show_galery" href="#'.$gid.','.$ordner.'" data-toggle="modal" data-target="#myModal">
-              <img alt="'.$img.'" title="'.$img.'" class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img).'">
-             <!-- <img alt="_DSC8418.JPG" title="_DSC8418.JPG" class="img-responsive" src="https://static.depositphotos.com/storage/image/0d61440245ce0d8212cefe4bcfaf9bce495da1aa.jpg"> !-->
+              <img alt="'.$img.'" title="'.$img.'" class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . set_name_image($img).'">             
             </a>
 
 	        <div class="inner">
@@ -824,8 +825,10 @@ function show_gallery_folder($res, $galerie_folders_images_id)
 				 <div class="modal" id="demoLightbox'.$gid.'" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
-
-								<!-- Modal body -->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+							  	</div>
+								<!-- Modal body xxx -->
 								<div class="modal-body">
 								  <img class="img-fluid" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["large"] . '/' . urlencode(set_name_image($img)).'">
 
@@ -986,6 +989,7 @@ function liste_DIV($ordering="")
 }
 
 function listHashtagsGalery($hashtags) {
+	// XYXY
     $table = 'morp_tags_category';
     $primary = 'id';
     $show_col = "name";
@@ -993,7 +997,7 @@ function listHashtagsGalery($hashtags) {
 
     $hashtags = explode(',', $hashtags);
 
-    $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
+    $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown pppp" multiple="">';
 
     $sql = "SELECT * FROM $table order by $sorting_col";
     $res = safe_query($sql);
@@ -1027,7 +1031,7 @@ function listHashtagsGalery($hashtags) {
         $count++;
 
         $select .= ($count < $num_rows) ?
-            '</select><select name="select" class="ui selection dropdown" multiple="">':
+            '</select><select name="select" class="ui selection dropdown aaaa" multiple="">':
         '</select>';
     }
 
