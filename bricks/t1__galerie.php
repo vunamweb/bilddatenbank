@@ -66,8 +66,8 @@ $filterButton = '';
 
     
 
-    $hashtags = $_GET['hashtags'];
-    $hashtags = explode(',', $hashtags);
+    $hashtags = ($_GET['hashtags'] != null && $_GET['hashtags'] != '') ? $_GET['hashtags'] : '';
+    $hashtags = ($hashtags != '') ? explode(',', $hashtags) : array();
 
     $total_search = get_total_search($seach_value, $hashtags, $category_id);
     $number = ($number > $total_search) ? $total_search : $number;
@@ -81,20 +81,26 @@ $filterButton = '';
     $sort_gallery = sort_array_gallery();
 
     if($category_id == 0)
-     $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
+     $que = "SELECT * FROM `morp_cms_galerie` g where (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') ";
     else
-     $que = "SELECT * FROM `morp_cms_galerie` g where g.gnid = ".$category_id." AND (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') AND (g.tags ";
+     $que = "SELECT * FROM `morp_cms_galerie` g where g.gnid = ".$category_id." AND (g.gtextde like '%".$seach_value."%' OR g.keyword like '%".$seach_value."%') ";
 
-    for($i = 0; $i < count($hashtags) -1; $i++){
-        if($i < count($hashtags) - 2)
-            $que .= 'like "%'.$hashtags[$i].'%" AND g.tags ';
-        else
-            $que .= 'like "%'.$hashtags[$i].'%"';
+	if(count($hashtags)>0) {
+		$que .= " AND ("; 
+    	for($i = 0; $i < count($hashtags) -1; $i++){
+        	// if($i < count($hashtags) - 2)
+			if($i < 1)
+            	$que .= '(g.tags like "%,'.$hashtags[$i].',%" OR g.tags like "'.$hashtags[$i].',%")';
+        	else
+            	$que .= ' AND (g.tags like "%,'.$hashtags[$i].',%" OR g.tags like "'.$hashtags[$i].',%")';
+	
+    	}
+		$que .= " )"; 
+		
+	}
 
-    }
-
-    $que .= ') LIMIT '.$start.','.$number.'';
-    //echo $que;
+    $que .= ' LIMIT '.$start.','.$number.'';
+    // echo $que;
     $res 	= safe_query($que);
 
     $start_number = ($start + $number > $total_search) ? $total_search : ($start + $number);
@@ -144,13 +150,13 @@ $filterButton = '';
 ';
     $output = ($total_search > 0) ? $output : '<br> <input type="hidden" name="category_id" id="category_id" value='.$category_id.' />  Keine Daten';
 
- echo $output; die();
+    echo $output; die();
 } else if($galerie && $galerie == 'update') {
     $text = $_GET["myText"];
     $keyWord = $_GET["keyWord"];
     $hashtags= $_GET["hashtags"];
     $pos_1 = 'gtextde';
-    $pos_2 = 'tags';
+    $pos_2 = 'tags';	
     $pos_3 = 'keyword';
     $feld = $_GET["feld"];
     $table = $_GET["table"];
@@ -167,7 +173,7 @@ $filterButton = '';
     $output .= '<div class="col-md-12">
                   <a class="edit_" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
                   <br>
-                  <div class="alert alert-success hide" role="alert">gespeichert update</div>
+                  <div class="alert alert-success hide" role="alert">... gespeichert update</div>
                 </div>';
 
     $output .= '<div class="content">';
@@ -253,8 +259,8 @@ $filterButton = '';
         	    <div class="col-md-12"><a href="javascript:void(0)" class="arrow-back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a></div>
                 <br><br>
                 <div class="col-md-6">
-                  <textarea class="galedit form-control" name="t'.$data[0].'" id="t'.$data[0].'" ref="s'.$data[0].'" placeholder="Description Image">'.$textde.'</textarea>
-                  <input id="keyword'.$data[0].'" placeholder="Key word" value="'.$keyWord.'" />
+                  <textarea class="galedit form-control" name="t'.$data[0].'" id="t'.$data[0].'" ref="s'.$data[0].'" placeholder="Bild Beschreibung">'.$textde.'</textarea>
+                  <input id="keyword'.$data[0].'" placeholder="Keyword" value="'.$keyWord.'" />
                 </div>
             ';
 
@@ -442,7 +448,7 @@ $filterButton = '';
     $sorting_col = "name";
     //print_r($_GET); die();
     
-    $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown" multiple="">';
+    $select = '<div id="sel-cont" class="sel-cont"><select name="select" class="ui selection dropdown bbb" multiple="">';
     
     $sql = "SELECT * FROM $table order by $sorting_col";
     $res = safe_query($sql);
@@ -477,7 +483,7 @@ $filterButton = '';
         $count++;
     
         $select .= ($count < $num_rows) ?
-            '</select><select name="select" class="ui selection dropdown" multiple="">':
+            '</select><select name="select" class="ui selection dropdown vvvv" multiple="">':
         '</select>';
     }
     
@@ -516,8 +522,12 @@ $filterButton = '';
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-                $message = 'you can login ' . $morpheus["url"] . ' with information below <br>';
-                $message .= 'User: ' . $item->email . '<br>' . 'Pass: ' . $item->password;
+                $message = $morpheus["mail_start"].'<p>Anbei senden wir Ihnen eine Einladung zur Bilddatenbank des Frankfurter Kinderbüro</p>
+				<p>Url: ' . $morpheus["url"] . '</p>';
+                $message .= '<p>Login: ' . $item->email . '<br>' . 'Pass: ' . $item->password.'</p>';
+				$message .= '<p>Start: ' . euro_dat($item->start_date) . '<br>Ende: ' . euro_dat($item->end_date).'</p>';
+				$message .= $morpheus["mail_end"];
+				
                 mail($item->email, $subject, $message, $headers);
 
                 $response = 'Save and send login successfully';
@@ -696,7 +706,7 @@ else if($galerie) {
     ';
     
     //start add 
-    $output .= '<br><div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';
+    $pagination .= '<br><div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';
 
     /*$output .= '<select class="number_page form-control" data-show-content="true">';
     $output .= ($_SESSION["number_per_page"] == 5) ? '<option selected value="20">20</option>' : '<option value="20">20</option>';
@@ -705,25 +715,25 @@ else if($galerie) {
     $output .= ($_SESSION["number_per_page"] == 80) ? '<option selected value="80">80</option>' : '<option value="80">80</option>';
     $output .= '</select>';*/
 
-    $output .= '<div class="infor_pagination">';
+    $pagination .= '<div class="infor_pagination">';
 
-    $output .= ($page == 1) ? '<a href="#" class="previous_pagination gallery"><</a>' : '<a href="'.$dir.'home/galerie+'.$galerie.'/?page='.($page - 1).'" class="previous_pagination gallery"><</a>';
+    $pagination .= ($page == 1) ? '<a href="#" class="previous_pagination gallery"><</a>' : '<a href="'.$dir.'home/galerie+'.$galerie.'/?page='.($page - 1).'" class="previous_pagination gallery"><</a>';
 
     for($i = 1; $i <= $count_page; $i++){
-        $output .= ($i == $page) ? '<a href="#home/galerie" class="number_pagination gallery active"><input type="text" value="'.$i.'"/></a>' :
+        $pagination .= ($i == $page) ? '<a href="#home/galerie" class="number_pagination gallery active"><input type="text" value="'.$i.'"/></a>' :
         '<a href="#'.$i.'" class="number_pagination gallery">'.$i.'</a>'; 
     }
 
-    $output .= ($page == $count_page) ? '<a href="#" class="next_pagination gallery">></a>' : '<a href="'.$dir.'home/galerie+'.$galerie.'/?page='.($page + 1).'" class="next_pagination show_gallery">></a>' ;
+    $pagination .= ($page == $count_page) ? '<a href="#" class="next_pagination gallery">></a>' : '<a href="'.$dir.'home/galerie+'.$galerie.'/?page='.($page + 1).'" class="next_pagination show_gallery">></a>' ;
 
-    $output .= '<a class="number_page">insgesamt '.$count_page.' Seiten</a>';
+    $pagination .= '<a class="number_page">insgesamt '.$count_page.' Seiten</a>';
     
-    $output .= '</div><br><br>';
+    $pagination .= '</div><br><br>';
     //end
-    
+    $output .= $pagination;
     $output .='<div class="grid">';
     $output .= set_thumb_gallery($res, 1);
-    $output .= '</div>';
+    $output .= '</div>'.$pagination;
 
 $filterButton = '';
 /*$filterButton = '
@@ -806,7 +816,8 @@ else {
     $res 	= safe_query($que);
 
     while ($row = mysqli_fetch_object($res)) {
-        $que = "SELECT * FROM `morp_cms_galerie` g WHERE  g.gnid=".$row->gnid." GROUP BY g.gnid";
+       $que = "SELECT * FROM `morp_cms_galerie` g WHERE  g.gnid=".$row->gnid." order by RAND() LIMIT 0,1";
+	   // 	echo "$que <br>";
         //echo $que; die();
     $res_ 	= safe_query($que);
 	$x		= mysqli_num_rows($res_);
@@ -822,22 +833,20 @@ else {
     if($x > 0) {
        while ($row_ = mysqli_fetch_object($res_)) {
     		$n++;
-    		$img 	= $row_->gname;
+    		$img = $row_->gname;
             $gid = $row_->gid;
-
 
     		$besitzer = $row_->mid;
     		$profile = getProfile($besitzer);
 
     		$output .= '
-
     				<div class="col-md-3 col-sm-6 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
     				    <div class="hovereffect">
-    				        <img class="img-responsive" src="'.$dir.'Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
+    				        <img class="img-responsive" src="'.$dir.'mthumb.php?w=300&amp;h=400&amp;q=100&amp;src=Galerie/'.$morpheus["GaleryPath"].'/' . $ordner . '/' . $gid . '/' . $morpheus["thumb"] . '/' . urlencode(set_name_image($img)).'">
     			            <div class="overlay">
     			                <h2>'.$hl.'</h2>
     							<p>'.$textde.'</p>
-    							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-pencil tool mb2"></i></a></p>
+    							<!--<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-pencil tool mb2"></i></a></p>-->
     							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-eraser tool"></i></a></p>
     			            </div>
     				    </div>
@@ -847,14 +856,13 @@ else {
     } else {
         $hl = $row->gnname;
         $output .= '
-
     				<div class="col-md-3 col-sm-6 linkbox mb2" ref="'.$dir.$navID[$cid].'galerie+'.$gnid.'/">
     				    <div class="hovereffect">
-    				        <img class="img-responsive no-upload" src="'.$dir.'Galerie/no_upload.jpg">
+    				        <img class="img-responsive no-upload" src="'.$dir.'mthumb.php?w=300&amp;h=400&amp;q=100&amp;src=Galerie/no_upload.jpg">
     			            <div class="overlay">
     			                <h2>'.$hl.'</h2>
     							<p>'.$textde.'</p>
-    							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-pencil tool mb2"></i></a></p>
+    							<!--<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-pencil tool mb2"></i></a></p>-->
     							<p><a href="'.$dir.$navID[8].'edit+'.$gnid.'/"><i class="fa fa-eraser tool"></i></a></p>
     			            </div>
     				    </div>
