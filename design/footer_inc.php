@@ -325,7 +325,7 @@ echo $maps;?>
       request = $.ajax({
         url: "" + origin + "home/galerie+update",
         type: "get",
-        data: "myText=" + myText + "&keyWord=" + keyWord + "&hashtags=" + hashtags + "&id=" + id + "&feld=gid&table=morp_cms_galerie",
+        data: "myText=" + myText + "&keyWord=" + encodeURIComponent(keyWord) + "&hashtags=" + hashtags + "&id=" + id + "&feld=gid&table=morp_cms_galerie",
         success: function(data) {
 			// console.log(data);
           $('#s' + id).removeClass('btn-danger');
