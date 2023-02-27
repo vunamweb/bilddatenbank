@@ -120,9 +120,9 @@ $filterButton = '';
 
     $output = '<br><a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Selektierte persönlichen Ordner hinzufügen</a>';
 
-    $output .= '<div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';
+    //$output .= '<div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';
 
-    $output .= '<div class="infor_pagination">';
+    /*$output .= '<div class="infor_pagination">';
 
     $output .= '<a href="#" class="previous_pagination"><</a>';
 
@@ -146,9 +146,9 @@ $filterButton = '';
     $output .= '<a class="number_page">insgesamt '.$count_page.' Seiten</a>';
     
 
-    $output .= '</div><br>';
+    $output .= '</div><br>'; */
 
-
+    $output .= showPageSelection($count_page, $page, $start, $start_number, $total_search);
 
     $output .= '
     <div class="grid">
@@ -158,9 +158,10 @@ $filterButton = '';
 
     $output .= '
 		<input type="hidden" name="category_id" id="category_id" value='.$category_id.' />
-        </div>
+        </div>';
 
-';
+    $output .= showPageSelection($count_page, $page, $start, $start_number, $total_search);
+
     $output = ($total_search > 0) ? $output : '<br> <input type="hidden" name="category_id" id="category_id" value='.$category_id.' />  Keine Daten';
 
     echo $output; die();

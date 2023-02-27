@@ -281,6 +281,38 @@ function orginalDate($date) {
     return euro_dat($date);
 }
 
+function showPageSelection($count_page, $page, $start, $start_number, $total_search) {
+    $output = '<div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';;
+
+    $output .= '<div class="infor_pagination">';
+
+    $output .= '<a href="#" class="previous_pagination"><</a>';
+
+    for($i = 1; $i <= $count_page; $i++){
+        //$active = '';
+
+        //if($i == $page)
+          //$active = 'active';
+        
+        $output .= ($i == $page) ? '<a class="number_pagination active"><input type="text" value="'.$i.'"/></a>' :
+        '<a href="#'.$i.'" class="number_pagination">'.$i.'</a>'; 
+
+        //$output .= '<a href="#'.$i.'" class="number_pagination '.$active.'">'.$i.'</a>';
+        //$output .= '<a href="#'.$i.'" class="number_pagination '.$active.'"><input type="text" value="'.$i.'"/></a>';
+        
+ }
+
+
+    $output .= '<a href="#" class="next_pagination">></a>';
+
+    $output .= '<a class="number_page">insgesamt '.$count_page.' Seiten</a>';
+    
+
+    $output .= '</div><br>';
+
+    return $output;
+}
+
 function get_total_search($seach_value, $hashtags, $category_id) {
     $hashtags = ($hashtags == null || $hashtags == '') ? array() : $hashtags;
 
