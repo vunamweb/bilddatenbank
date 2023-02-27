@@ -64,18 +64,16 @@ $filterButton = '';
 
     $category_id = ($_GET['category_id'] != '') ? $_GET['category_id'] : 0;
 
-    
-
     $hashtags = ($_GET['hashtags'] != null && $_GET['hashtags'] != '') ? $_GET['hashtags'] : '';
     $hashtags = ($hashtags != '') ? explode(',', $hashtags) : array();
 
-    $total_search = get_total_search($seach_value, $hashtags, $category_id);
+    /*$total_search = get_total_search($seach_value, $hashtags, $category_id);
     $number = ($number > $total_search) ? $total_search : $number;
 
     $count_page = ($total_search > 0) ? ceil($total_search/$number) : 1;
     $page = ($page < $count_page) ? $page : $count_page;
 
-    $start = $number * ($page - 1);
+    $start = $number * ($page - 1);*/
     //echo $count_page;
 
     $sort_gallery = sort_array_gallery();
@@ -97,13 +95,28 @@ $filterButton = '';
     	}
 		$que .= " )"; 
 		
-	}
+    }
+    
+    // get total search, number page
+    $res 	= safe_query($que);
+    $total_search = mysqli_num_rows($res);
+    $number = ($number > $total_search) ? $total_search : $number;
+
+    $count_page = ($total_search > 0) ? ceil($total_search/$number) : 1;
+    $page = ($page < $count_page) ? $page : $count_page;
+
+    $start = $number * ($page - 1);
+    // end
+
 
     $que .= ' LIMIT '.$start.','.$number.'';
     // echo $que;
     $res 	= safe_query($que);
+    //$total_search= mysqli_num_rows($res);
 
+    //echo $start . '/' . $number . '/' . $total_search;
     $start_number = ($start + $number > $total_search) ? $total_search : ($start + $number);
+    //$start_number = ($start + $number > $total_search) ? ($start + $countItem) : ($start + $number);
 
     $output = '<br><a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Selektierte persönlichen Ordner hinzufügen</a>';
 
