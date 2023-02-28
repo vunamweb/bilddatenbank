@@ -154,7 +154,8 @@ function setdata($author, $hashtags, $keyword, $file, $uploadDir, $gnid, $file_i
     $file_infor = json_encode($file_infor);*/
 
     if (!$date)
-        $date = date(Y . "-" . m . "-" . d);
+        //$date = date(Y . "-" . m . "-" . d);
+        $date = date('Y-m-d');
 
     $sql = "SELECT gid FROM morp_cms_galerie WHERE gname='$file' AND gnid=$gnid";
     $res = safe_query($sql);
