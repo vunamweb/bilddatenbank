@@ -106,6 +106,30 @@
                           </div>
                   </div>
 
+                  <div class="modal" id="myModal_change_keyword">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+
+                              <!-- Modal body -->
+                              <div class="modal-body">
+                                     <div class="content">
+                                       
+                                         <input type="text" name="name" id="keyword" placeholder="Keyword" />
+                                       
+                                     <a href="#" class="btn btn-info save_keyword">Save</a>
+                                     </div>
+
+                              </div>
+
+                            </div>
+                          </div>
+                  </div>
+
                   <div class="modal" id="myModal_add_hashtags_image">
                           <div class="modal-dialog">
                             <div class="modal-content">

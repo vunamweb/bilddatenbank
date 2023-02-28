@@ -961,6 +961,30 @@ echo $maps;?>
       });
     })
 
+    $('.save_keyword').click(function() {
+      var galeries_id = '';
+
+      var origin = $('#url').val();
+      var keyword = $('#keyword').val(); 
+      
+      $('input.checkbox').each(function() {
+        var value = $(this).val();
+
+        if ($(this).is(":checked"))
+          galeries_id = galeries_id + value + ','
+
+      })
+
+      request = $.ajax({
+        url: "" + origin + "home/galerie+save_keyword_search",
+        type: "get",
+        data: "keyword=" + keyword + "&galeries_id=" + galeries_id + "",
+        success: function(data) {
+          $('#myModal_change_keyword .close').click();
+        }
+      }); 
+    })
+
     $('.save_hashtags_image').click(function() {
       var hashtags, galeries_id = '';
 

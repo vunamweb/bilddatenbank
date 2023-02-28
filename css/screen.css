@@ -858,7 +858,7 @@ img + .datum { margin-top: 20px !important; }
    }
 #queue {
 	border: 1px solid #E5E5E5;
-	height: 377px;
+	height: 150px;
 	overflow: auto;
 	margin-bottom: 10px;
 	padding: 0 3px 3px;
@@ -1087,6 +1087,21 @@ color: #4b636e;
 }
 #myModal_add_folder .modal-header .header {
     margin-top: -15px;
+}
+
+#myModal_change_keyword .modal-dialog {
+    max-width: 30%;
+
+}
+#myModal_change_keyword .save_keyword {
+    margin-top: 20px;
+}
+#myModal_change_keyword #keyword {
+    display: block;
+}
+
+.add_keyword_search {
+    margin-left: 10px;
 }
 
 
@@ -1500,6 +1515,9 @@ a.delete_folder {
     width: 100%;
 }
 
+.grid {
+    margin-top: 20px;
+}
 .grid-sizer, .grid-item {
     width: 25% !important;
 }
@@ -1558,8 +1576,8 @@ a.delete_folder {
 
 .max_view { z-index: 3; }
 
-.show_folder {
-    /*margin-bottom: 15px;*/
+.show_folder, .add_keyword_search {
+    margin-bottom: 15px;
 }
 
 .modal_new .modal-header {
@@ -1714,3 +1732,5 @@ a.delete_folder {
 .off {
     display: none;
 }
+
+.modal-header { padding: 0.5rem 1rem; } 

@@ -120,6 +120,9 @@ $filterButton = '';
 
     $output = '<br><a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Selektierte persönlichen Ordner hinzufügen</a>';
 
+    $output .= '<a href="#" class="btn btn-info add_keyword_search" data-toggle="modal" data-target="#myModal_change_keyword">Add keyword</a><br>';
+
+    
     //$output .= '<div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';
 
     /*$output .= '<div class="infor_pagination">';
@@ -330,6 +333,19 @@ $filterButton = '';
             }
         }
     }
+
+} else if($galerie && $galerie == 'save_keyword_search') {
+    $galeries_id = $_GET['galeries_id'];
+    $galeries_id = explode(',', $galeries_id);
+
+    $keyword = $_GET['keyword'];
+
+    foreach($galeries_id as $item) {
+        $sql = 'update morp_cms_galerie set keyword = "'.$keyword.'" where gid = '.$item.' ';
+        safe_query($sql);
+    }
+
+    die();
 
 } else if($galerie && $galerie == 'save_hashtags_image') {
     $hashtags = $_GET['hashtags'];
