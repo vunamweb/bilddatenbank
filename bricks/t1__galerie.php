@@ -120,7 +120,9 @@ $filterButton = '';
 
     $output = '<br><a href="#" class="btn btn-info show_folder" data-toggle="modal" data-target="#myModal_add_folder">+ Selektierte persönlichen Ordner hinzufügen</a>';
 
-    $output .= '<a href="#" class="btn btn-info add_keyword_search" data-toggle="modal" data-target="#myModal_change_keyword">Add keyword</a><br>';
+    $output .= '<a href="#" class="btn btn-info add_keyword_search" data-toggle="modal" data-target="#myModal_change_keyword">Add keyword</a>';
+    
+    $output .= '<a href="#" class="btn btn-info add_hashtags_image mb15" data-toggle="modal" data-target="#myModal_add_hashtags_image"> Suchbegriffe hinzufugen <i class="fa fa-plus"></i></a>';
 
     
     //$output .= '<div class="infor_number col-md-6">'.($start + 1).'-'.$start_number.' of '.$total_search.'</div>';
