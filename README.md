@@ -30,13 +30,11 @@ A modern and scalable web application built with [Laravel](https://laravel.com/)
 
 ## 📸 Screenshot
 
-![Homepage](screenshots/homepage.png)
-![Homepage](screenshots/homepage.png)
-![Homepage](screenshots/homepage.png)
-![Homepage](screenshots/homepage.png)
-
-
-
+![Homepage](images/image.png)
+![Homepage](images/image001.png)
+![Homepage](images/image002.png)
+![Homepage](images/image003.png)
+![Homepage](images/image004.png)
 
 ## ⚙️ Installation
 
