@@ -43,6 +43,11 @@ cp .env.example .env
 php artisan key:generate
 
 # Configure database in .env
+
+## 📸 Screenshot
+
+![Homepage](screenshots/homepage.png)
+
 # Then run migrations and seeders
 php artisan migrate --seed
 
