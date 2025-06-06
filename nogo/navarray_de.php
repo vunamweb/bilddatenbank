@@ -1,5 +1,0 @@
-<?php
-$navarray = array("0"=>"", "1"=>"home", "2"=>"neuigkeiten", "4"=>"kategorien", "5"=>"infos", "6"=>"profil", "7"=>"galerie-erstellen", "8"=>"kategorien-edit", "9"=>"meine-kategorien", "10"=>"galerie-upload", "16"=>"neuigkeiten-vom-stift", "17"=>"neuigkeiten-veranstaltungen", "18"=>"neuigkeiten-oberrad", "24"=>"gallery-comment", "26"=>"suche", "29"=>"hashtags", "35"=>"dienstanweisungen", "36"=>"kategory", "37"=>"tag", "38"=>"tag-group");
-?><?php
-$navarrayFULL = array("0"=>"", "1"=>"Home", "2"=>"news", "4"=>"Start Categories", "5"=>"Infos", "6"=>"Profile", "7"=>"new category", "8"=>"category edit", "9"=>"my categories", "10"=>"gallery Upload", "16"=>"Neuigkeiten vom Stift", "17"=>"Neuigkeiten Veranstaltungen", "18"=>"Neuigkeiten Oberrad", "24"=>"gallery comments", "26"=>"Suche", "29"=>"HashTags", "35"=>"Dienstanweisungen", "36"=>"kategory", "37"=>"tag", "38"=>"tagGroup");
-?>
